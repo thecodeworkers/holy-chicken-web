@@ -1,0 +1,89 @@
+@import '../../../public//styles/index.scss';
+
+._main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0px 3px 6px $mercury;
+}
+
+._menu {
+  width: 85%;
+  margin:0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1%;
+}
+
+._leftSide {
+  width: 40%;
+}
+
+._rightSide {
+  width: 40%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+._linksList {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  font-family: $montserratRegular;
+
+  & li {
+    font-size: $montserratRegular14;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-position: under;
+    }
+  }
+
+  & li:not(:last-child) {
+    margin-right: 2rem;
+  }
+}
+
+._link {
+  color: $doveGray;
+}
+
+._activeLink {
+  color: $darkBlack;
+  font-family: $montserratBold;
+}
+
+._iconsList {
+  display: flex;
+  align-items: center;
+}
+
+._iconParent {
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+._logoContainer {
+  width: 20%;
+}
+
+._logoParent {
+  width: 5.625rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+._button {
+  background-color: $neonCarrot;
+  border: 1px solid $neonCarrot;
+  color: $white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1.25rem;
+  cursor: pointer;
+}
+
