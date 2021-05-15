@@ -65,6 +65,41 @@
 ._iconParent {
   margin-left: 2rem;
   cursor: pointer;
+
+  &:nth-child(3) {
+    position: relative;
+  }
+}
+
+._dropDown {
+  background-color: $darkBlack;
+  border-radius: 20px;
+  position: absolute;
+  width: 14rem;
+  transform: translate(-45%, 7%);
+}
+
+._buttonBlueParent {
+  display: flex;
+  justify-content: center;
+}
+
+._dropDownContent {
+  padding: 1.2rem;
+  box-sizing: border-box;
+
+  & p {
+    color: $white;
+    font-family: $montserratMedium;
+    font-size: $montserratRegular14;
+    text-align: center;
+    margin-top: 9%;
+  }
+}
+
+._link {
+  text-decoration: underline;
+  color: $white;
 }
 
 ._logoContainer {
@@ -76,14 +111,5 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-._button {
-  background-color: $neonCarrot;
-  border: 1px solid $neonCarrot;
-  color: $white;
-  padding: 0.5rem 1.5rem;
-  border-radius: 1.25rem;
-  cursor: pointer;
 }
 
