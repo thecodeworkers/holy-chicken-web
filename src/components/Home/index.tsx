@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import Footer from '../Footer'
 
 const Home = () => {
   return (
@@ -8,9 +9,7 @@ const Home = () => {
         <title>Holy Chiken</title>
       </Head>
 
-      <div>
-        <p>HOME </p>
-      </div>
+      <Footer />
     </div>
   )
 }
