@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 const Logo = ({ color }) => (
-<svg xmlns="http://www.w3.org/2000/svg" width="119.525" height="57.415" viewBox="0 0 119.525 57.415">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 119.525 57.415">
   <g id="Group_2" data-name="Group 2" transform="translate(-49.864 -317.722)">
     <rect id="Rectangle_1" data-name="Rectangle 1" width="4.055" height="1.468" transform="translate(141.782 371.719)" fill="#121212"/>
     <rect id="Rectangle_2" data-name="Rectangle 2" width="4.055" height="1.468" transform="translate(76.323 371.681)" fill="#121212"/>
@@ -31,8 +31,6 @@ const Logo = ({ color }) => (
     <path id="Path_22" data-name="Path 22" d="M643.818,540.344H640.2v1.246h0v-1.242h-2.539l-9.212,9.906v-9.906H625.8v1.788h.778v18.747H625.8v1.787h2.651V552.8l10.09,9.874h15.774v-2.565h-1.787v.777h-9.042v-8.552h9.042v.777h1.787v-3.342h-1.787v.777h-9.042v-8.408h9.042v.778h1.787v-2.565h-10.5Zm-2.2,20.539H639.3l-9.527-9.39,8.577-9.28h3.263Z" transform="translate(-506.585 -195.815)" fill="#121212"/>
   </g>
 </svg>
-
-
 )
 
 export default memo(Logo)
