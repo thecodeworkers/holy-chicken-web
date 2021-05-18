@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Navbar } from '@components'
+import { Navbar, GeneralCard } from '@components'
 import { FirstBanner } from './elements'
 
 const Home = ({ content }) => {
@@ -12,6 +12,9 @@ const Home = ({ content }) => {
       <Navbar />
       {content ? (<>
       <FirstBanner data={content?.firstBanner} />
+       <div style={{width: '13.5rem'}}>
+        <GeneralCard />
+      </div>
       </>
     ) : null}
     </div>
