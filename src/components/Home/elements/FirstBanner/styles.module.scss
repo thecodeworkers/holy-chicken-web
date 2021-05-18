@@ -1,0 +1,58 @@
+@import '@styles/index.scss';
+
+._content {
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 85%;
+  margin: auto;
+}
+
+._main {
+  margin-top: 10%;
+}
+
+._hidden {
+  display:  none;
+}
+
+._show {
+  display: block;
+  animation: fadeIn 2s ease;
+}
+
+._img{
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: .4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@include responsive(lg) {
+
+  ._main{
+    margin-top: 15%;
+  }
+}
+
+@include responsive(md) {
+
+  ._main{
+    margin-top: 20%;
+  }
+}
+
+@include responsive(sm) {
+
+  ._main{
+    margin-top: 25%;
+  }
+}
