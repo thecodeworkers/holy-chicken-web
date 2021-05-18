@@ -9,7 +9,9 @@ const Home = () => {
         <title>Holy Chiken</title>
       </Head>
       {/* <Navbar /> */}
-      <GeneralCard />
+      <div style={{width: '13.5rem'}}>
+        <GeneralCard />
+      </div>
     </div>
   )
 }
