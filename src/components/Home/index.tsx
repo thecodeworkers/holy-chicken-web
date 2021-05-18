@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Navbar } from '@components'
+import { Navbar, GeneralCard } from '@components'
 
 const Home = () => {
   return (
@@ -8,7 +8,10 @@ const Home = () => {
       <Head>
         <title>Holy Chiken</title>
       </Head>
-      <Navbar />
+      {/* <Navbar /> */}
+      <div style={{width: '13.5rem'}}>
+        <GeneralCard />
+      </div>
     </div>
   )
 }
