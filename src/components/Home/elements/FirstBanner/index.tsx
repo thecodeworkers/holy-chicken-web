@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import styles from './styles.module.scss'
+import { GeneralCard, Button } from '@components'
 
-const FirstBanner = ({ data }) => {
+const FirstBanner = ({ data, content }) => {
+
+  console.log(content);
+
   const [currentIndex, setcurrentIndex] = useState(1);
   const [newArray, setNewArray] = useState(data)
 
@@ -31,15 +35,25 @@ const FirstBanner = ({ data }) => {
     <div className={styles._content}>
       <div className={styles._main}>
         {
-         Array.from(Array(newArray?.length).keys()).map((index) => {
-          const currentClass = index + 1;
+          Array.from(Array(newArray?.length).keys()).map((index) => {
+            const currentClass = index + 1;
             return (
-              <div className={newArray[index].className} id={currentClass.toString()}  key={index}>
-               <img src={newArray[index]?.image?.mediaItemUrl} className={styles._img}></img>
+              <div className={newArray[index].className} id={currentClass.toString()} key={index}>
+                <img src={newArray[index]?.image?.mediaItemUrl} className={styles._img}></img>
               </div>
             )
           })
         }
+      </div>
+      <div className={styles._cardContainer}>
+        <div className={styles._card}>
+          <GeneralCard />
+        </div>
+        <div className={styles._textContainer}>
+          <p>{content.title}</p>
+          <p>{content.content}</p>
+          <Button color='#118AC6' textColor='white' text={content.button.title}></Button>
+        </div>
       </div>
     </div>
   )
