@@ -49,10 +49,16 @@ const FirstBanner = ({ data, content }) => {
         <div className={styles._card}>
           <GeneralCard />
         </div>
+        <div className={styles._card}>
+          <GeneralCard />
+        </div>
+        <div className={styles._card}>
+          <GeneralCard />
+        </div>
         <div className={styles._textContainer}>
-          <p>{content.title}</p>
-          <p>{content.content}</p>
-          <Button color='#118AC6' textColor='white' text={content.button.title}></Button>
+          <p className={styles._title}>{content.title}</p>
+          <p className={styles._subtitle}>{content.content}</p>
+          <Button color='#FD8C2E' textColor='white' text={content.button.title}></Button>
         </div>
       </div>
     </div>

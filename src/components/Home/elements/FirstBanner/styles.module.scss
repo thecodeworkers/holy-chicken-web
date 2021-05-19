@@ -39,9 +39,23 @@
   width: 13.5rem;
 }
 
+._textContainer{
+  width: 30%;
+  text-align: center;
+}
+
 ._title{
   font-family: $blackTextHeavyBold;
+  font-size: 3rem;
+  color: $black;
+  margin-bottom: 1rem;
+}
 
+._subtitle{
+  font-family: $montserratRegular;
+  font-size: 0.9em;
+  color: $black;
+  margin-bottom: 1.5rem;
 }
 
 @keyframes fadeIn {
@@ -61,6 +75,10 @@
   }
   ._img{
     height: 350px;
+  }
+
+  ._cardContainer{
+    flex-direction: column-reverse;
   }
 }
 
