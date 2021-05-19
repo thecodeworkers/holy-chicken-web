@@ -4,8 +4,6 @@ import { GeneralCard, Button } from '@components'
 
 const FirstBanner = ({ data, content }) => {
 
-  console.log(content);
-
   const [currentIndex, setcurrentIndex] = useState(1);
   const [newArray, setNewArray] = useState(data)
 

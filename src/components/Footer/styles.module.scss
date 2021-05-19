@@ -1,0 +1,157 @@
+
+@import '../../../public/styles/index.scss';
+
+._footerContainer{
+  background-color: $black;
+  width: 100%;
+  padding: 2rem 0rem;
+  box-sizing: border-box;
+}
+
+._footer{
+  width: 85%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+._content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+
+._logoMain{
+  width: 50px;
+  height: 50px;
+}
+
+._textContainer{
+  margin-top: 0.5rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+._title{
+  color: $white;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  font-family: $blackerTextHeavy;
+}
+
+._subtitle{
+  font-size: 0.75rem;
+  color: $white;
+  width: 55%;
+  line-height: 1.2;
+  font-family: $montserratRegular;
+  margin-top: 0.2rem;
+}
+
+._links{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+}
+
+._link{
+  font-family: $montserratMedium;
+  font-size: 0.75rem;
+  color: $white;
+}
+
+._socialContainer{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+._termsContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+._termsleft{
+  border-right: 1px solid $white;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+._terms{
+  font-size: 0.65rem;
+  color: $white;
+  font-family: $montserratRegular;
+  margin-right: 1rem;
+}
+
+._socialMedia{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+._icon{
+  margin-right: 1rem;
+}
+
+._copyContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+
+._copyContent{
+  margin-right: 0.5rem;
+  font-size: 0.65rem;
+  color: $white;
+  font-family: $montserratRegular;
+}
+._copy{
+    margin-right: 0.5rem;
+    font-size: 0.65rem;
+    color: $white;
+    font-family: $montserratRegular;
+}
+
+._makers{
+  width: 25px;
+  height: 25px;
+}
+
+
+@include responsive(md) {
+
+  ._termsContainer{
+    display: none;
+  }
+  ._links{
+    display: none;
+  }
+  ._subtitle{
+    width: 70%;
+  }
+  ._copyContent{
+    display: none;
+  }
+
+  ._makers{
+    width: 22px;
+    height: 22px;
+  }
+}
