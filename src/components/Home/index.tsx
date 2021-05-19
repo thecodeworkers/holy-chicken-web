@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import { Navbar } from '@components'
+import Footer from '../Footer'
 import { FirstBanner } from './elements'
 
 const Home = ({ content }) => {
@@ -15,6 +16,7 @@ const Home = ({ content }) => {
 
       </>
     ) : null}
+      <Footer />
     </div>
   )
 }
