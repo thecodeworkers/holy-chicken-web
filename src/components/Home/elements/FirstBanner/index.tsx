@@ -1,13 +1,32 @@
 import { useState, useEffect } from 'react';
 import styles from './styles.module.scss'
-import { GeneralCard, Button } from '@components'
+import { GeneralCard, Button, Stepper } from '@components'
 
 const FirstBanner = ({ data, content, publicity}) => {
 
+
   const [currentIndex, setcurrentIndex] = useState(1);
   const [newArray, setNewArray] = useState(data)
-
+  const [responsive, setResponsive] = useState('');
+  const [path, setPath] = useState('');
   let interval;
+
+  useEffect(() => {
+    if(window.innerWidth <= 576) setResponsive('576');
+    // if(window.innerWidth >576 && window.innerWidth <= 768) setResponsive('768');
+     if(window.innerWidth > 577) setResponsive('580');
+    console.log(responsive);
+    window.addEventListener('resize', checkWidth);
+
+    setPath(window.location.pathname)
+    return () => window.removeEventListener('resize', checkWidth);
+  }, [responsive]);
+
+  const checkWidth = () => {
+    if(window.matchMedia('(max-width: 576px) and (min-width: 370px)').matches) return setResponsive('576');
+    // if(window.matchMedia('(max-width: 768px) and (min-width: 577px)').matches) return setResponsive('768');
+   if(window.matchMedia('(min-width: 577px)').matches) return setResponsive('580');
+  };
 
 
   useEffect(() => {
@@ -38,11 +57,20 @@ const FirstBanner = ({ data, content, publicity}) => {
             const currentClass = index + 1;
             return (
               <div className={newArray[index].className} id={currentClass.toString()} key={index}>
-                <img src={newArray[index]?.image?.mediaItemUrl} className={styles._img}></img>
+                <img src={responsive >= '576' ? newArray[index]?.image?.mediaItemUrl :
+                  newArray[index]?.responsiveImage?.mediaItemUrl  }
+                   className={styles._img}></img>
               </div>
             )
+
           })
+
         }
+    <div className={styles._stepperContainer}>
+        <div className={styles._stepper}>
+          <Stepper currentStep={currentIndex+1} length={newArray?.length} onPress={() => changeImage(currentIndex, newArray.className)}/>
+        </div>
+      </div>
       </div>
       <div className={styles._cardContainer}>
         <div className={styles._cardContent}>
@@ -68,14 +96,20 @@ const FirstBanner = ({ data, content, publicity}) => {
     </div>
     <div className='_publicity' />
      <style jsx>{`
+
      ._publicity{
        background-image: url(${publicity?.image?.mediaItemUrl});
        background-size: cover;
-       background-repeat: no-repeat;
        background-position: center;
-       width: 100%;
-       height: 60vw;
+       height: 30vw;
      }
+
+    @media(max-width: 768px) {
+      ._publicity {
+        background-image: url(${publicity?.responsiveImage?.mediaItemUrl});
+        height: 25vh;
+      }
+    }
    `}</style>
    </>
   )
