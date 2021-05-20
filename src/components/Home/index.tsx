@@ -16,7 +16,7 @@ const Home = ({ content }) => {
 
       </>
     ) : null}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }
