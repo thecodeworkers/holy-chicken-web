@@ -13,7 +13,6 @@ const FirstBanner = ({ data, content, publicity}) => {
 
   useEffect(() => {
     if(window.innerWidth <= 576) setResponsive('576');
-    // if(window.innerWidth >576 && window.innerWidth <= 768) setResponsive('768');
      if(window.innerWidth > 577) setResponsive('580');
     console.log(responsive);
     window.addEventListener('resize', checkWidth);
@@ -24,7 +23,6 @@ const FirstBanner = ({ data, content, publicity}) => {
 
   const checkWidth = () => {
     if(window.matchMedia('(max-width: 576px) and (min-width: 370px)').matches) return setResponsive('576');
-    // if(window.matchMedia('(max-width: 768px) and (min-width: 577px)').matches) return setResponsive('768');
    if(window.matchMedia('(min-width: 577px)').matches) return setResponsive('580');
   };
 
@@ -57,12 +55,10 @@ const FirstBanner = ({ data, content, publicity}) => {
             const currentClass = index + 1;
             return (
               <div className={newArray[index].className} id={currentClass.toString()} key={index}>
-                <img src={responsive >= '576' ? newArray[index]?.image?.mediaItemUrl :
-                  newArray[index]?.responsiveImage?.mediaItemUrl  }
+                <img src={responsive >= '576' ? newArray[index]?.image?.mediaItemUrl : newArray[index]?.responsiveImage?.mediaItemUrl  }
                    className={styles._img}></img>
               </div>
             )
-
           })
 
         }

@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import { Navbar } from '@components'
 import Footer from '../Footer'
-import { FirstBanner } from './elements'
+import { FirstBanner, SecondBanner, ThirdBanner} from './elements'
 
 const Home = ({ content }) => {
   return (
@@ -13,6 +13,8 @@ const Home = ({ content }) => {
       <Navbar />
       {content ? (<>
       <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner}/>
+      <SecondBanner data={content?.thirdBanner} />
+      <ThirdBanner data={content?.fourthBanner} />
 
       </>
     ) : null}

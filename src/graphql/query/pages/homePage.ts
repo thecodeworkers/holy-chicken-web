@@ -65,6 +65,7 @@ const home = `
           title
         }
         title
+        subtitle
       }
     }
   }
