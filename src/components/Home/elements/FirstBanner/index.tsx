@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.scss'
 import { GeneralCard, Button } from '@components'
 
-const FirstBanner = ({ data, content }) => {
+const FirstBanner = ({ data, content, publicity}) => {
 
   const [currentIndex, setcurrentIndex] = useState(1);
   const [newArray, setNewArray] = useState(data)
@@ -30,6 +30,7 @@ const FirstBanner = ({ data, content }) => {
   }
 
   return (
+    <>
     <div className={styles._content}>
       <div className={styles._main}>
         {
@@ -44,14 +45,18 @@ const FirstBanner = ({ data, content }) => {
         }
       </div>
       <div className={styles._cardContainer}>
-        <div className={styles._card}>
-          <GeneralCard />
-        </div>
-        <div className={styles._card}>
-          <GeneralCard />
-        </div>
-        <div className={styles._card}>
-          <GeneralCard />
+        <div className={styles._cardContent}>
+          <div className={styles._cardHidden}>
+            <div className={styles._card}>
+              <GeneralCard />
+            </div>
+            <div className={styles._card}>
+              <GeneralCard />
+            </div>
+            <div className={styles._card}>
+              <GeneralCard />
+            </div>
+          </div>
         </div>
         <div className={styles._textContainer}>
           <p className={styles._title}>{content.title}</p>
@@ -59,7 +64,20 @@ const FirstBanner = ({ data, content }) => {
           <Button color='#FD8C2E' textColor='white' text={content.button.title}></Button>
         </div>
       </div>
+
     </div>
+    <div className='_publicity' />
+     <style jsx>{`
+     ._publicity{
+       background-image: url(${publicity?.image?.mediaItemUrl});
+       background-size: cover;
+       background-repeat: no-repeat;
+       background-position: center;
+       width: 100%;
+       height: 60vw;
+     }
+   `}</style>
+   </>
   )
 }
 

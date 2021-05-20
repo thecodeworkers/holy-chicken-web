@@ -12,11 +12,11 @@ const Home = ({ content }) => {
       </Head>
       <Navbar />
       {content ? (<>
-      <FirstBanner data={content?.firstBanner} content={content?.outstanding}/>
+      <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner}/>
 
       </>
     ) : null}
-      <Footer />
+     <Footer />
     </div>
   )
 }
