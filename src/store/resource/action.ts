@@ -1,14 +1,18 @@
 import { SET_RESOURCES, } from './action-types'
 import { actionObject } from '../../utils'
-import { pages } from '../../graphql/query'
+import { pages, resources } from '../../graphql/query'
 import { GET_PAGES } from '@store/page/action-types'
 
 
 export const getResources: any = () => async (dispatch, getState) => {
-  const { resource } = getState()
-  const generalPage = await pages('generalPage')
-  console.log(resource);
+  const { page } = getState()
+  let data = page
 
-  dispatch(actionObject(GET_PAGES, { ...resource, ...{ generalPage: generalPage } }))
-  dispatch(actionObject(SET_RESOURCES))
+  const homePage = await pages('homePage')
+  data['homePage'] = homePage
+
+  const resource = await resources()
+
+  dispatch(actionObject(GET_PAGES, data))
+  dispatch(actionObject(SET_RESOURCES, resource))
 }

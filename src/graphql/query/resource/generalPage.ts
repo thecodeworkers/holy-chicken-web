@@ -1,5 +1,5 @@
 
-import {generalId } from '@utils/pageIds'
+import { generalId } from '@utils/pageIds'
 
 const general = `
 generalPage:page(id: "${generalId}") {
