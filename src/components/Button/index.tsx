@@ -1,10 +1,9 @@
 
 
-const Button = ({ color, textColor, method = null, text }) => {
+const Button = ({ color, textColor, method = null, text, height = '2.1rem' }) => {
   return (
     <>
     <button className='_button' onClick={method ?? null}>{text}</button>
-
     <style jsx>{`
       ._button {
         background-color: ${color};
@@ -14,6 +13,8 @@ const Button = ({ color, textColor, method = null, text }) => {
         border-radius: 1.25rem;
         cursor: pointer;
         font-family: Montserrat-Bold;
+        width: 100%;
+        height: ${height}
       }
     `}
     </style>
