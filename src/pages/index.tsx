@@ -6,7 +6,7 @@ import { Home } from '@components'
 
 const HomePage = () => {
   const { page: { homePage: { home } } } = useSelector((state: any) => state)
- 
+
   return <Home content={home} />
 }
 

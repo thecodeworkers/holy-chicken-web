@@ -3,8 +3,6 @@ import styles from './styles.module.scss'
 import { GeneralCard, Button, Stepper } from '@components'
 
 const SecondBanner = ({ data }) => {
-
-  console.log(data);
   const locations = data?.locations
   const times = data?.schedules?.times
   return (

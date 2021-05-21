@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { setLoader } from '@store/actions'
 
-const Footer = () => {
+const Footer = ({}) => {
 
   const router = useRouter()
   const dispatch = useDispatch()

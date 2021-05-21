@@ -5,8 +5,10 @@ import { GET_PAGES } from '@store/page/action-types'
 
 
 export const getResources: any = () => async (dispatch, getState) => {
-  const { page } = getState()
-  const homePage = await pages('homePage')
-  dispatch(actionObject(GET_PAGES, { ...page, ...{ homePage: homePage } }))
+  const { resource } = getState()
+  const generalPage = await pages('generalPage')
+  console.log(resource);
+
+  dispatch(actionObject(GET_PAGES, { ...resource, ...{ generalPage: generalPage } }))
   dispatch(actionObject(SET_RESOURCES))
 }

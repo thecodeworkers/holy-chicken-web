@@ -68,7 +68,9 @@ const home = `
         subtitle
       }
     }
-  }
+
+}
+
 `
 
 export default home

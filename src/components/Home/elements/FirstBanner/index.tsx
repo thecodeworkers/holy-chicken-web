@@ -14,7 +14,6 @@ const FirstBanner = ({ data, content, publicity}) => {
   useEffect(() => {
     if(window.innerWidth <= 576) setResponsive('576');
      if(window.innerWidth > 577) setResponsive('580');
-    console.log(responsive);
     window.addEventListener('resize', checkWidth);
 
     setPath(window.location.pathname)

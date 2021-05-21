@@ -2,7 +2,7 @@ import { AnyAction } from 'redux'
 import { SET_RESOURCES } from './action-types'
 
 const initialState = {
-  
+  general: {},
 }
 
 const resourceReducer = (state = initialState, { type, payload }: AnyAction) => {
