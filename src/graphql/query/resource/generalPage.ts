@@ -35,6 +35,7 @@ generalPage:page(id: "${generalId}") {
       }
     }
   }
+}
 `
 
 export default general

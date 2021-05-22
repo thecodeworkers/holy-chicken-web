@@ -10,12 +10,9 @@ const resource = async () => {
   `
 
   const data: any = await GraphQlClient(query)
-
   const resources = {
-    general: normalizedArray(data?.generalPage)
+    general: normalized(data?.generalPage)
   }
-  console.log(resources);
-
   return resources
 }
 
