@@ -16,7 +16,6 @@
 ._mainStatic {
   @include menu;
   transform: translateY(-100%)
-
 }
 
 ._mainIn {
@@ -49,7 +48,6 @@
   }
 }
 
-
 ._content {
   margin-top: 6.5rem;
   width: 90%;
@@ -69,10 +67,6 @@
 
   & li:not(:first-child){
     margin-top: 6%;
-  }
-
-  & li {
-    color: $white;
   }
 }
 
@@ -128,6 +122,15 @@
   & div:nth-child(2) {
     margin-top: 6%;
   }
+}
+
+._link {
+  color: $timberWolf;
+}
+
+._activeLink {
+  color: $white;
+  font-weight: bold;
 }
 
 

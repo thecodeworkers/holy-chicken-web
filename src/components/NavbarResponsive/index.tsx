@@ -14,6 +14,8 @@ const NavbarResponsive = () => {
     if(show === 2) return setShow(1)
    }
 
+   const resetShow = () => setShow(0)
+
   return (
     <>
     <nav className={styles._nav}>
@@ -37,7 +39,7 @@ const NavbarResponsive = () => {
       </div>
     </nav>
 
-    <ResponsiveMenu show={show} />
+    <ResponsiveMenu show={show} method={resetShow}/>
     </>
   )
 }

@@ -1,15 +1,29 @@
+import { useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Insta, Twitter, WhatsApp} from '@images/icons'
 import Button from '../Button'
+import { useRouter } from 'next/router'
 
-const ResponsiveMenu = ({ show = 2 }) => {
+const ResponsiveMenu = ({ show = 0, method }) => {
+
+  const router = useRouter()
 
   const assignClass = () => {
-
-    console.log(show)
     if(show === 0) return styles._mainStatic
     if(show === 1) return styles._mainIn
     if(show === 2) return styles._mainOut
+  }
+
+  const navigation = (route: string) => {
+    if (route != router.pathname) {
+      router.push(route)
+      method()
+    }
+  }
+
+  const activeLink = (route: string) => {
+    if (route == router.pathname) return styles._activeLink
+    return styles._link
   }
 
   return (
@@ -17,10 +31,10 @@ const ResponsiveMenu = ({ show = 2 }) => {
       <div className={styles._content}>
         <div>
           <ul className={styles._list}>
-            <li>Home</li>
-            <li>About us</li>
-            <li>Contacto</li>
-            <li>Shop</li>
+            <li className={activeLink('/')} onClick={() => navigation('/')}>Home</li>
+            <li className={activeLink('/about-us')} onClick={() => navigation('/about-us')}>About us</li>
+            <li className={activeLink('/contact')} onClick={() => navigation('/contact')}>Contacto</li>
+            <li className={activeLink('/shop')} onClick={() => navigation('/shop')}>Shop</li>
           </ul>
         </div>
 
@@ -61,7 +75,9 @@ const ResponsiveMenu = ({ show = 2 }) => {
 
             <div>
               <img src='images/icons/banana-logo.svg' width='25px'></img>
-              <img src='images/icons/tcw-logo.svg' width='25px' className={styles._tcwLogo}></img>
+              <a href='https://www.thecodeworkers.com/' rel='noopener' target='_blank'>
+                <img src='images/icons/tcw-logo.svg' width='25px' className={styles._tcwLogo}></img>
+              </a>
             </div>
           </div>
         </div>

@@ -38,11 +38,6 @@
   & li {
     font-size: $montserratRegular14;
     cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-      text-underline-position: under;
-    }
   }
 
   & li:not(:last-child) {
@@ -52,11 +47,23 @@
 
 ._link {
   color: $doveGray;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-position: under;
+  }
 }
 
 ._activeLink {
   color: $darkBlack;
   font-family: $montserratBold;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-position: under;
+  }
 }
 
 ._iconsList {
@@ -97,11 +104,6 @@
     text-align: center;
     margin-top: 9%;
   }
-}
-
-._link {
-  text-decoration: underline;
-  color: $white;
 }
 
 ._logoContainer {
