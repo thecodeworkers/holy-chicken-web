@@ -31,9 +31,9 @@ const NavBar = () => {
           <div className={styles._leftSide}>
             <ul className={styles._linksList}>
               <li onClick={() => navigation('/')} className={activeLink('/')}>Home</li>
-              <li onClick={() => navigation('/about-us')}>About us</li>
-              <li onClick={() => navigation('/contact')}>Contacto</li>
-              <li onClick={() => navigation('/shop')}>Shop</li>
+              <li onClick={() => navigation('/about-us')} className={activeLink('/about-us')}>About us</li>
+              <li onClick={() => navigation('/contact')} className={activeLink('/contact')}>Contacto</li>
+              <li onClick={() => navigation('/shop')} className={activeLink('/shop')}>Shop</li>
             </ul>
           </div>
 

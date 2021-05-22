@@ -54,8 +54,24 @@ const FirstBanner = ({ data, content, publicity}) => {
             const currentClass = index + 1;
             return (
               <div className={newArray[index].className} id={currentClass.toString()} key={index}>
-                <img src={responsive >= '576' ? newArray[index]?.image?.mediaItemUrl : newArray[index]?.responsiveImage?.mediaItemUrl  }
-                   className={styles._img}></img>
+                <div className={`_banner${index}`}>
+                  <style jsx>{`
+                    ._banner${index} {
+                      background-image: url(${newArray[index]?.image?.mediaItemUrl});
+                      height: 450px;
+                      width: 85vw
+                    }
+                    @media(max-width: 576px) {
+                      ._banner${index} {
+                        background-image: url(${newArray[index]?.responsiveImage?.mediaItemUrl});
+                        height: 250px;
+                        width: 85vw;
+                        background-repeat: no-repeat;
+                        background-size:100% 100%
+                      }
+                    }
+                  `}</style>
+                </div>
               </div>
             )
           })
@@ -79,6 +95,10 @@ const FirstBanner = ({ data, content, publicity}) => {
             <div className={styles._card}>
               <GeneralCard />
             </div>
+
+            <div style={{width: 30, height: 100, margin: 20}}>
+
+            </div>
           </div>
         </div>
         <div className={styles._textContainer}>
@@ -89,23 +109,23 @@ const FirstBanner = ({ data, content, publicity}) => {
       </div>
 
     </div>
-    <div className='_publicity' />
-     <style jsx>{`
-
-     ._publicity{
-       background-image: url(${publicity?.image?.mediaItemUrl});
-       background-size: cover;
-       background-position: center;
-       height: 30vw;
-     }
-
-    @media(max-width: 768px) {
-      ._publicity {
-        background-image: url(${publicity?.responsiveImage?.mediaItemUrl});
-        height: 25vh;
+    <div className='_publicity'>
+      <style jsx>{`
+      ._publicity{
+        background-image: url(${publicity?.image?.mediaItemUrl});
+        background-size: cover;
+        background-position: center;
+        height: 30vw;
       }
-    }
-   `}</style>
+
+      @media(max-width: 576px) {
+        ._publicity {
+          background-image: url(${publicity?.responsiveImage?.mediaItemUrl});
+          height: 25vh;
+        }
+      }
+    `}</style>
+    </div>
    </>
   )
 }
