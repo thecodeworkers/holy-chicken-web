@@ -1,0 +1,136 @@
+@import '../../../public/styles/index.scss';
+
+@mixin menu {
+  background-color: $darkBlack;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 997;
+  display: flex;
+  justify-content: center;
+
+}
+
+._mainStatic {
+  @include menu;
+  transform: translateY(-100%)
+}
+
+._mainIn {
+  @include menu;
+  animation: menu-in 1s linear forwards;
+}
+
+._mainOut{
+  @include menu;
+  animation: menu-out 1s linear forwards;
+}
+
+@keyframes menu-in {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes menu-out {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+._content {
+  margin-top: 6.5rem;
+  width: 90%;
+  flex-shrink: 1;
+  padding-bottom: 6%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+._list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: $montserratRegular;
+  font-size: $montserratRegular14;
+
+  & li:not(:first-child){
+    margin-top: 6%;
+  }
+}
+
+._socialMediaParent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 6%;
+
+  & div:not(:last-child) {
+    margin-right: 1.5rem;
+  }
+}
+
+._politicsParent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  margin: 6% 0;
+
+  & p {
+    font-family: $montserratRegular;
+    color: $white;
+    font-size: $montserratRegular14;
+  }
+}
+
+._separator {
+  height: 30px;
+  width: 2px;
+  background-color: $white;
+}
+
+._copyright {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & p {
+    color: $white;
+    font-family: $montserratRegular;
+    font-size: $montserratRegular14;
+  }
+}
+
+._tcwLogo {
+  margin-left: 1.2rem
+}
+
+._buttonsParent {
+
+  & div:nth-child(2) {
+    margin-top: 6%;
+  }
+}
+
+._link {
+  color: $timberWolf;
+}
+
+._activeLink {
+  color: $white;
+  font-weight: bold;
+}
+
+
