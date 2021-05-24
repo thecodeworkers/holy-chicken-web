@@ -4,9 +4,10 @@ import { wrapper } from '@store'
 import { getResources } from '@store/actions'
 import { Home } from '@components'
 const HomePage = () => {
-  const { page: { homePage: { home } } } = useSelector((state: any) => state)
+  const { page: { homePage: { home } }, resource: { general: {general}} } = useSelector((state: any) => state)
 
-  return <Home content={home} />
+
+  return <Home content={home} data={general}/>
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(

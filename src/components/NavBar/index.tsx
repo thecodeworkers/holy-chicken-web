@@ -7,10 +7,9 @@ import { useRouter } from 'next/router'
 import Button from '../Button'
 import { NavbarResponsive } from '@components'
 
-const NavBar = () => {
+const NavBar = ({ data }) => {
 
   const router = useRouter()
-
   const [show, setShow] = useState(false)
 
   const navigation = (route: string) => {
@@ -29,12 +28,17 @@ const NavBar = () => {
       <nav className={styles._main}>
         <div className={styles._menu}>
           <div className={styles._leftSide}>
-            <ul className={styles._linksList}>
-              <li onClick={() => navigation('/')} className={activeLink('/')}>Home</li>
-              <li onClick={() => navigation('/about-us')} className={activeLink('/about-us')}>About us</li>
-              <li onClick={() => navigation('/contact')} className={activeLink('/contact')}>Contacto</li>
-              <li onClick={() => navigation('/shop')} className={activeLink('/shop')}>Shop</li>
-            </ul>
+
+            {
+              data?.mainNavigation.map((item, index) => {
+                return (
+                  <div className={styles._linksList} key={index}>
+                    <p onClick={() => navigation(item.link)} className={activeLink(item.link)}>{item.title}</p>
+                  </div>
+                )
+              }
+              )
+            }
           </div>
 
           <div className={styles._logoContainer}>

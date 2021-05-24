@@ -4,13 +4,13 @@ import { Navbar } from '@components'
 import Footer from '../Footer'
 import { FirstBanner, SecondBanner, ThirdBanner} from './elements'
 
-const Home = ({ content }) => {
+const Home = ({ content, data}) => {
   return (
     <div>
       <Head>
         <title>Holy Chiken</title>
       </Head>
-      <Navbar />
+      <Navbar data={data?.header}/>
       {content ? (<>
       <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner}/>
       <SecondBanner data={content?.thirdBanner} />
@@ -18,7 +18,7 @@ const Home = ({ content }) => {
 
       </>
     ) : null}
-     <Footer />
+     <Footer data={data?.footer} />
     </div>
   )
 }
