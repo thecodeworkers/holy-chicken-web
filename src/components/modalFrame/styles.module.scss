@@ -1,0 +1,19 @@
+@import '../../../public/styles/index.scss';
+
+._parent {
+  width: 100%;
+  height: 100vh;
+  background-color: blue;
+  z-index: 998;
+  position: fixed;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+._modal {
+  background-color: green;
+  width: 500px;
+  height: 200px;
+}
