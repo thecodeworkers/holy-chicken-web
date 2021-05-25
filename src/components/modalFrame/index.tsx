@@ -1,11 +1,28 @@
 import styles from './styles.module.scss'
 
-const ModalFrame = ({ children }) => (
-  <div className={styles._parent}>
+const ModalFrame = ({ children, separation = '5rem' }) => (
+  <>
+  <div className='_parent'>
     <div className={styles._modal}>
-    <h1>hey</h1>
+      {children}
     </div>
   </div>
+
+  <style>{`
+    ._parent {
+      width: 100%;
+      height: calc(100vh - ${separation});
+      background-color: rgba(0,0,0,0.6);
+      z-index: 998;
+      position: fixed;
+      bottom: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  `}
+  </style>
+  </>
 )
 
 export default ModalFrame;

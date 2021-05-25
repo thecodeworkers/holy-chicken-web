@@ -1,0 +1,67 @@
+@import '../../../public/styles/index.scss';
+
+._main {
+  display: inline-flex;
+}
+
+._iconParent {
+  margin-right: 1rem;
+}
+
+._itemParent {
+  display: flex;
+  margin-top: 1.2rem;
+
+  & p {
+    font-family: $montserratRegular;
+    font-size: 0.8rem;
+  }
+
+  & p:first-child {
+    font-family: $montserratBold;
+    margin-bottom: 0.1rem;
+  }
+}
+
+._leftSection {
+  box-shadow: 8px 12px 16px $mercury;
+  padding: 3rem 3.5rem 1rem 3.5rem;
+  box-sizing: border-box;
+  border-radius: 30px;
+  width: 45%;
+
+  & h1 {
+    font-family: $blackerTextHeavyBold;
+    font-size: 1.8rem;
+  }
+}
+
+._rightSection {
+  padding: 2.5rem 2.5rem 1rem 2.5rem;
+}
+
+._textParent {
+  &:not(:first-child) {
+    margin-top: 1.5rem;
+  }
+}
+
+._socialMediaParent {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & div {
+    cursor: pointer;
+  }
+
+  & div:not(:last-child) {
+    margin-right: 1rem;
+  }
+}
+
+._marginBottom {
+  margin-bottom: 2.5rem;
+}
+
