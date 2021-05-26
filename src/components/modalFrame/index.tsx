@@ -12,7 +12,7 @@ const ModalFrame = ({ children, separation = '5rem' }) => (
     ._parent {
       width: 100%;
       height: calc(100vh - ${separation});
-      background-color: rgba(0,0,0,0.6);
+      background-color: rgba(0,0,0,0.5);
       z-index: 998;
       position: fixed;
       bottom: 0px;

@@ -4,7 +4,8 @@ import { Navbar, ModalFrame } from '@components'
 import Footer from '../Footer'
 import { FirstBanner } from './elements'
 import styles from './styles.module.scss'
-import { Phone, Mail, Insta, Twitter, WhatsApp, Location } from '@images/icons'
+import { Phone, Mail, Insta, Twitter, WhatsApp, Location, PaperClip } from '@images/icons'
+import Button from '../Button'
 
 const Home = ({ content }) => {
   return (
@@ -81,7 +82,81 @@ const Home = ({ content }) => {
 
           </div>
           <div className={styles._rightSection}>
-            <h1>Right</h1>
+            <h1>Tipo de contacto</h1>
+
+            <div className={styles._rightMain}>
+              <div  className={styles._leftSide}>
+                <div className={styles._buttonsParent}>
+                  <div className={styles._btnParent}>
+                   <Button color='#000' text='Cliente' textColor='#FFF'/>
+                  </div>
+
+                  <div className={styles._btnParent}>
+                    <Button color='#F4F3EE' text='Proveedor' textColor='#000'/>
+                  </div>
+
+                 <div className={styles._btnParent}>
+                   <Button color='#F4F3EE' text='Personal' textColor='#000'/>
+                 </div>
+                </div>
+
+                <form>
+                  <div className={styles._inputRow}>
+                    <div style={{width: '48%'}}>
+                      <div className={styles._inputParent}>
+                        <label>Nombre</label>
+                        <input placeholder='Nombre' type='text' className={styles._input} />
+                      </div>
+                    </div>
+
+
+                    <div style={{width: '48%'}}>
+                    <div className={styles._inputParent}>
+                      <label>Apellido</label>
+                      <input placeholder='Apellido' type='text' className={styles._input} />
+                    </div>
+                  </div>
+                  </div>
+
+                  <div className={styles._inputRow}>
+                    <div style={{width: '100%'}}>
+                      <div className={styles._inputParent}>
+                        <label>Teléfono</label>
+                        <input placeholder='+58 (000) 000 00 00' type='text' className={styles._input} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={styles._inputRow}>
+                    <div style={{width: '100%'}}>
+                      <div className={styles._inputParent}>
+                        <label>Email</label>
+                        <input placeholder='correo@dominio.com' type='text' className={styles._input} />
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+
+              <div className={styles._rightSide}>
+                <div className={styles._textAreaParent}>
+                  <textarea className={styles._textArea} placeholder='Escriba su mensaje aqui...'></textarea>
+                  <div className={styles._paperClipParent}>
+                    <PaperClip color='#000'/>
+                  </div>
+                </div>
+
+                <div className={styles._termsParent}>
+                  <p className={styles._termsText}>Al enviar, acepta nuestros <strong>términos y condiciones</strong> y <strong>nuestra política de privacidad</strong>, que explica cómo podemos recopilar y usar su información personal.</p>
+                </div>
+
+                <div className={styles._sendBtn}>
+                   <Button color='#000' text='Enviar' textColor='#FFF'/>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
 
