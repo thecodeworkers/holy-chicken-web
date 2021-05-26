@@ -13,13 +13,13 @@
 
 ._blackTitle{
   font-family: $blackerTextHeavyBold;
-  font-size: 3rem;
+  font-size: $blackerTextHeavyBold60;
   color: $black;
 }
 
 ._blackSubtitle{
   font-family: $montserratMedium;
-  font-size: 1.2rem;
+  font-size: $montserratMedium19;
   color: $black;
   margin-bottom: 2rem;
 }
@@ -50,14 +50,14 @@
 }
 
 ._title{
-  font-size: 1rem;
+  font-size: $montserratSemiBold16;
   font-family: $montserratSemiBold;
   color: $black;
   margin-bottom: 1rem;
 }
 
 ._subtitle{
-  font-size: 0.8rem;
+  font-size: $montserratRegular14;
   font-family: $montserratRegular;
   color: $black;
   margin-bottom: 1rem;

@@ -60,14 +60,14 @@
 
 ._title{
   font-family: $blackerTextHeavyBold;
-  font-size: 3rem;
+  font-size:$blackerTextHeavyBold60;
   color: $black;
   margin-bottom: 1rem;
 }
 
 ._subtitle{
   font-family: $montserratRegular;
-  font-size: 0.9em;
+  font-size: $montserratRegular18;
   color: $black;
   margin-bottom: 1.5rem;
 }
