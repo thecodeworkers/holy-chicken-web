@@ -1,0 +1,60 @@
+@import '@styles/index.scss';
+
+._content {
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 85%;
+  margin: auto;
+  flex-direction: column;
+  margin: 2.5rem auto
+}
+
+._blackTitle{
+  font-family: $blackerTextHeavyBold;
+  font-size: $blackerTextHeavyBold60;
+  color: $black;
+
+}
+
+._appsContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 1rem auto;
+}
+
+._image{
+  width: 80%;
+}
+
+@include responsive(md) {
+._blackTitle{
+  font-size: 2rem;
+}
+
+._appsContainer{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr,) !important;
+  width: 100%;
+
+  }
+
+  ._locate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+
+
+  }
+  ._image{
+    width: 70%;
+  }
+  ._content{
+    margin: 1rem auto;
+  }
+
+}

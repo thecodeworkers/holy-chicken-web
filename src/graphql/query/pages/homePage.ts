@@ -65,9 +65,12 @@ const home = `
           title
         }
         title
+        subtitle
       }
     }
-  }
+
+}
+
 `
 
 export default home

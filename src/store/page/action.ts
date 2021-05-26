@@ -11,6 +11,7 @@ const setResources = (data, page, resources) => {
 export const getPages: any = (resources) => async (dispatch, getState) => {
 
   const result: any = await pages(resources)
+
   const { page } = getState()
   let data = page
   data = setResources(data, result, resources);

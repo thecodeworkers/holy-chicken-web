@@ -21,6 +21,9 @@
 
 ._leftSide {
   width: 40%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 ._rightSide {
@@ -35,12 +38,12 @@
   padding: 0;
   font-family: $montserratRegular;
 
-  & li {
+  & p {
     font-size: $montserratRegular14;
     cursor: pointer;
   }
 
-  & li:not(:last-child) {
+  & p:not(:last-child) {
     margin-right: 2rem;
   }
 }

@@ -1,0 +1,107 @@
+@import '@styles/index.scss';
+
+._content {
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 85%;
+  margin: auto;
+  flex-direction: column;
+  margin: 2.5rem auto
+}
+
+._blackTitle{
+  font-family: $blackerTextHeavyBold;
+  font-size: $blackerTextHeavyBold60;
+  color: $black;
+}
+
+._blackSubtitle{
+  font-family: $montserratMedium;
+  font-size: $montserratMedium19;
+  color: $black;
+  margin-bottom: 2rem;
+}
+
+._addressContainer{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+._address{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 25%;
+
+}
+
+._locate{
+  width: 80%;
+  margin-bottom: 1rem;
+}
+
+._times{
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+
+._title{
+  font-size: $montserratSemiBold16;
+  font-family: $montserratSemiBold;
+  color: $black;
+  margin-bottom: 1rem;
+}
+
+._subtitle{
+  font-size: $montserratRegular14;
+  font-family: $montserratRegular;
+  color: $black;
+  margin-bottom: 1rem;
+}
+
+._buttonContainer{
+  display: flex;
+  justify-content: center;
+  margin-top:1rem;
+}
+
+@include responsive(xl) {
+
+  ._times{
+    width: 90%;
+  }
+}
+@include responsive(lg) {
+
+  ._address{
+    width: 100%;
+    margin-right: 1rem;
+  }
+  ._times{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+@include responsive(md) {
+
+  ._addressContainer{
+    flex-direction: column;
+  }
+  ._buttonContainer{
+   align-self: center;
+  }
+  ._blackTitle{
+    font-size: 2rem;
+  }
+  ._blackSubtitle{
+    font-size: 1rem;
+  }
+}
+
