@@ -1,0 +1,149 @@
+@import '@styles/index.scss';
+
+._main{
+  position: fixed;
+  top: 200px;
+  right:-245px;
+  cursor: pointer;
+  display: flex;
+  -webkit-animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+._mainAnimate{
+  position: fixed;
+  top: 200px;
+  right:-245px;
+  cursor: pointer;
+  display: flex;
+  -webkit-animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+._triangleMain{
+  position: relative;
+}
+
+._triangle{
+  background: $black;
+  position: absolute;
+  height: 2rem;
+  width: 2rem;
+  top: 170px;
+  transform: rotate(45deg);
+  right: -25px;
+}
+
+._content {
+  height: 8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  flex-direction: column;
+  background-color: $black;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  width: 4.5rem;
+}
+
+._whiteContent{
+  height: 23rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  flex-direction: column;
+  background-color:$white;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  width: 15rem;
+  padding: 1rem 0;
+  overflow-y: scroll;
+}
+
+._textContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+._text{
+  font-family: $montserratBold;
+  font-size: 0.7rem;
+  color: $tundora;
+}
+
+._whiteCard{
+  margin: 0.5rem 0;
+
+}
+
+._logo{
+  margin: 0.5rem 0;
+}
+
+@-webkit-keyframes slide-left {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-250px);
+            transform: translateX(-250px);
+  }
+}
+@keyframes slide-left {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-250px);
+            transform: translateX(-250px);
+  }
+}
+
+@-webkit-keyframes slide-right{
+  0% {
+    -webkit-transform: translateX(-250px);
+            transform: translateX(-250px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+@keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(-250px);
+            transform: translateX(-250px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+
+@include responsive(lg) {
+
+._main{
+  top: 170px;
+}
+
+._mainAnimate{
+  top: 170px;
+}
+
+}
+
+@include responsive(sm) {
+
+._main{
+  display: none;
+}
+._mainAnimate{
+  display: none;
+}
+}

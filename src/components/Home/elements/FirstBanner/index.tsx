@@ -7,23 +7,7 @@ const FirstBanner = ({ data, content, publicity}) => {
 
   const [currentIndex, setcurrentIndex] = useState(1);
   const [newArray, setNewArray] = useState(data)
-  const [responsive, setResponsive] = useState('');
-  const [path, setPath] = useState('');
   let interval;
-
-  useEffect(() => {
-    if(window.innerWidth <= 576) setResponsive('576');
-     if(window.innerWidth > 577) setResponsive('580');
-    window.addEventListener('resize', checkWidth);
-
-    setPath(window.location.pathname)
-    return () => window.removeEventListener('resize', checkWidth);
-  }, [responsive]);
-
-  const checkWidth = () => {
-    if(window.matchMedia('(max-width: 576px) and (min-width: 370px)').matches) return setResponsive('576');
-   if(window.matchMedia('(min-width: 577px)').matches) return setResponsive('580');
-  };
 
 
   useEffect(() => {
@@ -43,6 +27,10 @@ const FirstBanner = ({ data, content, publicity}) => {
       if (currentIndex < newArray.length - 1) return setcurrentIndex(currentIndex + 1)
       else setcurrentIndex(0)
     }, 4000);
+  }
+
+  const changeManuaImage= () => {
+
   }
 
   return (
@@ -79,7 +67,7 @@ const FirstBanner = ({ data, content, publicity}) => {
         }
     <div className={styles._stepperContainer}>
         <div className={styles._stepper}>
-          <Stepper currentStep={currentIndex+1} length={newArray?.length} onPress={() => changeImage(currentIndex, newArray.className)}/>
+          <Stepper currentStep={currentIndex+1} length={newArray?.length} onPress={() => changeImage(currentIndex+1, styles._show)}/>
         </div>
       </div>
       </div>
