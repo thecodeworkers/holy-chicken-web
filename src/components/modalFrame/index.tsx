@@ -19,6 +19,8 @@ const ModalFrame = ({ children, separation = '5rem' }) => (
       display: flex;
       justify-content: center;
       align-items: center;
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
     }
   `}
   </style>
