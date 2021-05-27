@@ -28,6 +28,7 @@
 
 ._image{
   width: 80%;
+  cursor: pointer;
 }
 
 @include responsive(md) {

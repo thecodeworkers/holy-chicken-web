@@ -19,6 +19,7 @@ const home = `
           image {
             mediaItemUrl
             slug
+            link
           }
         }
       }

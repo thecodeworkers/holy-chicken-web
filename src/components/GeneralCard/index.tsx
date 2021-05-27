@@ -13,7 +13,10 @@ const GeneralCard = () => {
 
       <div className={styles._sectionParent}>
         <p>7$</p>
-        <Button color='#118AC6' textColor='white' text='Agregar'></Button>
+        <div style={{width:123}}>
+        <Button color='#118AC6' textColor='white' text='Agregar' height={'1.9rem'}></Button>
+        </div>
+
       </div>
     </div>
   )

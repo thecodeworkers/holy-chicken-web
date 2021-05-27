@@ -1,6 +1,7 @@
 import styles from './styles.module.scss'
 
 const ThirdBanner = ({ data }) => {
+console.log(data);
 
   return (
     <div className={styles._content}>
@@ -12,7 +13,9 @@ const ThirdBanner = ({ data }) => {
           data.commerces.map((item, index) => {
             return (
               <div className={styles._locate} key={index}>
+                 <a href={item?.image.link} target='_blank'>
                  <img src={item?.image?.mediaItemUrl} className={styles._image}/>
+              </a>
               </div>
             )
           }

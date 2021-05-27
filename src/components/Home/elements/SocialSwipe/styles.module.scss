@@ -1,21 +1,26 @@
 @import '@styles/index.scss';
 
-._main{
+@mixin main{
   position: fixed;
   top: 200px;
   right:-245px;
   cursor: pointer;
   display: flex;
+}
+
+._main{
+  @include main;
+}
+
+._mainIn{
+  @include main;
   -webkit-animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
-._mainAnimate{
-  position: fixed;
-  top: 200px;
-  right:-245px;
-  cursor: pointer;
-  display: flex;
+
+._mainOut{
+  @include main;
   -webkit-animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
@@ -132,7 +137,11 @@
   top: 170px;
 }
 
-._mainAnimate{
+._mainIn{
+  top: 170px;
+}
+
+._mainOut{
   top: 170px;
 }
 
