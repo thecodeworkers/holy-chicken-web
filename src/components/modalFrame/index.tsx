@@ -22,6 +22,15 @@ const ModalFrame = ({ children, separation = '5rem' }) => (
       -webkit-backdrop-filter: blur(14px);
       backdrop-filter: blur(14px);
     }
+
+    @media (max-width: 768px) {
+      ._parent {
+        display: block;
+        position: absolute;
+        padding: 4rem 0;
+        top: 3.75rem;
+      }
+    }
   `}
   </style>
   </>
