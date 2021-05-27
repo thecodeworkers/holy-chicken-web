@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { setLoader } from '@store/actions'
 
-const Footer = () => {
+const Footer = ({ data }) => {
 
   const router = useRouter()
   const dispatch = useDispatch()
@@ -23,24 +23,28 @@ const Footer = () => {
       <footer className={styles._footerContainer}>
         <div className={styles._footer}>
 
-
-
           <div className={styles._content}>
             <div className={styles._logoMain} >
               <ChickenLogo color='#fff' />
             </div>
             <div className={styles._textContainer}>
-              <p className={styles._title}>¿Holy o Not So Holy? </p>
-              <p className={styles._subtitle}>Pide tu pollo crispy en sánduche o tenders, picante o clásico. Tu orden divina espera por ti.</p>
+              <p className={styles._title}>{data?.footerTitle}</p>
+              <p className={styles._subtitle}>{data?.footerSubtitle}</p>
             </div>
             <div className={styles._links}>
-              <p className={styles._link}>Contáctanos</p>
-              <p className={styles._link}>About us</p>
-              <p className={styles._link}>Destacados</p>
-              <p className={styles._link}>Catering</p>
-              <p className={styles._link}>Location</p>
-              <p className={styles._link}>Menú</p>
-              <p className={styles._link}>Login</p>
+              {
+                data?.footerNavigation.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <p onClick={() => navigation(item.link)} className={styles._link} >{item?.titulo}</p>
+
+                    </div>
+
+
+                  )
+                }
+                )
+              }
             </div>
 
             <div className={styles._socialContainer}>
@@ -67,7 +71,7 @@ const Footer = () => {
 
               <div className={styles._copyContainer}>
                 <div className={styles._copyContent}>
-                  <p className={styles._copy}>Copyright © Holy Chicken C.A</p>
+                  <p className={styles._copy}>{data.copyright}</p>
                 </div>
                 <div className={styles._copy}>
                   <a href='https://www.thecodeworkers.com' >

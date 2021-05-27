@@ -1,7 +1,6 @@
 import { GraphQlClient, normalized } from '@utils'
 import homePageQuery from './homePage'
 
-
 const pages = async (resource: any) => {
 
   const resources = {
@@ -13,9 +12,8 @@ const pages = async (resource: any) => {
       ${resources[resource]}
     }
   `
-  
-  const result: any = await GraphQlClient(query)
 
+  const result: any = await GraphQlClient(query)
   return (result) ? 'nodes' in result[resource] ? normalized(result[resource].nodes) : normalized(result[resource]) : {}
 }
 

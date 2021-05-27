@@ -6,6 +6,7 @@ const initialState = {
 }
 
 const pageReducer = (state = initialState, { type, payload }: AnyAction) => {
+
   switch (type) {
     case GET_PAGES:
       return { ...state, ...payload }

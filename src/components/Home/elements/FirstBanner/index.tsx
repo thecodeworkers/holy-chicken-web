@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import styles from './styles.module.scss'
-import { GeneralCard, Button } from '@components'
+import { GeneralCard, Button, Stepper } from '@components'
 
-const FirstBanner = ({ data, content }) => {
+const FirstBanner = ({ data, content, publicity}) => {
+
 
   const [currentIndex, setcurrentIndex] = useState(1);
   const [newArray, setNewArray] = useState(data)
-
   let interval;
 
 
@@ -29,7 +29,12 @@ const FirstBanner = ({ data, content }) => {
     }, 4000);
   }
 
+  const changeManuaImage= () => {
+
+  }
+
   return (
+    <>
     <div className={styles._content}>
       <div className={styles._main}>
         {
@@ -37,23 +42,79 @@ const FirstBanner = ({ data, content }) => {
             const currentClass = index + 1;
             return (
               <div className={newArray[index].className} id={currentClass.toString()} key={index}>
-                <img src={newArray[index]?.image?.mediaItemUrl} className={styles._img}></img>
+                <div className={`_banner${index}`}>
+                  <style jsx>{`
+                    ._banner${index} {
+                      background-image: url(${newArray[index]?.image?.mediaItemUrl});
+                      height: 450px;
+                      width: 85vw
+                    }
+                    @media(max-width: 576px) {
+                      ._banner${index} {
+                        background-image: url(${newArray[index]?.responsiveImage?.mediaItemUrl});
+                        height: 250px;
+                        width: 85vw;
+                        background-repeat: no-repeat;
+                        background-size:100% 100%
+                      }
+                    }
+                  `}</style>
+                </div>
               </div>
             )
           })
+
         }
+    <div className={styles._stepperContainer}>
+        <div className={styles._stepper}>
+          <Stepper currentStep={currentIndex+1} length={newArray?.length} onPress={() => changeImage(currentIndex+1, styles._show)}/>
+        </div>
+      </div>
       </div>
       <div className={styles._cardContainer}>
-        <div className={styles._card}>
-          <GeneralCard />
+        <div className={styles._cardContent}>
+          <div className={styles._cardHidden}>
+            <div className={styles._card}>
+              <GeneralCard />
+            </div>
+            <div className={styles._card}>
+              <GeneralCard />
+            </div>
+            <div className={styles._card}>
+              <GeneralCard />
+            </div>
+
+            <div style={{width: 30, height: 100, margin: 20}}>
+
+            </div>
+          </div>
         </div>
         <div className={styles._textContainer}>
-          <p>{content.title}</p>
-          <p>{content.content}</p>
-          <Button color='#118AC6' textColor='white' text={content.button.title}></Button>
+          <p className={styles._title}>{content.title}</p>
+          <p className={styles._subtitle}>{content.content}</p>
+          <Button color='#FD8C2E' textColor='white' text={content.button.title}></Button>
         </div>
       </div>
+
     </div>
+    <div className='_publicity'>
+      <style jsx>{`
+      ._publicity{
+        background-image: url(${publicity?.image?.mediaItemUrl});
+        background-size: cover;
+        background-position: center;
+        height: 30vw;
+      }
+
+      @media(max-width: 576px) {
+        ._publicity {
+          background-image: url(${publicity?.responsiveImage?.mediaItemUrl});
+          height: 25vh;
+        }
+      }
+    `}</style>
+    </div>
+   </>
   )
 }
 
