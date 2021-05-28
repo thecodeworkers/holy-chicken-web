@@ -22,10 +22,6 @@ const ThirdBanner = ({ data }) => {
         }
       </div>
     </div>
-
-
-
-
   )
 }
 

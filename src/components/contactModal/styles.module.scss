@@ -127,6 +127,7 @@
 }
 
 
+
 ._textArea {
   border: solid 1px $alto;
   border-radius: 1.25rem;
@@ -185,11 +186,17 @@
 ._closeParent {
   display: flex;
   justify-content: space-between;
-}
-
-._closeParent {
   cursor: pointer;
 }
+
+._closeIconParent {
+  cursor: pointer;
+}
+
+._responsiveIconParent {
+  display: none;
+}
+
 
 @include responsive(lg) {
   ._main {
@@ -198,7 +205,6 @@
     overflow-y: scroll;
     height: 60vh;
     box-shadow: none;
-
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
@@ -292,5 +298,18 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;
+  }
+
+  ._closeIconParent {
+    display: none;
+  }
+
+  ._responsiveIconParent {
+    display: block;
+  }
+
+
+  ._separation {
+   margin-top: 1.2rem;
   }
 }

@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react';
 import styles from './styles.module.scss'
 import { GeneralCard, Button, Stepper } from '@components'
+import { useDispatch } from 'react-redux'
+import { setShowModal} from '@store/actions'
 
 const SecondBanner = ({ data }) => {
+
+  const dispatch = useDispatch()
   const locations = data?.locations
   const times = data?.schedules?.times
+
+  const openModal = () => dispatch(setShowModal(true))
+
   return (
     <div className={styles._content}>
 
@@ -53,7 +60,7 @@ const SecondBanner = ({ data }) => {
             )}
         </div>
       </div>
-      <div className={styles._buttonContainer} >
+      <div className={styles._buttonContainer} onClick={openModal}>
       <Button color='#FD8C2E' textColor='white' text={data.button.title}></Button>
       </div>
 

@@ -91,14 +91,15 @@ const FirstBanner = ({ data, content, publicity }) => {
               </div>
 
               <div style={{ width: 30, height: 100, margin: 20 }}>
-
               </div>
             </div>
           </div>
           <div className={styles._textContainer}>
             <p className={styles._title}>{content.title}</p>
             <p className={styles._subtitle}>{content.content}</p>
+            <div className={styles._btnParent}>
             <Button color='#FD8C2E' textColor='white' text={content.button.title}></Button>
+            </div>
           </div>
         </div>
 
