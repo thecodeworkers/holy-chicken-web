@@ -1,6 +1,6 @@
 
 
-const Button = ({ color, textColor, method = null, text, height = '2.1rem' }) => {
+const Button = ({ color, textColor, method = null, text, height = '2.5rem' }) => {
   return (
     <>
     <button className='_button' onClick={method ?? null}>{text}</button>
@@ -17,6 +17,7 @@ const Button = ({ color, textColor, method = null, text, height = '2.1rem' }) =>
         height: ${height};
         display: flex;
         justify-content: center;
+        align-items: center;
       }
     `}
     </style>

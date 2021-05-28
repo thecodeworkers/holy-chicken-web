@@ -5,14 +5,22 @@ import { Insta, WhatsApp, Twitter } from '@images/icons'
 const SocialSwipe = () => {
 
   const [animate, setAnimate]=useState(false)
+  const [show, setShow] = useState(0)
+
+  const assignClass = () => {
+    if(show === 0) return styles._main
+    if(show === 1) return styles._mainIn
+    if(show === 2) return styles._mainOut
+  }
 
   const animation = () => {
-    if (!animate) setAnimate(true)
-    if (animate) setAnimate(false)
+    if (show === 0) setShow(2)
+    if (show === 1) setShow(2)
+    if (show === 2) setShow(1)
   }
 
   return(
-    <div className={!animate ? styles._main : styles._mainAnimate} onClick={animation}>
+    <div className={assignClass()} onClick={animation}>
       <div className={styles._triangleMain}>
       <div className={styles._triangle}>
 

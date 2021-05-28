@@ -16,6 +16,7 @@ const home = `
       fourthBanner {
         title
         commerces {
+          link
           image {
             mediaItemUrl
             slug
