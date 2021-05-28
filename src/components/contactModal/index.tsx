@@ -4,16 +4,25 @@ import { ModalFrame, Button } from '@components'
 import { Phone, Mail, Insta, Twitter, WhatsApp, Location, PaperClip } from '@images/icons'
 import { useDispatch } from 'react-redux'
 import { setShowModal } from '@store/actions'
+import { useSelector } from 'react-redux'
 
 const ModalContact = () => {
 
   const dispatch = useDispatch()
+  const { resource: { general: { general } } } = useSelector((state: any) => state)
 
   return (
     <ModalFrame>
     <div className={styles._main}>
       <div className={styles._leftSection}>
-        <p className={styles._title}>Contáctanos</p>
+        <div className={styles._closeParent}>
+          <p className={styles._title}>Contáctanos</p>
+
+          <div className={styles._responsiveIconParent} onClick={() => dispatch(setShowModal(false))}>
+           <img src='images/icons/close.svg' width='16px'></img>
+          </div>
+
+        </div>
 
         <div className={`${styles._itemParent} ${styles._marginBottom}`}>
           <div className={styles._iconParent}>
@@ -67,13 +76,19 @@ const ModalContact = () => {
 
         <div className={styles._socialMediaParent}>
           <div>
+          <a href={general?.socialNetworks[0]?.link} target='_blank'>
             <Insta color='#000'/>
+          </a>
           </div>
           <div>
+           <a href={general?.socialNetworks[1]?.link} target='_blank'>
             <Twitter color='#000'/>
+          </a>
           </div>
           <div>
+          <a href={general?.socialNetworks[2]?.link} target='_blank'>
             <WhatsApp color='#000'/>
+          </a>
           </div>
         </div>
 
@@ -82,7 +97,7 @@ const ModalContact = () => {
         <div className={styles._closeParent}>
           <p className={styles._title}>Tipo de contacto</p>
 
-          <div className={styles._closeParent} onClick={() => dispatch(setShowModal(false))}>
+          <div className={styles._closeIconParent} onClick={() => dispatch(setShowModal(false))}>
            <img src='images/icons/close.svg' width='16px'></img>
           </div>
 
@@ -114,7 +129,7 @@ const ModalContact = () => {
                 </div>
 
                 <div className={styles._halfWidth}>
-                <div className={styles._inputParent}>
+                <div className={`${styles._inputParent} ${styles._separation}`}>
                   <label>Apellido</label>
                   <input placeholder='Apellido' type='text' className={styles._input} />
                 </div>

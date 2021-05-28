@@ -6,10 +6,12 @@ import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import { wrapper } from '@store'
 import { getResources } from '@store/actions'
-
+import { useDispatch } from 'react-redux'
+import { setShowModal } from '@store/actions'
 
 const ResponsiveMenu = ({ show = 0, method }) => {
 
+  const dispatch = useDispatch()
   const router = useRouter()
   const { resource: { general: { general } } } = useSelector((state: any) => state)
 
@@ -20,6 +22,11 @@ const ResponsiveMenu = ({ show = 0, method }) => {
   }
 
   const navigation = (route: string) => {
+    if(route == '/contact') {
+      dispatch(setShowModal(true))
+      method()
+      return
+    }
     if (route != router.pathname) {
       router.push(route)
       method()
@@ -28,7 +35,6 @@ const ResponsiveMenu = ({ show = 0, method }) => {
 
   const activeLink = (route: string) => {
     if (route == router.pathname) return styles._activeLink
-
     return styles._link
   }
 
@@ -36,19 +42,16 @@ const ResponsiveMenu = ({ show = 0, method }) => {
     <div className={assignClass()}>
       <div className={styles._content}>
         <div>
-            {
-              general?.header?.mainNavigation.map((item, index) => {
-                return (
-
-                  <div className={styles._list} key={index}>
-                    <p className={activeLink(item?.link)} onClick={() => navigation(item?.link)}>{item.title}</p>
-                  </div>
-
-
-                )
-              }
+          {
+            general?.header?.mainNavigation.map((item, index) => {
+              return (
+                <div className={styles._list} key={index}>
+                  <p className={activeLink(item?.link)} onClick={() => navigation(item?.link)}>{item.title}</p>
+                </div>
               )
             }
+            )
+          }
         </div>
 
         <div className={styles._downSection}>
@@ -71,11 +74,11 @@ const ResponsiveMenu = ({ show = 0, method }) => {
           </div>
 
           <div className={styles._buttonsParent}>
-            <div>
+            <div onClick={() => navigation('/shop')}>
               <Button textColor='#FFF' text='Pedir Ahora' color='#FD8C2E' height='2.5rem' />
             </div>
 
-            <div>
+            <div onClick={() => navigation('/login')}>
               <Button textColor='#FFF' text='Iniciar Sesión' color='#118AC6' height='2.5rem' />
             </div>
           </div>

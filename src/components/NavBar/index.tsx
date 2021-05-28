@@ -55,7 +55,10 @@ const NavBar = ({ data }) => {
 
           <div className={styles._rightSide}>
             <div className={styles._iconsList}>
+              <div onClick={() => navigation('/shop')}>
               <Button color='#FD8C2E' text='Pedir ahora' textColor='#fff'></Button>
+              </div>
+
               <div className={styles._iconParent} onClick={() => navigation('/cart')}>
                 <Cart color='#000' />
 
@@ -68,10 +71,10 @@ const NavBar = ({ data }) => {
                 {show &&
                   <div className={styles._dropDown}>
                     <div className={styles._dropDownContent}>
-                      <div className={styles._buttonBlueParent}>
-                        <Button color='#118AC6' text='Iniciar sesión' textColor='#fff'></Button>
+                      <div className={styles._buttonBlueParent} onClick={() => navigation('/login')}>
+                        <Button color='#118AC6' text='Iniciar sesión' textColor='#fff' ></Button>
                       </div>
-                      <p>¿Nuevo cliente? <a className={styles._link}> Crear Cuenta </a></p>
+                      <p>¿Nuevo cliente? <a className={styles._link} onClick={() => navigation('/register')}> Crear Cuenta </a></p>
                       <p>Mis órdenes</p >
                     </div>
                   </div>

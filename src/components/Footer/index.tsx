@@ -4,15 +4,15 @@ import { ChickenLogo, Logo } from '@images/resources'
 import { Insta, WhatsApp, Twitter } from '@images/icons'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { setLoader } from '@store/actions'
+import { setLoader, setShowModal } from '@store/actions'
 
-const Footer = ({ data, content}) => {
+const Footer = ({ data, content }) => {
 
   const router = useRouter()
   const dispatch = useDispatch()
 
-
   const navigation = (route, loader: boolean = false, reference = null, key = '') => {
+    if (route == '/contact') return dispatch(setShowModal(true))
     if (router.pathname != route) {
       if (loader) dispatch(setLoader(true))
       router.push(route)
@@ -37,10 +37,7 @@ const Footer = ({ data, content}) => {
                   return (
                     <div key={index}>
                       <p onClick={() => navigation(item.link)} className={styles._link} >{item?.titulo}</p>
-
                     </div>
-
-
                   )
                 }
                 )
@@ -59,18 +56,18 @@ const Footer = ({ data, content}) => {
 
               <div className={styles._socialMedia}>
                 <div className={styles._icon}>
-                <a href={content[0]?.link} target='_blank'>
-                  <Insta color={'#fff'} />
+                  <a href={content[0]?.link} target='_blank'>
+                    <Insta color={'#fff'} />
                   </a>
                 </div>
                 <div className={styles._icon}>
-                <a href={content[1]?.link} target='_blank'>
-                  <Twitter color={'#fff'} />
+                  <a href={content[1]?.link} target='_blank'>
+                    <Twitter color={'#fff'} />
                   </a>
                 </div>
                 <div className={styles._icon}>
-                <a href={content[2]?.link} target='_blank'>
-                  <WhatsApp color={'#fff'} />
+                  <a href={content[2]?.link} target='_blank'>
+                    <WhatsApp color={'#fff'} />
                   </a>
                 </div>
               </div>

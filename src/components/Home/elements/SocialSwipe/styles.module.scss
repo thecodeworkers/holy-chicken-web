@@ -65,6 +65,25 @@
   width: 15rem;
   padding: 1rem 0;
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $black;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $black;
+    border-radius: 10px;
+  }
+
 }
 
 ._textContainer{
