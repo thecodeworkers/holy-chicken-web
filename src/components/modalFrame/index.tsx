@@ -32,7 +32,7 @@ const ModalFrame = ({ children, separation = '5rem' }) => {
       display: none;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       ._parent {
         display: block;
         position: fixed;

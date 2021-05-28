@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import styles from './styles.module.scss'
 import { GeneralCard, Button, Stepper } from '@components'
+import { useRouter } from 'next/router'
 
 const FirstBanner = ({ data, content, publicity }) => {
 
+  const router = useRouter()
   const [currentIndex, setcurrentIndex] = useState(1);
   const [newArray, setNewArray] = useState(data)
   let interval;
-
 
   useEffect(() => {
     changeImage(currentIndex, styles._show)
@@ -36,6 +37,10 @@ const FirstBanner = ({ data, content, publicity }) => {
     }
 
     determinateCurrent()
+  }
+
+  const navigation = (route: string) => {
+    if (route != router.pathname) router.push(route)
   }
 
   return (
@@ -97,7 +102,7 @@ const FirstBanner = ({ data, content, publicity }) => {
           <div className={styles._textContainer}>
             <p className={styles._title}>{content.title}</p>
             <p className={styles._subtitle}>{content.content}</p>
-            <div className={styles._btnParent}>
+            <div className={styles._btnParent} onClick={() => navigation('/shop')}>
             <Button color='#FD8C2E' textColor='white' text={content.button.title}></Button>
             </div>
           </div>
