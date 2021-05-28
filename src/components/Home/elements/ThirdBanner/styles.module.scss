@@ -30,6 +30,10 @@
   width: 80%;
   cursor: pointer;
 }
+._linkcontainer{
+  display: flex;
+  justify-content: center;
+}
 
 @include responsive(md) {
 ._blackTitle{

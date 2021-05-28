@@ -12,7 +12,7 @@ const ThirdBanner = ({ data }) => {
           data.commerces.map((item, index) => {
             return (
               <div className={styles._locate} key={index}>
-                <a href={item?.link} target='_blank'>
+                <a href={item?.link} target='_blank' className={styles._linkContainer}>
                   <img src={item?.image?.mediaItemUrl} className={styles._image} />
                 </a>
               </div>
