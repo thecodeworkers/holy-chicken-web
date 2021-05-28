@@ -8,6 +8,8 @@ import Button from '../Button'
 import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner} from './elements'
 
 const Home = ({ content, data}) => {
+
+
   return (
     <div>
       <Head>
@@ -169,7 +171,7 @@ const Home = ({ content, data}) => {
 
       </>
     ) : null}
-     <Footer data={data?.footer} />
+     <Footer data={data?.footer} content={data?.socialNetworks}  />
     </div>
   )
 }

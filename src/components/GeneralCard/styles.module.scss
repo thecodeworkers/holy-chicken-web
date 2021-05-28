@@ -11,12 +11,15 @@
   & h3 {
     font-family: $blackerTextHeavy;
     margin-top: 7%;
+    color: $mineShaft;
+    font-size: $blackerTextHeavy20;
+
   }
 
   & p {
     color: $gray;
     font-family: $montserratRegular;
-    font-size: 0.8rem;
+    font-size: $montserratRegular12;
     margin: 4% 0;
   }
 }
@@ -29,7 +32,7 @@
 
   & p {
     font-family: $montserratBold;
-    font-size: 0.9rem;
-    color: $darkBlack;
+    font-size: $montserratBold16;
+    color: $mineShaft;
   }
 }

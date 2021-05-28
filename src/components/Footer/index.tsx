@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { setLoader } from '@store/actions'
 
-const Footer = ({ data }) => {
+const Footer = ({ data, content}) => {
 
   const router = useRouter()
   const dispatch = useDispatch()
@@ -59,13 +59,19 @@ const Footer = ({ data }) => {
 
               <div className={styles._socialMedia}>
                 <div className={styles._icon}>
+                <a href={content[0]?.link} target='_blank'>
                   <Insta color={'#fff'} />
+                  </a>
                 </div>
                 <div className={styles._icon}>
+                <a href={content[1]?.link} target='_blank'>
                   <Twitter color={'#fff'} />
+                  </a>
                 </div>
                 <div className={styles._icon}>
+                <a href={content[2]?.link} target='_blank'>
                   <WhatsApp color={'#fff'} />
+                  </a>
                 </div>
               </div>
 

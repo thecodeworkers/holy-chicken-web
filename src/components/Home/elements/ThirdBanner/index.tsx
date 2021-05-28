@@ -8,11 +8,13 @@ const ThirdBanner = ({ data }) => {
       <p className={styles._blackTitle}>{data?.title}</p>
 
       <div className={styles._appsContainer}>
-         {
+        {
           data.commerces.map((item, index) => {
             return (
               <div className={styles._locate} key={index}>
-                 <img src={item?.image?.mediaItemUrl} className={styles._image}/>
+                <a href={item?.link} target='_blank'>
+                  <img src={item?.image?.mediaItemUrl} className={styles._image} />
+                </a>
               </div>
             )
           }
