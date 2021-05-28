@@ -28,6 +28,7 @@ const ResponsiveMenu = ({ show = 0, method }) => {
 
   const activeLink = (route: string) => {
     if (route == router.pathname) return styles._activeLink
+
     return styles._link
   }
 
