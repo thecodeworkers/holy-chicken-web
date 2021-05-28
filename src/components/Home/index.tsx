@@ -1,11 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
-import { Navbar, ModalFrame } from '@components'
+import { Navbar, ModalFrame, ModalContact } from '@components'
 import Footer from '../Footer'
 import styles from './styles.module.scss'
-import { Phone, Mail, Insta, Twitter, WhatsApp, Location, PaperClip } from '@images/icons'
+
 import Button from '../Button'
-import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner} from './elements'
+import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner } from './elements'
 
 const Home = ({ content, data}) => {
 
@@ -15,7 +15,7 @@ const Home = ({ content, data}) => {
       <Head>
         <title>Holy Chiken</title>
       </Head>
-      <ModalFrame>
+      {/* <ModalFrame>
         <div className={styles._main}>
           <div className={styles._leftSection}>
             <h1>Contáctanos</h1>
@@ -161,7 +161,8 @@ const Home = ({ content, data}) => {
           </div>
         </div>
 
-      </ModalFrame>
+      </ModalFrame> */}
+      <ModalContact />
       <Navbar data={data?.header}/>
       {content ? (<>
       <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner}/>

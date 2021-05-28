@@ -17,3 +17,10 @@
   border-radius: 20px;
   box-shadow: 8px 12px 18px $boulder;
 }
+
+@include responsive(lg) {
+  ._modal {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
