@@ -1,17 +1,22 @@
-import { useEffect } from 'react'
+import { memo } from 'react'
 import styles from './styles.module.scss'
-import { Insta, Twitter, WhatsApp} from '@images/icons'
+import { Insta, Twitter, WhatsApp } from '@images/icons'
 import Button from '../Button'
 import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
+import { wrapper } from '@store'
+import { getResources } from '@store/actions'
+
 
 const ResponsiveMenu = ({ show = 0, method }) => {
 
   const router = useRouter()
+  const { resource: { general: { general } } } = useSelector((state: any) => state)
 
   const assignClass = () => {
-    if(show === 0) return styles._mainStatic
-    if(show === 1) return styles._mainIn
-    if(show === 2) return styles._mainOut
+    if (show === 0) return styles._mainStatic
+    if (show === 1) return styles._mainIn
+    if (show === 2) return styles._mainOut
   }
 
   const navigation = (route: string) => {
@@ -30,34 +35,47 @@ const ResponsiveMenu = ({ show = 0, method }) => {
     <div className={assignClass()}>
       <div className={styles._content}>
         <div>
-          <ul className={styles._list}>
-            <li className={activeLink('/')} onClick={() => navigation('/')}>Home</li>
-            <li className={activeLink('/about-us')} onClick={() => navigation('/about-us')}>About us</li>
-            <li className={activeLink('/contact')} onClick={() => navigation('/contact')}>Contacto</li>
-            <li className={activeLink('/shop')} onClick={() => navigation('/shop')}>Shop</li>
-          </ul>
+            {
+              general?.header?.mainNavigation.map((item, index) => {
+                return (
+
+                  <div className={styles._list} key={index}>
+                    <p className={activeLink(item?.link)} onClick={() => navigation(item?.link)}>{item.title}</p>
+                  </div>
+
+
+                )
+              }
+              )
+            }
         </div>
 
         <div className={styles._downSection}>
           <div className={styles._socialMediaParent}>
             <div>
-              <Insta color='#FFF'/>
+              <a href={general?.socialNetworks[0]?.link} target='_blank'>
+                <Insta color='#FFF' />
+              </a>
             </div>
             <div>
-              <Twitter color='#FFF'/>
+              <a href={general?.socialNetworks[1]?.link} target='_blank'>
+                <Twitter color='#FFF' />
+              </a>
             </div>
             <div>
-              <WhatsApp color='#FFF'/>
+              <a href={general?.socialNetworks[2]?.link} target='_blank'>
+                <WhatsApp color='#FFF' />
+              </a>
             </div>
           </div>
 
           <div className={styles._buttonsParent}>
             <div>
-             <Button textColor='#FFF' text='Pedir Ahora' color='#FD8C2E' height='2.5rem'/>
+              <Button textColor='#FFF' text='Pedir Ahora' color='#FD8C2E' height='2.5rem' />
             </div>
 
             <div>
-              <Button textColor='#FFF' text='Iniciar Sesión' color='#118AC6' height='2.5rem'/>
+              <Button textColor='#FFF' text='Iniciar Sesión' color='#118AC6' height='2.5rem' />
             </div>
           </div>
 
@@ -85,5 +103,7 @@ const ResponsiveMenu = ({ show = 0, method }) => {
     </div>
   )
 }
-
-export default ResponsiveMenu
+export const getServerSideProps = wrapper.getServerSideProps(
+  ({ store }) => store.dispatch(getResources())
+)
+export default memo(ResponsiveMenu)

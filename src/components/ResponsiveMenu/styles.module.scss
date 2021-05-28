@@ -64,8 +64,9 @@
   margin: 0;
   font-family: $montserratRegular;
   font-size: $montserratRegular14;
+  height: 100%;
 
-  & li:not(:first-child){
+  & p:not(:first-child){
     margin-top: 6%;
   }
 }
@@ -126,6 +127,7 @@
 
 ._link {
   color: $timberWolf;
+  cursor: pointer;
 }
 
 ._activeLink {

@@ -1,7 +1,6 @@
 import styles from './styles.module.scss'
 
 const ThirdBanner = ({ data }) => {
-  console.log(data);
 
   return (
     <div className={styles._content}>
@@ -11,7 +10,6 @@ const ThirdBanner = ({ data }) => {
       <div className={styles._appsContainer}>
         {
           data.commerces.map((item, index) => {
-            console.log(item);
             return (
               <div className={styles._locate} key={index}>
                 <a href={item?.link} target='_blank'>
