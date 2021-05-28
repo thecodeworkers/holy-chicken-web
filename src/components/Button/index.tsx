@@ -14,7 +14,9 @@ const Button = ({ color, textColor, method = null, text, height = '2.1rem' }) =>
         cursor: pointer;
         font-family: Montserrat-Bold;
         width: 100%;
-        height: ${height}
+        height: ${height};
+        display: flex;
+        justify-content: center;
       }
     `}
     </style>

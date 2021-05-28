@@ -1,13 +1,20 @@
+import { useState } from 'react'
 import styles from './styles.module.scss'
 import { ModalFrame, Button } from '@components'
 import { Phone, Mail, Insta, Twitter, WhatsApp, Location, PaperClip } from '@images/icons'
+import { useDispatch } from 'react-redux'
+import { setShowModal } from '@store/actions'
 
 const ModalContact = () => {
+
+  const dispatch = useDispatch()
+
   return (
     <ModalFrame>
     <div className={styles._main}>
       <div className={styles._leftSection}>
-        <h1>Contáctanos</h1>
+        <p className={styles._title}>Contáctanos</p>
+
         <div className={`${styles._itemParent} ${styles._marginBottom}`}>
           <div className={styles._iconParent}>
             <Phone />
@@ -72,7 +79,14 @@ const ModalContact = () => {
 
       </div>
       <div className={styles._rightSection}>
-        <h1>Tipo de contacto</h1>
+        <div className={styles._closeParent}>
+          <p className={styles._title}>Tipo de contacto</p>
+
+          <div className={styles._closeParent} onClick={() => dispatch(setShowModal(false))}>
+           <img src='images/icons/close.svg' width='16px'></img>
+          </div>
+
+        </div>
 
         <div className={styles._rightMain}>
           <div  className={styles._leftSide}>
@@ -92,15 +106,14 @@ const ModalContact = () => {
 
             <form>
               <div className={styles._inputRow}>
-                <div style={{width: '48%'}}>
+                <div className={styles._halfWidth} >
                   <div className={styles._inputParent}>
                     <label>Nombre</label>
                     <input placeholder='Nombre' type='text' className={styles._input} />
                   </div>
                 </div>
 
-
-                <div style={{width: '48%'}}>
+                <div className={styles._halfWidth}>
                 <div className={styles._inputParent}>
                   <label>Apellido</label>
                   <input placeholder='Apellido' type='text' className={styles._input} />
@@ -125,7 +138,6 @@ const ModalContact = () => {
                   </div>
                 </div>
               </div>
-
             </form>
           </div>
 

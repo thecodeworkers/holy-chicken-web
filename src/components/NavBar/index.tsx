@@ -6,13 +6,19 @@ import { Cart, Profile, Search } from '@images/icons'
 import { useRouter } from 'next/router'
 import Button from '../Button'
 import { NavbarResponsive } from '@components'
+import { useDispatch } from 'react-redux'
+import { setShowModal } from '@store/actions'
 
 const NavBar = ({ data }) => {
+
+  const dispatch = useDispatch()
 
   const router = useRouter()
   const [show, setShow] = useState(false)
 
+
   const navigation = (route: string) => {
+    if(route == '/contact') return dispatch(setShowModal(true))
     if (route != router.pathname) router.push(route)
   }
 
@@ -29,16 +35,16 @@ const NavBar = ({ data }) => {
         <div className={styles._menu}>
           <div className={styles._leftSide}>
 
-            {
-              data?.mainNavigation.map((item, index) => {
-                return (
-                  <div className={styles._linksList} key={index}>
-                    <p onClick={() => navigation(item.link)} className={activeLink(item.link)}>{item.title}</p>
-                  </div>
+            <ul className={styles._linksList}>
+              {
+                data?.mainNavigation.map((item, index) => {
+                  return (
+                    <li className={activeLink(item?.link)} key={index} onClick={() => navigation(item?.link)}>{item?.title}</li>
+                  )
+                }
                 )
               }
-              )
-            }
+            </ul>
           </div>
 
           <div className={styles._logoContainer}>
