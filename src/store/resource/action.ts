@@ -11,6 +11,9 @@ export const getResources: any = () => async (dispatch, getState) => {
   const homePage = await pages('homePage')
   data['homePage'] = homePage
 
+  const aboutPage = await pages('homePage')
+  data['aboutPage'] = aboutPage
+
   const resource = await resources()
 
   dispatch(actionObject(GET_PAGES, data))
