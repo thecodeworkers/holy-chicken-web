@@ -11,7 +11,7 @@ const AboutUsPage = () => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  ({ store }) => store.dispatch(getResources())
+  ({ store }) => store.dispatch(getResources('aboutPage'))
 )
 
 export default AboutUsPage

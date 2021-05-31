@@ -4,7 +4,7 @@ import { Navbar } from '@components'
 import Footer from '../Footer'
 
 
-const AboutUs = ({ content, data}) => {
+const AboutUs = ({ content, data }) => {
 
   console.log(content, data);
 
@@ -13,12 +13,12 @@ const AboutUs = ({ content, data}) => {
       <Head>
         <title>Holy Chiken</title>
       </Head>
-      <Navbar data={data?.header}/>
+      <Navbar data={data?.header} />
       {content ? (<>
 
       </>
-    ) : null}
-     <Footer data={data?.footer} content={data?.socialNetworks}  />
+      ) : null}
+      <Footer data={data?.footer} content={data?.socialNetworks} />
     </div>
   )
 }
