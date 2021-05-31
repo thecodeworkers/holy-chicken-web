@@ -5,9 +5,9 @@ import { wrapper } from '@store'
 import { getResources } from '@store/actions'
 
 const AboutUsPage = () => {
-  const { page: { aboutPage: { about } }, resource: { general: {general}} } = useSelector((state: any) => state)
+  const { page: { aboutPage: { aboutUs } }, resource: { general: { general } } } = useSelector((state: any) => state)
 
-  return <AboutUs content={about} data={general} />
+  return <AboutUs content={aboutUs} data={general} />
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(

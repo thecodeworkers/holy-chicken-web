@@ -27,7 +27,6 @@ aboutPage:page(id: "${aboutUsId}") {
       }
     }
   }
-  }
 }
 
 `
