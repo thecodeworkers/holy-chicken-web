@@ -2,11 +2,11 @@ import React from 'react'
 import Head from 'next/head'
 import { Navbar } from '@components'
 import Footer from '../Footer'
-
+import { FirstBanner } from './elements'
 
 const AboutUs = ({ content, data }) => {
 
-  console.log(content, data);
+
 
   return (
     <div>
@@ -15,7 +15,7 @@ const AboutUs = ({ content, data }) => {
       </Head>
       <Navbar data={data?.header} />
       {content ? (<>
-
+        <FirstBanner data={content?.roadmap} />
       </>
       ) : null}
       <Footer data={data?.footer} content={data?.socialNetworks} />
