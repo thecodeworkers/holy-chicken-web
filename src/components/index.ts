@@ -1,5 +1,6 @@
 export { default as Loader } from './Loader'
 export { default as Home } from './Home'
+export { default as AboutUs } from './AboutUs'
 export { default as Navbar } from './NavBar'
 export { default as Button } from './Button'
 export { default as GeneralCard } from './GeneralCard'
