@@ -1,15 +1,25 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import styles from './styles.module.scss'
 import { Button } from '@components'
+import { useDispatch, useSelector } from 'react-redux'
+import { setShowModal } from '@store/actions'
 
 const LoginModal = () => {
+
+  const dispatch = useDispatch()
+  const { intermitence: { loginModal } } = useSelector((state: any) => state)
+
 
   const [show, setShow] = useState(false)
 
   const showPassword = () => setShow(show => !show)
 
+  const closeModal = (event) => {
+    const { target } = event
+    if(target.id == 'background') dispatch(setShowModal({loginModal: false}))
+  }
   return (
-    <div className={`${styles._background} ${styles._flex}`}>
+    <div className={`${loginModal ? styles._background : styles._hidden} ${styles._flex}`} onClick={closeModal} id='background'>
       <div className={`${styles._modal} _generalCard`}>
         <p className={styles._title}> Ingresar</p>
         <form>
@@ -31,11 +41,8 @@ const LoginModal = () => {
           </div>
         </form>
 
-
         <p className={styles._blackLink}>Comprar sin registrarse</p>
-
         <p className={styles._grayLink}>¿Nuevo cliente? <a>Crear Cuenta</a></p>
-
         <p className={styles._grayLink}>¿Olvidaste tu contraseña? <a>Recuperar Contraseña</a></p>
 
       </div>

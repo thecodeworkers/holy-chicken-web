@@ -23,7 +23,7 @@ const ResponsiveMenu = ({ show = 0, method }) => {
 
   const navigation = (route: string) => {
     if(route == '/contact') {
-      dispatch(setShowModal(true))
+      dispatch(setShowModal({ contactModal: true }))
       method()
       return
     }
@@ -36,6 +36,11 @@ const ResponsiveMenu = ({ show = 0, method }) => {
   const activeLink = (route: string) => {
     if (route == router.pathname) return styles._activeLink
     return styles._link
+  }
+
+  const openLoginModal = () => {
+    dispatch(setShowModal({ loginModal: true }))
+    method()
   }
 
   return (
@@ -78,7 +83,7 @@ const ResponsiveMenu = ({ show = 0, method }) => {
               <Button textColor='#FFF' text='Pedir Ahora' color='#FD8C2E' height='2.5rem' />
             </div>
 
-            <div onClick={() => navigation('/login')}>
+            <div onClick={openLoginModal}>
               <Button textColor='#FFF' text='Iniciar Sesión' color='#118AC6' height='2.5rem' />
             </div>
           </div>

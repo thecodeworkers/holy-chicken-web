@@ -18,7 +18,7 @@ const ModalContact = () => {
         <div className={styles._closeParent}>
           <p className={styles._title}>Contáctanos</p>
 
-          <div className={styles._responsiveIconParent} onClick={() => dispatch(setShowModal(false))}>
+          <div className={styles._responsiveIconParent} onClick={() => dispatch(setShowModal({ contactModal: false }))}>
            <img src='images/icons/close.svg' width='16px'></img>
           </div>
 
@@ -97,7 +97,7 @@ const ModalContact = () => {
         <div className={styles._closeParent}>
           <p className={styles._title}>Tipo de contacto</p>
 
-          <div className={styles._closeIconParent} onClick={() => dispatch(setShowModal(false))}>
+          <div className={styles._closeIconParent} onClick={() => dispatch(setShowModal({ contactModal: false }))}>
            <img src='images/icons/close.svg' width='16px'></img>
           </div>
 

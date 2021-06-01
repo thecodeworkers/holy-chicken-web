@@ -17,13 +17,18 @@ const NavBar = ({ data }) => {
   const [show, setShow] = useState(false)
 
   const navigation = (route: string) => {
-    if(route == '/contact') return dispatch(setShowModal(true))
+    if(route == '/contact') return dispatch(setShowModal({ contactModal: true }))
     if (route != router.pathname) router.push(route)
   }
 
   const activeLink = (route: string) => {
     if (route == router.pathname) return styles._activeLink
     return styles._link
+  }
+
+  const openLoginModal = () => {
+    setShow(false)
+    dispatch(setShowModal({ loginModal: true }))
   }
 
   const showDropDown = () => setShow(show => !show)
@@ -70,7 +75,7 @@ const NavBar = ({ data }) => {
                 {show &&
                   <div className={styles._dropDown}>
                     <div className={styles._dropDownContent}>
-                      <div className={styles._buttonBlueParent} onClick={() => navigation('/login')}>
+                      <div className={styles._buttonBlueParent} onClick={openLoginModal}>
                         <Button color='#118AC6' text='Iniciar sesión' textColor='#fff' ></Button>
                       </div>
                       <p>¿Nuevo cliente? <a className={styles._link} onClick={() => navigation('/register')}> Crear Cuenta </a></p>
