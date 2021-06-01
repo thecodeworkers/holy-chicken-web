@@ -16,7 +16,6 @@ const NavBar = ({ data }) => {
   const router = useRouter()
   const [show, setShow] = useState(false)
 
-
   const navigation = (route: string) => {
     if(route == '/contact') return dispatch(setShowModal(true))
     if (route != router.pathname) router.push(route)

@@ -1,0 +1,46 @@
+import { useState } from 'react'
+import styles from './styles.module.scss'
+import { Button } from '@components'
+
+const LoginModal = () => {
+
+  const [show, setShow] = useState(false)
+
+  const showPassword = () => setShow(show => !show)
+
+  return (
+    <div className={`${styles._background} ${styles._flex}`}>
+      <div className={`${styles._modal} _generalCard`}>
+        <p className={styles._title}> Ingresar</p>
+        <form>
+          <div className={styles._inputParent}>
+            <label>Email</label>
+            <input type="text" className={styles._input} placeholder='Correo'/>
+          </div>
+
+          <div className={styles._inputParent}>
+            <label>Password</label>
+            <input type={!show ? 'password' : 'text'} className={styles._input} placeholder='Contraseña' />
+            <div className={styles._imageParent} onClick={showPassword}>
+            <img src={!show ? 'images/icons/show-password.svg' : 'images/icons/hide-password.svg'}  width='18px' height='18px' />
+            </div>
+          </div>
+
+          <div className={styles._btnParent} >
+            <Button color='#000' text='Ingresar' textColor='#FFF' />
+          </div>
+        </form>
+
+
+        <p className={styles._blackLink}>Comprar sin registrarse</p>
+
+        <p className={styles._grayLink}>¿Nuevo cliente? <a>Crear Cuenta</a></p>
+
+        <p className={styles._grayLink}>¿Olvidaste tu contraseña? <a>Recuperar Contraseña</a></p>
+
+      </div>
+    </div>
+  )
+}
+
+export default LoginModal;
