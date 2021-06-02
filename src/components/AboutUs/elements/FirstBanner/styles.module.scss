@@ -39,7 +39,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 2rem;
+  padding-left: 1.5rem;
 }
 
 ._imageLeftContainer{
@@ -47,12 +47,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-right: 2rem;
+  padding-right: 1.5rem;
 }
 
 
 ._image{
-height: 700px;
+height: 550px;
+
 }
 
 ._textLeftContainer{
@@ -61,7 +62,7 @@ height: 700px;
   align-items: flex-start;
   flex-direction: column;
   width: 50%;
-  padding-left: 2rem;
+  padding-left: 1.5rem;
 }
 
 ._textRightContainer{
@@ -70,7 +71,7 @@ height: 700px;
   align-items: flex-end;
   flex-direction: column;
   width: 50%;
-  padding-right: 2rem;
+  padding-right: 1.5rem;
 }
 
 ._line{
@@ -94,17 +95,17 @@ height: 700px;
   top:-12px;
   z-index: 1;
 }
-._linetwo::before{
-  content: '';
-  width: 25px;
-  height: 25px;
-  background-color: white;
-  border: 1px solid black;
-  position: absolute;
-  border-radius: 50%;
-  top: -12px;
-  z-index: 1;
-}
+// ._linetwo::before{
+//   content: '';
+//   width: 25px;
+//   height: 25px;
+//   background-color: white;
+//   border: 1px solid black;
+//   position: absolute;
+//   border-radius: 50%;
+//   top: -12px;
+//   z-index: 1;
+// }
 
 ._line::after{
   content: '';
@@ -145,14 +146,14 @@ height: 700px;
 
 ._lineFather{
   position:absolute;
-  width:759px;
+  width: 765px;
   transform: translateX(-50%);
   left: 50%
 }
 
 ._lineFatherTwo{
   position:absolute;
-  width:759px;
+  width:609px;
   transform: translateX(-50%);
   left: 50%
 }
