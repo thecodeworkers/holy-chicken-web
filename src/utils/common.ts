@@ -41,3 +41,4 @@ export const isRetina = () => {
 
     return !!window?.matchMedia(query).matches
 }
+

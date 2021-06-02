@@ -16,8 +16,14 @@ const LoginModal = () => {
 
   const closeModal = (event) => {
     const { target } = event
-    if(target.id == 'background') dispatch(setShowModal({loginModal: false}))
+    if(target.id == 'background') dispatch(setShowModal({ loginModal: false }))
   }
+
+  const openModal = (name) => {
+    dispatch(setShowModal({ [name]: true }))
+    dispatch(setShowModal({ loginModal: false }))
+  }
+
   return (
     <div className={`${loginModal ? styles._background : styles._hidden} ${styles._flex}`} onClick={closeModal} id='background'>
       <div className={`${styles._modal} _generalCard`}>
@@ -42,7 +48,7 @@ const LoginModal = () => {
         </form>
 
         <p className={styles._blackLink}>Comprar sin registrarse</p>
-        <p className={styles._grayLink}>¿Nuevo cliente? <a>Crear Cuenta</a></p>
+        <p className={styles._grayLink}>¿Nuevo cliente? <a onClick={() => openModal('registerModal')}>Crear Cuenta</a></p>
         <p className={styles._grayLink}>¿Olvidaste tu contraseña? <a>Recuperar Contraseña</a></p>
 
       </div>

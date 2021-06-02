@@ -1,0 +1,73 @@
+@import '../../../public/styles/index.scss';
+
+._background {
+  @include blurBackground();
+}
+
+._modal {
+  padding: 4rem 3rem;
+  box-sizing: border-box;
+  max-width:500px;
+}
+
+._title {
+  font-family: $blackerTextHeavyBold;
+  text-align: center;
+  font-size: $blackerTextHeavy40;
+  margin-bottom: 0.8rem;
+}
+
+._input {
+  @include generalInput($alto);
+  font-size: $montserratBold16;
+}
+
+._inputParent {
+  position: relative;
+  & label {
+  padding-left: 0.7rem;
+  font-family: $montserratRegular;
+  font-size: $montserratBold16;
+  }
+
+  &:nth-child(2) {
+    margin: 1.2rem 0;
+  }
+}
+
+._row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+._halfWidth {
+  width: 48%;
+}
+
+._marginTop {
+  margin-top: 1.2rem;
+}
+
+._buttonsMarginTop {
+  margin-top: 1.8rem;
+}
+
+._imageParent {
+  position: absolute;
+  cursor: pointer;
+  right: 0.8rem;
+  top: 35px;
+}
+
+._hidden {
+  display: none
+}
+
+@include responsive(lg) {
+  ._background {
+    @include blurBackgroundResponsive();
+  }
+}

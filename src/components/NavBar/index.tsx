@@ -26,9 +26,9 @@ const NavBar = ({ data }) => {
     return styles._link
   }
 
-  const openLoginModal = () => {
+  const openModal = (name) => {
     setShow(false)
-    dispatch(setShowModal({ loginModal: true }))
+    dispatch(setShowModal({ [name]: true }))
   }
 
   const showDropDown = () => setShow(show => !show)
@@ -75,10 +75,10 @@ const NavBar = ({ data }) => {
                 {show &&
                   <div className={styles._dropDown}>
                     <div className={styles._dropDownContent}>
-                      <div className={styles._buttonBlueParent} onClick={openLoginModal}>
+                      <div className={styles._buttonBlueParent} onClick={() => openModal('loginModal')}>
                         <Button color='#118AC6' text='Iniciar sesión' textColor='#fff' ></Button>
                       </div>
-                      <p>¿Nuevo cliente? <a className={styles._link} onClick={() => navigation('/register')}> Crear Cuenta </a></p>
+                      <p>¿Nuevo cliente? <a className={styles._link} onClick={() => openModal('registerModal')}> Crear Cuenta </a></p>
                       <p>Mis órdenes</p >
                     </div>
                   </div>
