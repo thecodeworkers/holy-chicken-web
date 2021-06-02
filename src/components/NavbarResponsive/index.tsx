@@ -3,10 +3,16 @@ import styles from './styles.module.scss'
 import { Menu, Cart, Profile } from '@images/icons'
 import { ChickenLogo } from '@images/resources'
 import { ResponsiveMenu } from '@components'
+import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
+import { setShowModal } from '@store/actions'
 
 const NavbarResponsive = () => {
 
   const [ show, setShow ] = useState(0)
+
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   const deployMenu = () => {
     if(show === 0) return setShow(1)
@@ -15,6 +21,12 @@ const NavbarResponsive = () => {
    }
 
    const resetShow = () => setShow(0)
+
+   const navigation = (route: string) => {
+    if (route != router.pathname) router.push(route)
+  }
+
+   const openLoginModal = () => dispatch(setShowModal({ loginModal: true }))
 
   return (
     <>
@@ -29,10 +41,10 @@ const NavbarResponsive = () => {
           </div>
         </div>
         <div className={styles._rightSection}>
-          <div>
+          <div onClick={ () => navigation('/shop')}>
             <Cart color='#000' />
           </div>
-          <div>
+          <div onClick={openLoginModal}>
             <Profile color='#000' />
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +8,6 @@ const LoginModal = () => {
 
   const dispatch = useDispatch()
   const { intermitence: { loginModal } } = useSelector((state: any) => state)
-
 
   const [show, setShow] = useState(false)
 

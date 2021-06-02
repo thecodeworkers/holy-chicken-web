@@ -82,5 +82,13 @@
 @include responsive(lg) {
   ._background {
     @include blurBackgroundResponsive();
+    height: 100%;
+  }
+
+  ._modal {
+    margin-top: 3.75rem;
+    align-self: center;
+    padding: 1.8rem;
+    width: 90%;
   }
 }
