@@ -9,14 +9,18 @@ const LoginModal = () => {
   const dispatch = useDispatch()
   const { intermitence: { loginModal } } = useSelector((state: any) => state)
 
-
   const [show, setShow] = useState(false)
 
   const showPassword = () => setShow(show => !show)
 
   const closeModal = (event) => {
     const { target } = event
-    if(target.id == 'background') dispatch(setShowModal({loginModal: false}))
+    if(target.id == 'background') dispatch(setShowModal({ loginModal: false }))
+  }
+
+  const openModal = (name) => {
+    dispatch(setShowModal({ [name]: true }))
+    dispatch(setShowModal({ loginModal: false }))
   }
 
   return (
@@ -43,7 +47,7 @@ const LoginModal = () => {
         </form>
 
         <p className={styles._blackLink}>Comprar sin registrarse</p>
-        <p className={styles._grayLink}>¿Nuevo cliente? <a>Crear Cuenta</a></p>
+        <p className={styles._grayLink}>¿Nuevo cliente? <a onClick={() => openModal('registerModal')}>Crear Cuenta</a></p>
         <p className={styles._grayLink}>¿Olvidaste tu contraseña? <a>Recuperar Contraseña</a></p>
 
       </div>
