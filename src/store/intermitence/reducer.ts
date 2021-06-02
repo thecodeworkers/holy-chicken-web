@@ -3,7 +3,8 @@ import { AnyAction } from 'redux'
 
 const initialState = {
   contactModal: false,
-  loginModal: false
+  loginModal: false,
+  registerModal: false
 }
 
 const intermitenceReducer = (state = initialState, { type, payload }: AnyAction) => {

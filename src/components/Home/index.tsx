@@ -1,11 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
-import { Navbar, ModalFrame, ModalContact, LoginModal } from '@components'
+import { Navbar, ModalFrame, ModalContact, LoginModal, RegisterModal } from '@components'
 import Footer from '../Footer'
 import styles from './styles.module.scss'
-
 import Button from '../Button'
 import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner } from './elements'
+
 
 const Home = ({ content, data}) => {
 
@@ -16,6 +16,7 @@ const Home = ({ content, data}) => {
       </Head>
       <ModalContact />
       <LoginModal />
+      <RegisterModal />
       <Navbar data={data?.header}/>
       {content ? (<>
       <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner}/>

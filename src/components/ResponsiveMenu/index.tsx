@@ -38,8 +38,8 @@ const ResponsiveMenu = ({ show = 0, method }) => {
     return styles._link
   }
 
-  const openLoginModal = () => {
-    dispatch(setShowModal({ loginModal: true }))
+  const openModal = (name) => {
+    dispatch(setShowModal({ [name]: true }))
     method()
   }
 
@@ -83,7 +83,7 @@ const ResponsiveMenu = ({ show = 0, method }) => {
               <Button textColor='#FFF' text='Pedir Ahora' color='#FD8C2E' height='2.5rem' />
             </div>
 
-            <div onClick={openLoginModal}>
+            <div onClick={() => openModal('loginModal')}>
               <Button textColor='#FFF' text='Iniciar Sesión' color='#118AC6' height='2.5rem' />
             </div>
           </div>
