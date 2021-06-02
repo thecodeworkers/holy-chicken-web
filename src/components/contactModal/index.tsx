@@ -16,14 +16,12 @@ const ModalContact = () => {
 
   const { resource: { general: { general } } } = useSelector((state: any) => state)
 
-
   return (
     <ModalFrame>
       <div className={styles._main}>
         <div className={styles._leftSection}>
           <div className={styles._closeParent}>
             <p className={styles._title}>Contáctanos</p>
-
             <div className={styles._responsiveIconParent} onClick={() => dispatch(setShowModal(false))}>
               <img src='images/icons/close.svg' width='16px'></img>
             </div>

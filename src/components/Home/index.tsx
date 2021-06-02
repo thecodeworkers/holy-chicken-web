@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Navbar, ModalFrame, ModalContact } from '@components'
+import { Navbar, ModalFrame, ModalContact, LoginModal } from '@components'
 import Footer from '../Footer'
 import styles from './styles.module.scss'
 
@@ -15,6 +15,7 @@ const Home = ({ content, data}) => {
         <title>Holy Chiken</title>
       </Head>
       <ModalContact />
+      <LoginModal />
       <Navbar data={data?.header}/>
       {content ? (<>
       <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner}/>

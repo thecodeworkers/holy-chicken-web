@@ -12,7 +12,8 @@ const Footer = ({ data, content }) => {
   const dispatch = useDispatch()
 
   const navigation = (route, loader: boolean = false, reference = null, key = '') => {
-    if (route == '/contact') return dispatch(setShowModal(true))
+    if(route == '/login')  return dispatch(setShowModal({ loginModal: true }))
+    if (route == '/contact') return dispatch(setShowModal({ contactModal: true }))
     if (router.pathname != route) {
       if (loader) dispatch(setLoader(true))
       router.push(route)
