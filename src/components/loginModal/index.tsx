@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,6 +18,7 @@ const LoginModal = () => {
     const { target } = event
     if(target.id == 'background') dispatch(setShowModal({loginModal: false}))
   }
+
   return (
     <div className={`${loginModal ? styles._background : styles._hidden} ${styles._flex}`} onClick={closeModal} id='background'>
       <div className={`${styles._modal} _generalCard`}>
