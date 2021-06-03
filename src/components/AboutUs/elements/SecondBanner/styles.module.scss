@@ -3,11 +3,143 @@
 ._content {
   height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
-  width: 85%;
+  width: 70%;
   margin: auto;
-  flex-direction: column;
+  flex-direction: row;
 }
 
+._container{
+margin-bottom: 5rem;
+}
+
+._textContainer{
+  width: 50%;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+._title{
+  font-family: $blackerTextHeavyBold;
+  font-size:$blackerTextHeavyBold60;
+  color: $black;
+  width: 90%;
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+}
+
+._subtitle{
+  font-family: $montserratRegular;
+  font-size: $montserratRegular18;
+  color: $black;
+  margin-bottom: 1rem;
+}
+
+._advice{
+  font-family: $montserratLight;
+  font-size: $montserratLight10;
+  color: $black;
+  margin-bottom: 1rem;
+  width: 50%;
+}
+
+._buttonContainer{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 80%;
+}
+._isoContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+._img{
+  width: 100%;
+}
+
+._iso{
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+._logo{
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+._slug{
+  font-family: $montserratBold;
+  font-size: $montserratBold11;
+  color: $mineShaft;
+  margin-top: 1rem;
+}
+
+
+@include responsive(xl) {
+
+  ._img{
+    width: 90%;
+  }
+}
+
+
+
+@include responsive(lg) {
+
+  ._img{
+    width: 70%;
+  }
+  ._textContainer{
+    width: 70%;
+  }
+
+  ._content{
+    width: 85%;
+  }
+}
+
+
+
+@include responsive(md) {
+
+  ._content{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ._textContainer{
+    width: 100%;
+  }
+
+  ._isoContainer{
+    flex-direction: row;
+  }
+  ._container{
+    margin-bottom: 2rem;
+  }
+
+  ._buttonContainer{
+    width: 100%;
+  }
+  ._advice{
+    width: 100%;
+  }
+}
 
