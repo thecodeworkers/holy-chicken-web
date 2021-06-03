@@ -52,7 +52,8 @@
 
 
 ._image{
-height: 550px;
+height: 100%;
+width: 100%;
 
 }
 
@@ -107,18 +108,18 @@ height: 550px;
 //   z-index: 1;
 // }
 
-._line::after{
-  content: '';
-  width: 25px;
-  height: 25px;
-  background-color: white;
-  border: 1px solid black;
-  position: absolute;
-  border-radius: 50%;
-  right: 0;
-  top:-12px;
-  z-index: 1;
-}
+// ._line::after{
+//   content: '';
+//   width: 25px;
+//   height: 25px;
+//   background-color: white;
+//   border: 1px solid black;
+//   position: absolute;
+//   border-radius: 50%;
+//   right: 0;
+//   top:-12px;
+//   z-index: 1;
+// }
 
 ._line::before{
   content: '';
@@ -146,23 +147,64 @@ height: 550px;
 
 ._lineFather{
   position:absolute;
-  width: 765px;
+  width:100px;
   transform: translateX(-50%);
   left: 50%
 }
 
 ._lineFatherTwo{
   position:absolute;
-  width:609px;
+  width:851px;
   transform: translateX(-50%);
   left: 50%
 }
+
+._rightHistory{
+display: flex;
+}
+
+._leftHistory{
+  display: flex;
+}
+
+
+@include responsive(xl) {
+  ._image{
+    height: 85%;
+    width: 85%;
+  }
+  ._title{
+    font-size:2.5rem
+  }
+
+  ._textContent{
+    width: 80%;
+  }
+  }
+
+  @include responsive(lg) {
+    ._image{
+      height: 100%;
+      width: 100%;
+    }
+    ._title{
+      font-size:2.5rem
+    }
+
+    ._textContent{
+      width: 80%;
+    }
+    }
+
 
 @include responsive(md) {
 
   ._content{
     justify-content: center;
     align-items: center;
+  }
+  ._road{
+    margin-top: 6rem;
   }
 
   ._roadContainer{
@@ -172,21 +214,31 @@ height: 550px;
   }
   ._title{
     align-self: flex-start;
+    width: 80%;
+    font-size: 2rem;
   }
-  ._imageContainer{
+  ._imageLeftContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  ._imageRightContainer{
     width: 100%;
     display: flex;
     justify-content: center;
   }
   ._textLeftContainer{
     width: 100%;
+    padding-left: 0;
   }
   ._textRightContainer{
     width: 100%;
     align-items: flex-start;
+    padding-right: 0;
   }
   ._image{
-    height: 260px;
+    height: 100%;
+    width: 100%;
   }
   ._title{
     font-size: 2rem;
@@ -194,5 +246,17 @@ height: 550px;
   ._textContent{
     width: 100%;
   }
+
+  ._leftHistory{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  ._rightHistory{
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
 }
+
 
