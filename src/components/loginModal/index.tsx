@@ -48,7 +48,7 @@ const LoginModal = () => {
 
         <p className={styles._blackLink}>Comprar sin registrarse</p>
         <p className={styles._grayLink}>¿Nuevo cliente? <a onClick={() => openModal('registerModal')}>Crear Cuenta</a></p>
-        <p className={styles._grayLink}>¿Olvidaste tu contraseña? <a>Recuperar Contraseña</a></p>
+        <p className={styles._grayLink}>¿Olvidaste tu contraseña? <a onClick={() => openModal('forgotPasswordModal')}>Recuperar Contraseña</a></p>
 
       </div>
     </div>

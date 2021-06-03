@@ -5,6 +5,7 @@ import Footer from '../Footer'
 import styles from './styles.module.scss'
 import Button from '../Button'
 import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner } from './elements'
+import ForgotPasswordModal from '../ForgotPasswordModal'
 
 
 const Home = ({ content, data}) => {
@@ -17,6 +18,7 @@ const Home = ({ content, data}) => {
       <ModalContact />
       <LoginModal />
       <RegisterModal />
+      <ForgotPasswordModal />
       <Navbar data={data?.header}/>
       {content ? (<>
       <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner}/>
