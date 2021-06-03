@@ -16,7 +16,6 @@ const GeneralCard = () => {
         <div style={{width:123}}>
         <Button color='#118AC6' textColor='white' text='Agregar' height={'1.9rem'}></Button>
         </div>
-
       </div>
     </div>
   )
