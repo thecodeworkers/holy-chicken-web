@@ -42,6 +42,12 @@
   justify-content: space-between;
 }
 
+._buttonsRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
 
 ._halfWidth {
   width: 48%;
@@ -69,5 +75,49 @@
 @include responsive(lg) {
   ._background {
     @include blurBackgroundResponsive();
+    height: 100%;
   }
+
+  ._modal {
+    height: 60vh;
+    overflow: auto;
+    margin-top: 3.75rem;
+    width: 90%;
+    padding: 1.8rem;
+    align-self: center;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    & ::-webkit-scrollbar-track {
+      background: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $black;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: none;
+    }
+  }
+
+  ._row {
+    flex-direction: column;
+  }
+
+  ._halfWidth {
+    width: 100%;
+  }
+
+  ._buttonsRow {
+    flex-direction: column-reverse;
+
+    & div:first-child {
+      margin-top: 1.2rem;
+    }
+  }
+
 }
