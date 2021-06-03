@@ -13,7 +13,7 @@ const Home = ({ content, data}) => {
   return (
     <div>
       <Head>
-        <title>Holy Chiken</title>
+        <title>Holy Chicken</title>
       </Head>
       <ModalContact />
       <LoginModal />
