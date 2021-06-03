@@ -1,13 +1,20 @@
 import styles from './styles.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
+import { setShowModal } from '@store/actions'
 
 const ModalFrame = ({ children, separation = '5rem' }) => {
 
-  const { intermitence: { show }} = useSelector((store: any) => store)
+  const dispatch = useDispatch()
+  const { intermitence: { contactModal }} = useSelector((store: any) => store)
+
+  const closeModal = (event: any) => {
+    const { target } = event
+    if(target.id == 'close-contact') return dispatch(setShowModal({ contactModal: false }))
+  }
 
   return (
   <>
-  <div className={show ? '_parent' : '_hidden'}>
+  <div className={contactModal ? '_parent' : '_hidden'} id='close-contact' onClick={closeModal}>
     <div className={styles._modal}>
       {children}
     </div>
