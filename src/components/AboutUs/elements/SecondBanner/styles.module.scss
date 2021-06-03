@@ -130,6 +130,7 @@ margin-bottom: 5rem;
 
   ._isoContainer{
     flex-direction: row;
+    justify-content: center;
   }
   ._container{
     margin-bottom: 2rem;
@@ -141,5 +142,17 @@ margin-bottom: 5rem;
   ._advice{
     width: 100%;
   }
+
+  ._iso{
+    margin-bottom: 0;
+
+  }
+  ._logo{
+    margin-bottom: 0;
+  }
+
+
+
+
 }
 
