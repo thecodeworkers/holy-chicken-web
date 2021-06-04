@@ -5,17 +5,19 @@ import Footer from '../Footer'
 import styles from './styles.module.scss'
 import Button from '../Button'
 import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner } from './elements'
+import ForgotPasswordModal from '../ForgotPasswordModal'
 
 const Home = ({ content, data}) => {
 
   return (
     <div>
       <Head>
-        <title>Holy Chiken</title>
+        <title>Holy Chicken</title>
       </Head>
       <ModalContact />
       <LoginModal />
       <RegisterModal />
+      <ForgotPasswordModal />
       <Navbar data={data?.header}/>
       <ChangePasswordModal />
       {content ? (<>

@@ -5,7 +5,8 @@ const initialState = {
   contactModal: false,
   loginModal: false,
   registerModal: false,
-  changePasswordModal: false
+  changePasswordModal: false,
+  forgotPasswordModal: false
 }
 
 const intermitenceReducer = (state = initialState, { type, payload }: AnyAction) => {
