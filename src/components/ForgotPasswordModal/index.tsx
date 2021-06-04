@@ -10,9 +10,12 @@ const ForgotPasswordModal = () => {
 
   const closeModal = (event) => {
     const { target } = event
-
-    console.log(target)
     if(target.id == 'forgot-password-modal') dispatch(setShowModal({ forgotPasswordModal: false }))
+  }
+
+  const openChangePassword = () => {
+    dispatch(setShowModal({ forgotPasswordModal: false }))
+    dispatch(setShowModal({ changePasswordModal: true }))
   }
 
   return (
@@ -27,7 +30,7 @@ const ForgotPasswordModal = () => {
         </div>
 
         <div className={styles._buttonParent}>
-          <Button color='#000' text='Enviar' textColor='#FFF' />
+          <Button color='#000' text='Enviar' textColor='#FFF' method={openChangePassword} />
         </div>
       </div>
     </div>
