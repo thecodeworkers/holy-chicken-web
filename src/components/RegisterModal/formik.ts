@@ -8,7 +8,8 @@ const formikConfig = () => (useFormik({
     lastname: '',
     phone: '',
     email: '',
-    message: ''
+    password: '',
+    confirmPassword: ''
   },
 
   validationSchema: Yup.object({
@@ -27,7 +28,14 @@ const formikConfig = () => (useFormik({
       .required()
       .matches(emailRegex),
 
-    message: Yup.string()
+    password: Yup.string()
+      .required()
+      .matches(passwordRegex),
+
+    confirmPassword: Yup.string()
+      .required()
+      .matches(passwordRegex)
+      .oneOf([Yup.ref('password'), null], 'Las contrasenas no coinciden')
   }),
 
   onSubmit: values => {

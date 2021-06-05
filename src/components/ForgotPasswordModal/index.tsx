@@ -10,8 +10,6 @@ const ForgotPasswordModal = () => {
 
   const closeModal = (event) => {
     const { target } = event
-
-    console.log(target)
     if(target.id == 'forgot-password-modal') dispatch(setShowModal({ forgotPasswordModal: false }))
   }
 

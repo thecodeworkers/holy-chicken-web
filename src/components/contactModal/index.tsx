@@ -151,7 +151,6 @@ const ModalContact = () => {
                         onBlur={formik.handleBlur}
                         value={formik.values.lastname}
                         className={errors.lastname && touched.lastname ? styles._inputError : styles._input} />
-
                     </div>
                   </div>
                 </div>
