@@ -23,7 +23,7 @@
 }
 
 ._parragraph {
-  font-size: 0.9rem;
+  font-size: $montserratBold16;
   font-family: $montserratRegular;
   text-align: center;
   width: 80%;
@@ -58,6 +58,25 @@
 
 @include responsive(lg) {
   ._background {
-    @include blurBackgroundResponsive()
+    @include blurBackgroundResponsive();
+    height: 100%;
+  }
+
+  ._modal {
+    width: 90%;
+    padding: 1.8rem;
+  }
+
+  ._buttonParent {
+    width: 100%;
+  }
+
+  ._title {
+    font-size: $blackerTextHeavy40 - 0.1;
+  }
+
+  ._parragraph {
+    width: 90%;
+    font-size: $montserratRegular12;
   }
 }
