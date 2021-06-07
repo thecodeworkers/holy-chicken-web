@@ -1,28 +1,56 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { Button } from '@components'
+import { Button, Toast } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal } from '@store/actions'
 import FormikConfig from './formik'
 
 const RegisterModal = () => {
 
-  const formik = FormikConfig()
+  const dispatch = useDispatch()
+  const formik = FormikConfig(dispatch)
   const { errors, touched } = formik
 
-  const dispatch = useDispatch()
   const [show, setShow] = useState(false)
   const [showTwo, setShowTwo] = useState(false)
-  const { intermitence: { registerModal } } = useSelector((state: any) => state)
+  const [showToast, setShowToast ] = useState(0)
+  const [toastText, setToastText] = useState('')
+  const [toastIcon, setToastIcon ] = useState('check')
+
+  const { intermitence: { registerModal }, auth } = useSelector((state: any) => state)
 
   const showPassword = () => setShow(show => !show)
-
   const showPasswordTwo = () => setShowTwo(showTwo => !showTwo)
 
   const closeModal = (event, flag = false) => {
     const { target } = event
     if (target.id == 'close-register' || flag) dispatch(setShowModal({ registerModal: false }))
   }
+
+  useEffect(() => {
+    if(auth.register) {
+      setToastText('Usuario creado de exitosamente')
+      setShowToast(1)
+      setToastIcon('check')
+      formik.resetForm()
+
+      setTimeout(() => {
+        setShowToast(2)
+      }, 2000);
+    }
+
+    // if(!auth.register) {
+    //   setToastText('Error al registar usuario')
+    //   setShowToast(1)
+    //   setToastIcon('error')
+
+    //   setTimeout(() => {
+    //     setShowToast(2)
+    //   }, 2000);
+    // }
+
+
+  }, [auth])
 
   return (
     <div className={registerModal ? styles._background : styles._hidden} onClick={closeModal} id='close-register'>
@@ -37,12 +65,12 @@ const RegisterModal = () => {
                 <input
                 placeholder='Nombre'
                 type='text'
-                name='name'
-                id='name'
+                name='firstName'
+                id='firstName'
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.name}
-                className={errors.name && touched.name ? styles._inputError : styles._input} />
+                value={formik.values.firstName}
+                className={errors.firstName && touched.firstName ? styles._inputError : styles._input} />
               </div>
             </div>
 
@@ -52,12 +80,12 @@ const RegisterModal = () => {
                 <input
                   type="text"
                   placeholder='Apellido'
-                  name='lastname'
-                  id='lastname'
+                  name='lastName'
+                  id='lastName'
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.lastname}
-                  className={errors.lastname && touched.lastname ? styles._inputError : styles._input}
+                  value={formik.values.lastName}
+                  className={errors.lastName && touched.lastName ? styles._inputError : styles._input}
                 />
               </div>
             </div>
@@ -142,6 +170,8 @@ const RegisterModal = () => {
           </div>
         </form>
       </div>
+
+      <Toast status={showToast} text={toastText} icon={toastIcon}></Toast>
     </div>
   )
 }

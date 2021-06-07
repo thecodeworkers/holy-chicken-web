@@ -1,11 +1,12 @@
 import { useFormik } from 'formik'
 import { emailRegex, passwordRegex, onlyLettersRegex } from '@utils/regex'
+import { registerUser } from '@store/actions'
 import * as Yup from 'yup'
 
-const formikConfig = () => (useFormik({
+const formikConfig = (dispatch) => (useFormik({
   initialValues: {
-    name: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     phone: '',
     email: '',
     password: '',
@@ -13,11 +14,11 @@ const formikConfig = () => (useFormik({
   },
 
   validationSchema: Yup.object({
-    name: Yup.string()
+    firstName: Yup.string()
       .required()
       .matches(onlyLettersRegex),
 
-    lastname: Yup.string()
+      lastName: Yup.string()
       .required()
       .matches(onlyLettersRegex),
 
@@ -35,11 +36,11 @@ const formikConfig = () => (useFormik({
     confirmPassword: Yup.string()
       .required()
       .matches(passwordRegex)
-      .oneOf([Yup.ref('password'), null], 'Las contrasenas no coinciden')
+      .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden')
   }),
 
   onSubmit: values => {
-    console.log(JSON.stringify(values))
+    dispatch(registerUser(values))
   }
 }))
 

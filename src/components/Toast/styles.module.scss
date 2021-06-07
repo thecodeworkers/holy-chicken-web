@@ -1,0 +1,62 @@
+@import '../../../public/styles/index.scss';
+
+@mixin toast {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: -10%;
+  left: 50%;
+  padding: 1rem 1.5rem;
+  box-sizing: border-box;
+  background-color: $black;
+  border-radius: 1.5rem;
+  z-index: 999;
+  -webkit-box-shadow: 0px 0px 19px -12px rgba(0,0,0,0.32);
+  -moz-box-shadow: 0px 0px 19px -12px rgba(0,0,0,0.32);
+  box-shadow: 0px 0px 19px -12px rgba(0,0,0,0.32);
+}
+
+._toast {
+  @include toast();
+}
+
+._toastIn {
+  @include toast();
+  animation: toast-in 0.6s ease forwards;
+}
+
+._toastOut {
+  @include toast();
+  animation: toast-out 0.6s ease forwards;
+}
+
+._content {
+  display: flex;
+
+  & p {
+    margin-left: 0.5rem;
+    font-family: $montserratRegular;
+    font-size: $montserratRegular14;
+    font-weight: bold;
+    color: $white;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    top: -10%
+  }
+
+  to {
+    top: 8%;
+  }
+}
+
+@keyframes toast-out {
+  from {
+    top: 8%
+  }
+
+  to {
+    top: -10%;
+  }
+}

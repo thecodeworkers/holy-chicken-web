@@ -12,3 +12,4 @@ export { default as ModalContact } from './contactModal'
 export { default as LoginModal } from './loginModal'
 export { default as RegisterModal } from './RegisterModal'
 export { default as ForgotPasswordModal } from './ForgotPasswordModal'
+export { default as Toast } from './Toast';
