@@ -5,6 +5,7 @@ const initialState = {
   contactModal: false,
   loginModal: false,
   registerModal: false,
+  changePasswordModal: false,
   forgotPasswordModal: false
 }
 

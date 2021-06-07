@@ -13,6 +13,11 @@ const ForgotPasswordModal = () => {
     if(target.id == 'forgot-password-modal') dispatch(setShowModal({ forgotPasswordModal: false }))
   }
 
+  const openChangePassword = () => {
+    dispatch(setShowModal({ forgotPasswordModal: false }))
+    dispatch(setShowModal({ changePasswordModal: true }))
+  }
+
   return (
     <div className={forgotPasswordModal ? styles._background : styles._hidden} id='forgot-password-modal' onClick={closeModal}>
       <div className={`${styles._modal} _generalCard`}>
@@ -25,7 +30,7 @@ const ForgotPasswordModal = () => {
         </div>
 
         <div className={styles._buttonParent}>
-          <Button color='#000' text='Enviar' textColor='#FFF' />
+          <Button color='#000' text='Enviar' textColor='#FFF' method={openChangePassword} />
         </div>
       </div>
     </div>
