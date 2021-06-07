@@ -1,0 +1,18 @@
+@import '../../../public/styles/index.scss';
+
+._text {
+  color: $white;
+  font-family: $montserratRegular;
+  font-size: $montserratRegular10;
+}
+
+._arrowDown {
+  width: 0;
+  height: 0;
+  border-left: 0.75rem solid transparent;
+  border-right: 0.75rem solid transparent;
+  border-top: 0.75rem solid $denim;
+  position: absolute;
+  bottom: -0.625rem;
+  left: 1.875rem;
+}

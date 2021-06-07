@@ -35,7 +35,7 @@ const RegisterModal = () => {
             </div>
 
             <div className={styles._halfWidth}>
-              <div className={`${styles._inputParent} ${styles._marginTop}`}>
+              <div className={`${styles._inputParent} ${styles._responsiveMarginTop}`}>
                 <label>Apellido</label>
                 <input type="text" className={styles._input} placeholder='Apellido' />
               </div>
@@ -64,7 +64,7 @@ const RegisterModal = () => {
             </div>
 
             <div className={styles._halfWidth}>
-              <div className={`${styles._inputParent} ${styles._marginTop}`}>
+              <div className={`${styles._inputParent} ${styles._responsiveMarginTop}`}>
                 <label>Password</label>
                 <input type={!showTwo ? 'password' : 'text'} className={styles._input} placeholder='Contraseña' />
                 <div className={styles._imageParent} onClick={showPasswordTwo}>
