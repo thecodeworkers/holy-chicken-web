@@ -7,8 +7,10 @@ import FormikConfig from './formik'
 
 const RegisterModal = () => {
 
+  const changeStatus = () => setStatus(true)
+
   const dispatch = useDispatch()
-  const formik = FormikConfig(dispatch)
+  const formik = FormikConfig(dispatch, changeStatus)
   const { errors, touched } = formik
 
   const [show, setShow] = useState(false)
@@ -16,6 +18,9 @@ const RegisterModal = () => {
   const [showToast, setShowToast ] = useState(0)
   const [toastText, setToastText] = useState('')
   const [toastIcon, setToastIcon ] = useState('check')
+  const [status, setStatus] = useState(false)
+
+  let interval
 
   const { intermitence: { registerModal }, auth } = useSelector((state: any) => state)
 
@@ -24,33 +29,33 @@ const RegisterModal = () => {
 
   const closeModal = (event, flag = false) => {
     const { target } = event
-    if (target.id == 'close-register' || flag) dispatch(setShowModal({ registerModal: false }))
+    if (target.id == 'close-register' || flag) {
+      dispatch(setShowModal({ registerModal: false }))
+      formik.resetForm()
+    }
+    setShowToast(0)
   }
 
   useEffect(() => {
-    if(auth.register) {
-      setToastText('Usuario creado de exitosamente')
-      setShowToast(1)
-      setToastIcon('check')
+    if(auth.register && status) {
+      toastHandler('Usuario creado de exitosamente', 'check')
       formik.resetForm()
-
-      setTimeout(() => {
-        setShowToast(2)
-      }, 2000);
     }
 
-    // if(!auth.register) {
-    //   setToastText('Error al registar usuario')
-    //   setShowToast(1)
-    //   setToastIcon('error')
+    if(!auth.register && status) toastHandler('Error al registar usuario', 'error')
 
-    //   setTimeout(() => {
-    //     setShowToast(2)
-    //   }, 2000);
-    // }
-
-
+    return () => { clearTimeout(interval) }
   }, [auth])
+
+  const toastHandler = (message, type) => {
+    setToastText(message)
+      setShowToast(1)
+      setToastIcon(type)
+
+      interval = setTimeout(() => {
+        setShowToast(2)
+      }, 2000);
+  }
 
   return (
     <div className={registerModal ? styles._background : styles._hidden} onClick={closeModal} id='close-register'>
@@ -109,7 +114,7 @@ const RegisterModal = () => {
             <label>Correo</label>
             <input
               type="mail"
-              placeholder='correo'
+              placeholder='Correo'
               name='email'
               id='email'
               onChange={formik.handleChange}
@@ -122,7 +127,7 @@ const RegisterModal = () => {
           <div className={`${styles._row} ${styles._marginTop}`}>
             <div className={styles._halfWidth}>
               <div className={styles._inputParent}>
-                <label>Password</label>
+                <label>Contraseña</label>
                 <input
                   type={!show ? 'password' : 'text'}
                   placeholder='Contraseña'
@@ -141,7 +146,7 @@ const RegisterModal = () => {
 
             <div className={styles._halfWidth}>
               <div className={`${styles._inputParent} ${styles._responsiveMarginTop}`}>
-                <label>Password</label>
+                <label>Confirmar Contraseña</label>
                 <input
                   type={!showTwo ? 'password' : 'text'}
                   placeholder='Contraseña'

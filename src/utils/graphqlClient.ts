@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { backupURL } from '@utils/path'
 
-const WP_API_URL = process.env.WP_API_URL ?? 'https://holychicken-dev-admin.thecodeworkers.com/index.php?graphql'
+const WP_API_URL = process.env.WP_API_URL ?? backupURL
 
 const GraphQlClient = async (query, variables = {}) => {
 
@@ -8,6 +9,7 @@ const GraphQlClient = async (query, variables = {}) => {
     const headers = { 'Content-Type': 'application/json' }
     const response = await axios.post(WP_API_URL, { query, variables }, { headers })
 
+    console.log(response.data.data)
     return response.data.data
 
   } catch (err) {

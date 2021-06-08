@@ -1,9 +1,9 @@
 import { useFormik } from 'formik'
-import { emailRegex, passwordRegex, onlyLettersRegex } from '@utils/regex'
+import { emailRegex, passwordRegex, onlyLettersRegex, onlyNumbersRegex } from '@utils/regex'
 import { registerUser } from '@store/actions'
 import * as Yup from 'yup'
 
-const formikConfig = (dispatch) => (useFormik({
+const formikConfig = (dispatch, method) => (useFormik({
   initialValues: {
     firstName: '',
     lastName: '',
@@ -23,7 +23,10 @@ const formikConfig = (dispatch) => (useFormik({
       .matches(onlyLettersRegex),
 
     phone: Yup.string()
-      .required(),
+      .required()
+      .min(7)
+      .max(12)
+      .matches(onlyNumbersRegex),
 
     email: Yup.string()
       .required()
@@ -41,6 +44,7 @@ const formikConfig = (dispatch) => (useFormik({
 
   onSubmit: values => {
     dispatch(registerUser(values))
+    method()
   }
 }))
 
