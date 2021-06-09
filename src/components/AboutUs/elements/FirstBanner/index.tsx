@@ -55,8 +55,6 @@ const FirstBanner = ({ data }) => {
                 }
 
               </div>
-              //   </div>
-              // </div>
             )
           }
           )
