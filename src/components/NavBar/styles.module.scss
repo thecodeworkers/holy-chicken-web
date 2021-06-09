@@ -1,4 +1,4 @@
-@import '../../../public//styles/index.scss';
+@import '../../../public/styles/index.scss';
 
 ._main {
   position: fixed;
@@ -7,7 +7,7 @@
   width: 100%;
   box-shadow: 0px 3px 6px $mercury;
   background-color: $white;
-  z-index: 999;
+  z-index: 998;
 }
 
 ._menu {
@@ -49,7 +49,6 @@
 }
 
 ._link {
-  // color: $doveGray;
   text-decoration: none;
 
   &:hover {
@@ -80,6 +79,19 @@
 
   &:nth-child(3) {
     position: relative;
+  }
+}
+
+._profileParent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & p {
+    font-family: $montserratRegular;
+    color: $gray;
+    font-size: $montserratRegular14;
+    margin-left: 0.5rem;
   }
 }
 

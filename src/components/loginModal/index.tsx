@@ -1,24 +1,61 @@
 import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { Button } from '@components'
+import { Button, Toast } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal } from '@store/actions'
 import FormikConfig from './formik'
 
 const LoginModal = () => {
 
-  const formik = FormikConfig()
   const dispatch = useDispatch()
-  const { intermitence: { loginModal } } = useSelector((state: any) => state)
+
+  const changeStatus = () => setStatus(true)
+
+  const formik = FormikConfig(dispatch, changeStatus)
+  const [showToast, setShowToast ] = useState(0)
+  const [toastText, setToastText] = useState('')
+  const [toastIcon, setToastIcon ] = useState('check')
+  const [status, setStatus] = useState(false)
+
+  const { intermitence: { loginModal }, auth } = useSelector((state: any) => state)
 
   const [show, setShow] = useState(false)
   const { errors, touched } = formik
+
+  let interval
 
   const showPassword = () => setShow(show => !show)
 
   const closeModal = (event) => {
     const { target } = event
-    if(target.id == 'background') dispatch(setShowModal({ loginModal: false }))
+    if(target.id == 'background') {
+      dispatch(setShowModal({ loginModal: false }))
+      formik.resetForm()
+      setShowToast(0)
+      setStatus(false)
+    }
+  }
+
+  useEffect(() => {
+    if(auth?.login?.login && status) {
+      toastHandler('Usuario autenticado exitosamente', 'check')
+      formik.resetForm()
+    }
+
+    if(!auth?.login?.login && status) toastHandler('Error al autenticar usuario', 'error')
+
+    return () => { clearTimeout(interval) }
+  }, [auth])
+
+  const toastHandler = (message, type) => {
+    setToastText(message)
+      setShowToast(1)
+      setToastIcon(type)
+
+      interval = setTimeout(() => {
+        setShowToast(2)
+        setStatus(false)
+      }, 2000);
   }
 
   const openModal = (name) => {
@@ -70,6 +107,8 @@ const LoginModal = () => {
         <p className={styles._grayLink}>¿Nuevo cliente? <a onClick={() => openModal('registerModal')}>Crear Cuenta</a></p>
         <p className={styles._grayLink}>¿Olvidaste tu contraseña? <a onClick={() => openModal('forgotPasswordModal')}>Recuperar Contraseña</a></p>
       </div>
+
+      <Toast status={showToast} text={toastText} icon={toastIcon}></Toast>
     </div>
   )
 }

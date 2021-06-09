@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal } from '@store/actions'
 import FormikConfig from './formik'
 
+
 const RegisterModal = () => {
 
   const changeStatus = () => setStatus(true)
@@ -32,17 +33,18 @@ const RegisterModal = () => {
     if (target.id == 'close-register' || flag) {
       dispatch(setShowModal({ registerModal: false }))
       formik.resetForm()
+      setShowToast(0)
+      setStatus(false)
     }
-    setShowToast(0)
   }
 
   useEffect(() => {
-    if(auth.register && status) {
+    if(auth.register?.registerCustomer && status) {
       toastHandler('Usuario creado de exitosamente', 'check')
       formik.resetForm()
     }
 
-    if(!auth.register && status) toastHandler('Error al registar usuario', 'error')
+    if(!auth.register?.registerCustomer && status) toastHandler('Error al registar usuario', 'error')
 
     return () => { clearTimeout(interval) }
   }, [auth])
