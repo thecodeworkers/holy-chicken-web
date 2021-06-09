@@ -22,7 +22,6 @@ const formikConfig = () => (useFormik({
 
     phone: Yup.string()
       .required(),
-    // .matches(onlyLettersRegex),
 
     email: Yup.string()
       .required()
