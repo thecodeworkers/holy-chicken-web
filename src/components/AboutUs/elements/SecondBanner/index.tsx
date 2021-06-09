@@ -45,7 +45,7 @@ const SecondBanner = ({ data }) => {
         background-image: url(${data?.background?.mediaItemUrl});
         background-size: cover;
         background-position: center;
-        height: 80vh;
+        height: 85vh;
         width:100%
       }
 
