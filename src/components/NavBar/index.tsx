@@ -1,13 +1,13 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Logo } from '@images/resources'
 import { Cart, Profile, Search } from '@images/icons'
 import { useRouter } from 'next/router'
 import Button from '../Button'
 import { NavbarResponsive } from '@components'
-import { useDispatch } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setShowModal, logoutUser } from '@store/actions'
 
 const NavBar = ({ data }) => {
 
@@ -15,6 +15,9 @@ const NavBar = ({ data }) => {
 
   const router = useRouter()
   const [show, setShow] = useState(false)
+
+  const { auth } = useSelector((state: any) => state)
+  const { isAuth } = auth
 
   const navigation = (route: string) => {
     if(route == '/contact') return dispatch(setShowModal({ contactModal: true }))
@@ -32,6 +35,8 @@ const NavBar = ({ data }) => {
   }
 
   const showDropDown = () => setShow(show => !show)
+
+  const logout = () => dispatch(logoutUser())
 
   return (
     <>
@@ -65,18 +70,21 @@ const NavBar = ({ data }) => {
 
               <div className={styles._iconParent} onClick={() => navigation('/cart')}>
                 <Cart color='#000' />
-
               </div>
+
               <div className={styles._iconParent} >
-                <div onClick={showDropDown}>
+                <div onClick={showDropDown} className={styles._profileParent}>
                   <Profile color='#000' />
+                  { isAuth && <p>Hi, { auth?.login?.login?.user?.firstName }</p> }
                 </div>
 
-                {show &&
+                { show &&
                   <div className={styles._dropDown}>
                     <div className={styles._dropDownContent}>
-                      <div className={styles._buttonBlueParent} onClick={() => openModal('loginModal')}>
-                        <Button color='#118AC6' text='Iniciar sesión' textColor='#fff' ></Button>
+                      <div
+                      className={styles._buttonBlueParent}
+                      onClick={!isAuth ? () => openModal('loginModal') : logout}>
+                        <Button color='#118AC6' text={!isAuth ? 'Iniciar sesión' : 'Cerrar sesión'} textColor='#fff' ></Button>
                       </div>
                       <p>¿Nuevo cliente? <a className={styles._link} onClick={() => openModal('registerModal')}> Crear Cuenta </a></p>
                       <p>Mis órdenes</p >
