@@ -21,9 +21,9 @@ const FirstBanner = ({ data }) => {
 
             return (
               <div  key={index}>
-                {/* <div className={index === 0 ? styles._lineFather : styles._lineFatherTwo}>
+                 <div className={index === 0 ? styles._lineFather : styles._lineFatherTwo}>
                   <div className={index === 0 ? styles._line : styles._linetwo}> </div>
-                </div> */}
+                </div>
 
                 {index % 2 == 0 ?
 
@@ -55,8 +55,6 @@ const FirstBanner = ({ data }) => {
                 }
 
               </div>
-              //   </div>
-              // </div>
             )
           }
           )

@@ -40,6 +40,7 @@
   justify-content: center;
   align-items: center;
   padding-left: 1.5rem;
+  height: 720px;
 }
 
 ._imageLeftContainer{
@@ -48,11 +49,12 @@
   justify-content: center;
   align-items: center;
   padding-right: 1.5rem;
+  height: 720px;
 }
 
 
 ._image{
-height: 100%;
+
 width: 100%;
 
 }
@@ -62,8 +64,9 @@ width: 100%;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  width: 50%;
-  padding-left: 1.5rem;
+  width: 45%;
+  padding-left: 5%;
+  height: 720px;
 }
 
 ._textRightContainer{
@@ -71,69 +74,34 @@ width: 100%;
   justify-content: center;
   align-items: flex-end;
   flex-direction: column;
-  width: 50%;
-  padding-right: 1.5rem;
+  width: 45%;
+  padding-right: 5%;
+  height: 720px;
 }
 
-._line{
-  width: 100%;
-  height: 3px;
-  background-color: black;
-  position: relative;
-  transform: rotate(90deg);
-  z-index: 1;
-}
 
 ._linetwo::after{
   content: '';
   width: 25px;
   height: 25px;
   background-color: white;
-  border: 1px solid black;
+  border: 3px solid black;
   position: absolute;
   border-radius: 50%;
   right: 0;
   top:-12px;
-  z-index: 1;
 }
-// ._linetwo::before{
-//   content: '';
-//   width: 25px;
-//   height: 25px;
-//   background-color: white;
-//   border: 1px solid black;
-//   position: absolute;
-//   border-radius: 50%;
-//   top: -12px;
-//   z-index: 1;
-// }
-
-// ._line::after{
-//   content: '';
-//   width: 25px;
-//   height: 25px;
-//   background-color: white;
-//   border: 1px solid black;
-//   position: absolute;
-//   border-radius: 50%;
-//   right: 0;
-//   top:-12px;
-//   z-index: 1;
-// }
-
-._line::before{
+._linetwo::before{
   content: '';
   width: 25px;
   height: 25px;
   background-color: white;
-  border: 1px solid black;
+  border: 3px solid black;
   position: absolute;
   border-radius: 50%;
   top: -12px;
   z-index: 1;
 }
-
-
 
 ._linetwo{
   width: 100%;
@@ -141,20 +109,19 @@ width: 100%;
   background-color: black;
   position: relative;
   transform: rotate(90deg);
-  z-index: 1;
 
 }
 
 ._lineFather{
   position:absolute;
-  width:100px;
+  width:751px;
   transform: translateX(-50%);
   left: 50%
 }
 
 ._lineFatherTwo{
   position:absolute;
-  width:851px;
+  width:751px;
   transform: translateX(-50%);
   left: 50%
 }
@@ -167,12 +134,74 @@ display: flex;
   display: flex;
 }
 
+@include responsive(xxxl) {
+  ._imageLeftContainer{
+    height: 700px;
+  }
+  ._imageRightContainer{
+    height: 700px;
+  }
+  ._textLeftContainer{
+    height: 700px;
+  }
+  ._textRightContainer{
+    height: 700px;
+  }
+  ._lineFatherTwo{
+    width: 731px;
+  }
+  ._lineFather{
+    width: 731px
+  }
+
+}
+
+
+@include responsive(xxl) {
+  ._imageLeftContainer{
+    height: 590px;
+  }
+  ._imageRightContainer{
+    height: 590px;
+  }
+  ._textLeftContainer{
+    height: 590px;
+  }
+  ._textRightContainer{
+    height: 590px;
+  }
+  ._lineFatherTwo{
+    width: 621px;
+  }
+  ._lineFather{
+    width: 621px
+  }
+
+}
+
+
 
 @include responsive(xl) {
-  ._image{
-    height: 85%;
-    width: 85%;
+
+  ._imageLeftContainer{
+    height: 520px;
   }
+  ._imageRightContainer{
+    height: 520px;
+  }
+  ._textLeftContainer{
+    height: 520px;
+  }
+  ._textRightContainer{
+    height: 520px;
+  }
+  ._lineFatherTwo{
+    width: 551px;
+  }
+  ._lineFather{
+    width: 551px
+  }
+
   ._title{
     font-size:2.5rem
   }
@@ -180,12 +209,27 @@ display: flex;
   ._textContent{
     width: 80%;
   }
-  }
+}
 
   @include responsive(lg) {
-    ._image{
-      height: 100%;
-      width: 100%;
+
+    ._imageLeftContainer{
+      height: 430px;
+    }
+    ._imageRightContainer{
+      height: 430px;
+    }
+    ._textLeftContainer{
+      height: 430px;
+    }
+    ._textRightContainer{
+      height: 430px;
+    }
+    ._lineFatherTwo{
+      width: 461px;
+    }
+    ._lineFather{
+      width: 461px
     }
     ._title{
       font-size:2.5rem
@@ -221,25 +265,30 @@ display: flex;
     width: 100%;
     display: flex;
     justify-content: center;
+    height: 100%;
+    padding-left: 1rem;
   }
   ._imageRightContainer{
     width: 100%;
     display: flex;
     justify-content: center;
+    height: 100%;
+    padding-left: 1rem;
   }
   ._textLeftContainer{
     width: 100%;
     padding-left: 0;
+    height: 100%;
+    padding-left: 1rem;
   }
   ._textRightContainer{
     width: 100%;
     align-items: flex-start;
     padding-right: 0;
-  }
-  ._image{
     height: 100%;
-    width: 100%;
+    padding-left: 1rem;
   }
+
   ._title{
     font-size: 2rem;
   }
@@ -257,6 +306,14 @@ display: flex;
     justify-content: center;
     align-items: center;
   }
+  ._lineFather{
+    display: none;
+  }
+  ._lineFatherTwo{
+   display: none;
+  }
+
+
 }
 
 
