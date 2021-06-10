@@ -1,0 +1,83 @@
+@import '@styles/index.scss';
+
+._content {
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 85%;
+  margin: auto;
+  flex-direction: column;
+}
+
+._main {
+  margin-top: 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+._header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+._title{
+  font-family: $blackerTextHeavyBold;
+  font-size:$blackerTextHeavyBold60;
+  color: $black;
+  margin-bottom: 1rem;
+}
+
+._subtitle{
+  font-family: $montserratMedium;
+  font-size: $montserratMedium18;
+  color: $mineShaft;
+  margin-bottom: 1rem;
+}
+._shopContainer{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 100%;
+}
+
+._filterContainer{
+  width: 20%;
+  background-color: red;
+}
+
+._productContainer{
+  width: 80%;
+  background-color: yellow;
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr,) !important;
+}
+
+._cardContainer{
+
+}
+
+._card{
+  width: 12.5rem;
+}
+
+@include responsive(lg) {
+
+
+}
+
+@include responsive(md) {
+
+
+}
+
+@include responsive(sm) {
+
+
+}
+
