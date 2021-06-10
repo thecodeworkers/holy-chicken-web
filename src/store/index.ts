@@ -3,6 +3,7 @@ import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import thunkMiddleware from 'redux-thunk'
 import reducers from './reducers'
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
+import reconcile from './reconcile'
 
 const createNoopStorage = () => {
   return {
@@ -28,8 +29,11 @@ const bindMiddleware = (middleware) => {
 }
 
 const reducer = (state, action) => {
-  if (action.type === HYDRATE) return { ...state, ...action.payload }
-  if (action.type === 'persist/REHYDRATE') action.payload = { ...action.payload, ...state }
+  let reconcileState = {}
+
+  if (action.type == '__NEXT_REDUX_WRAPPER_HYDRATE__') reconcileState = reconcile(state, action.payload)
+  if (action.type === HYDRATE) return { ...state, ...action.payload, ...reconcileState }
+
   return reducers(state, action)
 }
 
