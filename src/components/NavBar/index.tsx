@@ -7,8 +7,7 @@ import { useRouter } from 'next/router'
 import Button from '../Button'
 import { NavbarResponsive } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal, logoutUser, resetModals } from '@store/actions'
-
+import { setShowModal, logoutUser, resetModals} from '@store/actions'
 
 const NavBar = ({ data }) => {
 

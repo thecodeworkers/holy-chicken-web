@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button, Toast } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { setShowModal, resetModals} from '@store/actions'
 import FormikConfig from './formik'
 
 const LoginModal = () => {
