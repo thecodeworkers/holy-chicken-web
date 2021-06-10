@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import { wrapper } from '@store'
 import { getResources } from '@store/actions'
 import { useDispatch } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { setShowModal, resetModals} from '@store/actions'
 
 const ResponsiveMenu = ({ show = 0, method }) => {
 
@@ -23,6 +23,7 @@ const ResponsiveMenu = ({ show = 0, method }) => {
 
   const navigation = (route: string) => {
     if(route == '/contact') {
+      dispatch(resetModals())
       dispatch(setShowModal({ contactModal: true }))
       method()
       return

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { setShowModal, resetModals} from '@store/actions'
 
 const LoginModal = () => {
 
@@ -19,8 +19,8 @@ const LoginModal = () => {
   }
 
   const openModal = (name) => {
+    dispatch(resetModals())
     dispatch(setShowModal({ [name]: true }))
-    dispatch(setShowModal({ loginModal: false }))
   }
 
   return (
@@ -46,10 +46,9 @@ const LoginModal = () => {
           </div>
         </form>
 
-        <p className={styles._blackLink}>Comprar sin registrarse</p>
+        <p className={styles._blackLink}  onClick={() => openModal('locationModal')}>Comprar sin registrarse</p>
         <p className={styles._grayLink}>¿Nuevo cliente? <a onClick={() => openModal('registerModal')}>Crear Cuenta</a></p>
         <p className={styles._grayLink}>¿Olvidaste tu contraseña? <a onClick={() => openModal('forgotPasswordModal')}>Recuperar Contraseña</a></p>
-
       </div>
     </div>
   )

@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import Button from '../Button'
 import { NavbarResponsive } from '@components'
 import { useDispatch } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { resetModals, setShowModal } from '@store/actions'
 
 const NavBar = ({ data }) => {
 
@@ -17,7 +17,11 @@ const NavBar = ({ data }) => {
   const [show, setShow] = useState(false)
 
   const navigation = (route: string) => {
-    if(route == '/contact') return dispatch(setShowModal({ contactModal: true }))
+    if(route == '/contact') {
+      dispatch(resetModals())
+      dispatch(setShowModal({ contactModal: true }))
+      return
+    }
     if (route != router.pathname) router.push(route)
   }
 
@@ -68,6 +72,7 @@ const NavBar = ({ data }) => {
 
               </div>
               <div className={styles._iconParent} >
+
                 <div onClick={showDropDown}>
                   <Profile color='#000' />
                 </div>

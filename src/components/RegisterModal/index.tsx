@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button, Toast } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { resetModals, setShowModal } from '@store/actions'
 import FormikConfig from './formik'
 
 const RegisterModal = () => {
@@ -29,7 +29,7 @@ const RegisterModal = () => {
 
   const closeModal = (event, flag = false) => {
     const { target } = event
-    if (target.id == 'close-register' || flag) {
+    if (target.id == 'close-register') {
       dispatch(setShowModal({ registerModal: false }))
       formik.resetForm()
     }
@@ -55,6 +55,11 @@ const RegisterModal = () => {
       interval = setTimeout(() => {
         setShowToast(2)
       }, 2000);
+  }
+
+  const openLocations = () => {
+    dispatch(resetModals())
+    dispatch(setShowModal({ locationModal: true }))
   }
 
   return (
@@ -166,7 +171,7 @@ const RegisterModal = () => {
 
           <div className={`${styles._buttonsRow} ${styles._buttonsMarginTop}`}>
             <div className={styles._halfWidth}>
-              <Button color='#F4F3EE' textColor='#000' text='Hacerlo luego' method={(event) => closeModal(event, true)} />
+              <Button color='#F4F3EE' textColor='#000' text='Hacerlo luego' method={openLocations} />
             </div>
 
             <div className={styles._halfWidth}>

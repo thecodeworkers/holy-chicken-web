@@ -22,10 +22,6 @@ const ModalContact = () => {
         <div className={styles._leftSection}>
           <div className={styles._closeParent}>
             <p className={styles._title}>Contáctanos</p>
-            <div className={styles._responsiveIconParent} onClick={() => dispatch(setShowModal(false))}>
-              <img src='images/icons/close.svg' width='16px'></img>
-            </div>
-
           </div>
 
           <div className={`${styles._itemParent} ${styles._marginBottom}`}>
@@ -100,10 +96,6 @@ const ModalContact = () => {
         <div className={styles._rightSection}>
           <div className={styles._closeParent}>
             <p className={styles._title}>Tipo de contacto</p>
-
-            <div className={styles._closeIconParent} onClick={() => dispatch(setShowModal(false))}>
-              <img src='images/icons/close.svg' width='16px'></img>
-            </div>
           </div>
 
           <form onSubmit={formik.handleSubmit}>
