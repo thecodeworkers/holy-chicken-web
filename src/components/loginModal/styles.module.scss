@@ -20,6 +20,10 @@
   font-size: $montserratBold16;
 }
 
+._inputError {
+  @include generalInput($red);
+  font-size: $montserratBold16;
+}
 
 ._inputParent {
   position: relative;
