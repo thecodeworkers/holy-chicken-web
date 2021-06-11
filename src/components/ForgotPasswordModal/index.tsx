@@ -30,6 +30,7 @@ const ForgotPasswordModal = () => {
   useEffect(() => {
     if(auth?.emailSended && status) {
       dispatch(setToast('check', 'Correo enviado exitosamente ', 1))
+      dispatch(setShowModal({ forgotPasswordModal: false }))
       formik.resetForm()
     }
 

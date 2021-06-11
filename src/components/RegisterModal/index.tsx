@@ -43,6 +43,7 @@ const RegisterModal = () => {
   }, [auth])
 
   const openLocations = () => {
+    formik.resetForm()
     dispatch(resetModals())
     dispatch(setShowModal({ locationModal: true }))
   }
