@@ -14,4 +14,5 @@ export { default as RegisterModal } from './RegisterModal'
 export { default as ChangePasswordModal } from './ChangePasswordModal'
 export { default as Tooltip } from './Tooltip'
 export { default as ForgotPasswordModal } from './ForgotPasswordModal'
-export { default as Toast } from './Toast';
+export { default as Toast } from './Toast'
+export { default as LocationModal } from './LocationModal'

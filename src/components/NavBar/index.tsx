@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import Button from '../Button'
 import { NavbarResponsive } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal, logoutUser } from '@store/actions'
+import { setShowModal, logoutUser, resetModals} from '@store/actions'
 
 const NavBar = ({ data }) => {
 
@@ -20,7 +20,11 @@ const NavBar = ({ data }) => {
   const { isAuth } = auth
 
   const navigation = (route: string) => {
-    if(route == '/contact') return dispatch(setShowModal({ contactModal: true }))
+    if(route == '/contact') {
+      dispatch(resetModals())
+      dispatch(setShowModal({ contactModal: true }))
+      return
+    }
     if (route != router.pathname) router.push(route)
   }
 
