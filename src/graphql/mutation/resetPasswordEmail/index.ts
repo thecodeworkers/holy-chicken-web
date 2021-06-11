@@ -1,10 +1,10 @@
 import { GraphQlClient } from  '@utils'
 import { v4 as uuidv4 } from 'uuid';
 
-const restorePasswordEmailMutation = async ({ username }) => {
+const restorePasswordEmailMutation = async ({ email }) => {
   const mutation = `
     mutation sendResetPassworMutation {
-      sendPasswordResetEmail(input: {username: ${username}}) {
+      sendPasswordResetEmail(input: {username: "${email}"}) {
         user {
           locale
         }

@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import Button from '../Button'
 import { NavbarResponsive } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal, logoutUser, resetModals} from '@store/actions'
+import { setShowModal, logoutUser, resetModals, setToast } from '@store/actions'
 
 const NavBar = ({ data }) => {
 
@@ -20,7 +20,7 @@ const NavBar = ({ data }) => {
   const { isAuth } = auth
 
   const navigation = (route: string) => {
-    if(route == '/contact') {
+    if (route == '/contact') {
       dispatch(resetModals())
       dispatch(setShowModal({ contactModal: true }))
       return
@@ -35,12 +35,16 @@ const NavBar = ({ data }) => {
 
   const openModal = (name) => {
     setShow(false)
+    dispatch(resetModals())
     dispatch(setShowModal({ [name]: true }))
   }
 
   const showDropDown = () => setShow(show => !show)
 
-  const logout = () => dispatch(logoutUser())
+  const logout = () => {
+    dispatch(logoutUser())
+    dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
+  }
 
   return (
     <>
@@ -69,7 +73,7 @@ const NavBar = ({ data }) => {
           <div className={styles._rightSide}>
             <div className={styles._iconsList}>
               <div onClick={() => navigation('/shop')}>
-              <Button color='#FD8C2E' text='Pedir ahora' textColor='#fff'></Button>
+                <Button color='#FD8C2E' text='Pedir ahora' textColor='#fff'></Button>
               </div>
 
               <div className={styles._iconParent} onClick={() => navigation('/cart')}>
@@ -79,15 +83,15 @@ const NavBar = ({ data }) => {
               <div className={styles._iconParent} >
                 <div onClick={showDropDown} className={styles._profileParent}>
                   <Profile color='#000' />
-                  { isAuth && <p>Hi, { auth?.login?.login?.user?.firstName }</p> }
+                  {isAuth && <p>Hi, {auth?.login?.login?.user?.firstName}</p>}
                 </div>
 
-                { show &&
+                {show &&
                   <div className={styles._dropDown}>
                     <div className={styles._dropDownContent}>
                       <div
-                      className={styles._buttonBlueParent}
-                      onClick={!isAuth ? () => openModal('loginModal') : logout}>
+                        className={styles._buttonBlueParent}
+                        onClick={!isAuth ? () => openModal('loginModal') : logout}>
                         <Button color='#118AC6' text={!isAuth ? 'Iniciar sesión' : 'Cerrar sesión'} textColor='#fff' ></Button>
                       </div>
                       <p>¿Nuevo cliente? <a className={styles._link} onClick={() => openModal('registerModal')}> Crear Cuenta </a></p>

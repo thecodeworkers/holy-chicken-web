@@ -1,0 +1,1 @@
+export const TOAST_STATUS = 'TOAST_STATUS'

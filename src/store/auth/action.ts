@@ -1,6 +1,6 @@
-import { registerMutation, loginMutation } from '@graphql'
+import { registerMutation, loginMutation, restorePasswordEmail} from '@graphql'
 import { actionObject } from '@utils'
-import { REGISTER_USER, LOGIN_USER } from './action-types'
+import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL } from './action-types'
 
 export const registerUser = (body: any) => async (dispatch) => {
   const result = await registerMutation(body)
@@ -14,4 +14,11 @@ export const loginUser = (body: any) => async (dispatch) => {
 
 export const logoutUser = () => async (dispatch) => {
   await dispatch(actionObject(LOGIN_USER, { login: null, isAuth: null }))
+}
+
+export const sendRestorePasswordEmail = (body) => async (dispatch) => {
+  const result = await restorePasswordEmail(body)
+
+  console.log(result)
+  await dispatch(actionObject(RESTORE_PASSWORD_EMAIL, { emailSended: result ? true : false }))
 }

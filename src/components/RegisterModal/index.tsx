@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button, Toast } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetModals, setShowModal } from '@store/actions'
+import { resetModals, setShowModal, setToast } from '@store/actions'
 import FormikConfig from './formik'
 
 
@@ -16,12 +16,7 @@ const RegisterModal = () => {
 
   const [show, setShow] = useState(false)
   const [showTwo, setShowTwo] = useState(false)
-  const [showToast, setShowToast ] = useState(0)
-  const [toastText, setToastText] = useState('')
-  const [toastIcon, setToastIcon ] = useState('check')
   const [status, setStatus] = useState(false)
-
-  let interval
 
   const { intermitence: { registerModal }, auth } = useSelector((state: any) => state)
 
@@ -33,31 +28,19 @@ const RegisterModal = () => {
     if (target.id == 'close-register') {
       dispatch(setShowModal({ registerModal: false }))
       formik.resetForm()
-      setShowToast(0)
+      dispatch(setToast('', '', 0))
       setStatus(false)
     }
   }
 
   useEffect(() => {
     if(auth.register?.registerCustomer && status) {
-      toastHandler('Usuario creado de exitosamente', 'check')
+      dispatch(setToast('check', 'Usuario creado de exitosamente', 1))
       formik.resetForm()
     }
 
-    if(!auth.register?.registerCustomer && status) toastHandler('Error al registar usuario', 'error')
-
-    return () => { clearTimeout(interval) }
+    if(!auth.register?.registerCustomer && status) dispatch(setToast('error', 'Error al registar usuario', 1))
   }, [auth])
-
-  const toastHandler = (message, type) => {
-    setToastText(message)
-      setShowToast(1)
-      setToastIcon(type)
-
-      interval = setTimeout(() => {
-        setShowToast(2)
-      }, 2000);
-  }
 
   const openLocations = () => {
     dispatch(resetModals())
@@ -182,8 +165,6 @@ const RegisterModal = () => {
           </div>
         </form>
       </div>
-
-      <Toast status={showToast} text={toastText} icon={toastIcon}></Toast>
     </div>
   )
 }

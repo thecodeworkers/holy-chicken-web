@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button, Toast } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal, resetModals} from '@store/actions'
+import { setShowModal, resetModals, setToast } from '@store/actions'
 import FormikConfig from './formik'
 
 const LoginModal = () => {
@@ -12,17 +12,12 @@ const LoginModal = () => {
   const changeStatus = () => setStatus(true)
 
   const formik = FormikConfig(dispatch, changeStatus)
-  const [showToast, setShowToast ] = useState(0)
-  const [toastText, setToastText] = useState('')
-  const [toastIcon, setToastIcon ] = useState('check')
   const [status, setStatus] = useState(false)
 
   const { intermitence: { loginModal }, auth } = useSelector((state: any) => state)
 
   const [show, setShow] = useState(false)
   const { errors, touched } = formik
-
-  let interval
 
   const showPassword = () => setShow(show => !show)
 
@@ -31,32 +26,22 @@ const LoginModal = () => {
     if(target.id == 'background') {
       dispatch(setShowModal({ loginModal: false }))
       formik.resetForm()
-      setShowToast(0)
+      dispatch(setToast('', '', 0))
       setStatus(false)
     }
   }
 
   useEffect(() => {
     if(auth?.login?.login && status) {
-      toastHandler('Usuario autenticado exitosamente', 'check')
+      dispatch(setToast('check', 'Usuario autenticado exitosamente', 1))
+      dispatch(setShowModal({ loginModal: false }))
+      setStatus(false)
       formik.resetForm()
     }
 
-    if(!auth?.login?.login && status) toastHandler('Error al autenticar usuario', 'error')
+    if(!auth?.login?.login && status) dispatch(setToast('error', 'Error al autenticar usuario', 1))
 
-    return () => { clearTimeout(interval) }
   }, [auth])
-
-  const toastHandler = (message, type) => {
-    setToastText(message)
-      setShowToast(1)
-      setToastIcon(type)
-
-      interval = setTimeout(() => {
-        setShowToast(2)
-        setStatus(false)
-      }, 2000);
-  }
 
   const openModal = (name) => {
     dispatch(resetModals())
@@ -107,8 +92,6 @@ const LoginModal = () => {
         <p className={styles._grayLink}>¿Nuevo cliente? <a onClick={() => openModal('registerModal')}>Crear Cuenta</a></p>
         <p className={styles._grayLink}>¿Olvidaste tu contraseña? <a onClick={() => openModal('forgotPasswordModal')}>Recuperar Contraseña</a></p>
       </div>
-
-      <Toast status={showToast} text={toastText} icon={toastIcon}></Toast>
     </div>
   )
 }

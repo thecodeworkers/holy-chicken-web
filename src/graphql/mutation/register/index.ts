@@ -17,29 +17,3 @@ const registerMutation = async ({ firstName, lastName, email, password, phone })
 
 export default registerMutation
 
-  // mutation RegisterUser {
-  //   registerUser(
-  //     input: {
-  //         clientMutationId: "${uuidv4()}",
-  //         username: "${email}",
-  //         password: "${password}",
-  //         email: "${email}",
-  //         firstName: "${firstName}",
-  //         lastName: "${firstName}",
-  //     }) {
-  //     user {
-  //       jwtAuthToken
-  //       jwtRefreshToken,
-  //       email
-  //     }
-  //   }
-  // }
-
-
-  // mutation RegisterUser {
-  //   registerCustomer(input: {password: "${password}", firstName: "${firstName}", lastName: "${lastName}", email: "${email}", username: "${email}", billing: {phone: "${phone}"}}) {
-  //     authToken
-  //     clientMutationId
-  //     refreshToken
-  //   }
-  // }
