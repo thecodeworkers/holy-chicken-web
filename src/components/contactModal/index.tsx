@@ -6,15 +6,25 @@ import { useDispatch } from 'react-redux'
 import { setShowModal } from '@store/actions'
 import { useSelector } from 'react-redux'
 import FormikConfig from './formik'
+import { getPageFiles } from 'next/dist/next-server/server/get-page-files'
 
 const ModalContact = () => {
 
   const dispatch = useDispatch()
   const formik = FormikConfig()
-
+  const [isActive, setActive] = useState(1)
+  const [fileName, setFileName] =useState('')
   const { errors, touched } = formik
 
   const { resource: { general: { general } } } = useSelector((state: any) => state)
+
+  const activeLink = (props) => {
+    setActive(props)
+  }
+
+  const getFile = (event) =>{
+    setFileName(event.target.files[0].name);
+  }
 
   return (
     <ModalFrame>
@@ -22,6 +32,10 @@ const ModalContact = () => {
         <div className={styles._leftSection}>
           <div className={styles._closeParent}>
             <p className={styles._title}>Contáctanos</p>
+            {/* <div className={styles._responsiveIconParent} onClick={() => dispatch(setShowModal(false))}>
+              <img src='images/icons/close.svg' width='16px'></img>
+            </div> */}
+
           </div>
 
           <div className={`${styles._itemParent} ${styles._marginBottom}`}>
@@ -30,7 +44,9 @@ const ModalContact = () => {
             </div>
             <div>
               <p>Teléfono</p>
+              <a className={styles._link} href = "tel:+58 412-2485668">
               <p>+58 412-2485668</p>
+              </a>
             </div>
           </div>
 
@@ -40,7 +56,9 @@ const ModalContact = () => {
             </div>
             <div>
               <p>Email</p>
+              <a className={styles._link} href = "mailto:infoholychicken@gmail.com">
               <p>infoholychicken@gmail.com</p>
+              </a>
             </div>
           </div>
 
@@ -57,7 +75,7 @@ const ModalContact = () => {
               </div>
 
               <div className={styles._textParent}>
-                <p>El hatillo</p>
+                <p>El Hatillo</p>
                 <p>Calle Bolívar del pueblo de El Hatillo.
                 A una cuadra de la Plaza Bolívar.
                 Quinta Nuti.
@@ -96,22 +114,26 @@ const ModalContact = () => {
         <div className={styles._rightSection}>
           <div className={styles._closeParent}>
             <p className={styles._title}>Tipo de contacto</p>
+
+            {/* <div className={styles._closeIconParent} onClick={() => dispatch(setShowModal(false))}>
+              <img src='images/icons/close.svg' width='16px'></img>
+            </div> */}
           </div>
 
           <form onSubmit={formik.handleSubmit}>
             <div className={styles._rightMain}>
               <div className={styles._leftSide}>
                 <div className={styles._buttonsParent}>
-                  <div className={styles._btnParent}>
-                    <Button color='#000' text='Cliente' textColor='#FFF' />
+                  <div className={styles._btnParent}   >
+                    <Button color={isActive === 1 ? '#000' : '#F4F3EE'} method={() => activeLink(1)} text='Cliente' textColor={isActive === 1 ? '#FFF' : '#000'} />
                   </div>
 
-                  <div className={styles._btnParent}>
-                    <Button color='#F4F3EE' text='Proveedor' textColor='#000' />
+                  <div className={styles._btnParent}  >
+                    <Button color={isActive === 2 ? '#000' : '#F4F3EE'} method={() => activeLink(2)} text='Proveedor' textColor={isActive === 2 ? '#FFF' : '#000'} />
                   </div>
 
-                  <div className={styles._btnParent}>
-                    <Button color='#F4F3EE' text='Personal' textColor='#000' />
+                  <div className={styles._btnParent}  >
+                    <Button color={isActive === 3 ? '#000' : '#F4F3EE'} method={() => activeLink(3)} text='Personal' textColor={isActive === 3 ? '#FFF' : '#000'} />
                   </div>
                 </div>
 
@@ -185,17 +207,27 @@ const ModalContact = () => {
               <div className={styles._rightSide}>
                 <div className={styles._textAreaParent}>
                   <textarea
-                     onChange={formik.handleChange}
-                     onBlur={formik.handleBlur}
-                     value={formik.values.message}
-                     name='message'
-                     id='message'
-                     className={styles._textArea}
-                     placeholder='Escriba su mensaje aqui...'
-                    >
-                    </textarea>
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.message}
+                    name='message'
+                    id='message'
+                    className={styles._textArea}
+                    placeholder='Escriba su mensaje aqui...'
+                  >
+
+                  </textarea>
+
                   <div className={styles._paperClipParent}>
-                    <PaperClip color='#000' />
+                  <p className ={styles._fileName}>{fileName}</p>
+                    <label htmlFor="file-input" className={styles._filePointer}>
+
+                      <PaperClip color='#000' />
+                    </label>
+                    <input id="file-input" type="file"
+                    accept={'application/pdf, application/msword'}
+
+                    onChange={(e) => getFile(e)} className={styles._file} />
                   </div>
                 </div>
 
@@ -204,7 +236,7 @@ const ModalContact = () => {
                 </div>
 
                 <div className={styles._sendBtn}>
-                  <Button color='#000' text='Enviar' textColor='#FFF'  type='submit'/>
+                  <Button color='#000' text='Enviar' textColor='#FFF' type='submit' />
                 </div>
               </div>
             </div>
