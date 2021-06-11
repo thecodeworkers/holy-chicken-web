@@ -25,7 +25,7 @@ const Footer = ({ data, content }) => {
         <div className={styles._footer}>
 
           <div className={styles._content}>
-            <div className={styles._logoMain} >
+            <div className={styles._logoMain} onClick={() => navigation('/')} >
               <ChickenLogo color='#fff' />
             </div>
             <div className={styles._textContainer}>
@@ -51,7 +51,7 @@ const Footer = ({ data, content }) => {
                   <p className={styles._terms}>Política de privacidad  </p>
                 </div>
                 <div>
-                  <p className={styles._terms}> Términos y condiciones</p>
+                  <p className={styles._politics}> Términos y condiciones</p>
                 </div>
               </div>
 

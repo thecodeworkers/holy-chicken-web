@@ -65,7 +65,7 @@ width: 100%;
   align-items: flex-start;
   flex-direction: column;
   width: 45%;
-  padding-left: 5%;
+  padding-left: 70px;
   height: 720px;
 }
 
@@ -75,7 +75,7 @@ width: 100%;
   align-items: flex-end;
   flex-direction: column;
   width: 45%;
-  padding-right: 5%;
+  padding-right: 70px;
   height: 720px;
 }
 
@@ -89,7 +89,7 @@ width: 100%;
   position: absolute;
   border-radius: 50%;
   right: 0;
-  top:-12px;
+  top:-14px;
 }
 ._linetwo::before{
   content: '';
@@ -99,7 +99,7 @@ width: 100%;
   border: 3px solid black;
   position: absolute;
   border-radius: 50%;
-  top: -12px;
+  top: -14px;
   z-index: 1;
 }
 
@@ -260,6 +260,7 @@ display: flex;
     align-self: flex-start;
     width: 80%;
     font-size: 2rem;
+    margin-bottom: 1rem;
   }
   ._imageLeftContainer{
     width: 100%;
@@ -280,6 +281,8 @@ display: flex;
     padding-left: 0;
     height: 100%;
     padding-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   ._textRightContainer{
     width: 100%;
@@ -287,10 +290,8 @@ display: flex;
     padding-right: 0;
     height: 100%;
     padding-left: 1rem;
-  }
-
-  ._title{
-    font-size: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   ._textContent{
     width: 100%;

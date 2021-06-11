@@ -65,7 +65,7 @@ const NavBar = ({ data }) => {
           </div>
 
           <div className={styles._logoContainer}>
-            <div className={styles._logoParent}>
+            <div className={styles._logoParent} onClick={() => navigation('/')}>
               <Logo color='#000' />
             </div>
           </div>

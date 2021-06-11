@@ -7,9 +7,6 @@ import { FirstBanner, SecondBanner } from './elements'
 
 const AboutUs = ({ content, data }) => {
 
-
-console.log(content);
-
   return (
     <div>
       <Head>

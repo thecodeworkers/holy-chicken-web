@@ -36,7 +36,7 @@ const NavbarResponsive = () => {
           <Menu color='#000' />
         </div>
         <div className={styles._chickenParent}>
-          <div className={styles._chickenChild}>
+          <div className={styles._chickenChild} onClick={() => navigation('/')} >
             <ChickenLogo color='#000' />
           </div>
         </div>
