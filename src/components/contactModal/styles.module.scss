@@ -3,7 +3,7 @@
 ._main {
   display: inline-flex;
   max-width: 75rem;
-  border-radius: 2rem;
+  border-radius: 2.375;
 }
 
 ._hidden {
@@ -157,7 +157,7 @@
 }
 
 ._inputError {
-  @include input(red)
+  @include input($red)
 }
 
 ._textArea {

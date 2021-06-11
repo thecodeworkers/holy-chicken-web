@@ -6,11 +6,13 @@ import '@styles/globals.scss'
 import Head from 'next/head'
 import { Loader } from '@components'
 import { useSelector } from 'react-redux'
-import { ModalContact, LoginModal, RegisterModal, ForgotPasswordModal, ChangePasswordModal, LocationModal} from '@components'
+import { ModalContact, LoginModal, RegisterModal, ForgotPasswordModal, ChangePasswordModal, LocationModal, Toast} from '@components'
 
 const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => {
 
   const { show } = useSelector((state: any) => state.loader)
+  const { toast } = useSelector((state: any) => state)
+
   const store: any = useStore()
 
   useEffect(() => {
@@ -24,6 +26,7 @@ const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => {
       </Head>
 
       <>
+      <Toast icon={toast?.type} text={toast?.text} status={toast?.status}></Toast>
       <ModalContact />
       <LoginModal />
       <RegisterModal />

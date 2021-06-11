@@ -1,10 +1,11 @@
 import { AnyAction } from 'redux'
-import { REGISTER_USER, LOGIN_USER } from './action-types'
+import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL } from './action-types'
 
 const initialState = {
   register: null,
   login: null,
-  isAuth: null
+  isAuth: null,
+  emailSended: null
 }
 
 const authReducer = (state = initialState, { type, payload }: AnyAction) => {
@@ -14,6 +15,9 @@ const authReducer = (state = initialState, { type, payload }: AnyAction) => {
 
     case LOGIN_USER:
      return { ...state, ...payload }
+
+    case RESTORE_PASSWORD_EMAIL:
+      return { ...state, ...payload }
 
     default:
       return state
