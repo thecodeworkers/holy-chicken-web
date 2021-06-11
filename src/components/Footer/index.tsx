@@ -51,7 +51,7 @@ const Footer = ({ data, content }) => {
                   <p className={styles._terms}>Política de privacidad  </p>
                 </div>
                 <div>
-                  <p className={styles._terms}> Términos y condiciones</p>
+                  <p className={styles._politics}> Términos y condiciones</p>
                 </div>
               </div>
 

@@ -86,7 +86,7 @@
 }
 
 ._stepper {
-  width: 80px;
+  width: 100px;
 }
 
 @keyframes fadeIn {
@@ -152,7 +152,8 @@
 @include responsive(md) {
 
   ._btnParent {
-    width: 100%;
+   align-self: center;
+   width: 160px;
   }
 
   ._main{

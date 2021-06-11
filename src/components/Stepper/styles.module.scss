@@ -26,12 +26,12 @@ $size: 0.875rem;
 
 @include responsive(md) {
   ._step {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 0.875rem;
+    height: 0.875rem;
   }
 
   ._currentStep {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 0.875rem;
+    height: 0.875rem;
   }
 }

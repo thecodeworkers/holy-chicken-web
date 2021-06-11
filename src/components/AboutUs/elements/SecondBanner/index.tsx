@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { Timeline } from 'antd';
 
 const SecondBanner = ({ data }) => {
-  console.log(data);
 
   const router = useRouter()
 
