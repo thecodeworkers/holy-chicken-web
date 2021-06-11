@@ -25,7 +25,7 @@ const Footer = ({ data, content }) => {
         <div className={styles._footer}>
 
           <div className={styles._content}>
-            <div className={styles._logoMain} >
+            <div className={styles._logoMain} onClick={() => navigation('/')} >
               <ChickenLogo color='#fff' />
             </div>
             <div className={styles._textContainer}>

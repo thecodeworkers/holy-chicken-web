@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
 import styles from './styles.module.scss'
-import { GeneralCard, Button, Stepper } from '@components'
+import { Button } from '@components'
 import { useDispatch } from 'react-redux'
-import { setShowModal} from '@store/actions'
+import { setShowModal } from '@store/actions'
 
 const SecondBanner = ({ data }) => {
 
@@ -10,8 +9,9 @@ const SecondBanner = ({ data }) => {
   const locations = data?.locations
   const times = data?.schedules?.times
 
-  const openModal = () => dispatch(setShowModal(true))
-
+  const openModal = () => {
+    return dispatch(setShowModal({ contactModal: true }))
+  }
   return (
     <div className={styles._content}>
 
