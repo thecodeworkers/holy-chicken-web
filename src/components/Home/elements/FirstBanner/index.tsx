@@ -3,7 +3,9 @@ import styles from './styles.module.scss'
 import { GeneralCard, Button, Stepper } from '@components'
 import { useRouter } from 'next/router'
 
-const FirstBanner = ({ data, content, publicity }) => {
+const FirstBanner = ({ data, content, publicity, resource }) => {
+
+  const { outstanding } = resource
 
   const router = useRouter()
   const [currentIndex, setcurrentIndex] = useState(1);
@@ -85,15 +87,21 @@ const FirstBanner = ({ data, content, publicity }) => {
         <div className={styles._cardContainer}>
           <div className={styles._cardContent}>
             <div className={styles._cardHidden}>
-              <div className={styles._card}>
-                <GeneralCard />
-              </div>
-              <div className={styles._card}>
-                <GeneralCard />
-              </div>
-              <div className={styles._card}>
-                <GeneralCard />
-              </div>
+
+              {
+                outstanding.map(item => {
+                  return (
+                    <div className={styles._card}>
+                      <GeneralCard
+                        name={item?.name}
+                        image={item.image?.mediaItemUrl}
+                        description={item?.description}
+                        price={item?.price} />
+                    </div>
+                  )
+
+                })
+              }
 
               <div style={{ width: 30, height: 100, margin: 20 }}>
               </div>
@@ -103,7 +111,7 @@ const FirstBanner = ({ data, content, publicity }) => {
             <p className={styles._title}>{content.title}</p>
             <p className={styles._subtitle}>{content.content}</p>
             <div className={styles._btnParent} onClick={() => navigation('/shop')}>
-            <Button color='#FD8C2E' textColor='white' text={content.button.title}></Button>
+              <Button color='#FD8C2E' textColor='white' text={content.button.title}></Button>
             </div>
           </div>
         </div>

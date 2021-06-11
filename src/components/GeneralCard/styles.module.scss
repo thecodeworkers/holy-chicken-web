@@ -35,3 +35,13 @@
     color: $mineShaft;
   }
 }
+
+._btnParent {
+  width: 7.5rem;
+}
+
+@include responsive(md) {
+  ._btnParent {
+    width: 4.925rem;
+  }
+}

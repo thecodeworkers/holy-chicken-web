@@ -1,19 +1,19 @@
 import styles from './styles.module.scss'
 import { Button } from '@components'
+import { createMarkup } from '@utils'
 
-const GeneralCard = () => {
+const GeneralCard = ({ name = 'default name', description = 'default description', image = 'images/resources/burguer.png', price = '7$' }) => {
   return (
     <div className={styles._parent}>
       <div className={styles._imageParent}>
-        <img src='images/resources/burguer.png' width='100%'></img>
+        <img src={image} width='100%'></img>
       </div>
-
-      <h3>Holy </h3>
-      <p>210 gramos de pollo crispy entre pan brioche</p>
+      <h3> {name} </h3>
+      <div dangerouslySetInnerHTML={createMarkup(description)}></div>
 
       <div className={styles._sectionParent}>
-        <p>7$</p>
-        <div style={{width:123}}>
+        <p>{price}</p>
+        <div className={styles._btnParent}>
         <Button color='#118AC6' textColor='white' text='Agregar' height={'1.9rem'}></Button>
         </div>
       </div>
