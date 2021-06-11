@@ -3,6 +3,7 @@ import { SET_RESOURCES } from './action-types'
 
 const initialState = {
   general: {},
+  outstanding: {},
 }
 
 const resourceReducer = (state = initialState, { type, payload }: AnyAction) => {

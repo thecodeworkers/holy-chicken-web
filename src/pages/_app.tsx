@@ -6,6 +6,7 @@ import '@styles/globals.scss'
 import Head from 'next/head'
 import { Loader } from '@components'
 import { useSelector } from 'react-redux'
+import { ModalContact, LoginModal, RegisterModal, ForgotPasswordModal, ChangePasswordModal, LocationModal} from '@components'
 
 const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => {
 
@@ -21,7 +22,18 @@ const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => {
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+
+      <>
+      <ModalContact />
+      <LoginModal />
+      <RegisterModal />
+      <ForgotPasswordModal />
+      <ChangePasswordModal />
+      <LocationModal />
+      </>
+
       { show && <Loader />}
+
       <Component {...pageProps} />
     </>
   )
