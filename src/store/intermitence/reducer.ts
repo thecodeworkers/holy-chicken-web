@@ -1,4 +1,4 @@
-import { SHOW_MODAL } from './action-types'
+import { SHOW_MODAL, RESET_MODALS } from './action-types'
 import { AnyAction } from 'redux'
 
 const initialState = {
@@ -6,7 +6,8 @@ const initialState = {
   loginModal: false,
   registerModal: false,
   changePasswordModal: false,
-  forgotPasswordModal: false
+  forgotPasswordModal: false,
+  locationModal: false
 }
 
 const intermitenceReducer = (state = initialState, { type, payload }: AnyAction) => {
@@ -14,6 +15,10 @@ const intermitenceReducer = (state = initialState, { type, payload }: AnyAction)
   switch (type) {
     case SHOW_MODAL:
       return { ...state, ...payload }
+
+    case RESET_MODALS:
+      console.log('ENTER REDUCER')
+      return initialState
 
     default:
       return state

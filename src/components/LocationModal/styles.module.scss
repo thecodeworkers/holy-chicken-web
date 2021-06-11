@@ -1,0 +1,132 @@
+@import '../../../public/styles/index.scss';
+
+._background {
+  @include blurBackground;
+}
+
+._modal {
+  padding: 4rem 3rem;
+  box-sizing: border-box;
+  width: 60%;
+  max-width: 800px;
+}
+
+._title {
+  font-family: $blackerTextHeavyBold;
+  text-align: center;
+  font-size: $blackerTextHeavy40;
+  margin-bottom: 1.2rem;
+}
+
+._cardsParent {
+  display: flex;
+  justify-content: space-between;
+}
+
+._card {
+  width: 30%;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px $mercury;
+  flex-direction: column;
+  justify-content: space-between;
+  display: flex;
+  cursor: pointer;
+  transition: 0.6s;
+
+  &:hover {
+    transform: translateY(-0.6rem);
+    box-shadow: 0 3px 22px $mercury;
+    transition:  0.6s;
+  }
+}
+
+._hidden {
+  display: none;
+}
+
+._cardFooter {
+  background-color: $black;
+  border-radius: 12px;
+  padding: 1.2rem 2rem;
+  box-sizing: border-box;
+
+  & p {
+    font-size: $montserratRegular10;
+    font-family: $montserratRegular;
+    color: $white;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+._topContent {
+  padding: 0.5rem 2rem 0.7rem 2rem;
+  box-sizing: border-box;
+}
+
+._home {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+._locationTitle {
+  font-family: $montserratBold;
+  font-size: $montserratRegular14;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+._locationText {
+  font-family: $montserratRegular;
+  font-size: $montserratRegular10;
+  text-align: center;
+  margin-top: 1rem
+}
+
+
+@include responsive(lg) {
+  ._background {
+    @include blurBackgroundResponsive;
+    height: 100%;
+  }
+
+  ._modal {
+    width: 90%;
+    height: 60vh;
+    overflow-y: scroll;
+    padding: 2rem;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    & ::-webkit-scrollbar-track {
+      background: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $black;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: $black;
+    }
+  }
+
+  ._cardsParent {
+    display: block;
+  }
+
+  ._card {
+    width: 100%;
+    margin-top: 3.75rem;
+
+    &:not(:first-child) {
+      margin-top: 2rem;
+    }
+  }
+
+}
