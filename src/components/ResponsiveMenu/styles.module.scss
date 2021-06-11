@@ -20,12 +20,12 @@
 
 ._mainIn {
   @include menu;
-  animation: menu-in 1s linear forwards;
+  animation: menu-in 0.5s linear forwards;
 }
 
 ._mainOut{
   @include menu;
-  animation: menu-out 1s linear forwards;
+  animation: menu-out 0.5s linear forwards;
 }
 
 @keyframes menu-in {

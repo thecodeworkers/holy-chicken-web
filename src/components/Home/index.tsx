@@ -5,7 +5,9 @@ import Footer from '../Footer'
 import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner } from './elements'
 import ForgotPasswordModal from '../ForgotPasswordModal'
 
-const Home = ({ content, data}) => {
+const Home = ({ content, data, resource }) => {
+
+  console.log(content)
 
   return (
     <div>
@@ -15,7 +17,7 @@ const Home = ({ content, data}) => {
 
       <Navbar data={data?.header}/>
       {content ? (<>
-      <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner}/>
+      <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner} resource={resource}/>
       <SocialSwipe />
       <SecondBanner data={content?.thirdBanner} />
       <ThirdBanner data={content?.fourthBanner} />

@@ -6,7 +6,12 @@ import { Home } from '@components'
 const HomePage = () => {
   const { page: { homePage: { home } }, resource: { general: { general } } } = useSelector((state: any) => state)
 
-  return <Home content={home} data={general} />
+
+  const { resource } = useSelector((state: any) => state)
+
+  console.log('RESOURCE', resource)
+
+  return <Home content={home} data={general} resource={resource} />
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
