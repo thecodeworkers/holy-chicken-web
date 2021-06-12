@@ -9,8 +9,6 @@ const HomePage = () => {
 
   const { resource } = useSelector((state: any) => state)
 
-  console.log('RESOURCE', resource)
-
   return <Home content={home} data={general} resource={resource} />
 }
 

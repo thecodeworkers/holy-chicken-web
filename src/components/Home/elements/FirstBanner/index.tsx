@@ -89,9 +89,9 @@ const FirstBanner = ({ data, content, publicity, resource }) => {
             <div className={styles._cardHidden}>
 
               {
-                outstanding.map(item => {
+                outstanding.map((item, index) => {
                   return (
-                    <div className={styles._card}>
+                    <div className={styles._card} key={index}>
                       <GeneralCard
                         name={item?.name}
                         image={item.image?.mediaItemUrl}

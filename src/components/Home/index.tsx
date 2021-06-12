@@ -7,8 +7,6 @@ import ForgotPasswordModal from '../ForgotPasswordModal'
 
 const Home = ({ content, data, resource }) => {
 
-  console.log(content)
-
   return (
     <div>
       <Head>

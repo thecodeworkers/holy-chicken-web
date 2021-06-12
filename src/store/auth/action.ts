@@ -19,6 +19,5 @@ export const logoutUser = () => async (dispatch) => {
 export const sendRestorePasswordEmail = (body) => async (dispatch) => {
   const result = await restorePasswordEmail(body)
 
-  console.log(result)
   await dispatch(actionObject(RESTORE_PASSWORD_EMAIL, { emailSended: result ? true : false }))
 }

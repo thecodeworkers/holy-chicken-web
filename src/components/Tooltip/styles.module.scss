@@ -4,6 +4,10 @@
   color: $white;
   font-family: $montserratRegular;
   font-size: $montserratRegular10;
+
+  & p {
+    font-weight: bold;
+  }
 }
 
 ._arrowDown {
@@ -15,4 +19,10 @@
   position: absolute;
   bottom: -0.625rem;
   left: 1.875rem;
+}
+
+@include responsive(lg) {
+._text{
+  text-align: center;
+}
 }

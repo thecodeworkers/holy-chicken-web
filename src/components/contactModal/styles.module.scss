@@ -33,6 +33,7 @@
     text-decoration: none;
     :active{
       text-decoration: none;
+
     }
   }
 }
@@ -307,13 +308,13 @@
     max-height: 2.1rem;
     width: 85%;
     box-sizing: border-box;
-    width: 85%;
-    min-width: 85%;
+    width: 100%;
+
   }
 
   ._paperClipParent {
-    top: 1.55rem;
-    right: 0.7rem
+    top: 2rem;
+    right: 1rem;
   }
 
   ._sendBtn {
@@ -331,7 +332,7 @@
   }
 
   ._termsParent {
-    width: 90%;
+    width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -349,4 +350,5 @@
   ._separation {
    margin-top: 1.2rem;
   }
+
 }

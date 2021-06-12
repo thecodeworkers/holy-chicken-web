@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { Button, Toast } from '@components'
+import { Button, Tooltip } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal, resetModals, setToast } from '@store/actions'
 import FormikConfig from './formik'
@@ -8,17 +8,13 @@ import FormikConfig from './formik'
 const LoginModal = () => {
 
   const dispatch = useDispatch()
-
   const changeStatus = () => setStatus(true)
-
   const formik = FormikConfig(dispatch, changeStatus)
   const [status, setStatus] = useState(false)
-
+  const [showTooltip, setShowTooltip] = useState(false)
   const { intermitence: { loginModal }, auth } = useSelector((state: any) => state)
-
   const [show, setShow] = useState(false)
   const { errors, touched } = formik
-
   const showPassword = () => setShow(show => !show)
 
   const closeModal = (event) => {
@@ -66,7 +62,8 @@ const LoginModal = () => {
               className={errors.email && touched.email ? styles._inputError : styles._input} />
           </div>
 
-          <div className={styles._inputParent}>
+          <div className={styles._inputParent} onFocus={() => setShowTooltip(true)} onBlur={() => setShowTooltip(false)}>
+          <Tooltip paddinHorizontal={0} top='-75%'show={showTooltip}/>
             <label>Password</label>
             <input
               type={!show ? 'password' : 'text'}

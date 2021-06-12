@@ -28,12 +28,11 @@ const ChangePasswordModal = () => {
         <p className={styles._title}> Nueva Contraseña</p>
         <form>
           <div className={styles._inputParent} onFocus={() => setShowTooltip(true)} onBlur={() => setShowTooltip(false)}>
-          <Tooltip top='-75%'show={showTooltip}/>
+          <Tooltip paddinHorizontal={0} top='-75%'show={showTooltip}/>
             <label>Password</label>
             <input type={!show ? 'password' : 'text'} className={styles._input} placeholder='Contraseña' />
             <div className={styles._imageParent} onClick={showPassword}>
               <img src={!show ? 'images/icons/show-password.svg' : 'images/icons/hide-password.svg'} width='18px' height='18px' />
-
             </div>
 
           </div>

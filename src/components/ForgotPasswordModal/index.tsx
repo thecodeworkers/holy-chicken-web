@@ -43,10 +43,6 @@ const ForgotPasswordModal = () => {
     dispatch(setShowModal({ changePasswordModal: true }))
   }
 
-  useEffect(() => {
-    console.log(toast)
-  }, [toast])
-
   const changeToastStatus = () => {
     dispatch(setToast('error', 'texto', 1))
   }

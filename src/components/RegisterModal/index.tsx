@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { Button, Toast } from '@components'
+import { Button, Tooltip } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetModals, setShowModal, setToast } from '@store/actions'
 import FormikConfig from './formik'
@@ -13,7 +13,7 @@ const RegisterModal = () => {
   const dispatch = useDispatch()
   const formik = FormikConfig(dispatch, changeStatus)
   const { errors, touched } = formik
-
+  const [showTooltip, setShowTooltip] = useState(false)
   const [show, setShow] = useState(false)
   const [showTwo, setShowTwo] = useState(false)
   const [status, setStatus] = useState(false)
@@ -117,7 +117,8 @@ const RegisterModal = () => {
 
           <div className={`${styles._row} ${styles._marginTop}`}>
             <div className={styles._halfWidth}>
-              <div className={styles._inputParent}>
+              <div className={styles._inputParent} onFocus={() => setShowTooltip(true)} onBlur={() => setShowTooltip(false)}>
+              <Tooltip paddinHorizontal={1} top='-75%'show={showTooltip}/>
                 <label>Contraseña</label>
                 <input
                   type={!show ? 'password' : 'text'}
@@ -136,7 +137,8 @@ const RegisterModal = () => {
             </div>
 
             <div className={styles._halfWidth}>
-              <div className={`${styles._inputParent} ${styles._responsiveMarginTop}`}>
+              <div className={`${styles._inputParent} ${styles._responsiveMarginTop}`} >
+
                 <label>Confirmar Contraseña</label>
                 <input
                   type={!showTwo ? 'password' : 'text'}
