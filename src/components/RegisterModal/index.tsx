@@ -18,6 +18,8 @@ const RegisterModal = () => {
   const [showTwo, setShowTwo] = useState(false)
   const [status, setStatus] = useState(false)
 
+  let timeout
+
   const { intermitence: { registerModal }, auth } = useSelector((state: any) => state)
 
   const showPassword = () => setShow(show => !show)
@@ -40,12 +42,22 @@ const RegisterModal = () => {
     }
 
     if(!auth.register?.registerCustomer && status) dispatch(setToast('error', 'Error al registar usuario', 1))
+
+    return () => clearTimeout(timeout)
   }, [auth])
 
   const openLocations = () => {
     formik.resetForm()
     dispatch(resetModals())
     dispatch(setShowModal({ locationModal: true }))
+  }
+
+  const tooltipTimer = () => {
+    setShowTooltip(true)
+
+    timeout = setTimeout(() => {
+      setShowTooltip(false)
+    }, 8000);
   }
 
   return (
@@ -117,7 +129,7 @@ const RegisterModal = () => {
 
           <div className={`${styles._row} ${styles._marginTop}`}>
             <div className={styles._halfWidth}>
-              <div className={styles._inputParent} onFocus={() => setShowTooltip(true)} onBlur={() => setShowTooltip(false)}>
+              <div className={styles._inputParent} onFocus={tooltipTimer} onBlur={() => setShowTooltip(false)}>
               <Tooltip paddinHorizontal={1} top='-75%'show={showTooltip}/>
                 <label>Contraseña</label>
                 <input
