@@ -45,7 +45,7 @@ const ModalContact = () => {
             <div>
               <p>Teléfono</p>
               <a className={styles._link} href = "tel:+58 412-2485668">
-              <p>+58 412-2485668</p>
+              +58 412-2485668
               </a>
             </div>
           </div>
@@ -57,7 +57,7 @@ const ModalContact = () => {
             <div>
               <p>Email</p>
               <a className={styles._link} href = "mailto:infoholychicken@gmail.com">
-              <p>infoholychicken@gmail.com</p>
+              infoholychicken@gmail.com
               </a>
             </div>
           </div>
