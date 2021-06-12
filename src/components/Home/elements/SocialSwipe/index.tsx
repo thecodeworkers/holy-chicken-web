@@ -45,21 +45,14 @@ const SocialSwipe = () => {
         <p className={styles._text}>@holychicken.ccs</p>
         <p className={styles._text}>4.606</p>
         </div>
-        <img src={'images/resources/burguer.png'} width={200}></img>
+        <img src={'images/resources/burguer.png'} width={170}></img>
       </div>
       <div className={styles._whiteCard}>
         <div className={styles._textContainer}>
-        <p className={styles._text}>@holychicken.ccs</p>
+        <p className={styles._text}>@holychickenccs</p>
         <p className={styles._text}>4.206</p>
         </div>
-        <img src={'images/resources/burguer.png'} width={200}></img>
-      </div>
-      <div className={styles._whiteCard}>
-        <div className={styles._textContainer}>
-        <p className={styles._text}>@holychicken.ccs</p>
-        <p className={styles._text}>46</p>
-        </div>
-        <img src={'images/resources/burguer.png'} width={200}></img>
+        <img src={'images/resources/burguer.png'} width={170}></img>
       </div>
       </div>
 

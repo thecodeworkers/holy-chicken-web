@@ -5,11 +5,11 @@ const Tooltip = ({ top = '0px', bottom = '0px', right = '0px', left = '0px', sho
     <>
     <div className={show ? '_parent' : '_hidden'}>
       <p className={styles._text}>
-        La contraseña debe contener al menos
-        <p >8 caracteres, 1 letra mayúscula,
-        1 número,</p> <p>1 letra minúscula </p>
+        La contraseña debe contener al menos</p>
+        <p className={styles._text}> 8 caracteres, 1 letra mayúscula,1 número,</p>
+        <p className={styles._text}> 1 letra minúscula </p>
 
-      </p>
+
       <div className={styles._arrowDown}></div>
     </div>
 
