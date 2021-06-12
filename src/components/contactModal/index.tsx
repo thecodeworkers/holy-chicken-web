@@ -225,7 +225,7 @@ const ModalContact = () => {
                       <PaperClip color='#000' />
                     </label>
                     <input id="file-input" type="file"
-                    accept={'application/pdf, application/msword'}
+                    accept={'application/pdf, application/msword, image/*'}
 
                     onChange={(e) => getFile(e)} className={styles._file} />
                   </div>
