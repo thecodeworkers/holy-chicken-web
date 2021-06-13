@@ -17,8 +17,6 @@ const LoginModal = () => {
   const { errors, touched } = formik
   const showPassword = () => setShow(show => !show)
 
-  let timeout;
-
   const closeModal = (event) => {
     const { target } = event
     if(target.id == 'background') {
@@ -39,21 +37,11 @@ const LoginModal = () => {
 
     if(!auth?.login?.login && status) dispatch(setToast('error', 'Error al autenticar usuario', 1))
 
-    return () => clearTimeout(timeout)
-
   }, [auth])
 
   const openModal = (name) => {
     dispatch(resetModals())
     dispatch(setShowModal({ [name]: true }))
-  }
-
-  const tooltipTimer = () => {
-    setShowTooltip(true)
-
-    timeout = setTimeout(() => {
-      setShowTooltip(false)
-    }, 8000);
   }
 
   return (
@@ -73,8 +61,8 @@ const LoginModal = () => {
               className={errors.email && touched.email ? styles._inputError : styles._input} />
           </div>
 
-          <div className={styles._inputParent}  onBlur={() => setShowTooltip(false)} >
-          <Tooltip paddinHorizontal={0} top='-75%' show={showTooltip}/>
+          <div className={styles._inputParent} onFocus={() => setShowTooltip(true)} onBlur={() => setShowTooltip(false)}>
+          <Tooltip paddinHorizontal={0} top='-75%'show={showTooltip}/>
             <label>Password</label>
             <input
               type={!show ? 'password' : 'text'}
@@ -82,7 +70,6 @@ const LoginModal = () => {
               name='password'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              onFocus={tooltipTimer}
               value={formik.values.password}
               className={errors.password && touched.password ? styles._inputError : styles._input} />
 
@@ -92,7 +79,11 @@ const LoginModal = () => {
           </div>
 
           <div className={styles._btnParent}>
-            <Button color='#000' text='Ingresar' textColor='#FFF' type='submit'/>
+            <Button
+              color='#000'
+              text='Ingresar'
+              textColor='#FFF'
+              type='submit' flag={true}/>
           </div>
         </form>
 
