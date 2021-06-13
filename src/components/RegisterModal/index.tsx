@@ -105,7 +105,6 @@ const RegisterModal = () => {
               type="text"
               placeholder='+58 (000) 000 00 00'
               name='phone'
-              id='phone'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
@@ -119,7 +118,6 @@ const RegisterModal = () => {
               type="mail"
               placeholder='Correo'
               name='email'
-              id='email'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
@@ -136,7 +134,6 @@ const RegisterModal = () => {
                   type={!show ? 'password' : 'text'}
                   placeholder='Contraseña'
                   name='password'
-                  id='password'
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
@@ -156,7 +153,6 @@ const RegisterModal = () => {
                   type={!showTwo ? 'password' : 'text'}
                   placeholder='Contraseña'
                   name='confirmPassword'
-                  id='confirmPassword'
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.confirmPassword}

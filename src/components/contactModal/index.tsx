@@ -175,7 +175,6 @@ const ModalContact = () => {
                       <label>Teléfono</label>
                       <input
                         name='phone'
-                        id='phone'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.phone}
@@ -192,7 +191,6 @@ const ModalContact = () => {
                       <label>Email</label>
                       <input
                         name='email'
-                        id='email'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.email}
