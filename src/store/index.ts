@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware } from 'redux'
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
+import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 import thunkMiddleware from 'redux-thunk'
 import reducers from './reducers'
-import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 import reconcile from './reconcile'
 
 const createNoopStorage = () => {
@@ -46,7 +46,10 @@ const makeStore: any = ({ isServer }) => {
 
   const persistConfig = {
     key: 'holyChickenRoot',
-    storage
+    storage,
+    blacklist: [
+      'page'
+    ]
   }
 
   const persistedReducer = persistReducer(persistConfig, reducer)
