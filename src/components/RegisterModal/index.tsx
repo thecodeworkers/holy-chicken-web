@@ -44,7 +44,7 @@ const RegisterModal = () => {
     if(!auth.register?.registerCustomer && status) dispatch(setToast('error', 'Error al registar usuario', 1))
 
     return () => clearTimeout(timeout)
-  }, [auth])
+  }, [auth?.register])
 
   const openLocations = () => {
     formik.resetForm()

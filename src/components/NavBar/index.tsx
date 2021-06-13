@@ -98,7 +98,7 @@ const NavBar = ({ data }) => {
                         onClick={!isAuth ? () => openModal('loginModal') : logout}>
                         <Button color='#118AC6' text={!isAuth ? 'Iniciar sesión' : 'Cerrar sesión'} textColor='#fff' ></Button>
                       </div>
-                      <p>¿Nuevo cliente? <a className={styles._link} onClick={() => openModal('registerModal')}> Crear Cuenta </a></p>
+                      {!isAuth && <p>¿Nuevo cliente? <a className={styles._link} onClick={() => openModal('registerModal')}> Crear Cuenta </a></p>}
                       <p>Mis órdenes</p >
                     </div>
                   </div>

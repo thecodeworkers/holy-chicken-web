@@ -35,7 +35,7 @@ const ForgotPasswordModal = () => {
     }
 
     if(!auth?.emailSended && status) dispatch(setToast('error', 'Error al enviar correo', 1))
-  }, [auth])
+  }, [auth?.emailSended])
 
 
   const openChangePassword = () => {
@@ -68,7 +68,7 @@ const ForgotPasswordModal = () => {
         </div>
 
         <div className={styles._buttonParent}>
-          <Button color='#000' text='Enviar' textColor='#FFF' method={null} type='submit'/>
+          <Button color='#000' text='Enviar' textColor='#FFF' method={null} type='submit' flag={true}/>
         </div>
         </form>
       </div>

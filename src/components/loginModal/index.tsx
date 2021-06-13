@@ -37,7 +37,7 @@ const LoginModal = () => {
 
     if(!auth?.login?.login && status) dispatch(setToast('error', 'Error al autenticar usuario', 1))
 
-  }, [auth])
+  }, [auth?.login])
 
   const openModal = (name) => {
     dispatch(resetModals())
