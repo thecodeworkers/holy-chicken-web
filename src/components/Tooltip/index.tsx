@@ -25,6 +25,14 @@ const Tooltip = ({ top = '0px', bottom = '0px', right = '0px', left = '0px', sho
         bottom: ${bottom};
         right: ${right};
         left: ${left};
+        display: flex;
+        align-items: center;
+      }
+
+      @media(max-width:768px) {
+        ._parent {
+          height: 1.5rem;
+        }
       }
 
       ._hidden {

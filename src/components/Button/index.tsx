@@ -13,7 +13,7 @@ const Button = ({ color, textColor, method = null, text, height = '2.5rem', type
         border-radius: 1.25rem;
         cursor: pointer;
         font-family: Montserrat-Bold;
-        font-size: 1rem;
+        font-size: 0.9rem;
         width: 100%;
         height: ${height};
         display: flex;

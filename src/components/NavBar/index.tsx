@@ -46,6 +46,7 @@ const NavBar = ({ data }) => {
 
   const logout = () => {
     dispatch(logoutUser())
+    setShow(false)
     dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
   }
 
