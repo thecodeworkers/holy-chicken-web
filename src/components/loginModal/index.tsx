@@ -55,7 +55,6 @@ const LoginModal = () => {
               type='text'
               placeholder='Correo'
               name='email'
-              id='email'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
@@ -69,7 +68,6 @@ const LoginModal = () => {
               type={!show ? 'password' : 'text'}
               placeholder='Contraseña'
               name='password'
-              id='password'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}

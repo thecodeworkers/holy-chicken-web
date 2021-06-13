@@ -93,7 +93,6 @@ const RegisterModal = () => {
               type="text"
               placeholder='+58 (000) 000 00 00'
               name='phone'
-              id='phone'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
@@ -107,7 +106,6 @@ const RegisterModal = () => {
               type="mail"
               placeholder='Correo'
               name='email'
-              id='email'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
@@ -118,13 +116,12 @@ const RegisterModal = () => {
           <div className={`${styles._row} ${styles._marginTop}`}>
             <div className={styles._halfWidth}>
               <div className={styles._inputParent} onFocus={() => setShowTooltip(true)} onBlur={() => setShowTooltip(false)}>
-              <Tooltip paddinHorizontal={1} top='-75%'show={showTooltip}/>
+              <Tooltip paddinHorizontal={0.5} top='-75%'show={showTooltip}/>
                 <label>Contraseña</label>
                 <input
                   type={!show ? 'password' : 'text'}
                   placeholder='Contraseña'
                   name='password'
-                  id='password'
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
@@ -144,7 +141,6 @@ const RegisterModal = () => {
                   type={!showTwo ? 'password' : 'text'}
                   placeholder='Contraseña'
                   name='confirmPassword'
-                  id='confirmPassword'
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.confirmPassword}

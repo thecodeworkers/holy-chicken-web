@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.scss'
 import { GeneralCard, Button, Stepper } from '@components'
 import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
+import { setLoader } from '@store/actions'
 
 const FirstBanner = ({ data, content, publicity, resource }) => {
 
@@ -10,6 +12,7 @@ const FirstBanner = ({ data, content, publicity, resource }) => {
   const router = useRouter()
   const [currentIndex, setcurrentIndex] = useState(1);
   const [newArray, setNewArray] = useState(data)
+  const dispatch = useDispatch()
   let interval;
 
   useEffect(() => {
@@ -41,8 +44,11 @@ const FirstBanner = ({ data, content, publicity, resource }) => {
     determinateCurrent()
   }
 
-  const navigation = (route: string) => {
-    if (route != router.pathname) router.push(route)
+  const navigation = (route: string, loader = true) => {
+    if (route != router.pathname) {
+      if (loader) dispatch(setLoader(true))
+      router.push(route)
+    }
   }
 
   return (
