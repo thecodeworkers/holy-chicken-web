@@ -8,10 +8,12 @@ export const getResources: any = (consult: string = '') => async (dispatch, getS
   const { page } = getState()
   let data = page
 
-  const homePage = await pages(consult)
-  data[consult] = homePage
-  const resource = await resources()
+  if (consult) {
+    const homePage = await pages(consult)
+    data[consult] = homePage
+    dispatch(actionObject(GET_PAGES, data))
+  }
 
-  dispatch(actionObject(GET_PAGES, data))
+  const resource = await resources()
   dispatch(actionObject(SET_RESOURCES, resource))
 }

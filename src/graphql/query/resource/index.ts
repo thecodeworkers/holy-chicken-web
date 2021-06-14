@@ -16,8 +16,8 @@ const resource = async () => {
 
   const resources = {
     general: normalized(data?.generalPage),
-    outstanding: normalizedArray(data?.products.nodes),
-    products: normalized(data?.products),
+    outstanding: normalizedArray(data?.outstanding.nodes),
+    products: normalizedArray(data?.products.nodes),
   }
   return resources
 }
