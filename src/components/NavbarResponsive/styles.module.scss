@@ -45,3 +45,25 @@
 ._leftSection {
   width: 30%;
 }
+
+._panel {
+  position: fixed;
+  top: 3.75rem;
+  width: 100%;
+  background-color: $black;
+  z-index: 998;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+._myOrders {
+  color: $white;
+  font-family: $montserratRegular;
+  font-size: $montserratRegular18;
+  text-align: center;
+  margin-top: 1.2em;
+}
+
+._hidden {
+  display: none;
+}
