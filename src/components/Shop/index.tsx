@@ -6,6 +6,7 @@ import { FirstBanner } from './elements'
 import ForgotPasswordModal from '../ForgotPasswordModal'
 
 const Shop = ({ content, data}) => {
+  console.log(content);
 
   return (
     <div>
@@ -19,9 +20,7 @@ const Shop = ({ content, data}) => {
       <Navbar data={data?.header}/> */}
       <ChangePasswordModal />
       {content ? (<>
-
-        <div> SHOP COMING SOON</div>
-      {/* <FirstBanner /> */}
+       <FirstBanner />
       {/* <SecondBanner data={content?.thirdBanner} />
       <ThirdBanner data={content?.fourthBanner} /> */}
       </>

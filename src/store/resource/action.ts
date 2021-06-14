@@ -4,7 +4,7 @@ import { pages, resources } from '../../graphql/query'
 import { GET_PAGES } from '@store/page/action-types'
 
 
-export const getResources: any = (consult: string) => async (dispatch, getState) => {
+export const getResources: any = (consult: string = '') => async (dispatch, getState) => {
   const { page } = getState()
   let data = page
 
