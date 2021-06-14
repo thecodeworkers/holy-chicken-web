@@ -17,6 +17,8 @@ const LoginModal = () => {
   const { errors, touched } = formik
   const showPassword = () => setShow(show => !show)
 
+  let timeout
+
   const closeModal = (event) => {
     const { target } = event
     if(target.id == 'background') {
@@ -37,11 +39,21 @@ const LoginModal = () => {
 
     if(!auth?.login?.login && status) dispatch(setToast('error', 'Error al autenticar usuario', 1))
 
+    return () => clearTimeout(timeout)
+
   }, [auth?.login])
 
   const openModal = (name) => {
     dispatch(resetModals())
     dispatch(setShowModal({ [name]: true }))
+  }
+
+  const tooltipTimer = () => {
+    setShowTooltip(true)
+
+    timeout = setTimeout(() => {
+      setShowTooltip(false)
+    }, 8000);
   }
 
   return (
@@ -61,7 +73,7 @@ const LoginModal = () => {
               className={errors.email && touched.email ? styles._inputError : styles._input} />
           </div>
 
-          <div className={styles._inputParent} onFocus={() => setShowTooltip(true)} onBlur={() => setShowTooltip(false)}>
+          <div className={styles._inputParent} onFocus={tooltipTimer} onBlur={() => setShowTooltip(false)}>
           <Tooltip paddinHorizontal={0} top='-75%'show={showTooltip}/>
             <label>Password</label>
             <input
