@@ -11,8 +11,8 @@ const Footer = ({ data, content }) => {
   const router = useRouter()
   const dispatch = useDispatch()
 
-  const navigation = (route : string, loader = true, reference = null, key = '') => {
-    if(route == '/login')  return dispatch(setShowModal({ loginModal: true }))
+  const navigation = (route: string, loader = true, reference = null, key = '') => {
+    if (route == '/login') return dispatch(setShowModal({ loginModal: true }))
     if (route == '/contact') return dispatch(setShowModal({ contactModal: true }))
     if (router.pathname != route) {
       if (loader) dispatch(setLoader(true))
@@ -21,7 +21,7 @@ const Footer = ({ data, content }) => {
   }
 
 
-  return (
+  return content ? (
     <>
       <footer className={styles._footerContainer}>
         <div className={styles._footer}>
@@ -93,7 +93,7 @@ const Footer = ({ data, content }) => {
         </div>
       </footer>
     </>
-  )
+  ) : null
 }
 
 export default Footer

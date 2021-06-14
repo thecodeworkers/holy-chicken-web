@@ -8,7 +8,7 @@ const resource = async () => {
     query Resources {
       ${generalQuery}
       ${outstanding}
-      ${productsQuery}
+      ${productsQuery()}
     }
   `
 
