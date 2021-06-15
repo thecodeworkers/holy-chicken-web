@@ -111,7 +111,6 @@ const IndividualProduct = () => {
                   <input type='radio' className={styles._radioBtn} defaultChecked={false}></input>
                   <p>BBQ. Morena</p>
                 </div>
-s
                 <div className={styles._priceParent}>
                   <p>$0.00</p>
                 </div>
@@ -135,7 +134,7 @@ s
               </div>
 
               <div>
-              <p className={styles._littleTitleCard}>FRESH N’ HOLY</p>
+              <p className={styles._littleTitleCard}>HOLY BLESSINGS</p>
               <div className={styles._row}>
                 <div className={styles._column}>
                 <div className={styles._checkParent}>
