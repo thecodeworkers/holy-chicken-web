@@ -5,27 +5,27 @@ import Footer from '../Footer'
 import { FirstBanner } from './elements'
 import ForgotPasswordModal from '../ForgotPasswordModal'
 
-const Shop = ({ content, data}) => {
-  console.log(content);
+const Shop = ({ content, data, filters }) => {
+  console.log(filters);
 
   return (
     <div>
       <Head>
         <title>Holy Chicken</title>
       </Head>
- <ModalContact />
+      <ModalContact />
       <LoginModal />
       <RegisterModal />
       <ForgotPasswordModal />
-      <Navbar data={data?.header}/>
+      <Navbar data={data?.header} />
       <ChangePasswordModal />
       {content ? (<>
-       <FirstBanner content={content} />
-      {/* <SecondBanner data={content?.thirdBanner} />
+        <FirstBanner content={content} />
+        {/* <SecondBanner data={content?.thirdBanner} />
       <ThirdBanner data={content?.fourthBanner} /> */}
       </>
-    ) : null}
-     <Footer data={data?.footer} content={data?.socialNetworks}  />
+      ) : null}
+      <Footer data={data?.footer} content={data?.socialNetworks} />
     </div>
   )
 }

@@ -2,6 +2,7 @@ import { GraphQlClient, normalized, normalizedArray } from '@utils'
 import generalQuery from './generalPage'
 import outstanding from './outstanding'
 import productsQuery from './products'
+import productsCategoriesQuery from './productsCategories'
 const resource = async () => {
 
   const query = `
@@ -9,6 +10,7 @@ const resource = async () => {
       ${generalQuery}
       ${outstanding}
       ${productsQuery()}
+      ${productsCategoriesQuery}
     }
   `
 
@@ -18,6 +20,7 @@ const resource = async () => {
     general: normalized(data?.generalPage),
     outstanding: normalizedArray(data?.outstanding.nodes),
     products: normalizedArray(data?.products.nodes),
+    productsCategories: normalizedArray(data?.products.nodes),
   }
   return resources
 }

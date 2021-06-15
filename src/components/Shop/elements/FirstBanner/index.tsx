@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.scss'
 import { GeneralCard } from '@components'
 import { useRouter } from 'next/router'
+import { Search } from '@images/icons';
 
 const FirstBanner = ({content }) => {
 
@@ -22,9 +23,18 @@ const FirstBanner = ({content }) => {
 
         <div className={styles._shopContainer}>
           <div className={styles._filterContainer}>
-            <p>filtro</p>
+            <p className={styles._filterTitle}>filtro</p>
           </div>
           <div className={styles._productContainer}>
+          <div className={styles._inputParent}>
+            <input
+              placeholder='Pide tu deseo…'
+              name='password'
+              className={styles._input} />
+            <div className={styles._imageParent} >
+            <Search color={'#000000'} />
+            </div>
+          </div>
             <div className={styles._cardContainer}>
             {
                 content.map((item, index) => {
