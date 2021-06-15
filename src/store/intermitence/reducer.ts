@@ -7,7 +7,8 @@ const initialState = {
   registerModal: false,
   changePasswordModal: false,
   forgotPasswordModal: false,
-  locationModal: false
+  locationModal: false,
+  individualProductModal: true
 }
 
 const intermitenceReducer = (state = initialState, { type, payload }: AnyAction) => {

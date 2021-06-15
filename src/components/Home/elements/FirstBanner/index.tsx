@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { GeneralCard, Button, Stepper } from '@components'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { setLoader } from '@store/actions'
+import { setLoader, setShowModal} from '@store/actions'
 
 const FirstBanner = ({ data, content, publicity, resource }) => {
 
@@ -51,6 +51,8 @@ const FirstBanner = ({ data, content, publicity, resource }) => {
     }
   }
 
+  const openIndividualModal = () => dispatch(setShowModal({ individualProductModal: true }))
+
   return (
     <>
       <div className={styles._content}>
@@ -97,7 +99,7 @@ const FirstBanner = ({ data, content, publicity, resource }) => {
               {
                 outstanding.map((item, index) => {
                   return (
-                    <div className={styles._card} key={index}>
+                    <div className={styles._card} key={index} onClick={openIndividualModal}>
                       <GeneralCard
                         name={item?.name}
                         image={item.image?.mediaItemUrl}
