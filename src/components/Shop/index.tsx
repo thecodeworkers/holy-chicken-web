@@ -13,19 +13,19 @@ const Shop = ({ content, data}) => {
       <Head>
         <title>Holy Chicken</title>
       </Head>
-      {/* <ModalContact />
+ <ModalContact />
       <LoginModal />
       <RegisterModal />
       <ForgotPasswordModal />
-      <Navbar data={data?.header}/> */}
+      <Navbar data={data?.header}/>
       <ChangePasswordModal />
       {content ? (<>
-       <FirstBanner />
+       <FirstBanner content={content} />
       {/* <SecondBanner data={content?.thirdBanner} />
       <ThirdBanner data={content?.fourthBanner} /> */}
       </>
     ) : null}
-     {/* <Footer data={data?.footer} content={data?.socialNetworks}  /> */}
+     <Footer data={data?.footer} content={data?.socialNetworks}  />
     </div>
   )
 }

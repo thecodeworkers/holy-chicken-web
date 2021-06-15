@@ -6,7 +6,7 @@ const GeneralCard = ({ name = 'default name', description = 'default description
   return (
     <div className={styles._parent}>
       <div className={styles._imageParent}>
-        <img src={image} width='100%'></img>
+        <img src={image} className={styles._image}></img>
       </div>
       <h3> {name} </h3>
       <div dangerouslySetInnerHTML={createMarkup(description)}></div>
