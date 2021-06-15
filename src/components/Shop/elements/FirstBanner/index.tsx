@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { GeneralCard } from '@components'
 import { useRouter } from 'next/router'
 
-const FirstBanner = ({ }) => {
+const FirstBanner = ({content }) => {
 
   const router = useRouter()
 
@@ -26,23 +26,23 @@ const FirstBanner = ({ }) => {
           </div>
           <div className={styles._productContainer}>
             <div className={styles._cardContainer}>
-              <div className={styles._card}>
-                <GeneralCard />
-              </div>
-              <div className={styles._card}>
-                <GeneralCard />
-              </div>
-              <div className={styles._card}>
-                <GeneralCard />
-              </div>
-              <div className={styles._card}>
-                <GeneralCard />
-              </div>
-              <div className={styles._card}>
-                <GeneralCard />
-              </div>
+            {
+                content.map((item, index) => {
+                  return (
+                    <div className={styles._card} key={index}>
+                      <GeneralCard
+                        name={item?.name}
+                        image={item.image?.mediaItemUrl}
+                        description={item?.description}
+                        price={item?.price} />
+                    </div>
+                  )
+
+                })
+              }
             </div>
           </div>
+
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 
 const outstanding = `
-products (where: {categoryId: 42}) {
+outstanding:products (where: {categoryId: 42}) {
   nodes {
     id
     description

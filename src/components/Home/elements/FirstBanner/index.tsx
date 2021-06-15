@@ -109,8 +109,7 @@ const FirstBanner = ({ data, content, publicity, resource }) => {
                 })
               }
 
-              <div style={{ width: 30, height: 100, margin: 20 }}>
-              </div>
+              <div className={styles._space}></div>
             </div>
           </div>
           <div className={styles._textContainer}>

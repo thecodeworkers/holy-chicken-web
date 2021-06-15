@@ -76,6 +76,13 @@
   color: $black;
   margin-bottom: 1.5rem;
 }
+._space{
+  width: 30px;
+  height: 100px;
+  margin: 20px;
+  display: none;
+}
+
 ._stepperContainer {
   width: 100%;
   display: flex;
@@ -120,6 +127,8 @@
     align-content: center;
   }
 
+
+
   ._cardHidden{
     overflow-x: scroll;
 
@@ -154,6 +163,10 @@
   ._btnParent {
    align-self: center;
    width: 160px;
+  }
+
+  ._space{
+    display: block;
   }
 
   ._main{

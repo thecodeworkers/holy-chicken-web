@@ -36,6 +36,17 @@
   }
 }
 
+._image{
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+}
+
+._imageParent{
+width: 100%;
+height: 100%;
+ }
+
 ._btnParent {
   width: 7.5rem;
 }
