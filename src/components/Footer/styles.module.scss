@@ -60,7 +60,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 60%;
+  width: 70%;
 }
 
 ._link{
@@ -162,5 +162,8 @@
   ._makers{
     width: 22px;
     height: 22px;
+  }
+  ._socialMedia{
+    margin-left: 0;
   }
 }

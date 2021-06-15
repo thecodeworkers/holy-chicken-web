@@ -18,10 +18,12 @@ aboutPage:page(id: "${aboutUsId}") {
       emblem {
         mediaItemUrl
         slug
+        title
       }
       isotype {
         mediaItemUrl
         slug
+        title
       }
     }
     roadmap {

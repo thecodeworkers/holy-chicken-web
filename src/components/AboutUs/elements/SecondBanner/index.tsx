@@ -26,11 +26,11 @@ const SecondBanner = ({ data }) => {
           <div className={styles._isoContainer}>
           <div className={styles._iso}>
           <img  className={styles._img} src={data?.isotype?.mediaItemUrl} alt={data?.isotype?.slug} />
-          <p className={styles._slug}>{data?.isotype?.slug}</p>
+          <p className={styles._slug}>{data?.isotype?.title}</p>
           </div>
           <div className={styles._logo}>
-          <img className={styles._img} src={data?.emblem?.mediaItemUrl} alt={data?.emblem?.slug} />
-          <p className={styles._slug}>{data?.emblem?.slug}</p>
+          <img className={styles._emblem} src={data?.emblem?.mediaItemUrl} alt={data?.emblem?.slug} />
+          <p className={styles._slugEmblem}>{data?.emblem?.title}</p>
           </div>
 
           </div>
