@@ -18,18 +18,7 @@ export const scrolling = (reference) => {
     window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
   }
 }
-
 export const createMarkup = (text) => { return {__html: text}; }
-
-// export const navigation = (route, loader = false) => {
-//   // const router = useRouter()
-//   // const dispatch = useDispatch()
-
-//   if(useRouter().pathname != route) {
-//     if(loader) useDispatch()(setLoader(true))
-//     useRouter().push(route)
-//   }
-// }
 
 export const isRetina = () => {
   const query = '(-webkit-min-device-pixel-ratio: 2), n\
@@ -41,4 +30,3 @@ export const isRetina = () => {
 
     return !!window?.matchMedia(query).matches
 }
-

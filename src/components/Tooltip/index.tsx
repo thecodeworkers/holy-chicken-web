@@ -1,6 +1,6 @@
 import styles from './styles.module.scss'
 
-const Tooltip = ({ top = '0px', bottom = '0px', right = '0px', left = '0px', show, paddinHorizontal}) => {
+const Tooltip = ({ top = '0px', bottom = '0px', right = '0px', left = '0px', show, paddinHorizontal }) => {
   return (
     <>
     <div className={show ? '_parent' : '_hidden'}>

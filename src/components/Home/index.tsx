@@ -1,9 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
-import { Navbar, ModalFrame, ModalContact, LoginModal, RegisterModal, ChangePasswordModal, LocationModal} from '@components'
+import { Navbar, IndividualProductModal } from '@components'
 import Footer from '../Footer'
 import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner } from './elements'
-import ForgotPasswordModal from '../ForgotPasswordModal'
 
 const Home = ({ content, data, resource }) => {
 
@@ -14,6 +13,7 @@ const Home = ({ content, data, resource }) => {
       </Head>
 
       <Navbar data={data?.header}/>
+      <IndividualProductModal />
       {content ? (<>
       <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner} resource={resource}/>
       <SocialSwipe />
