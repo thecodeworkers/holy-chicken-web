@@ -38,21 +38,24 @@ const SocialSwipe = () => {
       <WhatsApp color={'#fff'} />
       </div>
       </div>
-
       <div className={styles._whiteContent}>
       <div className={styles._whiteCard}>
+      <a href={'https://www.instagram.com/holychicken.ccs/?hl=es-la'} target='_blank'>
         <div className={styles._textContainer}>
         <p className={styles._text}>@holychicken.ccs</p>
         <p className={styles._text}>4.606</p>
         </div>
         <img src={'images/resources/burguer.png'} width={170}></img>
+      </a>
       </div>
-      <div className={styles._whiteCard}>
+      <div className={styles._whiteCard} >
+      <a href={'https://www.instagram.com/holychicken.ccs/?hl=es-la'} target='_blank'>
         <div className={styles._textContainer}>
-        <p className={styles._text}>@holychickenccs</p>
+        <p className={styles._text}>@HolyChickenCcs</p>
         <p className={styles._text}>4.206</p>
         </div>
         <img src={'images/resources/burguer.png'} width={170}></img>
+        </a>
       </div>
       </div>
 

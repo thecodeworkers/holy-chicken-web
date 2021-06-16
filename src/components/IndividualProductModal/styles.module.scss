@@ -1,0 +1,231 @@
+@import '../../../public/styles/index.scss';
+
+._background {
+  @include blurBackground()
+}
+
+._modal {
+  padding: 3rem 2.5rem;
+  box-sizing: border-box;
+  width: 1100px;
+}
+
+._centerBody {
+  display: flex;
+  width: 100%;
+  margin-top: 0.6rem;
+}
+
+._leftSide {
+  width: 45%;
+}
+
+._rightSide {
+  width: 55%;
+  padding: 0 3rem;
+  box-sizing: border-box;
+  height: 22.5rem;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $pampas;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $pampas;
+  }
+}
+
+._title {
+  font-family: $montserratBold;
+  font-size: $blackerTextHeavy40;
+}
+
+._titleParent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+._numberParent {
+  display: flex;
+  align-items: center;
+}
+
+._circle {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $black;
+  border-radius: 50%;
+  cursor: pointer;
+
+  & p {
+    color: $white;
+    font-family: $montserratRegular;
+    font-size: $montserratMedium19;
+    font-weight: bold;
+  }
+}
+
+._input {
+  border: solid 1px $black;
+  border-radius: 1.25rem;
+  width: 2rem;
+  padding: 0.12rem 0.4rem;
+  background-color: transparent;
+  font-family: $montserratRegular;
+  text-align: center;
+  margin: 0 0.4rem;
+  font-weight: 500;
+}
+
+._subtitle {
+  color: $gray;
+  font-family: $montserratRegular;
+  font-size: $montserratRegular14;
+  margin-top: 0.5rem;
+}
+
+._imgParent {
+  margin: 0.6rem 0;
+}
+
+._img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+
+._inputParent {
+  width: 80%;
+  & label {
+  padding-left: 0.7rem;
+  font-family: $montserratRegular;
+  font-size: $montserratBold16;
+  }
+}
+
+._inputLarge {
+  @include generalInput($gray)
+}
+
+._littleTitle {
+  font-family: $montserratBold;
+  font-size: $blackerTextHeavy20;
+}
+
+._row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.3rem 0;
+}
+
+._checkParent {
+  display: flex;
+  align-items: center;
+
+  & p {
+    font-family: $montserratRegular;
+    margin-left: 0.7rem;
+    font-size: $montserratBold16;
+  }
+}
+
+._priceParent {
+  display: flex;
+  align-items: center;
+
+  & p {
+    font-family: $montserratRegular;
+    margin-left: 0.7rem;
+    font-size: $montserratRegular22;
+    font-weight: 600;
+  }
+}
+
+._radioBtn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
+  padding: 0.1rem;
+  background-clip: content-box;
+  border: 2px solid $black;
+  background-color: trasparent;
+  border-radius: 50%;
+
+  &:checked {
+    background-color: $black;
+  }
+}
+
+._cardParent {
+  background-color: $pampas;
+  border-radius: 38px;
+  padding: 1.2rem;
+  margin-top: 1.5rem;
+  box-sizing: border-box;
+}
+
+._column {
+  width:33.33%;
+
+  &:nth-child(2) {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &:nth-child(3) {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+._littleTitleCard {
+  font-family: $montserratBold;
+  font-size: $blackerTextHeavy20;
+  margin-top: 1rem;
+}
+
+._totalParent {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+
+  & p {
+    font-family: $montserratBold;
+    font-size: $montserratRegular24;
+    margin-left: 2rem;
+    margin-right: 4.2rem;
+  }
+}
+
+._btnParent {
+  width: 120px;
+}
+
+._hidden {
+  display: none;
+}
+
+._comebackParent {
+  cursor: pointer;
+}

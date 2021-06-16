@@ -73,8 +73,8 @@ const LoginModal = () => {
               className={errors.email && touched.email ? styles._inputError : styles._input} />
           </div>
 
-          <div className={styles._inputParent} onFocus={tooltipTimer} onBlur={() => setShowTooltip(false)}>
-          <Tooltip paddinHorizontal={0} top='-75%'show={showTooltip}/>
+          <div className={styles._inputParent} >
+
             <label>Password</label>
             <input
               type={!show ? 'password' : 'text'}

@@ -68,6 +68,10 @@ margin-top: -10rem;
   width: 100%;
 }
 
+._emblem{
+  width: 100%;
+}
+
 ._iso{
   margin-bottom: 3rem;
   display: flex;
@@ -91,10 +95,21 @@ margin-top: -10rem;
   margin-top: 1rem;
 }
 
+._slugEmblem{
+  font-family: $montserratBold;
+  font-size: $montserratBold11;
+  color: $mineShaft;
+  margin-top: 1rem;
+}
+
 
 @include responsive(xl) {
 
   ._img{
+    width: 90%;
+  }
+
+  ._emblem{
     width: 90%;
   }
 }
@@ -104,6 +119,9 @@ margin-top: -10rem;
 @include responsive(lg) {
 
   ._img{
+    width: 70%;
+  }
+  ._emblem{
     width: 70%;
   }
   ._textContainer{
@@ -131,7 +149,9 @@ margin-top: -10rem;
 
   ._isoContainer{
     flex-direction: row;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
   ._container{
     margin-bottom: 2rem;
@@ -151,6 +171,11 @@ margin-top: -10rem;
   }
   ._logo{
     margin-bottom: 0;
+    width: 200px;
+  }
+
+  ._emblem{
+    width: 100%;
   }
 
 
