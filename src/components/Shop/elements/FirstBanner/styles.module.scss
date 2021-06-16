@@ -47,16 +47,37 @@
 }
 
 ._filterContainer{
-  width: 20%;
+  width: 25%;
+
+}
+
+._searchContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+._container{
+  border-radius: 1.875rem;
+  box-shadow: 10px 10px 10px $gallery;
+   padding: 1.5rem;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+  width: 90%;
 
 }
 
 ._productContainer{
-  width: 80%;
+  width: 70%;
   display: flex;
   justify-content: space-between;
   align-content: center;
   flex-direction: column;
+  margin-left: 5%;
 }
 
 ._cardContainer{
@@ -67,7 +88,11 @@
 
 ._card{
   width: 14.5rem;
-  margin: 1.5rem auto;
+  margin: 1.5rem 0;
+}
+
+._dropDown{
+ width: 20%;
 }
 
 ._filterTitle{
@@ -82,6 +107,7 @@
 
 ._inputParent {
   position: relative;
+  width: 60%;
   & label {
   padding-left: 0.7rem;
   font-family: $montserratRegular;
@@ -97,6 +123,50 @@
   cursor: pointer;
   right: 0.8rem;
   top: 16px;
+}
+
+._checkParent {
+  display: flex;
+  align-items: center;
+
+  & p {
+    font-family: $montserratRegular;
+    margin-left: 0.7rem;
+    font-size: $montserratBold16;
+  }
+}
+
+._radioBtn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
+  padding: 0.1rem;
+  background-clip: content-box;
+  border: 2px solid $black;
+  background-color: trasparent;
+  border-radius: 50%;
+
+  &:checked {
+    background-color: $black;
+  }
+}
+
+._littleTitle {
+  font-family: $montserratBold;
+  font-size: $blackerTextHeavy20;
+}
+
+._row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.3rem 0;
+  width: 100%;
 }
 
 @include responsive(lg) {
