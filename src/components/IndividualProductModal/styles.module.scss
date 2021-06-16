@@ -26,6 +26,7 @@
   box-sizing: border-box;
   height: 22.5rem;
   overflow-y: auto;
+  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -105,6 +106,18 @@
 ._img {
   width: 100%;
   height: 200px;
+  object-fit: contain;
+}
+
+._bigImgParent {
+  margin: 0.6rem 0;
+  position: relative;
+}
+
+._bigImg {
+  position: absolute;
+  height: 330px;
+  width: 100%;
   object-fit: contain;
 }
 
