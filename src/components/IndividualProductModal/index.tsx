@@ -75,6 +75,7 @@ const IndividualProduct = ({ type = 'cloth' }) => {
 
           </div>
           <div className={styles._rightSide}>
+
             {/* <ClothSection /> */}
             <VerticalListWithImage />
             {/* <VerticalList /> */}
