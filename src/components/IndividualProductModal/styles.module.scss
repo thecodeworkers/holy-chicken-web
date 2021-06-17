@@ -29,7 +29,7 @@
   overflow-x: hidden;
 
   &::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
   }
 
   & ::-webkit-scrollbar-track {
@@ -242,3 +242,70 @@
 ._comebackParent {
   cursor: pointer;
 }
+
+
+@include responsive(lg) {
+  ._background {
+    @include blurBackgroundResponsive()
+  }
+
+  ._centerBody {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  ._modal {
+    width: 90%;
+    height: 70vh;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  ._leftSide, ._rightSide {
+    width: 100%;
+  }
+
+  ._rightSide {
+    height: auto;
+    padding: 0;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  ._titleParent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  ._title {
+    margin-bottom: 0.6rem;
+  }
+
+  ._numberParent {
+    margin-bottom: 0.6rem;
+  }
+
+  ._inputParent {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  ._imgParent {
+    margin: 1rem 0;
+  }
+
+
+}
+
