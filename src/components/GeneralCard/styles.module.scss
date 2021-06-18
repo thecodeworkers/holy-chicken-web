@@ -28,6 +28,11 @@
     align-self: flex-start;
   }
 }
+._textContainer{
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
 
 ._sectionParent {
   display: flex;
@@ -62,5 +67,17 @@ height: 100%;
 @include responsive(md) {
   ._btnParent {
     width: 4.925rem;
+  }
+  ._parent{
+    padding: 1rem;
+    min-height: 20.875rem;
+
+
+    & h3{
+      font-size: 0.875rem;
+    }
+  }
+  ._sectionParent{
+    margin-top: 3%;
   }
 }

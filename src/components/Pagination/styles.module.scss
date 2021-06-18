@@ -1,0 +1,37 @@
+@import '@styles/index.scss';
+
+._container {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+._numberContainer {
+  border-radius: 50%;
+
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+._number {
+ font-size: $montserratBold20;
+}
+
+._arrowContainer {
+  display: flex;
+  cursor: pointer;
+}
+
+._arrow {
+  @include arrow($black, 6px);
+}
+
+@include responsive(md) {
+  ._container {
+    width: 100%;
+  }
+}
