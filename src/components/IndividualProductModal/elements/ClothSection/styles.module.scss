@@ -96,3 +96,9 @@
   margin-top: 1.2rem;
   flex-wrap: wrap;
 }
+
+@include responsive(lg) {
+  ._circlesParent {
+    margin-top: 1rem;
+  }
+}

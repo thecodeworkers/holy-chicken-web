@@ -138,6 +138,18 @@
   align-items: center;
 }
 
+._responsiveParent {
+  display: none;
+}
+
+._webParent {
+  display: block;
+}
+
+._webParent {
+  display: block;
+}
+
 @include responsive(lg) {
   ._column {
     width: 100%;
@@ -145,7 +157,7 @@
 
   ._newParent {
     display: flex;
-    margin-top: 0.4rem;
+    margin-top: 0.6rem;
   }
 
   ._priceParentReponsive {
@@ -162,7 +174,23 @@
   ._numberParentResponsive {
     display: flex;
     justify-content: flex-start;
-    // background-color: blue;
     margin-left: 2.2rem;
   }
+
+  ._responsiveRow {
+    margin: 1.3rem 0;
+  }
+
+  ._responsiveParent {
+    display: block;
+  }
+
+  ._webParent {
+    display: none;
+  }
+
+  ._webParent {
+    display: none;
+  }
+
 }

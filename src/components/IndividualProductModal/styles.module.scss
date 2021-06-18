@@ -306,6 +306,19 @@
     margin: 1rem 0;
   }
 
+  ._bigImg {
+    display: block;
+    position: relative;
+  }
+
+  ._totalParent {
+    justify-content: space-between;
+
+    & p {
+      margin: 0;
+    }
+  }
+
 
 }
 

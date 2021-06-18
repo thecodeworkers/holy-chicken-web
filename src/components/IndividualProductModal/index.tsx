@@ -5,10 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal } from '@store/actions'
 import { ClothSection, VerticalList, VerticalListWithImage, CardSection } from './elements'
 
-const IndividualProduct = ({ type = 'food' }) => {
+const IndividualProduct = ({ type = 'colorsizes' }) => {
 
   const dispatch = useDispatch()
-
   const [number, setNumber] = useState(0)
 
   const { intermitence: { individualProductModal } } = useSelector((state: any) => state)
@@ -24,6 +23,25 @@ const IndividualProduct = ({ type = 'food' }) => {
 
   const decrement = () => {
     if (number >= 1) setNumber(number => --number)
+  }
+
+  const featuresType = (type) => {
+    switch (type) {
+      case 'list':
+        return <VerticalList />
+
+      case 'card':
+        return <CardSection />
+
+      case 'list-image':
+        return <VerticalListWithImage />
+
+      case 'colorsizes':
+        return <ClothSection size={true}/>
+
+      default:
+        break;
+    }
   }
 
   return (
@@ -54,7 +72,7 @@ const IndividualProduct = ({ type = 'food' }) => {
             <p className={styles._subtitle}>Para los mal portados, 210 gramos de pollo crispy marinado con picante entre pan brioche</p>
 
             {
-              type == 'food' ?
+              type == 'card' ?
                 (<div className={styles._imgParent}>
                   <img src='images/resources/burguer.png' className={styles._img}></img>
                 </div>) : (<div className={styles._bigImgParent}>
@@ -63,7 +81,7 @@ const IndividualProduct = ({ type = 'food' }) => {
             }
 
             {
-              type == 'food' && (<div className={styles._inputParent}>
+              type == 'card' && (<div className={styles._inputParent}>
                 <label>Nota</label>
                 <input
                   type='text'
@@ -75,10 +93,7 @@ const IndividualProduct = ({ type = 'food' }) => {
 
           </div>
           <div className={styles._rightSide}>
-            <CardSection />
-            {/* <ClothSection /> */}
-            {/* <VerticalListWithImage /> */}
-            {/* <VerticalList /> */}
+            {featuresType(type)}
           </div>
         </div>
 

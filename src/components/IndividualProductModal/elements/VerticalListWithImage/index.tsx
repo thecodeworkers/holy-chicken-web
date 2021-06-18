@@ -18,18 +18,22 @@ const VerticalListWithImage = () => (
       </div>
     </div>
 
+
+  <div className={styles._imgParent}>
     {
-      brands.map((item, index) => {
-        return (
-          <div className={styles._row} key={index}>
-          <div className={styles._checkParent}>
-            <input type='radio' className={styles._radioBtn} defaultChecked={false}></input>
-            <img src={item?.path} className={styles._image}></img>
+        brands.map((item, index) => {
+          return (
+            <div className={styles._row} key={index}>
+            <div className={styles._checkParent}>
+              <input type='radio' className={styles._radioBtn} defaultChecked={false}></input>
+              <img src={item?.path} className={styles._image}></img>
+            </div>
           </div>
-        </div>
-        )
-      })
-    }
+          )
+        })
+      }
+  </div>
+
   </div>
 )
 

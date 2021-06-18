@@ -40,3 +40,9 @@
 ._column {
   margin-top: 1rem;
 }
+
+@include responsive(lg) {
+  ._listParent {
+    margin-bottom: 2rem;
+  }
+}

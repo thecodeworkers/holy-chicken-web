@@ -66,3 +66,18 @@
 ._icon {
   margin-right: 0.3rem
 }
+
+@include responsive(lg) {
+  ._imgParent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(3.125rem, 6.25rem);
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  ._image {
+    width: 100%;
+    object-fit: contain;
+  }
+}
