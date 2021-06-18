@@ -1,0 +1,196 @@
+@import '../../../../../public/styles/index.scss';
+
+._row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.3rem 0;
+}
+
+._title {
+  font-family: $montserratBold;
+  font-size: $blackerTextHeavy40;
+}
+
+._checkParent {
+  display: flex;
+  align-items: center;
+
+  & p {
+    font-family: $montserratRegular;
+    margin-left: 0.7rem;
+    font-size: $montserratBold16;
+  }
+}
+
+._priceParent {
+  display: flex;
+  align-items: center;
+
+  & p {
+    font-family: $montserratRegular;
+    margin-left: 0.7rem;
+    font-size: $montserratRegular22;
+    font-weight: 600;
+  }
+}
+
+._radioBtn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
+  padding: 0.1rem;
+  background-clip: content-box;
+  border: 2px solid $black;
+  background-color: trasparent;
+  border-radius: 50%;
+
+  &:checked {
+    background-color: $black;
+  }
+}
+
+._cardParent {
+  background-color: $pampas;
+  border-radius: 38px;
+  padding: 1.2rem;
+  margin-top: 1.5rem;
+  box-sizing: border-box;
+}
+
+._column {
+  width:33.33%;
+  visibility: visible;
+
+  &:nth-child(2) {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &:nth-child(3) {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+._littleTitleCard {
+  font-family: $montserratBold;
+  font-size: $blackerTextHeavy20;
+  margin-top: 1rem;
+}
+
+._totalParent {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+
+  & p {
+    font-family: $montserratBold;
+    font-size: $montserratRegular24;
+    margin-left: 2rem;
+    margin-right: 4.2rem;
+  }
+}
+
+._littleTitle {
+  font-family: $montserratBold;
+  font-size: $blackerTextHeavy20;
+}
+
+._circle {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $black;
+  border-radius: 50%;
+  cursor: pointer;
+
+  & p {
+    color: $white;
+    font-family: $montserratRegular;
+    font-size: $montserratMedium19;
+    font-weight: bold;
+  }
+}
+
+._input {
+  border: solid 1px $black;
+  border-radius: 1.25rem;
+  width: 2rem;
+  padding: 0.12rem 0.4rem;
+  background-color: transparent;
+  font-family: $montserratRegular;
+  text-align: center;
+  margin: 0 0.4rem;
+  font-weight: 500;
+}
+
+._numberParent {
+  display: flex;
+  align-items: center;
+}
+
+._responsiveParent {
+  display: none;
+}
+
+._webParent {
+  display: block;
+}
+
+._webParent {
+  display: block;
+}
+
+@include responsive(lg) {
+  ._column {
+    width: 100%;
+  }
+
+  ._newParent {
+    display: flex;
+    margin-top: 0.6rem;
+  }
+
+  ._priceParentReponsive {
+    width: 100%;
+
+    & p {
+      font-family: $montserratRegular;
+      margin-left: 1.2rem;
+      font-size: $montserratRegular22;
+      font-weight: 600;
+    }
+  }
+
+  ._numberParentResponsive {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 2.2rem;
+  }
+
+  ._responsiveRow {
+    margin: 1.3rem 0;
+  }
+
+  ._responsiveParent {
+    display: block;
+  }
+
+  ._webParent {
+    display: none;
+  }
+
+  ._webParent {
+    display: none;
+  }
+
+}

@@ -2,17 +2,23 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.scss'
 import { GeneralCard } from '@components'
 import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
+import { setShowModal } from '@store/actions'
+import { IndividualProductModal } from '@components'
 
 const FirstBanner = ({content }) => {
 
   const router = useRouter()
-
+  const dispatch = useDispatch()
 
   const navigation = (route: string) => {
     if (route != router.pathname) router.push(route)
   }
 
+  const openIndividualModal = () => dispatch(setShowModal({ individualProductModal: true }))
+
   return (
+    <>
     <div className={styles._content}>
       <div className={styles._main}>
         <div className={styles._header}>
@@ -29,7 +35,7 @@ const FirstBanner = ({content }) => {
             {
                 content.map((item, index) => {
                   return (
-                    <div className={styles._card} key={index}>
+                    <div className={styles._card} key={index} onClick={openIndividualModal}>
                       <GeneralCard
                         name={item?.name}
                         image={item.image?.mediaItemUrl}
@@ -46,6 +52,8 @@ const FirstBanner = ({content }) => {
         </div>
       </div>
     </div>
+    <IndividualProductModal />
+    </>
   )
 }
 
