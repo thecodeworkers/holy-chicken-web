@@ -1,0 +1,105 @@
+@import '@styles/index.scss';
+
+._drop {
+  background-color: $pampas;
+  border-bottom-left-radius: 1.25rem;
+  padding: 0 0.8rem;
+  position: absolute;
+  width: 200px;
+  transform: translate(-5%, 60%);
+  padding: 0 0.8rem;
+
+}
+
+._dropDownContent {
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+
+  & p {
+    color: $black;
+    font-family: $montserratMedium;
+    font-size: $montserratRegular14;
+    text-align: center;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+}
+
+._dropDown{
+  border-radius: 1.25rem;
+  padding: 0 0.8rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $pampas;
+  height: 2.3rem;
+  width: 200px;
+ }
+ ._dropTitle{
+  font-family: $montserratMedium;
+  font-size: $montserratMedium14;
+  margin-left: 1rem;
+ }
+
+ ._checkParent {
+  display: flex;
+  align-items: center;
+
+  & p {
+    font-family: $montserratRegular;
+    margin-left: 0.7rem;
+    font-size: $montserratBold16;
+  }
+}
+
+._radioBtn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  min-width:  0.8rem;
+  min-height:  0.8rem;
+  padding: 0.1rem;
+  background-clip: content-box;
+  border: 2px solid $black;
+  background-color: trasparent;
+  border-radius: 50%;
+  margin:0;
+
+  &:checked {
+    background-color: $black;
+  }
+}
+
+._filterTitle{
+  font-family: $montserratBold;
+  font-size: $montserratBold14;
+  color: $black;
+}
+
+._checkContent{
+  display: flex;
+}
+
+@include responsive(md) {
+
+._dropDown{
+  height: 2.5rem;
+  width:130px;
+}
+
+._drop{
+  width: 130px;
+  transform: translate(-8.1%, 55%);
+  padding-top: 0.5rem;
+}
+
+
+}

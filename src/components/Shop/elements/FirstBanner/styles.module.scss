@@ -57,17 +57,7 @@
   width: 100%;
 }
 
-._container{
-  border-radius: 1.875rem;
-  box-shadow: 10px 10px 10px $gallery;
-  padding: 1.5rem;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
-}
+
 ._paginationContainer {
   display: flex;
   justify-content: flex-end;
@@ -157,11 +147,6 @@
   }
 }
 
-._littleTitle {
-  font-family: $montserratBold;
-  font-size: $blackerTextHeavy20;
-}
-
 ._responsive{
   justify-content: space-between;
   align-items: center;
@@ -169,13 +154,6 @@
   margin-top: 0.5rem;
 }
 
-._row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 1.3rem 0;
-  width: 100%;
-}
 ._filtersContainer{
   display: flex;
   width: 100%;
@@ -195,57 +173,6 @@
   align-items: center;
   width: 20%;
   background-color: $pampas;
-}
-
-._dropDown{
-  border-radius: 1.25rem;
-  padding: 0 0.8rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: $pampas;
-  height: 2.3rem;
-  margin-top: 0.5rem;
-  width: 200px;
- }
- ._dropTitle{
-  font-family: $montserratMedium;
-  font-size: $montserratMedium14;
-  margin-left: 1rem;
- }
-
- ._checkContent{
-   display: flex;
- }
- ._drop {
-  background-color: $pampas;
-  border-radius: 1.25rem;
-  padding: 0 0.8rem;
-  position: absolute;
-  width: 200px;
-  transform: translate(-5%, 60%);
-
-  padding: 0 0.8rem;
-
-}
-
-._dropDownContent {
-
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-content: center;
-
-  & p {
-    color: $black;
-    font-family: $montserratMedium;
-    font-size: $montserratRegular14;
-    text-align: center;
-    margin-top: 0.4rem;
-    margin-bottom: 0.4rem;
-  }
 }
 
 @include responsive(xl) {
@@ -277,7 +204,7 @@ width: 100%;
 
 ._card{
   margin: 1.5 auto;
-}
+  }
 }
 
 @include responsive(md) {
@@ -310,7 +237,6 @@ width: 100%;
 ._card{
   width: 10.50rem;
   margin: 0.5rem 0.5rem;
-
 }
 
 ._dropDown{
