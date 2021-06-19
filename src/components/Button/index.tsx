@@ -24,12 +24,18 @@ const Button = ({ color, textColor, method = null, text, height = '2.5rem', type
         border-radius: 1.25rem;
         cursor: pointer;
         font-family: Montserrat-Bold;
-        font-size: 0.9rem;
+
         width: 100%;
         height: ${height};
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+
+      @media(max-width: 768px) {
+        ._button {
+          font-size: 0.8rem;
+        }
       }
     `}
     </style>

@@ -5,8 +5,7 @@ import Footer from '../Footer'
 import { FirstBanner } from './elements'
 import ForgotPasswordModal from '../ForgotPasswordModal'
 
-const Shop = ({ content, data}) => {
-  console.log(content);
+const Shop = ({ content, data }) => {
 
   return (
     <div>

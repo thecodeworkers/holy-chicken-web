@@ -2,20 +2,31 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.scss'
 import { GeneralCard } from '@components'
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setShowModal, setCurrentProduct } from '@store/actions'
 import { IndividualProductModal } from '@components'
 
-const FirstBanner = ({content }) => {
+const FirstBanner = ({ content }) => {
 
   const router = useRouter()
   const dispatch = useDispatch()
+
+  const { cart } = useSelector((state: any) => state)
 
   const navigation = (route: string) => {
     if (route != router.pathname) router.push(route)
   }
 
-  const openIndividualModal = () => dispatch(setShowModal({ individualProductModal: true }))
+  const openIndividualModal = (item: any) =>  {
+
+    console.log(item)
+    dispatch(setShowModal({ individualProductModal: true }))
+    dispatch(setCurrentProduct({ currentProduct: item }))
+  }
+
+  // useEffect(() => {
+  //   console.log(cart)
+  // }, [])
 
   return (
     <>
@@ -35,7 +46,7 @@ const FirstBanner = ({content }) => {
             {
                 content.map((item, index) => {
                   return (
-                    <div className={styles._card} key={index} onClick={openIndividualModal}>
+                    <div className={styles._card} key={index} onClick={() => openIndividualModal(item)}>
                       <GeneralCard
                         name={item?.name}
                         image={item.image?.mediaItemUrl}
@@ -43,7 +54,6 @@ const FirstBanner = ({content }) => {
                         price={item?.price} />
                     </div>
                   )
-
                 })
               }
             </div>
