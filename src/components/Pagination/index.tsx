@@ -70,7 +70,8 @@ const Pagination = ({ items, perPage, changePage, currentPage }) => {
 
               <style jsx>{`
                 .${styles._numberContainer} {
-                  color: ${pageNumber == currentPage ? '' : '#808080'};
+                  background-color: ${pageNumber == currentPage ? '#262833' : '#DBDADA'};
+                  color: ${pageNumber == currentPage ? '#ffffff' : '#000000'};
                   font-family: ${pageNumber == currentPage ? montserratBold : montserratLight
                 }
               `}</style>

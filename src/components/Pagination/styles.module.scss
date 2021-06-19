@@ -1,7 +1,7 @@
 @import '@styles/index.scss';
 
 ._container {
-  width: 30%;
+  width: 40%;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -9,7 +9,7 @@
 
 ._numberContainer {
   border-radius: 50%;
-
+  width: 2.5rem;
   height: 2.5rem;
   display: flex;
   justify-content: center;
@@ -18,7 +18,10 @@
 }
 
 ._number {
- font-size: $montserratBold20;
+  font-family: $montserratLight;
+  font-size: $montserratLight14;
+  font-weight: 200;
+  color: $gray
 }
 
 ._arrowContainer {
@@ -27,7 +30,7 @@
 }
 
 ._arrow {
-  @include arrow($black, 6px);
+  @include arrow($mineShaft, 6px);
 }
 
 @include responsive(md) {

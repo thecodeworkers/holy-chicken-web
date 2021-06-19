@@ -12,7 +12,7 @@ const FirstBanner = ({ content }) => {
 
   const [showSide, setShowSide] = useState(false)
   const router = useRouter()
-  const perPage = 9
+  const perPage = 12
   const [page, setPage] = useState(1)
 
   const navigation = (route: string) => {
