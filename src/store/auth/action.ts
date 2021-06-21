@@ -1,7 +1,7 @@
 import { registerMutation, loginMutation, restorePasswordEmail } from '@graphql'
 import { actionObject } from '@utils'
 import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL } from './action-types'
-import { REQUEST_LOADER, LOADER } from '@store/loader/actions-types'
+import { REQUEST_LOADER } from '@store/loader/actions-types'
 
 export const registerUser = (body: any) => async (dispatch) => {
   const result = await registerMutation(body)
@@ -9,7 +9,6 @@ export const registerUser = (body: any) => async (dispatch) => {
 }
 
 export const loginUser = (body: any) => async (dispatch) => {
-
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
     const result = await loginMutation(body)

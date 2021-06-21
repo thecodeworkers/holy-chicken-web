@@ -11,18 +11,24 @@ import { getPageFiles } from 'next/dist/next-server/server/get-page-files'
 const ModalContact = () => {
 
   const dispatch = useDispatch()
-  const formik = FormikConfig()
+  const [type, setType] = useState('Cliente')
+  const formik = FormikConfig(dispatch, type)
   const [isActive, setActive] = useState(1)
-  const [fileName, setFileName] =useState('')
+  const [fileName, setFileName] = useState('')
+
   const { errors, touched } = formik
 
   const { resource: { general: { general } } } = useSelector((state: any) => state)
 
   const activeLink = (props) => {
     setActive(props)
+    if(props == 1) setType('Cliente')
+    if(props == 2) setType('Proveedor')
+    if(props == 3) setType('Personal')
   }
 
   const getFile = (event) =>{
+    console.log(event.target.files[0])
     setFileName(event.target.files[0].name);
   }
 
@@ -209,7 +215,6 @@ const ModalContact = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values.message}
                     name='message'
-                    id='message'
                     className={styles._textArea}
                     placeholder='Escriba su mensaje aqui...'
                   >
@@ -222,10 +227,17 @@ const ModalContact = () => {
 
                       <PaperClip color='#000' />
                     </label>
-                    <input id="file-input" type="file"
-                    accept={'application/pdf, application/msword, image/*'}
+                    <input
+                    id="file-input"
+                    type="file"
+                    name='file'
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.file}
+                    accept={'application/pdf, application/msword, image/*'
+                  }
 
-                    onChange={(e) => getFile(e)} className={styles._file} />
+                    className={styles._file} />
                   </div>
                 </div>
 
