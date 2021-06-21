@@ -155,12 +155,17 @@
   margin-top: 0.5rem;
 }
 
-._filtersContainer{
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-content: center;
+// ._filtersContainer{
+//   display: flex;
+//   width: 100%;
+//   justify-content: space-between;
+//   align-content: center;
+// }
+
+._filterMenuContainer {
+display: none;
 }
+
 ._inputContainer{
   width: 100%;
   margin-bottom: 1rem;
@@ -215,6 +220,13 @@ width: 100%;
 }
 ._filterContainer{
   display: none;
+}
+
+._filterMenuContainer{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 100%;
 }
 
 ._searchContainer{

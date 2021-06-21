@@ -70,8 +70,8 @@ const Pagination = ({ items, perPage, changePage, currentPage }) => {
 
               <style jsx>{`
                 .${styles._numberContainer} {
-                  background-color: ${pageNumber == currentPage ? '#262833' : '#DBDADA'};
-                  color: ${pageNumber == currentPage ? '#ffffff' : '#000000'};
+                  font-weight: ${pageNumber == currentPage ? 900 : 500};
+                  color: ${pageNumber == currentPage ? '#000000' : '#808080'};
                   font-family: ${pageNumber == currentPage ? montserratBold : montserratLight
                 }
               `}</style>
@@ -91,3 +91,6 @@ const Pagination = ({ items, perPage, changePage, currentPage }) => {
 }
 
 export default memo(Pagination)
+
+
+// background-color: ${pageNumber == currentPage ? '#262833' : '#DBDADA'};

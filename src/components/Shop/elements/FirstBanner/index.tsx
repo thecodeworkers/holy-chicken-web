@@ -7,6 +7,7 @@ import { paginate } from '@utils'
 import { Pagination } from '@components'
 import  DropDownFilter  from '../DropDownFilter';
 import  SideFilter  from '../SideFilter';
+import  SideFilterMenu  from '../SideFilterMenu';
 
 const FirstBanner = ({ content }) => {
 
@@ -14,9 +15,16 @@ const FirstBanner = ({ content }) => {
   const router = useRouter()
   const perPage = 12
   const [page, setPage] = useState(1)
+  const [show, setShow] = useState(0)
 
   const navigation = (route: string) => {
     if (route != router.pathname) router.push(route)
+  }
+
+  const deployMenu = () => {
+    if (show === 0) return setShow(1)
+    if (show === 1) return setShow(2)
+    if (show === 2) return setShow(1)
   }
 
   return (
@@ -31,6 +39,9 @@ const FirstBanner = ({ content }) => {
         <div className={styles._shopContainer}>
           <div className={styles._filterContainer}>
            <SideFilter />
+          </div>
+          <div className={styles._filterMenuContainer}>
+           <SideFilterMenu show={show} method={deployMenu}/>
           </div>
           <div className={styles._productContainer}>
             <div className={styles._searchContainer}>
@@ -57,8 +68,8 @@ const FirstBanner = ({ content }) => {
                   </div>
                 </div>
               </div>
-              <div className={styles._filtersContainer}>
-                <div className={styles._filterButtonContainer} onClick={() => setShowSide(true)}>
+              <div className={styles._filterMenuContainer}>
+                <div className={styles._filterButtonContainer} onClick={deployMenu} >
                   <p className={styles._filterTitle}>Filtro</p>
                   <Filter color={'#000000'} />
                 </div>

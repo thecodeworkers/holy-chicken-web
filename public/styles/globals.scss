@@ -28,6 +28,16 @@ p, h1, h2, h3, h4, h5, h6 {
   border-radius: 2.375rem;
 }
 
+._right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+._left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
 @font-face {
   font-family: 'Blacker-Text-Heavy-trial';
   src: url('../fonts/Blacker-Text-Heavy-trial.ttf');
