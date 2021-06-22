@@ -8,6 +8,7 @@ import { Pagination } from '@components'
 import  DropDownFilter  from '../DropDownFilter';
 import  SideFilter  from '../SideFilter';
 import  SideFilterMenu  from '../SideFilterMenu';
+import { relative } from 'path';
 
 const FirstBanner = ({ content }) => {
 
@@ -28,7 +29,6 @@ const FirstBanner = ({ content }) => {
   }
 
   return (
-
     <div className={styles._content}>
       <div className={styles._main}>
         <div className={styles._header}>
@@ -40,9 +40,7 @@ const FirstBanner = ({ content }) => {
           <div className={styles._filterContainer}>
            <SideFilter />
           </div>
-          <div className={styles._filterMenuContainer}>
            <SideFilterMenu show={show} method={deployMenu}/>
-          </div>
           <div className={styles._productContainer}>
             <div className={styles._searchContainer}>
               <div className={styles._inputParent}>
@@ -54,7 +52,8 @@ const FirstBanner = ({ content }) => {
                   <Search color={'#000000'} />
                 </div>
               </div>
-              <DropDownFilter/>
+            <DropDownFilter/>
+
             </div>
             <div className={styles._responsive}>
               <div className={styles._inputContainer}>
@@ -68,12 +67,14 @@ const FirstBanner = ({ content }) => {
                   </div>
                 </div>
               </div>
-              <div className={styles._filterMenuContainer}>
+              <div className={styles._filter}>
                 <div className={styles._filterButtonContainer} onClick={deployMenu} >
                   <p className={styles._filterTitle}>Filtro</p>
                   <Filter color={'#000000'} />
                 </div>
-                <DropDownFilter/>
+
+              <DropDownFilter/>
+
 
               </div>
             </div>

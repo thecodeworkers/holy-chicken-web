@@ -19,7 +19,7 @@ const DropDownFilter = ({ }) => {
               <div className={styles._dropDown} onClick={showDropDown} >
                 <p className={styles._filterTitle}><strong>Ordernar por</strong></p>
                   <LeftArrow color={'#000000'} />
-                  {show &&
+                  {show ?
                   <div className={styles._drop}>
                     <div className={styles._dropDownContent}>
                       <div className={styles._checkContent}>
@@ -42,6 +42,7 @@ const DropDownFilter = ({ }) => {
                     </div>
                     </div>
                   </div>
+                  : null
                 }
               </div>
   )

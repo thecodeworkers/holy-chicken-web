@@ -181,6 +181,10 @@ display: none;
   background-color: $pampas;
 }
 
+._filter{
+  display: none;
+}
+
 @include responsive(xl) {
 
 ._container{
@@ -199,6 +203,7 @@ width: 100%;
   font-family: $montserratBold;
   font-size: $montserratBold11;
 }
+
 
 }
 
@@ -220,6 +225,12 @@ width: 100%;
 }
 ._filterContainer{
   display: none;
+}
+._filter{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 100%;
 }
 
 ._filterMenuContainer{

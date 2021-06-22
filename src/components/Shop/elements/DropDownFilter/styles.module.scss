@@ -1,18 +1,33 @@
 @import '@styles/index.scss';
 
+
+._dropDown{
+  border-radius: 1.25rem;
+  // padding: 0 0.8rem;
+ cursor: pointer;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ background-color: $pampas;
+ height: 2.3rem;
+ width: 200px;
+ box-sizing: border-box;
+ position: relative;
+}
+
 ._drop {
   background-color: $pampas;
   border-bottom-left-radius: 1.25rem;
-  padding: 0 0.8rem;
+  border-bottom-right-radius: 1.25rem;
+  // padding: 0 0.8rem;
   position: absolute;
-  width: 200px;
-  transform: translate(-5%, 60%);
-  padding: 0 0.8rem;
+  width: 90%;
+  top: 30px;
+  margin: 0 5%;
 
 }
 
 ._dropDownContent {
-
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -23,27 +38,18 @@
     color: $black;
     font-family: $montserratMedium;
     font-size: $montserratRegular14;
-    text-align: center;
-    margin-top: 0.4rem;
-    margin-bottom: 0.4rem;
+    text-align: left;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
   }
 }
 
-._dropDown{
-  border-radius: 1.25rem;
-  padding: 0 0.8rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: $pampas;
-  height: 2.3rem;
-  width: 200px;
- }
+
  ._dropTitle{
   font-family: $montserratMedium;
   font-size: $montserratMedium14;
   margin-left: 1rem;
+  text-align: left;
  }
 
  ._checkParent {
@@ -82,10 +88,12 @@
   font-family: $montserratBold;
   font-size: $montserratBold14;
   color: $black;
+  margin-left: 1rem;
 }
 
 ._checkContent{
   display: flex;
+  margin-left: 1rem;
 }
 
 @include responsive(md) {
