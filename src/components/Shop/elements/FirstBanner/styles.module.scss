@@ -66,10 +66,10 @@
 
 ._productContainer{
   width: 70%;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  flex-direction: column;
+  // display: flex;
+  // justify-content: space-between;
+  // align-content: center;
+  // flex-direction: column;
   margin-left: 5%;
 }
 
@@ -179,6 +179,14 @@ display: none;
   align-items: center;
   width: 20%;
   background-color: $pampas;
+}
+
+._emptyMessage {
+  margin: 1.5rem 0;
+
+  & p {
+    font-family: $montserratRegular;
+  }
 }
 
 @include responsive(xl) {

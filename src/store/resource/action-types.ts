@@ -1,1 +1,2 @@
 export const SET_RESOURCES = 'SET_RESOURCES'
+export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS'
