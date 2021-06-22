@@ -5,7 +5,7 @@ import Footer from '../Footer'
 import { FirstBanner } from './elements'
 import ForgotPasswordModal from '../ForgotPasswordModal'
 
-const Shop = ({ content, data, filters }) => {
+const Shop = ({ content, data, filters, backup }) => {
 
   return (
     <div>
@@ -19,7 +19,7 @@ const Shop = ({ content, data, filters }) => {
       <Navbar data={data?.header} />
       <ChangePasswordModal />
       {content ? (<>
-        <FirstBanner content={content} filters={filters}/>
+        <FirstBanner content={content} filters={filters} backup={backup} />
         {/* <SecondBanner data={content?.thirdBanner} />
       <ThirdBanner data={content?.fourthBanner} /> */}
       </>
