@@ -30,22 +30,22 @@ const IndividualProduct = ({ type = 'list' }) => {
     dispatch(setProductsNumber({ number: productNumber }))
   }
 
-  const featuresType = (type) => {
+  const featuresType = (type, attributes) => {
     switch (type) {
-      case 'list':
+      case 'temptations':
         return <VerticalList />
 
-      case 'card':
+      case 'holy-sanduches':
         return <CardSection />
 
-      case 'list-image':
+      case 'bebidas':
         return <VerticalListWithImage />
 
-      case 'colorsizes':
-        return <ClothSection size={true}/>
+      case 'merch':
+        return <ClothSection size={true} attributes={attributes} />
 
       default:
-        break;
+        return <CardSection />
     }
   }
 
@@ -79,7 +79,7 @@ const IndividualProduct = ({ type = 'list' }) => {
             </div>
 
             {
-              type == 'card' ?
+              currentProduct?.productCategories?.nodes[0]?.slug == 'holy-sanduches' ?
                 (<div className={styles._imgParent}>
                   <img src={currentProduct?.image?.mediaItemUrl ?? 'images/resources/burguer.png'} className={styles._img}></img>
                 </div>) : (<div className={styles._bigImgParent}>
@@ -88,7 +88,7 @@ const IndividualProduct = ({ type = 'list' }) => {
             }
 
             {
-              type == 'card' && (<div className={styles._inputParent}>
+              currentProduct?.productCategories?.nodes[0]?.slug == 'holy-sanduches' && (<div className={styles._inputParent}>
                 <label>Nota</label>
                 <input
                   type='text'
@@ -100,7 +100,7 @@ const IndividualProduct = ({ type = 'list' }) => {
 
           </div>
           <div className={styles._rightSide}>
-            {featuresType(type)}
+            {featuresType(currentProduct?.productCategories?.nodes[0]?.slug, currentProduct?.attributes)}
           </div>
         </div>
 
