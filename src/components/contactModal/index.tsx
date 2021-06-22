@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { ModalFrame, Button } from '@components'
 import { Phone, Mail, Insta, Twitter, WhatsApp, Location, PaperClip } from '@images/icons'
 import { useDispatch } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { setShowModal, setToast } from '@store/actions'
 import { useSelector } from 'react-redux'
 import FormikConfig from './formik'
 import { getPageFiles } from 'next/dist/next-server/server/get-page-files'
@@ -11,37 +11,44 @@ import { getPageFiles } from 'next/dist/next-server/server/get-page-files'
 const ModalContact = () => {
 
   const dispatch = useDispatch()
-  const [type, setType] = useState('Cliente')
-  const formik = FormikConfig(dispatch, type)
+  const [type, setType] = useState('cliente')
+  const changeStatus = () => setStatus(true)
+  const formik = FormikConfig(dispatch, type, changeStatus)
   const [isActive, setActive] = useState(1)
   const [fileName, setFileName] = useState('')
+  const [status, setStatus] = useState(false)
 
   const { errors, touched } = formik
 
-  const { resource: { general: { general } } } = useSelector((state: any) => state)
+  const { resource: { general: { general } }, contact } = useSelector((state: any) => state)
 
   const activeLink = (props) => {
     setActive(props)
-    if(props == 1) setType('Cliente')
-    if(props == 2) setType('Proveedor')
-    if(props == 3) setType('Personal')
+    if(props == 1) setType('cliente')
+    if(props == 2) setType('proveedor')
+    if(props == 3) setType('personal')
   }
 
-  const getFile = (event) =>{
-    console.log(event.target.files[0])
-    setFileName(event.target.files[0].name);
-  }
+  const getFile = (event) => setFileName(event.target.files[0].name);
+
+  useEffect(() => {
+    if(contact?.contact && status) {
+      dispatch(setToast('check', 'Su información ha sido enviada', 1))
+      dispatch(setShowModal({ contactModal: false }))
+      setStatus(false)
+      formik.resetForm()
+    }
+
+    if(!contact?.contact && status)  dispatch(setToast('error', 'Error al enviar su informacion', 1))
+
+  }, [contact?.contact])
 
   return (
-    <ModalFrame>
+    <ModalFrame >
       <div className={styles._main}>
         <div className={styles._leftSection}>
           <div className={styles._closeParent}>
             <p className={styles._title}>Contáctanos</p>
-            {/* <div className={styles._responsiveIconParent} onClick={() => dispatch(setShowModal(false))}>
-              <img src='images/icons/close.svg' width='16px'></img>
-            </div> */}
-
           </div>
 
           <div className={`${styles._itemParent} ${styles._marginBottom}`}>
@@ -120,10 +127,6 @@ const ModalContact = () => {
         <div className={styles._rightSection}>
           <div className={styles._closeParent}>
             <p className={styles._title}>Tipo de contacto</p>
-
-            {/* <div className={styles._closeIconParent} onClick={() => dispatch(setShowModal(false))}>
-              <img src='images/icons/close.svg' width='16px'></img>
-            </div> */}
           </div>
 
           <form onSubmit={formik.handleSubmit}>
@@ -224,19 +227,17 @@ const ModalContact = () => {
                   <div className={styles._paperClipParent}>
                   <p className ={styles._fileName}>{fileName}</p>
                     <label htmlFor="file-input" className={styles._filePointer}>
-
                       <PaperClip color='#000' />
                     </label>
                     <input
                     id="file-input"
                     type="file"
-                    name='file'
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.file}
-                    accept={'application/pdf, application/msword, image/*'
-                  }
-
+                    // name='file'
+                    // onChange={formik.handleChange}
+                    onChange={(event) => getFile(event)}
+                    // onBlur={formik.handleBlur}
+                    // value={formik.values.file}
+                    accept={'application/pdf, application/msword, image/*'}
                     className={styles._file} />
                   </div>
                 </div>
@@ -246,7 +247,7 @@ const ModalContact = () => {
                 </div>
 
                 <div className={styles._sendBtn}>
-                  <Button color='#000' text='Enviar' textColor='#FFF' type='submit' />
+                  <Button color='#000' text='Enviar' textColor='#FFF' type='submit' flag />
                 </div>
               </div>
             </div>

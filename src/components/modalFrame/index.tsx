@@ -9,7 +9,9 @@ const ModalFrame = ({ children, separation = '5rem' }) => {
 
   const closeModal = (event: any) => {
     const { target } = event
-    if(target.id == 'close-contact') return dispatch(setShowModal({ contactModal: false }))
+    if(target.id == 'close-contact') {
+      dispatch(setShowModal({ contactModal: false }))
+    }
   }
 
   return (

@@ -11,13 +11,10 @@ const LoginModal = () => {
   const changeStatus = () => setStatus(true)
   const formik = FormikConfig(dispatch, changeStatus)
   const [status, setStatus] = useState(false)
-  const [showTooltip, setShowTooltip] = useState(false)
   const { intermitence: { loginModal }, auth } = useSelector((state: any) => state)
   const [show, setShow] = useState(false)
   const { errors, touched } = formik
   const showPassword = () => setShow(show => !show)
-
-  let timeout
 
   const closeModal = (event) => {
     const { target } = event
@@ -39,8 +36,6 @@ const LoginModal = () => {
 
     if(!auth?.login?.login && status) dispatch(setToast('error', 'Error al autenticar usuario', 1))
 
-    return () => clearTimeout(timeout)
-
   }, [auth?.login])
 
   const openModal = (name) => {
@@ -48,13 +43,6 @@ const LoginModal = () => {
     dispatch(setShowModal({ [name]: true }))
   }
 
-  const tooltipTimer = () => {
-    setShowTooltip(true)
-
-    timeout = setTimeout(() => {
-      setShowTooltip(false)
-    }, 8000);
-  }
 
   return (
     <div className={`${loginModal ? styles._background : styles._hidden} ${styles._flex}`} onClick={closeModal} id='background'>
