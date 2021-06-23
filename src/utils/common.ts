@@ -56,3 +56,50 @@ export const orderBy = (array, key, type = 'desc', deep = null) => {
     return 0
   })
 }
+
+export const filter = (nodes: Array<any>, comparison, key, deep = null) => {
+
+  const nodeFilter = (node) => {
+    let validation = true
+    let validFilter = false
+    let select = _getDeep(node, deep)[key]
+    validFilter = select === comparison
+    if (typeof select === 'string') validFilter = select.toLowerCase().includes(comparison.toLowerCase())
+    return validation && validFilter
+  }
+
+  return (comparison) ? nodes.filter(nodeFilter) : nodes
+}
+
+
+const getData = (data, type) => {
+  switch (type) {
+    case 'categories':
+      return data['productCategories']['nodes']
+    default:
+      return _getDeep(data, type)
+  }
+}
+
+export const productFilter = (nodes: Array<any>, comparison, key) => {
+
+  const nodeFilter = (node) => {
+    let validation = true
+    let validFilter = false
+    for (let type of Object.keys(comparison)) {
+      let select = getData(node, type)
+      for (let value of select) {
+        if (type === 'categories') {
+          for (let compare of comparison[type]) {
+            if (value.translations[0].translation[key] === compare) {
+              validFilter = true
+              break;
+            }
+          }
+        }
+      }
+    }
+    return validation && validFilter
+  }
+  return (comparison.attributes.length || comparison.categories.length) ? nodes.filter(nodeFilter) : nodes
+}
