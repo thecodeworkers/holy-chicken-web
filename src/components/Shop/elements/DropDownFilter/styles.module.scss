@@ -2,15 +2,15 @@
 
 
 ._dropDown{
-  border-radius: 1.25rem;
-  // padding: 0 0.8rem;
+ border-top-left-radius: 1.25rem;
+ border-top-right-radius: 1.25rem;
  cursor: pointer;
  display: flex;
  justify-content: space-between;
  align-items: center;
  background-color: $pampas;
  height: 2.3rem;
- width: 200px;
+ width: 220px;
  box-sizing: border-box;
  position: relative;
 }
@@ -21,9 +21,9 @@
   border-bottom-right-radius: 1.25rem;
   // padding: 0 0.8rem;
   position: absolute;
-  width: 90%;
+  width: 100%;
   top: 30px;
-  margin: 0 5%;
+
 
 }
 
@@ -39,12 +39,12 @@
     font-family: $montserratMedium;
     font-size: $montserratRegular14;
     text-align: left;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+
   }
 }
-
-
+._arrowContainer{
+  margin-right: 1rem;
+}
  ._dropTitle{
   font-family: $montserratMedium;
   font-size: $montserratMedium14;
@@ -68,10 +68,10 @@
   -moz-appearance: none;
   appearance: none;
   display: inline-block;
-  width: 0.8rem;
-  height: 0.8rem;
-  min-width:  0.8rem;
-  min-height:  0.8rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  min-width:  0.6rem;
+  min-height:  0.6rem;
   padding: 0.1rem;
   background-clip: content-box;
   border: 2px solid $black;
@@ -94,18 +94,17 @@
 ._checkContent{
   display: flex;
   margin-left: 1rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
 }
 
 @include responsive(md) {
 
 ._dropDown{
   height: 2.5rem;
-  width:130px;
 }
 
 ._drop{
-  width: 130px;
-  transform: translate(-8.1%, 55%);
   padding-top: 0.5rem;
 }
 

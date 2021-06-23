@@ -1,0 +1,106 @@
+@import '../../../public/styles/index.scss';
+
+._background {
+
+  height: calc(100vh - 5rem);
+  z-index: 996;
+  position: fixed;
+  bottom: 0px;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+._modal {
+  padding: 3rem 2.5rem;
+  box-sizing: border-box;
+  width: 18.75rem;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+}
+
+
+
+._cardParent {
+  background-color: $pampas;
+  border-radius: 38px;
+  padding: 1.2rem;
+  margin-top: 1.5rem;
+  box-sizing: border-box;
+}
+
+
+._totalParent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+._parentContainer{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-content: center;
+}
+
+._parentTitle{
+  font-size: $blackerTextHeavy22;
+  font-family: $blackerTextHeavy;
+  color: $mineShaft;
+}
+
+._parentTotal{
+  font-size: $montserratBold22;
+  font-family: $montserratBold;
+  color: $mineShaft;
+}
+
+._btnParent {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+._hidden {
+  display: none;
+}
+
+._header{
+  text-align: center;
+}
+
+._title{
+  font-family: $blackerTextHeavyBold;
+  font-size: $blackerTextHeavy40;
+  margin-bottom: 1rem;
+}
+
+._subtitle{
+  font-size: $montserratRegular16;
+  font-family: $montserratRegular;
+  margin-bottom: 1rem;
+}
+
+._body{
+  text-align: center;
+}
+
+@include responsive(md) {
+
+  ._background{
+    width: 100%;
+  }
+ ._modal{
+   height: 100vh;
+   width: 100%;
+ }
+ ._header{
+   text-align: left;
+ }
+
+}

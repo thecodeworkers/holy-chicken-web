@@ -50,6 +50,8 @@ const NavBar = ({ data }) => {
     dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
   }
 
+
+
   return (
     <>
       <nav className={styles._main}>
@@ -80,7 +82,7 @@ const NavBar = ({ data }) => {
                 <Button color='#FD8C2E' text='Pedir ahora' textColor='#fff'></Button>
               </div>
 
-              <div className={styles._iconParent} onClick={() => navigation('/cart')}>
+              <div className={styles._iconParent} onClick={() => openModal('cartModal')}>
                 <Cart color='#000' />
               </div>
 

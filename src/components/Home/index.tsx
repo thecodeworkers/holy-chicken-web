@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Navbar, IndividualProductModal } from '@components'
+import { Navbar, IndividualProductModal, CartModal } from '@components'
 import Footer from '../Footer'
 import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner } from './elements'
 
@@ -14,6 +14,7 @@ const Home = ({ content, data, resource }) => {
 
       <Navbar data={data?.header}/>
       <IndividualProductModal />
+      <CartModal />
       {content ? (<>
       <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner} resource={resource}/>
       <SocialSwipe />

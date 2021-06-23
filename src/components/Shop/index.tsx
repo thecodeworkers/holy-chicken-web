@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Navbar, ModalFrame, ModalContact, LoginModal, RegisterModal, ChangePasswordModal } from '@components'
+import { Navbar, ModalFrame, ModalContact, LoginModal, RegisterModal, ChangePasswordModal, CartModal } from '@components'
 import Footer from '../Footer'
 import { FirstBanner } from './elements'
 import ForgotPasswordModal from '../ForgotPasswordModal'
@@ -16,6 +16,7 @@ const Shop = ({ content, data, filters, backup }) => {
       <LoginModal />
       <RegisterModal />
       <ForgotPasswordModal />
+      <CartModal />
       <Navbar data={data?.header} />
       <ChangePasswordModal />
       {content ? (<>

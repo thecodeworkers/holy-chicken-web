@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './styles.module.scss'
 import { useRouter } from 'next/router'
-import { LeftArrow } from '@images/icons';
+import { LeftArrow, DownArrow} from '@images/icons';
 
 
 const DropDownFilter = ({ }) => {
@@ -17,8 +17,10 @@ const DropDownFilter = ({ }) => {
 
   return (
               <div className={styles._dropDown} onClick={showDropDown} >
-                <p className={styles._filterTitle}><strong>Ordernar por</strong></p>
-                  <LeftArrow color={'#000000'} />
+                <p className={styles._filterTitle}><strong>Ordenar por</strong></p>
+                <div className={styles._arrowContainer}>
+                {!show ? <LeftArrow color={'#000000'}/> : <DownArrow color={'#000000'}/>}
+                </div>
                   {show ?
                   <div className={styles._drop}>
                     <div className={styles._dropDownContent}>
