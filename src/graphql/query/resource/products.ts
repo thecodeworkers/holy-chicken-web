@@ -5,6 +5,7 @@ products(first: 10000000) {
     id
     description
     slug
+    databaseId
     ... on SimpleProduct {
       id
       name
