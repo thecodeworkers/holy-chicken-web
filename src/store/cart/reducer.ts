@@ -1,9 +1,10 @@
 import { AnyAction } from 'redux'
-import { CURRENT_PRODUCT, PRODUCTS_NUMBER } from './action-types'
+import { CURRENT_PRODUCT, PRODUCTS_NUMBER, CART_PRODUCTS } from './action-types'
 
 const initialState = {
   currentProduct: null,
-  number: null
+  number: null,
+  cartProducts: []
 }
 
 const cardReducer = (state = initialState, { type, payload }: AnyAction) => {
@@ -12,6 +13,9 @@ const cardReducer = (state = initialState, { type, payload }: AnyAction) => {
       return { ...state, ...payload }
 
     case PRODUCTS_NUMBER:
+      return { ...state, ...payload }
+
+    case CART_PRODUCTS:
       return { ...state, ...payload }
 
     default:

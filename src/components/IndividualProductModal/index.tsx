@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal, setProductsNumber } from '@store/actions'
+import { setShowModal, setProductsNumber, setCartProducts } from '@store/actions'
 import { ClothSection, VerticalList, VerticalListWithImage, CardSection } from './elements'
 import { createMarkup } from '@utils'
 
@@ -11,7 +11,7 @@ const IndividualProduct = ({ type = 'list' }) => {
   const dispatch = useDispatch()
   const [productNumber, setProductNumber] = useState(0)
 
-  const { intermitence: { individualProductModal }, cart: { currentProduct } } = useSelector((state: any) => state)
+  const { intermitence: { individualProductModal }, cart: { currentProduct, cartProducts } } = useSelector((state: any) => state)
 
   const closeModal = (event, flag = false) => {
     const { target } = event
@@ -19,6 +19,8 @@ const IndividualProduct = ({ type = 'list' }) => {
       dispatch(setShowModal({ individualProductModal: false }))
     }
   }
+
+
 
   const aumented = () => setProductNumber(number => ++number)
 
@@ -39,15 +41,24 @@ const IndividualProduct = ({ type = 'list' }) => {
         return <CardSection />
 
       case 'bebidas':
-        return <VerticalListWithImage />
+        return <VerticalListWithImage attributes={attributes}  />
 
       case 'merch':
         return <ClothSection size={true} attributes={attributes} />
 
       default:
-        return <CardSection />
+        return <div></div>
     }
   }
+
+  const setProductstoCart = () => {
+    dispatch(setProductsNumber({ number: productNumber }))
+    dispatch(setCartProducts(currentProduct))
+  }
+
+  useEffect(() => {
+    console.log(cartProducts)
+  }, [cartProducts])
 
   return (
     <div className={individualProductModal ? styles._background : styles._hidden} onClick={closeModal} id='individual-product'>
@@ -106,7 +117,7 @@ const IndividualProduct = ({ type = 'list' }) => {
 
         <div className={styles._totalParent}>
           <div className={styles._btnParent}>
-            <Button text='Agregar' color='#000' textColor='#FFF'method={updateNumber} />
+            <Button text='Agregar' color='#000' textColor='#FFF' method={setProductstoCart}/>
           </div>
 
           <div>

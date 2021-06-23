@@ -6,16 +6,11 @@
   width: 100%;
   padding: 1.5rem;
   box-sizing: border-box;
-<<<<<<< HEAD
-  display: block;
-  position: relative;
-=======
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   min-height: 21.875rem;
->>>>>>> 184de9b54197c36f931f287ee7174e0ef487dc95
 
   & h3 {
     font-family: $blackerTextHeavy;
