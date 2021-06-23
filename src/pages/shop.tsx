@@ -5,9 +5,9 @@ import { wrapper } from '@store'
 import { getResources } from '@store/actions'
 
 const ShopPage = () => {
-  const { resource: { general: { general }, products } } = useSelector((state: any) => state)
+  const { resource: { general: { general }, products,  productsCategories, productsCopy } } = useSelector((state: any) => state)
 
-  return <Shop content={products} data={general} />
+  return <Shop content={products} backup={productsCopy} data={general} filters={productsCategories} />
 
 }
 
