@@ -91,7 +91,7 @@ export const productFilter = (nodes: Array<any>, comparison, key) => {
       for (let value of select) {
         if (type === 'categories') {
           for (let compare of comparison[type]) {
-            if (value.translations[0].translation[key] === compare) {
+            if (value[key] === compare) {
               validFilter = true
               break;
             }
@@ -101,5 +101,5 @@ export const productFilter = (nodes: Array<any>, comparison, key) => {
     }
     return validation && validFilter
   }
-  return (comparison.attributes.length || comparison.categories.length) ? nodes.filter(nodeFilter) : nodes
+  return (comparison.categories.length) ? nodes.filter(nodeFilter) : nodes
 }

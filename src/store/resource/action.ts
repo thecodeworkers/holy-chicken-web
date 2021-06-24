@@ -18,8 +18,9 @@ export const getResources: any = (consult: string = '') => async (dispatch, getS
 
   const resource = await resources()
   resource['outstanding'] = orderBy(resource.products, 'totalSales', 'asc').slice(0, 3)
+  resource['shop'] = resource.products
 
-  dispatch(actionObject(SET_RESOURCES, { ...resource, productsCopy: resource?.products}))
+  dispatch(actionObject(SET_RESOURCES, { ...resource, productsCopy: resource?.products }))
 }
 
 export const searchProducts: any = (data) => actionObject(SEARCH_PRODUCTS, data)
@@ -28,7 +29,6 @@ export const setProductFilter: any = (values) => async (dispatch, getState) => {
   try {
 
     const { resource: { products } } = getState()
-
     dispatch(actionObject(SET_FILTER, { filter: values, shop: productFilter(products, values, 'slug') }))
 
   } catch (error) {
