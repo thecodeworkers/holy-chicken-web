@@ -1,4 +1,5 @@
 import styles from './styles.module.scss'
+import { CountProduct } from '@components'
 
 const CardSection = () => {
   return (
@@ -81,15 +82,7 @@ const CardSection = () => {
             </div>
 
             <div className={styles._column}>
-              <div className={styles._numberParent}>
-                <div className={styles._circle}>
-                  <p>-</p>
-                </div>
-                <input type='text' value='1' readOnly className={styles._input} ></input>
-                <div className={styles._circle}>
-                  <p>+</p>
-                </div>
-              </div>
+             <CountProduct />
             </div>
 
             <div className={styles._column}>
@@ -108,15 +101,7 @@ const CardSection = () => {
             </div>
 
             <div className={styles._column}>
-              <div className={styles._numberParent}>
-                <div className={styles._circle}>
-                  <p>-</p>
-                </div>
-                <input type='text' value='1' readOnly className={styles._input} ></input>
-                <div className={styles._circle}>
-                  <p>+</p>
-                </div>
-              </div>
+            <CountProduct />
             </div>
 
             <div className={styles._column}>
@@ -135,15 +120,7 @@ const CardSection = () => {
             </div>
 
             <div className={styles._column}>
-              <div className={styles._numberParent}>
-                <div className={styles._circle}>
-                  <p>-</p>
-                </div>
-                <input type='text' value='1' readOnly className={styles._input} ></input>
-                <div className={styles._circle}>
-                  <p>+</p>
-                </div>
-              </div>
+            <CountProduct />
             </div>
 
             <div className={styles._column}>
@@ -165,15 +142,7 @@ const CardSection = () => {
             </div>
 
             <div className={styles._column}>
-              <div className={styles._numberParent}>
-                <div className={styles._circle}>
-                  <p>-</p>
-                </div>
-                <input type='text' value='1' readOnly className={styles._input} ></input>
-                <div className={styles._circle}>
-                  <p>+</p>
-                </div>
-              </div>
+            <CountProduct />
             </div>
 
             <div className={styles._column}>
@@ -192,15 +161,7 @@ const CardSection = () => {
             </div>
 
             <div className={styles._column}>
-              <div className={styles._numberParent}>
-                <div className={styles._circle}>
-                  <p>-</p>
-                </div>
-                <input type='text' value='1' readOnly className={styles._input}></input>
-                <div className={styles._circle}>
-                  <p>+</p>
-                </div>
-              </div>
+            <CountProduct />
             </div>
 
             <div className={styles._column}>
@@ -219,15 +180,7 @@ const CardSection = () => {
             </div>
 
             <div className={styles._column}>
-              <div className={styles._numberParent}>
-                <div className={styles._circle}>
-                  <p>-</p>
-                </div>
-                <input type='text' value='1' readOnly className={styles._input}></input>
-                <div className={styles._circle}>
-                  <p>+</p>
-                </div>
-              </div>
+            <CountProduct />
             </div>
 
             <div className={styles._column}>
@@ -252,15 +205,7 @@ const CardSection = () => {
 
             <div className={styles._newParent}>
               <div className={styles._column}>
-                <div className={styles._numberParentResponsive}>
-                  <div className={styles._circle}>
-                    <p>-</p>
-                  </div>
-                  <input type='text' value='1' readOnly className={styles._input}></input>
-                  <div className={styles._circle}>
-                    <p>+</p>
-                  </div>
-                </div>
+              <CountProduct />
               </div>
 
               <div className={styles._column}>
@@ -281,15 +226,7 @@ const CardSection = () => {
 
             <div className={styles._newParent}>
               <div className={styles._column}>
-                <div className={styles._numberParentResponsive}>
-                  <div className={styles._circle}>
-                    <p>-</p>
-                  </div>
-                  <input type='text' value='1' readOnly className={styles._input}></input>
-                  <div className={styles._circle}>
-                    <p>+</p>
-                  </div>
-                </div>
+              <CountProduct />
               </div>
 
               <div className={styles._column}>
@@ -309,15 +246,7 @@ const CardSection = () => {
 
             <div className={styles._newParent}>
               <div className={styles._column}>
-                <div className={styles._numberParentResponsive}>
-                  <div className={styles._circle}>
-                    <p>-</p>
-                  </div>
-                  <input type='text' value='1' readOnly className={styles._input}></input>
-                  <div className={styles._circle}>
-                    <p>+</p>
-                  </div>
-                </div>
+              <CountProduct />
               </div>
 
               <div className={styles._column}>
@@ -339,15 +268,7 @@ const CardSection = () => {
 
             <div className={styles._newParent}>
               <div className={styles._column}>
-                <div className={styles._numberParentResponsive}>
-                  <div className={styles._circle}>
-                    <p>-</p>
-                  </div>
-                  <input type='text' value='1' readOnly className={styles._input}></input>
-                  <div className={styles._circle}>
-                    <p>+</p>
-                  </div>
-                </div>
+               <CountProduct />
               </div>
 
               <div className={styles._column}>
@@ -368,15 +289,7 @@ const CardSection = () => {
 
             <div className={styles._newParent}>
               <div className={styles._column}>
-                <div className={styles._numberParentResponsive}>
-                  <div className={styles._circle}>
-                    <p>-</p>
-                  </div>
-                  <input type='text' value='1' readOnly className={styles._input}></input>
-                  <div className={styles._circle}>
-                    <p>+</p>
-                  </div>
-                </div>
+              <CountProduct />
               </div>
 
               <div className={styles._column}>
@@ -397,15 +310,7 @@ const CardSection = () => {
 
             <div className={styles._newParent}>
               <div className={styles._column}>
-                <div className={styles._numberParentResponsive}>
-                  <div className={styles._circle}>
-                    <p>-</p>
-                  </div>
-                  <input type='text' value='1' readOnly className={styles._input}></input>
-                  <div className={styles._circle}>
-                    <p>+</p>
-                  </div>
-                </div>
+              <CountProduct />
               </div>
 
               <div className={styles._column}>

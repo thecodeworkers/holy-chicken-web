@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { Button } from '@components'
+import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal, setProductsNumber, setCartProducts } from '@store/actions'
 import { ClothSection, VerticalList, VerticalListWithImage, CardSection } from './elements'
@@ -70,15 +70,7 @@ const IndividualProduct = ({ type = 'list' }) => {
               <div>
                 <p className={styles._title}>{currentProduct?.name}</p>
               </div>
-              <div className={styles._numberParent}>
-                <div className={styles._circle} onClick={decrement}>
-                  <p>-</p>
-                </div>
-                <input type='text' value={productNumber} readOnly className={styles._input}></input>
-                <div className={styles._circle} onClick={aumented}>
-                  <p>+</p>
-                </div>
-              </div>
+              <CountProduct/>
             </div>
 
             <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description) }></div>

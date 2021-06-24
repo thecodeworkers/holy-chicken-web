@@ -11,19 +11,22 @@ const DropDownFilter = ({ }) => {
   const router = useRouter()
   const dispatch = useDispatch()
 
-  const navigation = (route: string) => {
-    if (route != router.pathname) router.push(route)
-  }
-
   const sortBy = (value) => {
     dispatch(orderProducts(value))
   }
 
-  const showDropDown = () => setShow(show => !show)
+  const showDropDown = (event) => {
+    const { target } = event
+    if(target.id == 'drop' ||
+     target.id == 'title') {
+      setShow(show => !show)
+    }
+
+  }
 
   return (
-    <div className={styles._dropDown} onClick={showDropDown} >
-      <p className={styles._filterTitle}><strong>Ordenar por</strong></p>
+    <div className={styles._dropDown} onClick={showDropDown} id={'drop'} >
+      <p className={styles._filterTitle} ><strong id={'title'}>Ordenar por</strong></p>
       <div className={styles._arrowContainer}>
         {!show ? <LeftArrow color={'#000000'} /> : <DownArrow color={'#000000'} />}
       </div>
