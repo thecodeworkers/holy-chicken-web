@@ -7,6 +7,7 @@ const initialState = {
   products: {},
   productsCategories: {},
   productsCopy: {},
+  attributes: {},
   filter: {
     categories: []
   },

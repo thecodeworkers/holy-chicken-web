@@ -6,7 +6,8 @@ import { getResources, setProductFilter } from '@store/actions'
 
 const SideFilter = () => {
 
-  const { resource: { filter } } = useSelector((state: any) => state)
+  const { resource: { filter, productsCategories } } = useSelector((state: any) => state)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const SideFilter = () => {
     dispatch(setProductFilter(data))
   }
 
-  const { resource: { productsCategories } } = useSelector((state: any) => state)
+
   return (
     <div className={styles._container}>
       {
