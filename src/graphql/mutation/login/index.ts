@@ -6,6 +6,11 @@ const loginMutation = async ({ email, password, sessionToken }) => {
   mutation Login {
     login(input: {clientMutationId: "${uuidv4()}", username: "${email}", password: "${password}"}) {
       authToken
+      sessionToken
+      customer {
+        sessionToken
+        jwtAuthToken
+      }
       user {
         email
         firstName

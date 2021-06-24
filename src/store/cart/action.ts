@@ -8,10 +8,13 @@ export const setProductsNumber = (number: any) => actionObject(PRODUCTS_NUMBER, 
 export const setCartProducts = ({ databaseId, quantity }) => async (dispatch, getState) => {
   try {
     const { auth } = await getState()
-    const sessionToken = auth?.login?.sessionToken
+
+    const sessionToken = auth?.login?.login?.customer?.sessionToken
+    const jwtToken = auth?.login?.login?.customer?.jwtAuthToken
 
     if (auth?.isAuth) {
-      const result = await addItemToCartMutation(databaseId, 1, sessionToken)
+      const result = await addItemToCartMutation(databaseId, 2, null, sessionToken)
+
       if(result.message) throw new Error(result.message)
 
       const { addCartItems } = result
@@ -31,6 +34,6 @@ export const getCart = () => async (dispatch, getState) => {
   const sessionToken = auth?.login?.sessionToken
   const result = await getCartQuery(auth.isAuth, sessionToken)
 
-  return console.log('REAUUULT CART', result)
+  return console.log('RESUUUULT CART', result)
 
 }
