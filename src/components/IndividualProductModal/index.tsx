@@ -80,14 +80,12 @@ const IndividualProduct = ({ type = 'list' }) => {
                 </div>
                 <input type='text' value={productNumber} readOnly className={styles._input}></input>
                 <div className={styles._circle} onClick={aumented}>
-                  <p >+</p>
+                  <p>+</p>
                 </div>
               </div>
             </div>
 
-            <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description) }>
-
-            </div>
+            <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description) }></div>
 
             {
               currentProduct?.productCategories?.nodes[0]?.slug == 'holy-sanduches' ?
