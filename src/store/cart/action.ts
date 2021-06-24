@@ -33,5 +33,4 @@ export const getCart = () => async (dispatch, getState) => {
 
   return console.log('REAUUULT CART', result)
 
-  // dispatch(actionObject(GET_CART, shop))
 }

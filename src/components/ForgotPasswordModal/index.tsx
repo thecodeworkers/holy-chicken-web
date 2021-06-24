@@ -2,19 +2,14 @@ import { useEffect, useState  } from 'react'
 import styles from './styles.module.scss'
 import { Button, Toast } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal, resetModals, setToast } from '@store/actions'
+import { setShowModal, resetModals, setToast, resetForgotStatus } from '@store/actions'
 import formikConfig from './formik'
 
 const ForgotPasswordModal = () => {
 
   const dispatch = useDispatch()
-  const { intermitence: { forgotPasswordModal }, auth, toast} = useSelector((state: any) => state)
-
-  const [status, setStatus] = useState(false)
-
-  const changeStatus = () => setStatus(true)
-  const formik = formikConfig(dispatch, changeStatus)
-
+  const { intermitence: { forgotPasswordModal }, auth } = useSelector((state: any) => state)
+  const formik = formikConfig(dispatch)
   const { errors, touched } = formik
 
   const closeModal = (event) => {
@@ -23,28 +18,22 @@ const ForgotPasswordModal = () => {
       dispatch(setShowModal({ forgotPasswordModal: false }))
       formik.resetForm()
       dispatch(setToast('', '', 0))
-      setStatus(false)
     }
   }
 
   useEffect(() => {
-    if(auth?.emailSended && status) {
-      dispatch(setToast('check', 'Correo enviado exitosamente ', 1))
+    if(auth?.emailSended) {
       dispatch(setShowModal({ forgotPasswordModal: false }))
+      dispatch(resetForgotStatus())
       formik.resetForm()
     }
 
-    if(!auth?.emailSended && status) dispatch(setToast('error', 'Error al enviar correo', 1))
   }, [auth?.emailSended])
 
 
-  const openChangePassword = () => {
+  const openChangePassword = (  ) => {
     dispatch(resetModals())
     dispatch(setShowModal({ changePasswordModal: true }))
-  }
-
-  const changeToastStatus = () => {
-    dispatch(setToast('error', 'texto', 1))
   }
 
   return (

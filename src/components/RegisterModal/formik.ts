@@ -3,7 +3,7 @@ import { emailRegex, passwordRegex, onlyLettersRegex, onlyNumbersRegex } from '@
 import { registerUser } from '@store/actions'
 import * as Yup from 'yup'
 
-const formikConfig = (dispatch, method) => (useFormik({
+const formikConfig = (dispatch) => (useFormik({
   initialValues: {
     firstName: '',
     lastName: '',
@@ -44,7 +44,6 @@ const formikConfig = (dispatch, method) => (useFormik({
 
   onSubmit: values => {
     dispatch(registerUser(values))
-    method()
   }
 }))
 
