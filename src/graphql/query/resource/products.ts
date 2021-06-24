@@ -12,6 +12,9 @@ products(first: 10000000) {
       name
       price
       stockStatus
+      spicy {
+        isSpicy
+      }
       attributes {
       nodes {
         id
@@ -38,6 +41,10 @@ products(first: 10000000) {
       id
       name
       price
+      databaseId
+      spicy {
+        isSpicy
+      }
       attributes {
       nodes {
         id
@@ -61,9 +68,13 @@ products(first: 10000000) {
       }
     }
     ... on ExternalProduct {
- id
+      id
       name
       price
+      databaseId
+      spicy {
+        isSpicy
+      }
       attributes {
       nodes {
         id

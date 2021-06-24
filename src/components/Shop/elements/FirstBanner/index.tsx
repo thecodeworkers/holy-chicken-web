@@ -13,8 +13,6 @@ import { searchProducts, setShowModal, setCurrentProduct } from '@store/actions'
 
 const FirstBanner = ({ content, backup }: any) => {
 
-  console.log(backup, );
-
   const dispatch = useDispatch()
   const [showSide, setShowSide] = useState(false)
   const router = useRouter()
@@ -39,7 +37,7 @@ const FirstBanner = ({ content, backup }: any) => {
     setSearchValue(value)
     const valueLower = value.toLowerCase();
     const result = content.filter(((item: any) => item.name.toLowerCase().includes(valueLower)))
-    dispatch(searchProducts({ productsCopy: result }))
+    dispatch(searchProducts({ shop: result }))
     setPage(1)
   }
 
