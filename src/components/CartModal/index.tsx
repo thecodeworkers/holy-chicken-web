@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { getCart, setShowModal } from '@store/actions'
 import { createMarkup } from '@utils'
 
 const CartModal = () => {
@@ -11,11 +11,11 @@ const CartModal = () => {
 
   const { intermitence: { cartModal }, cart } = useSelector((state: any) => state)
 
-  const { cartProducts } = cart
-
   const closeModal = (event, flag = false) => {
     dispatch(setShowModal({ cartModal: false }))
   }
+
+  const nodes = cart?.cartProducts?.contents?.nodes ?? []
 
   return (
     <div className={cartModal ? styles._background : styles._hidden} onClick={closeModal}>
@@ -27,15 +27,16 @@ const CartModal = () => {
       <div className={styles._body}>
 
       {
-        !cartProducts.length ?
+        !nodes.length ?
         <p>Tu carrito está vacío</p> :
-        cartProducts.map((item, index) => {
+        nodes.map((item, index) => {
+          const dataItem = item?.product?.node
           return (
             <div key={index}>
-              <p>{item?.name}</p>
+              <p>{dataItem?.name}</p>
               <div dangerouslySetInnerHTML={createMarkup(item?.description) }></div>
               {/* <p>{item?.description}</p> */}
-              <p>{item?.price}</p>
+              <p>{dataItem?.price}</p>
             </div>
           )
         })
