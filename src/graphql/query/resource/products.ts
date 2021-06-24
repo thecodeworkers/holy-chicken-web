@@ -11,6 +11,7 @@ products(first: 10000000) {
       id
       name
       price
+      stockStatus
       attributes {
       nodes {
         id

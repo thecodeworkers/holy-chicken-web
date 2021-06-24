@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState} from 'react';
 import styles from './styles.module.scss'
 import { GeneralCard, IndividualProductModal } from '@components'
 import { useRouter } from 'next/router'
@@ -8,11 +8,12 @@ import { Pagination } from '@components'
 import DropDownFilter from '../DropDownFilter';
 import SideFilter from '../SideFilter';
 import SideFilterMenu from '../SideFilterMenu';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { searchProducts, setShowModal, setCurrentProduct } from '@store/actions'
-import { relative } from 'path';
 
 const FirstBanner = ({ content, backup }: any) => {
+
+  console.log(backup, );
 
   const dispatch = useDispatch()
   const [showSide, setShowSide] = useState(false)
@@ -47,8 +48,6 @@ const FirstBanner = ({ content, backup }: any) => {
     dispatch(setShowModal({ individualProductModal: true }))
     dispatch(setCurrentProduct({ currentProduct: item }))
   }
-
-
 
   return (
     <>
@@ -107,7 +106,9 @@ const FirstBanner = ({ content, backup }: any) => {
                   {
                     paginate(backup, page, perPage).map((item, index) => {
                       return (
-                        <div className={styles._card} key={index} onClick={() => openIndividualModal(item)}>
+                        <div className={item.stockStatus == 'OUT_OF_STOCK' ? styles._cardDisabled : styles._card}
+                         key={index} onClick={() => item.stockStatus === 'OUT_OF_STOCK' ? null :
+                         openIndividualModal(item) }>
                           <GeneralCard
                             name={item?.name}
                             image={item.image?.mediaItemUrl}
