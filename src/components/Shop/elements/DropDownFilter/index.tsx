@@ -2,15 +2,21 @@ import { useState } from 'react';
 import styles from './styles.module.scss'
 import { useRouter } from 'next/router'
 import { LeftArrow, DownArrow} from '@images/icons';
-
+import { orderProducts } from '@store/actions'
+import { useDispatch } from 'react-redux'
 
 const DropDownFilter = ({ }) => {
 
   const [show, setShow] = useState(false)
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const navigation = (route: string) => {
     if (route != router.pathname) router.push(route)
+  }
+
+  const sortBy = (value) => {
+    dispatch(orderProducts(value))
   }
 
   const showDropDown = () => setShow(show => !show)
@@ -26,7 +32,7 @@ const DropDownFilter = ({ }) => {
                     <div className={styles._dropDownContent}>
                       <div className={styles._checkContent}>
                         <div className={styles._checkParent}>
-                          <input type='radio' className={styles._radioBtn} defaultChecked={false}></input>
+                          <input type='checkbox'  onClick={()=> sortBy('desc')} className={styles._radioBtn} defaultChecked={false}></input>
                         </div>
                         <p className={styles._dropTitle}>Destacados</p>
                         </div>

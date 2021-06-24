@@ -36,3 +36,34 @@ export const setProductFilter: any = (values) => async (dispatch, getState) => {
 
   }
 }
+
+export const orderProducts: any = (value) => async (dispatch, getState) => {
+
+  const { shop: { shop, filter } } = getState()
+
+  let data = shop.map((item) => {
+    item.date = new Date(item.date).getTime()
+    return item
+  })
+
+  switch (value) {
+    case 'new':
+      data = orderBy(data, 'date', 'desc')
+      break;
+    case 'lowestCost':
+      data = orderBy(data, 'price', 'asc')
+      break;
+    case 'highestCost':
+      data = orderBy(data, 'price', 'desc')
+      break;
+    case 'collection':
+      data = orderBy(data, 'outstandingCollection', 'desc', ['productData'])
+      break;
+    case 'basics':
+      data = orderBy(data, 'outstandingCollection', 'asc', ['productData'])
+      break;
+  }
+
+  dispatch(actionObject(SET_FILTER, { filter: filter, shop: data }))
+
+}
