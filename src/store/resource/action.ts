@@ -39,28 +39,19 @@ export const setProductFilter: any = (values) => async (dispatch, getState) => {
 
 export const orderProducts: any = (value) => async (dispatch, getState) => {
 
-  const { shop: { shop, filter } } = getState()
+  const { resource: { shop, filter } } = getState()
 
-  let data = shop.map((item) => {
-    item.date = new Date(item.date).getTime()
-    return item
-  })
+  let data = shop
 
   switch (value) {
-    case 'new':
-      data = orderBy(data, 'date', 'desc')
+    case 'outstanding':
+      data = orderBy(data, 'totalSales', 'asc')
       break;
     case 'lowestCost':
       data = orderBy(data, 'price', 'asc')
       break;
     case 'highestCost':
       data = orderBy(data, 'price', 'desc')
-      break;
-    case 'collection':
-      data = orderBy(data, 'outstandingCollection', 'desc', ['productData'])
-      break;
-    case 'basics':
-      data = orderBy(data, 'outstandingCollection', 'asc', ['productData'])
       break;
   }
 
