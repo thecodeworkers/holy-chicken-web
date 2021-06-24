@@ -5,6 +5,7 @@ import resource from './resource/reducer'
 import intermitence from './intermitence/reducer'
 import auth from './auth/reducer'
 import toast from './toast/reducer'
+import cart from './cart/reducer'
 
 const reducers = combineReducers({
   loader,
@@ -12,7 +13,8 @@ const reducers = combineReducers({
   resource,
   intermitence,
   auth,
-  toast
+  toast,
+  cart
 })
 
 export default reducers

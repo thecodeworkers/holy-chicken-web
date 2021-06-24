@@ -1,0 +1,37 @@
+@import '@styles/index.scss';
+
+._container {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+._numberContainer {
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+._number {
+  font-size: $montserratLight14;
+}
+
+._arrowContainer {
+  display: flex;
+  cursor: pointer;
+}
+
+._arrow {
+  @include arrow($mineShaft, 6px);
+}
+
+@include responsive(md) {
+  ._container {
+    width: 100%;
+  }
+}

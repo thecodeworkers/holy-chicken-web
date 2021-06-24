@@ -67,7 +67,8 @@ const FirstBanner = ({ data, content, publicity, resource }) => {
                     ._banner${index} {
                       background-image: url(${newArray[index]?.image?.mediaItemUrl});
                       height: 450px;
-                      width: 85vw
+                      width: 85vw;
+                      background-size:cover
                     }
                     @media(max-width: 576px) {
                       ._banner${index} {

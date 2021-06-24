@@ -5,13 +5,14 @@ import { ChickenLogo } from '@images/resources'
 import { ResponsiveMenu, Button } from '@components'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import { setShowModal, setLoader, logoutUser, setToast } from '@store/actions'
+import { setShowModal, setLoader, logoutUser, setToast, resetModals} from '@store/actions'
 import { useSelector } from 'react-redux'
 
 
 const NavbarResponsive = () => {
 
   const [show, setShow] = useState(0)
+  const [showCart, setShowCart] = useState(false)
   const [showPanel, setShowPanel] = useState(false)
 
   const { auth } = useSelector((state: any) => state)
@@ -45,6 +46,12 @@ const NavbarResponsive = () => {
     dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
   }
 
+  const openModal = (name) => {
+   dispatch(resetModals())
+    dispatch(setShowModal({ [name]: true }))
+  }
+  const showedCart = () => setShowCart(showCart => !showCart)
+
   return (
     <>
       <nav className={styles._nav}>
@@ -58,7 +65,7 @@ const NavbarResponsive = () => {
             </div>
           </div>
           <div className={styles._rightSection}>
-            <div onClick={() => navigation('/shop')}>
+            <div onClick={() => openModal('cartModal')}>
               <Cart color='#000' />
             </div>
             <div onClick={openLoginModal}>

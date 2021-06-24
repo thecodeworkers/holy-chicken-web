@@ -16,7 +16,7 @@ const NavBar = ({ data }) => {
   const router = useRouter()
   const [show, setShow] = useState(false)
 
-  const { auth } = useSelector((state: any) => state)
+  const { auth, cart } = useSelector((state: any) => state)
   const { isAuth } = auth
 
   const navigation = (route: string, loader = true) => {
@@ -50,6 +50,8 @@ const NavBar = ({ data }) => {
     dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
   }
 
+
+
   return (
     <>
       <nav className={styles._main}>
@@ -80,8 +82,14 @@ const NavBar = ({ data }) => {
                 <Button color='#FD8C2E' text='Pedir ahora' textColor='#fff'></Button>
               </div>
 
-              <div className={styles._iconParent} onClick={() => navigation('/cart')}>
+              <div className={styles._iconParent} onClick={() => openModal('cartModal')}>
                 <Cart color='#000' />
+                {
+                  cart?.number > 0 && (<div className={styles._numberParent}>
+                    <p>{cart?.number}</p>
+                  </div>)
+                }
+
               </div>
 
               <div className={styles._iconParent} >

@@ -1,16 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { setShowModal, setProductsNumber, setCartProducts } from '@store/actions'
 import { ClothSection, VerticalList, VerticalListWithImage, CardSection } from './elements'
+import { createMarkup } from '@utils'
 
-const IndividualProduct = ({ type = 'colorsizes' }) => {
+const IndividualProduct = ({ type = 'list' }) => {
 
   const dispatch = useDispatch()
-  const [number, setNumber] = useState(0)
+  const [productNumber, setProductNumber] = useState(0)
 
-  const { intermitence: { individualProductModal } } = useSelector((state: any) => state)
+  const { intermitence: { individualProductModal }, cart: { currentProduct, cartProducts } } = useSelector((state: any) => state)
 
   const closeModal = (event, flag = false) => {
     const { target } = event
@@ -19,30 +20,45 @@ const IndividualProduct = ({ type = 'colorsizes' }) => {
     }
   }
 
-  const aumented = () => setNumber(number => ++number)
+
+
+  const aumented = () => setProductNumber(number => ++number)
 
   const decrement = () => {
-    if (number >= 1) setNumber(number => --number)
+    if (productNumber >= 1) setProductNumber(number => --number)
   }
 
-  const featuresType = (type) => {
+  const updateNumber = () => {
+    dispatch(setProductsNumber({ number: productNumber }))
+  }
+
+  const featuresType = (type, attributes) => {
     switch (type) {
-      case 'list':
+      case 'temptations':
         return <VerticalList />
 
-      case 'card':
+      case 'holy-sanduches':
         return <CardSection />
 
-      case 'list-image':
-        return <VerticalListWithImage />
+      case 'bebidas':
+        return <VerticalListWithImage attributes={attributes}  />
 
-      case 'colorsizes':
-        return <ClothSection size={true}/>
+      case 'merch':
+        return <ClothSection size={true} attributes={attributes} />
 
       default:
-        break;
+        return <div></div>
     }
   }
+
+  const setProductstoCart = () => {
+    dispatch(setProductsNumber({ number: productNumber }))
+    dispatch(setCartProducts(currentProduct))
+  }
+
+  useEffect(() => {
+    console.log(cartProducts)
+  }, [cartProducts])
 
   return (
     <div className={individualProductModal ? styles._background : styles._hidden} onClick={closeModal} id='individual-product'>
@@ -56,32 +72,34 @@ const IndividualProduct = ({ type = 'colorsizes' }) => {
 
             <div className={styles._titleParent} >
               <div>
-                <p className={styles._title}>NOT SOY HOLY</p>
+                <p className={styles._title}>{currentProduct?.name}</p>
               </div>
               <div className={styles._numberParent}>
                 <div className={styles._circle} onClick={decrement}>
-                  <p >-</p>
+                  <p>-</p>
                 </div>
-                <input type='text' value={number} readOnly className={styles._input}></input>
+                <input type='text' value={productNumber} readOnly className={styles._input}></input>
                 <div className={styles._circle} onClick={aumented}>
                   <p >+</p>
                 </div>
               </div>
             </div>
 
-            <p className={styles._subtitle}>Para los mal portados, 210 gramos de pollo crispy marinado con picante entre pan brioche</p>
+            <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description) }>
+
+            </div>
 
             {
-              type == 'card' ?
+              currentProduct?.productCategories?.nodes[0]?.slug == 'holy-sanduches' ?
                 (<div className={styles._imgParent}>
-                  <img src='images/resources/burguer.png' className={styles._img}></img>
+                  <img src={currentProduct?.image?.mediaItemUrl ?? 'images/resources/burguer.png'} className={styles._img}></img>
                 </div>) : (<div className={styles._bigImgParent}>
-                  <img src='images/resources/shirt.png' className={styles._bigImg}></img>
+                  <img src={currentProduct?.image?.mediaItemUrl ?? 'images/resources/shirt.png'} className={styles._bigImg}></img>
                 </div>)
             }
 
             {
-              type == 'card' && (<div className={styles._inputParent}>
+              currentProduct?.productCategories?.nodes[0]?.slug == 'holy-sanduches' && (<div className={styles._inputParent}>
                 <label>Nota</label>
                 <input
                   type='text'
@@ -93,17 +111,17 @@ const IndividualProduct = ({ type = 'colorsizes' }) => {
 
           </div>
           <div className={styles._rightSide}>
-            {featuresType(type)}
+            {featuresType(currentProduct?.productCategories?.nodes[0]?.slug, currentProduct?.attributes)}
           </div>
         </div>
 
         <div className={styles._totalParent}>
           <div className={styles._btnParent}>
-            <Button text='Agregar' color='#000' textColor='#FFF' />
+            <Button text='Agregar' color='#000' textColor='#FFF' method={setProductstoCart}/>
           </div>
 
           <div>
-            <p>$1,000.00</p>
+            <p>{currentProduct?.price}</p>
           </div>
         </div>
       </div>
