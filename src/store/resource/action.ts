@@ -1,5 +1,5 @@
 import { SET_RESOURCES, } from './action-types'
-import { actionObject, orderBy, productFilter } from '../../utils'
+import { actionObject, formatWooCommerceAmount, orderBy, productFilter } from '../../utils'
 import { pages, resources } from '../../graphql/query'
 import { GET_PAGES } from '@store/page/action-types'
 import { SEARCH_PRODUCTS, SET_FILTER } from './action-types'
