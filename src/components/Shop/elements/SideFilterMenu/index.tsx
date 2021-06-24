@@ -24,7 +24,6 @@ const SideFilter = ({ show = 0, method}) => {
     const data = filter
     if (checked) data[type].push(value)
     if (!checked) data[type].splice(data[type].indexOf(value), 1)
-    console.log(filter)
     dispatch(setProductFilter(data))
   }
 
