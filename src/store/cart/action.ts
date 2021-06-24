@@ -15,10 +15,10 @@ export const setCartProducts = ({ databaseId, quantity }) => async (dispatch, ge
       if(result.message) throw new Error(result.message)
 
       const { addCartItems } = result
+      const itemsNumber = addCartItems?.cart?.contents?.itemCount
 
-      console.log('NUMERO DE ITEEEMS', addCartItems?.cart?.contents?.itemCount)
       dispatch(actionObject(CART_PRODUCTS, { cartProducts: addCartItems?.cart }))
-      dispatch(setProductsNumber({ number: addCartItems?.cart?.contents?.itemCount }))
+      dispatch(setProductsNumber({ number: itemsNumber }))
     }
 
   } catch(error) {
