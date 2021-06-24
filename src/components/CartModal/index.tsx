@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from './styles.module.scss'
-import { Button } from '@components'
+import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal } from '@store/actions'
 import { createMarkup } from '@utils'
@@ -44,15 +44,7 @@ const CartModal = () => {
                       }
                       {/* <p>{item?.description}</p> */}
                       <div className={styles._quantityContainer}>
-                        <div className={styles._numberParent}>
-                          <div className={styles._circle}>
-                            <p>-</p>
-                          </div>
-                          <input type='text' value='1' readOnly className={styles._input} ></input>
-                          <div className={styles._circle}>
-                            <p>+</p>
-                          </div>
-                        </div>
+                      <CountProduct />
                         <p className={styles._number}>{item?.price}</p>
                       </div>
                     </div>
