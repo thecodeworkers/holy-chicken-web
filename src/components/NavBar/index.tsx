@@ -19,6 +19,8 @@ const NavBar = ({ data }) => {
   const { auth, cart } = useSelector((state: any) => state)
   const { isAuth } = auth
 
+  console.log(cart?.number)
+
   const navigation = (route: string, loader = true) => {
     if (route == '/contact') {
       dispatch(resetModals())
@@ -49,8 +51,6 @@ const NavBar = ({ data }) => {
     setShow(false)
     dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
   }
-
-
 
   return (
     <>

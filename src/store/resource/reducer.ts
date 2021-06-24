@@ -1,12 +1,17 @@
 import { AnyAction } from 'redux'
-import { SET_RESOURCES, SEARCH_PRODUCTS } from './action-types'
+import { SET_RESOURCES, SEARCH_PRODUCTS, SET_FILTER } from './action-types'
 
 const initialState = {
   general: {},
   outstanding: {},
   products: {},
   productsCategories: {},
-  productsCopy: {}
+  productsCopy: {},
+  attributes: {},
+  filter: {
+    categories: []
+  },
+  shop: [],
 }
 
 const resourceReducer = (state = initialState, { type, payload }: AnyAction) => {
@@ -15,7 +20,10 @@ const resourceReducer = (state = initialState, { type, payload }: AnyAction) => 
       return { ...state, ...payload }
 
     case SEARCH_PRODUCTS:
-      return { ...state, ...payload}
+      return { ...state, ...payload }
+
+    case SET_FILTER:
+      return { ...state, ...payload }
     default:
       return state
   }

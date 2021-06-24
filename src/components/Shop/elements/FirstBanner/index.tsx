@@ -8,7 +8,7 @@ import { Pagination } from '@components'
 import DropDownFilter from '../DropDownFilter';
 import SideFilter from '../SideFilter';
 import SideFilterMenu from '../SideFilterMenu';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { searchProducts, setShowModal, setCurrentProduct } from '@store/actions'
 import { relative } from 'path';
 
@@ -21,6 +21,7 @@ const FirstBanner = ({ content, backup }: any) => {
   const [page, setPage] = useState(1)
   const [show, setShow] = useState(0)
   const [searchValue, setSearchValue] = useState('')
+
 
   const navigation = (route: string) => {
     if (route != router.pathname) router.push(route)
@@ -46,6 +47,8 @@ const FirstBanner = ({ content, backup }: any) => {
     dispatch(setShowModal({ individualProductModal: true }))
     dispatch(setCurrentProduct({ currentProduct: item }))
   }
+
+
 
   return (
     <>

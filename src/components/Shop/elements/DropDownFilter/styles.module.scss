@@ -1,18 +1,17 @@
 @import '@styles/index.scss';
 
-
-._dropDown{
- border-top-left-radius: 1.25rem;
- border-top-right-radius: 1.25rem;
- cursor: pointer;
- display: flex;
- justify-content: space-between;
- align-items: center;
- background-color: $pampas;
- height: 2.3rem;
- width: 220px;
- box-sizing: border-box;
- position: relative;
+._dropDown {
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $pampas;
+  height: 2.3rem;
+  width: 220px;
+  box-sizing: border-box;
+  position: relative;
 }
 
 ._drop {
@@ -23,8 +22,6 @@
   position: absolute;
   width: 100%;
   top: 30px;
-
-
 }
 
 ._dropDownContent {
@@ -39,20 +36,19 @@
     font-family: $montserratMedium;
     font-size: $montserratRegular14;
     text-align: left;
-
   }
 }
-._arrowContainer{
+._arrowContainer {
   margin-right: 1rem;
 }
- ._dropTitle{
+._dropTitle {
   font-family: $montserratMedium;
   font-size: $montserratMedium14;
   margin-left: 1rem;
   text-align: left;
- }
+}
 
- ._checkParent {
+._checkParent {
   display: flex;
   align-items: center;
 
@@ -70,28 +66,28 @@
   display: inline-block;
   width: 0.6rem;
   height: 0.6rem;
-  min-width:  0.6rem;
-  min-height:  0.6rem;
+  min-width: 0.6rem;
+  min-height: 0.6rem;
   padding: 0.1rem;
   background-clip: content-box;
   border: 2px solid $black;
   background-color: trasparent;
   border-radius: 50%;
-  margin:0;
+  margin: 0;
 
   &:checked {
     background-color: $black;
   }
 }
 
-._filterTitle{
+._filterTitle {
   font-family: $montserratBold;
   font-size: $montserratBold14;
   color: $black;
   margin-left: 1rem;
 }
 
-._checkContent{
+._checkContent {
   display: flex;
   margin-left: 1rem;
   padding-top: 0.4rem;
@@ -99,14 +95,11 @@
 }
 
 @include responsive(md) {
+  ._dropDown {
+    height: 2.5rem;
+  }
 
-._dropDown{
-  height: 2.5rem;
-}
-
-._drop{
-  padding-top: 0.5rem;
-}
-
-
+  ._drop {
+    padding-top: 0.5rem;
+  }
 }

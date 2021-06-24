@@ -29,7 +29,7 @@ const IndividualProduct = ({ type = 'list' }) => {
   }
 
   const updateNumber = () => {
-    dispatch(setProductsNumber({ number: productNumber }))
+
   }
 
   const featuresType = (type, attributes) => {
@@ -52,13 +52,9 @@ const IndividualProduct = ({ type = 'list' }) => {
   }
 
   const setProductstoCart = () => {
-    dispatch(setProductsNumber({ number: productNumber }))
     dispatch(setCartProducts(currentProduct))
+    // dispatch(setProductsNumber({ number: 1 }))
   }
-
-  useEffect(() => {
-    console.log(cartProducts)
-  }, [cartProducts])
 
   return (
     <div className={individualProductModal ? styles._background : styles._hidden} onClick={closeModal} id='individual-product'>
