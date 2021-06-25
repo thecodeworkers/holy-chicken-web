@@ -33,6 +33,11 @@ const reconcile = (state, payload) => {
         trueState = { ...trueState, auth: credentials }
         break
 
+        case 'cart':
+          const cart = state[key]
+          trueState = { ...trueState, cart }
+          break
+
       default:
         break
     }

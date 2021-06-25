@@ -1,5 +1,6 @@
 import { AnyAction } from 'redux'
 import { CURRENT_PRODUCT, PRODUCTS_NUMBER, CART_PRODUCTS } from './action-types'
+import { LOGOUT_USER } from '@store/auth/action-types'
 
 const initialState = {
   currentProduct: null,
@@ -17,6 +18,9 @@ const cardReducer = (state = initialState, { type, payload }: AnyAction) => {
 
     case CART_PRODUCTS:
       return { ...state, ...payload }
+
+    case LOGOUT_USER:
+      return initialState
 
     default:
       return state

@@ -67,7 +67,6 @@ const RegisterModal = () => {
                 placeholder='Nombre'
                 type='text'
                 name='firstName'
-                id='firstName'
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.firstName}
@@ -82,7 +81,6 @@ const RegisterModal = () => {
                   type="text"
                   placeholder='Apellido'
                   name='lastName'
-                  id='lastName'
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.lastName}

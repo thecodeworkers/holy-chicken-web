@@ -1,6 +1,6 @@
 import { registerMutation, loginMutation, restorePasswordEmail } from '@graphql'
 import { actionObject } from '@utils'
-import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL } from './action-types'
+import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL, LOGOUT_USER } from './action-types'
 import { REQUEST_LOADER, LOADER } from '@store/loader/actions-types'
 import { setToast } from '@store/toast/action'
 
@@ -40,7 +40,7 @@ export const loginUser = (body: any) => async (dispatch) => {
 }
 
 export const logoutUser = () => async (dispatch) => {
-  await dispatch(actionObject(LOGIN_USER, { login: null, isAuth: null }))
+  await dispatch(actionObject(LOGOUT_USER, {}))
 }
 
 export const sendRestorePasswordEmail = (body) => async (dispatch) => {

@@ -190,8 +190,8 @@ const CardSection = () => {
             </div>
           </div>
         </div>
-
         </div>
+
         {/* RESPONSIVEEEEEEEEEE */}
         <div className={styles._responsiveParent}>
           <p className={styles._littleTitle}>HOLY BLESSINGS</p>
