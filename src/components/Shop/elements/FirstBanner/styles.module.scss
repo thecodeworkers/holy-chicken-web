@@ -233,6 +233,11 @@ width: 100%;
 ._card{
   margin: 1.5 auto;
   }
+
+._cardDisabled{
+  margin: 1.5 auto;
+  opacity: 0.5;
+}
 }
 
 @include responsive(md) {
@@ -278,6 +283,12 @@ width: 100%;
 ._card{
   width: 10.50rem;
   margin: 0.5rem 0.5rem;
+}
+
+._cardDisabled{
+  width: 10.50rem;
+  margin: 0.5rem 0.5rem;
+  opacity: 0.5;
 }
 
 ._dropDown{
