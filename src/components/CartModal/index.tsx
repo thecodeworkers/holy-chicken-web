@@ -13,7 +13,10 @@ const CartModal = () => {
   const { intermitence: { cartModal }, cart } = useSelector((state: any) => state)
 
   const closeModal = (event, flag = false) => {
-    dispatch(setShowModal({ cartModal: false }))
+    const { target } = event
+    if(target.id == 'modal') {
+      dispatch(setShowModal({ cartModal: false }))
+    }
   }
 
   const nodes = cart?.cartProducts?.contents?.nodes ?? []
@@ -23,8 +26,8 @@ const CartModal = () => {
     dispatch(removeCartItem(key))
   }
   return (
-    <div className={cartModal ? styles._background : styles._hidden} onBlur={closeModal}>
-      <div className={`_generalCard ${styles._modal}`}>
+    <div className={cartModal ? styles._background : styles._hidden} onClick={closeModal} id={'modal'}>
+      <div className={`_generalCard ${styles._modal}`} >
         <div className={styles._header}>
           <p className={styles._title}>Mi Pedido</p>
           <p className={styles._subtitle}>¡Consume $00.00 más y el delivery es gratis!</p>

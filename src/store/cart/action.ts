@@ -32,6 +32,7 @@ export const setCartProducts = ({ databaseId, quantity }: any) => async (dispatc
       dispatch(setProductsNumber({ number: itemsNumber }))
       dispatch(setToast('check', 'Producto agregado al carrito ', 1))
       dispatch(setShowModal({ individualProductModal: false }))
+      dispatch(setShowModal({ cartModal: true }))
     }
 
     if (!auth.isAuth) {
