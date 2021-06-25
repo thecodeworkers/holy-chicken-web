@@ -9,8 +9,6 @@ import { createMarkup } from '@utils'
 const IndividualProduct = ({ type = 'list' }) => {
 
   const dispatch = useDispatch()
-  const [productNumber, setProductNumber] = useState(0)
-
   const { intermitence: { individualProductModal }, cart: { currentProduct, cartProducts } } = useSelector((state: any) => state)
 
   const closeModal = (event, flag = false) => {
@@ -18,18 +16,6 @@ const IndividualProduct = ({ type = 'list' }) => {
     if (target.id == 'individual-product' || flag) {
       dispatch(setShowModal({ individualProductModal: false }))
     }
-  }
-
-
-
-  const aumented = () => setProductNumber(number => ++number)
-
-  const decrement = () => {
-    if (productNumber >= 1) setProductNumber(number => --number)
-  }
-
-  const updateNumber = () => {
-    dispatch(setProductsNumber({ number: productNumber }))
   }
 
   const featuresType = (type, attributes) => {
@@ -52,13 +38,8 @@ const IndividualProduct = ({ type = 'list' }) => {
   }
 
   const setProductstoCart = () => {
-    dispatch(setProductsNumber({ number: productNumber }))
     dispatch(setCartProducts(currentProduct))
   }
-
-  useEffect(() => {
-    console.log(cartProducts)
-  }, [cartProducts])
 
   return (
     <div className={individualProductModal ? styles._background : styles._hidden} onClick={closeModal} id='individual-product'>
@@ -74,12 +55,10 @@ const IndividualProduct = ({ type = 'list' }) => {
               <div>
                 <p className={styles._title}>{currentProduct?.name}</p>
               </div>
-              <CountProduct/>
+              <CountProduct product={null}/>
             </div>
 
-            <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description) }>
-
-            </div>
+            <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description) }></div>
 
             {
               currentProduct?.productCategories?.nodes[0]?.slug == 'holy-sanduches' ?
@@ -109,7 +88,7 @@ const IndividualProduct = ({ type = 'list' }) => {
 
         <div className={styles._totalParent}>
           <div className={styles._btnParent}>
-            <Button text='Agregar' color='#000' textColor='#FFF' method={setProductstoCart}/>
+            <Button text='Agregar' color='#000' textColor='#FFF' method={setProductstoCart} flag/>
           </div>
 
           <div>

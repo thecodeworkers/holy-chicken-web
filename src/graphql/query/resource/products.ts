@@ -12,6 +12,7 @@ products(first: 10000000) {
       name
       price
       stockStatus
+      stockQuantity
       spicy {
         isSpicy
       }

@@ -66,10 +66,6 @@
 
 ._productContainer{
   width: 70%;
-  // display: flex;
-  // justify-content: space-between;
-  // align-content: center;
-  // flex-direction: column;
   margin-left: 5%;
 }
 
@@ -82,6 +78,13 @@
 ._card{
   width: 14.5rem;
   margin: 1.5rem 0;
+  transition:all 0.4s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.03) translateX(5px) translateY(-10px);
+    transition:all 0.4s;
+  }
 }
 
 ._cardDisabled{
@@ -230,6 +233,11 @@ width: 100%;
 ._card{
   margin: 1.5 auto;
   }
+
+._cardDisabled{
+  margin: 1.5 auto;
+  opacity: 0.5;
+}
 }
 
 @include responsive(md) {
@@ -275,6 +283,12 @@ width: 100%;
 ._card{
   width: 10.50rem;
   margin: 0.5rem 0.5rem;
+}
+
+._cardDisabled{
+  width: 10.50rem;
+  margin: 0.5rem 0.5rem;
+  opacity: 0.5;
 }
 
 ._dropDown{

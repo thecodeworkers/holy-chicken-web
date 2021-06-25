@@ -1,39 +1,40 @@
-import { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from './styles.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { setProductsNumber } from '@store/actions'
+import { useDispatch } from 'react-redux'
+import { setProductsNumber, updateQuantity } from '@store/actions'
 
-const CountProduct = () => {
-
+const CountProduct = ({ product, stock = 0 }) => {
   const dispatch = useDispatch()
-  const [productNumber, setProductNumber] = useState(0)
+  const [productNumber, setProductNumber] = useState(stock)
 
-  const { cart: { cartProducts } } = useSelector((state: any) => state)
-
-  const aumented = () => setProductNumber(number => ++number)
+  const aumented = () => {
+    console.log(product, 'add')
+    setProductNumber(productNumber + 1)
+    if (product) dispatch(updateQuantity(product, 'add'))
+  }
 
   const decrement = () => {
-    if (productNumber >= 1) setProductNumber(number => --number)
+    if (productNumber >= 1) {
+      setProductNumber(productNumber - 1)
+      if (product) dispatch(updateQuantity(product, 'rest'))
+    }
   }
 
   const updateNumber = () => {
     dispatch(setProductsNumber({ number: productNumber }))
   }
 
-  useEffect(() => {
-    console.log(cartProducts)
-  }, [cartProducts])
 
   return (
-              <div className={styles._numberParent}>
-                <div className={styles._circle} onClick={decrement}>
-                  <p>-</p>
-                </div>
-                <input type='text' value={productNumber} readOnly className={styles._input}></input>
-                <div className={styles._circle} onClick={aumented}>
-                  <p >+</p>
-                </div>
-              </div>
+    <div className={styles._numberParent}>
+      <div className={styles._circle} onClick={decrement}>
+        <p>-</p>
+      </div>
+      <input type='text' value={productNumber} readOnly className={styles._input}></input>
+      <div className={styles._circle} onClick={aumented}>
+        <p>+</p>
+      </div>
+    </div>
   )
 }
 

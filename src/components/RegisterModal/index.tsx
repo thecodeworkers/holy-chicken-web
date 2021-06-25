@@ -5,18 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { resetModals, setShowModal, setToast } from '@store/actions'
 import FormikConfig from './formik'
 
-
 const RegisterModal = () => {
-
-  const changeStatus = () => setStatus(true)
-
   const dispatch = useDispatch()
-  const formik = FormikConfig(dispatch, changeStatus)
+  const formik = FormikConfig(dispatch)
   const { errors, touched } = formik
   const [showTooltip, setShowTooltip] = useState(false)
   const [show, setShow] = useState(false)
   const [showTwo, setShowTwo] = useState(false)
-  const [status, setStatus] = useState(false)
 
   let timeout
 
@@ -31,19 +26,17 @@ const RegisterModal = () => {
       dispatch(setShowModal({ registerModal: false }))
       formik.resetForm()
       dispatch(setToast('', '', 0))
-      setStatus(false)
     }
   }
 
   useEffect(() => {
-    if(auth.register?.registerCustomer && status) {
-      dispatch(setToast('check', 'Usuario creado de exitosamente', 1))
+    if(auth.register?.registerCustomer) {
+      dispatch(setShowModal({ registerModal: false }))
       formik.resetForm()
     }
 
-    if(!auth.register?.registerCustomer && status) dispatch(setToast('error', 'Error al registar usuario', 1))
-
     return () => clearTimeout(timeout)
+
   }, [auth?.register])
 
   const openLocations = () => {
@@ -171,7 +164,7 @@ const RegisterModal = () => {
             </div>
 
             <div className={styles._halfWidth}>
-              <Button color='#000' textColor='#FFF' text='Confirmar' type='submit'/>
+              <Button color='#000' textColor='#FFF' text='Confirmar' type='submit' flag/>
             </div>
           </div>
         </form>

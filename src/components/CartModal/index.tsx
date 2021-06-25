@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { getCart, setShowModal, removeCartItem } from '@store/actions'
 import { createMarkup } from '@utils'
+
 
 const CartModal = () => {
 
@@ -11,15 +12,22 @@ const CartModal = () => {
 
   const { intermitence: { cartModal }, cart } = useSelector((state: any) => state)
 
-  const { cartProducts } = cart
-
   const closeModal = (event, flag = false) => {
-    dispatch(setShowModal({ cartModal: false }))
+    const { target } = event
+    if(target.id == 'modal') {
+      dispatch(setShowModal({ cartModal: false }))
+    }
   }
 
+  const nodes = cart?.cartProducts?.contents?.nodes ?? []
+
+  const deleteItem = (dataItem: any) => {
+    const { key } = dataItem
+    dispatch(removeCartItem(key))
+  }
   return (
-    <div className={cartModal ? styles._background : styles._hidden} onClick={closeModal}>
-      <div className={`_generalCard ${styles._modal}`}>
+    <div className={cartModal ? styles._background : styles._hidden} onClick={closeModal} id={'modal'}>
+      <div className={`_generalCard ${styles._modal}`} >
         <div className={styles._header}>
           <p className={styles._title}>Mi Pedido</p>
           <p className={styles._subtitle}>¡Consume $00.00 más y el delivery es gratis!</p>
@@ -27,24 +35,26 @@ const CartModal = () => {
         <div className={styles._body}>
 
           {
-            !cartProducts.length ?
+            !nodes.length ?
               <p className={styles._subtitle}>Tu carrito está vacío</p> :
-              cartProducts.map((item, index) => {
+              nodes.map((item, index) => {
+                const dataItem = item?.product?.node
+                console.log(item?.key)
                 return (
                   <div key={index} className={styles._productContainer}>
-                    <div className={styles._close}>
+                    <div className={styles._close} onClick={() => deleteItem(item)}>
                       <img src='images/icons/close.svg' width='12px'></img>
                     </div>
                     <div className={styles._producItemContainer}>
-                      <p className={styles._productItemTitle}>{item?.name}</p>
-                      {item.description ?
+                      <p className={styles._productItemTitle}>{dataItem?.name}</p>
+                      {dataItem.description &&
                         <div className={styles._productItemSubtitle}
-                          dangerouslySetInnerHTML={createMarkup(item?.description)}>
-                        </div> : null
+                          dangerouslySetInnerHTML={createMarkup(dataItem?.description)}>
+                        </div>
                       }
-                      {/* <p>{item?.description}</p> */}
+
                       <div className={styles._quantityContainer}>
-                      <CountProduct />
+                        <CountProduct product={item?.key} stock={dataItem?.stockQuantity} />
                         <p className={styles._number}>{item?.price}</p>
                       </div>
                     </div>

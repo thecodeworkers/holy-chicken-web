@@ -15,9 +15,11 @@ const NavBar = ({ data }) => {
 
   const router = useRouter()
   const [show, setShow] = useState(false)
-
+  const [showCart, setShowCart] = useState(false)
   const { auth, cart } = useSelector((state: any) => state)
   const { isAuth } = auth
+
+  console.log(cart?.number)
 
   const navigation = (route: string, loader = true) => {
     if (route == '/contact') {
@@ -50,7 +52,13 @@ const NavBar = ({ data }) => {
     dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
   }
 
+  const showedCart = (showCart) => {
+    setShowCart(showCart => !showCart)
 
+    if(showCart) return  dispatch(setShowModal({ cartModal: false }))
+
+    if(!showCart) return  dispatch(setShowModal({ cartModal: true }))
+  }
 
   return (
     <>
@@ -82,7 +90,7 @@ const NavBar = ({ data }) => {
                 <Button color='#FD8C2E' text='Pedir ahora' textColor='#fff'></Button>
               </div>
 
-              <div className={styles._iconParent} onClick={() => openModal('cartModal')}>
+              <div className={styles._iconParent} onClick={() => showedCart(showCart)}>
                 <Cart color='#000' />
                 {
                   cart?.number > 0 && (<div className={styles._numberParent}>

@@ -1,10 +1,16 @@
 import { GraphQlClient } from  '@utils'
 import { v4 as uuidv4 } from 'uuid';
 
-const loginMutation = async ({ email, password }) => {
+const loginMutation = async ({ email, password, sessionToken }) => {
   const mutation = `
   mutation Login {
-    login(input: {username: "${email}", password: "${password}"}) {
+    login(input: {clientMutationId: "${uuidv4()}", username: "${email}", password: "${password}"}) {
+      authToken
+      sessionToken
+      customer {
+        sessionToken
+        jwtAuthToken
+      }
       user {
         email
         firstName
@@ -18,7 +24,7 @@ const loginMutation = async ({ email, password }) => {
     }
   }
 `
-  const result = await GraphQlClient(mutation)
+  const result = await GraphQlClient(mutation, sessionToken)
   return result
 }
 
