@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import styles from './styles.module.scss'
 import { useDispatch } from 'react-redux'
 import { setProductsNumber, updateQuantity } from '@store/actions'
 
-const CountProduct = ({ productKey, stock = 0, quantity = 1 }) => {
+const CountProduct = ({ productKey = '', stock = 0, quantity = 1 }) => {
   const dispatch = useDispatch()
   const [productNumber, setProductNumber] = useState(quantity)
 

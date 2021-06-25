@@ -27,7 +27,7 @@ const VerticalListWithImage = ({ attributes }) => {
           attributes?.nodes[0]?.options.length &&
           attributes?.nodes[0]?.options.map((res, index) => {
             return (
-              <div className={styles._row} >
+              <div className={styles._row} key={index}>
                 <div className={styles._checkParent} key={index}>
                   <input type='radio' className={styles._radioBtn} defaultChecked={false}></input>
                   {/* <img src={item?.path} className={styles._image}></img> */}

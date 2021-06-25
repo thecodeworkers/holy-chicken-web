@@ -16,7 +16,6 @@ const ClothSection = ({ size = true, attributes }) => (
     {
       size && (
         <div className={styles._sizesParent}>
-
           {
             attributes?.nodes[0]?.options.length &&
             attributes?.nodes[0]?.options.map((res) => {
