@@ -9,8 +9,6 @@ import { createMarkup } from '@utils'
 const IndividualProduct = ({ type = 'list' }) => {
 
   const dispatch = useDispatch()
-  const [productNumber, setProductNumber] = useState(0)
-
   const { intermitence: { individualProductModal }, cart: { currentProduct, cartProducts } } = useSelector((state: any) => state)
 
   const closeModal = (event, flag = false) => {
@@ -18,18 +16,6 @@ const IndividualProduct = ({ type = 'list' }) => {
     if (target.id == 'individual-product' || flag) {
       dispatch(setShowModal({ individualProductModal: false }))
     }
-  }
-
-
-
-  const aumented = () => setProductNumber(number => ++number)
-
-  const decrement = () => {
-    if (productNumber >= 1) setProductNumber(number => --number)
-  }
-
-  const updateNumber = () => {
-
   }
 
   const featuresType = (type, attributes) => {
@@ -53,7 +39,6 @@ const IndividualProduct = ({ type = 'list' }) => {
 
   const setProductstoCart = () => {
     dispatch(setCartProducts(currentProduct))
-    // dispatch(setProductsNumber({ number: 1 }))
   }
 
   return (
@@ -103,7 +88,7 @@ const IndividualProduct = ({ type = 'list' }) => {
 
         <div className={styles._totalParent}>
           <div className={styles._btnParent}>
-            <Button text='Agregar' color='#000' textColor='#FFF' method={setProductstoCart}/>
+            <Button text='Agregar' color='#000' textColor='#FFF' method={setProductstoCart} flag/>
           </div>
 
           <div>

@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCart, setShowModal } from '@store/actions'
+import { getCart, setShowModal, removeCartItem } from '@store/actions'
 import { createMarkup } from '@utils'
+
 
 const CartModal = () => {
 
@@ -17,8 +18,12 @@ const CartModal = () => {
 
   const nodes = cart?.cartProducts?.contents?.nodes ?? []
 
+  const deleteItem = (dataItem: any) =>{
+    const { key } = dataItem
+    dispatch(removeCartItem(key))
+  }
   return (
-    <div className={cartModal ? styles._background : styles._hidden} onClick={closeModal}>
+    <div className={cartModal ? styles._background : styles._hidden} onBlur={closeModal}>
       <div className={`_generalCard ${styles._modal}`}>
         <div className={styles._header}>
           <p className={styles._title}>Mi Pedido</p>
@@ -33,7 +38,7 @@ const CartModal = () => {
                 const dataItem = item?.product?.node
                 return (
                   <div key={index} className={styles._productContainer}>
-                    <div className={styles._close}>
+                    <div className={styles._close} onClick={() => deleteItem(item)}>
                       <img src='images/icons/close.svg' width='12px'></img>
                     </div>
                     <div className={styles._producItemContainer}>
