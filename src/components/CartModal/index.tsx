@@ -54,7 +54,7 @@ const CartModal = () => {
                       }
 
                       <div className={styles._quantityContainer}>
-                        <CountProduct key={item?.key} stock={dataItem?.stockQuantity} />
+                        <CountProduct product={item?.key} stock={dataItem?.stockQuantity} />
                         <p className={styles._number}>{item?.price}</p>
                       </div>
                     </div>

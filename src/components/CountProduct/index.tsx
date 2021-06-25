@@ -1,22 +1,22 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import styles from './styles.module.scss'
 import { useDispatch } from 'react-redux'
 import { setProductsNumber, updateQuantity } from '@store/actions'
 
-const CountProduct = ({ key, stock = 0 }) => {
+const CountProduct = ({ product, stock = 0 }) => {
   const dispatch = useDispatch()
   const [productNumber, setProductNumber] = useState(stock)
 
   const aumented = () => {
-    console.log(key, 'add')
+    console.log(product, 'add')
     setProductNumber(productNumber + 1)
-    if (key) dispatch(updateQuantity(key, 'add'))
+    if (product) dispatch(updateQuantity(product, 'add'))
   }
 
   const decrement = () => {
     if (productNumber >= 1) {
       setProductNumber(productNumber - 1)
-      if (key) dispatch(updateQuantity(key, 'rest'))
+      if (product) dispatch(updateQuantity(product, 'rest'))
     }
   }
 
