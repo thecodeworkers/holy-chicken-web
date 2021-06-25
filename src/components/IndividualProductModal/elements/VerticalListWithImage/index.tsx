@@ -9,8 +9,6 @@ const brands = [
 
 const VerticalListWithImage = ({ attributes }) => {
 
-  console.log(attributes?.nodes[0]?.options)
-
   return (
     <div>
       <div className={styles._titleParent}>

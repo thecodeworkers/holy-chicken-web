@@ -3,27 +3,21 @@ import styles from './styles.module.scss'
 import { useDispatch } from 'react-redux'
 import { setProductsNumber, updateQuantity } from '@store/actions'
 
-const CountProduct = ({ key, stock = 0 }) => {
+const CountProduct = ({ productKey, stock = 0, quantity = 1 }) => {
   const dispatch = useDispatch()
-  const [productNumber, setProductNumber] = useState(stock)
+  const [productNumber, setProductNumber] = useState(quantity)
 
   const aumented = () => {
-    console.log(key, 'add')
-    setProductNumber(productNumber + 1)
-    if (key) dispatch(updateQuantity(key, 'add'))
+    if(productNumber < stock) setProductNumber(quantity + 1)
+    if (productKey) dispatch(updateQuantity(productKey, 'add'))
   }
 
   const decrement = () => {
-    if (productNumber >= 1) {
-      setProductNumber(productNumber - 1)
-      if (key) dispatch(updateQuantity(key, 'rest'))
+    if (quantity >= 2) {
+      setProductNumber(quantity - 1)
+      if (productKey) dispatch(updateQuantity(productKey, 'rest'))
     }
   }
-
-  const updateNumber = () => {
-    dispatch(setProductsNumber({ number: productNumber }))
-  }
-
 
   return (
     <div className={styles._numberParent}>

@@ -32,7 +32,7 @@ export const setProductFilter: any = (values) => async (dispatch, getState) => {
     dispatch(actionObject(SET_FILTER, { filter: values, shop: productFilter(products, values, 'slug') }))
 
   } catch (error) {
-    console.log(error)
+    return error
 
   }
 }

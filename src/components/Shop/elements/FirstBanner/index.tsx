@@ -21,7 +21,6 @@ const FirstBanner = ({ content, backup }: any) => {
   const [show, setShow] = useState(0)
   const [searchValue, setSearchValue] = useState('')
 
-
   const navigation = (route: string) => {
     if (route != router.pathname) router.push(route)
   }
@@ -42,7 +41,6 @@ const FirstBanner = ({ content, backup }: any) => {
   }
 
   const openIndividualModal = (item: any) =>  {
-    console.log(item)
     dispatch(setShowModal({ individualProductModal: true }))
     dispatch(setCurrentProduct({ currentProduct: item }))
   }
@@ -104,14 +102,17 @@ const FirstBanner = ({ content, backup }: any) => {
                   {
                     paginate(backup, page, perPage).map((item, index) => {
                       return (
-                        <div className={item.stockStatus == 'OUT_OF_STOCK' ? styles._cardDisabled : styles._card}
-                         key={index} onClick={() => item.stockStatus === 'OUT_OF_STOCK' ? null :
-                         openIndividualModal(item) }>
+                        <div
+                        className={item.stockStatus == 'OUT_OF_STOCK' ? styles._cardDisabled : styles._card}
+                         key={index}
+                         onClick={() => item.stockStatus === 'OUT_OF_STOCK' ? null : openIndividualModal(item) }>
                           <GeneralCard
                             name={item?.name}
                             image={item.image?.mediaItemUrl}
                             description={item?.description}
-                            price={item?.price} />
+                            price={item?.price}
+                            hot={item?.spicy?.isSpicy}
+                            />
                         </div>
                       )
                     })

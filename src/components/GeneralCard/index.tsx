@@ -8,7 +8,7 @@ const GeneralCard = (
     description = 'default description',
     image = 'images/resources/burguer.png',
     price = '7$',
-    hot = false
+    hot = null
   }
   ) => {
 

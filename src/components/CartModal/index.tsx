@@ -17,6 +17,7 @@ const CartModal = () => {
   }
 
   const nodes = cart?.cartProducts?.contents?.nodes ?? []
+  const total = cart?.cartProducts?.total ?? "$0.00"
 
   const deleteItem = (dataItem: any) => {
     const { key } = dataItem
@@ -36,7 +37,7 @@ const CartModal = () => {
               <p className={styles._subtitle}>Tu carrito está vacío</p> :
               nodes.map((item, index) => {
                 const dataItem = item?.product?.node
-                console.log(item?.key)
+
                 return (
                   <div key={index} className={styles._productContainer}>
                     <div className={styles._close} onClick={() => deleteItem(item)}>
@@ -51,7 +52,7 @@ const CartModal = () => {
                       }
 
                       <div className={styles._quantityContainer}>
-                        <CountProduct key={item?.key} stock={dataItem?.stockQuantity} />
+                        <CountProduct productKey={item?.key} stock={dataItem?.stockQuantity} quantity={item?.quantity}/>
                         <p className={styles._number}>{item?.price}</p>
                       </div>
                     </div>
@@ -64,7 +65,7 @@ const CartModal = () => {
         <div className={styles._totalParent}>
           <div className={styles._parentContainer}>
             <p className={styles._parentTitle}>Total estimado</p>
-            <p className={styles._parentTotal}>1.000$</p>
+            <p className={styles._parentTotal}>{total}</p>
           </div>
           <div className={styles._btnParent}>
             <Button text='Confirmar' color='#000' textColor='#FFF' />

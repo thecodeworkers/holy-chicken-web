@@ -15,14 +15,14 @@ export const getCart = () => async (dispatch, getState) => {
   return console.log('RESUUUULT CART', result)
 }
 
-export const setCartProducts = ({ databaseId, quantity }: any) => async (dispatch, getState) => {
+export const setCartProducts = ({ databaseId, quantity = 1 }: any) => async (dispatch, getState) => {
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
     const { auth } = await getState()
     const sessionToken = auth?.login?.login?.customer?.sessionToken
 
     if (auth?.isAuth) {
-      const result = await addItemToCartMutation(databaseId, 1, null, sessionToken)
+      const result = await addItemToCartMutation(databaseId, quantity, null, sessionToken)
       if (result.message) throw new Error(result.message)
 
       const { addCartItems } = result
@@ -35,7 +35,7 @@ export const setCartProducts = ({ databaseId, quantity }: any) => async (dispatc
     }
 
     if (!auth.isAuth) {
-      dispatch(setToast('warning', 'Por favor inicie sesion para continuar', 1))
+      dispatch(setToast('warning', 'Por favor inicie sesión para continuar', 1))
     }
 
   } catch (error) {
@@ -59,7 +59,7 @@ export const removeCartItem = (key) => async (dispatch, getState) => {
 
     dispatch(actionObject(CART_PRODUCTS, { cartProducts: removeItemsFromCart?.cart }))
     dispatch(setProductsNumber({ number: itemsNumber }))
-    dispatch(setToast('check', 'Producto eliminado carrito', 1))
+    dispatch(setToast('check', 'Producto eliminado del carrito', 1))
 
   } catch (error) {
     dispatch(setToast('error', 'Error al eliminar producto del carrito', 1))
@@ -85,7 +85,11 @@ export const updateQuantity: any = (product: any, type: any) => async (dispatch,
 
         if (data.message) throw new Error(data.message);
 
-        dispatch(actionObject(CART_PRODUCTS, { cartProducts: data?.cart }))
+        const { updateItemQuantities } = data
+        const itemsNumber = updateItemQuantities?.cart?.contents?.itemCount
+
+        dispatch(actionObject(CART_PRODUCTS, { cartProducts: data?.updateItemQuantities?.cart }))
+        dispatch(setProductsNumber({ number: itemsNumber }))
         dispatch(setToast('check', 'Producto actualizado', 1))
         dispatch(actionObject(REQUEST_LOADER, false))
         return

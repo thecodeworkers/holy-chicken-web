@@ -99,13 +99,16 @@ const FirstBanner = ({ data, content, publicity, resource }) => {
 
               {
                 outstanding?.map((item, index) => {
+                  const spicy = item.spicy.isSpicy
                   return (
                     <div className={styles._card} key={index} onClick={openIndividualModal}>
                       <GeneralCard
                         name={item?.name}
                         image={item.image?.mediaItemUrl}
                         description={item?.description}
-                        price={item?.price} />
+                        price={item?.price}
+                        hot={spicy}
+                         />
                     </div>
                   )
 
