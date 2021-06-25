@@ -36,7 +36,7 @@ const CartModal = () => {
 
           {
             !nodes.length ?
-              <p className={styles._subtitle}>Tu carrito está vacío</p> :
+              <p className={styles._description}>Tu carrito está vacío</p> :
               nodes.map((item, index) => {
                 const dataItem = item?.product?.node
                 console.log(item?.key)
