@@ -215,11 +215,11 @@ const ModalContact = () => {
 
                   <div className={styles._paperClipParent}>
                   <p className ={styles._fileName}>{fileName}</p>
-                    <label htmlFor="file-input" className={styles._filePointer}>
+                    <label className={styles._filePointer}>
 
                       <PaperClip color='#000' />
                     </label>
-                    <input id="file-input" type="file"
+                    <input type="file"
                     accept={'application/pdf, application/msword, image/*'}
 
                     onChange={(e) => getFile(e)} className={styles._file} />

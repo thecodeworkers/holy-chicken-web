@@ -2,7 +2,7 @@ import { SET_RESOURCES, } from './action-types'
 import { actionObject, formatWooCommerceAmount, orderBy, productFilter } from '../../utils'
 import { pages, resources } from '../../graphql/query'
 import { GET_PAGES } from '@store/page/action-types'
-import { SEARCH_PRODUCTS, SET_FILTER } from './action-types'
+import { SEARCH_PRODUCTS, SET_FILTER, CLEAN_FILTER } from './action-types'
 
 
 export const getResources: any = (consult: string = '') => async (dispatch, getState) => {
@@ -56,5 +56,9 @@ export const orderProducts: any = (value) => async (dispatch, getState) => {
   }
 
   dispatch(actionObject(SET_FILTER, { filter: filter, shop: data }))
+}
 
+
+export const cleanFilter: any = (value) => async (dispatch, getState) => {
+  dispatch(actionObject(CLEAN_FILTER, { }))
 }

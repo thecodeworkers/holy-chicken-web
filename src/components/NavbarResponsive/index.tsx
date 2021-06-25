@@ -37,7 +37,8 @@ const NavbarResponsive = () => {
   }
 
   const openLoginModal = () => {
-    !isAuth ? dispatch(setShowModal({ loginModal: true })) : setShowPanel(true)
+    if(!isAuth) return(dispatch(setShowModal({ loginModal: true })))
+    setShowPanel(showPanel => !showPanel)
   }
 
   const logout = () => {
