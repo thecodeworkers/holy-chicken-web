@@ -18,7 +18,7 @@ const CartModal = () => {
 
   const nodes = cart?.cartProducts?.contents?.nodes ?? []
 
-  const deleteItem = (dataItem: any) =>{
+  const deleteItem = (dataItem: any) => {
     const { key } = dataItem
     dispatch(removeCartItem(key))
   }
@@ -36,6 +36,7 @@ const CartModal = () => {
               <p className={styles._subtitle}>Tu carrito está vacío</p> :
               nodes.map((item, index) => {
                 const dataItem = item?.product?.node
+                console.log(item?.key)
                 return (
                   <div key={index} className={styles._productContainer}>
                     <div className={styles._close} onClick={() => deleteItem(item)}>
@@ -50,7 +51,7 @@ const CartModal = () => {
                       }
 
                       <div className={styles._quantityContainer}>
-                      <CountProduct />
+                        <CountProduct key={item?.key} stock={dataItem?.stockQuantity} />
                         <p className={styles._number}>{item?.price}</p>
                       </div>
                     </div>

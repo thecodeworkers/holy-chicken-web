@@ -55,7 +55,7 @@ const IndividualProduct = ({ type = 'list' }) => {
               <div>
                 <p className={styles._title}>{currentProduct?.name}</p>
               </div>
-              <CountProduct/>
+              <CountProduct key={null}/>
             </div>
 
             <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description) }></div>

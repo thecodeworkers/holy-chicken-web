@@ -1,28 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styles from './styles.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { setProductsNumber } from '@store/actions'
+import { useDispatch } from 'react-redux'
+import { setProductsNumber, updateQuantity } from '@store/actions'
 
-const CountProduct = () => {
-
+const CountProduct = ({ key, stock = 0 }) => {
   const dispatch = useDispatch()
-  const [productNumber, setProductNumber] = useState(0)
+  const [productNumber, setProductNumber] = useState(stock)
 
-  const { cart: { cartProducts } } = useSelector((state: any) => state)
-
-  const aumented = () => setProductNumber(number => ++number)
+  const aumented = () => {
+    console.log(key, 'add')
+    setProductNumber(productNumber + 1)
+    if (key) dispatch(updateQuantity(key, 'add'))
+  }
 
   const decrement = () => {
-    if (productNumber >= 1) setProductNumber(number => --number)
+    if (productNumber >= 1) {
+      setProductNumber(productNumber - 1)
+      if (key) dispatch(updateQuantity(key, 'rest'))
+    }
   }
 
   const updateNumber = () => {
     dispatch(setProductsNumber({ number: productNumber }))
   }
 
-  useEffect(() => {
-    console.log(cartProducts)
-  }, [cartProducts])
 
   return (
     <div className={styles._numberParent}>
@@ -31,7 +32,7 @@ const CountProduct = () => {
       </div>
       <input type='text' value={productNumber} readOnly className={styles._input}></input>
       <div className={styles._circle} onClick={aumented}>
-        <p >+</p>
+        <p>+</p>
       </div>
     </div>
   )

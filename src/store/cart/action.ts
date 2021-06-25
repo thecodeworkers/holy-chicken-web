@@ -1,6 +1,6 @@
-import { actionObject } from '@utils'
+import { actionObject, filter } from '@utils'
 import { CURRENT_PRODUCT, PRODUCTS_NUMBER, CART_PRODUCTS, GET_CART } from './action-types'
-import { addItemToCartMutation, getCartQuery, removeFromCartMutation } from '@graphql'
+import { addItemToCartMutation, getCartQuery, removeFromCartMutation, updateItemQuantity } from '@graphql'
 import { REQUEST_LOADER } from '../loader/actions-types'
 import { setToast, setShowModal } from '@store/actions'
 
@@ -23,7 +23,7 @@ export const setCartProducts = ({ databaseId, quantity }: any) => async (dispatc
 
     if (auth?.isAuth) {
       const result = await addItemToCartMutation(databaseId, 1, null, sessionToken)
-      if(result.message) throw new Error(result.message)
+      if (result.message) throw new Error(result.message)
 
       const { addCartItems } = result
       const itemsNumber = addCartItems?.cart?.contents?.itemCount
@@ -34,11 +34,11 @@ export const setCartProducts = ({ databaseId, quantity }: any) => async (dispatc
       dispatch(setShowModal({ individualProductModal: false }))
     }
 
-    if(!auth.isAuth) {
+    if (!auth.isAuth) {
       dispatch(setToast('warning', 'Por favor inicie sesion para continuar', 1))
     }
 
-  } catch(error) {
+  } catch (error) {
     dispatch(setToast('check', 'Error al agregar producto al carrito', 1))
   }
 
@@ -61,10 +61,40 @@ export const removeCartItem = (key) => async (dispatch, getState) => {
     dispatch(setProductsNumber({ number: itemsNumber }))
     dispatch(setToast('check', 'Producto eliminado carrito', 1))
 
-  } catch(error) {
+  } catch (error) {
     dispatch(setToast('error', 'Error al eliminar producto del carrito', 1))
     return error
   }
+}
 
+export const updateQuantity: any = (product: any, type: any) => async (dispatch, getState) => {
+  try {
+    const { auth, cart: { cartProducts } } = await getState()
 
+    if (auth?.isAuth) {
+      dispatch(actionObject(REQUEST_LOADER, true))
+
+      const sessionToken = auth?.login?.login?.customer?.sessionToken
+
+      const filtered = filter(cartProducts?.contents?.nodes, product, 'key')
+      const quantity = (type === 'add') ? filtered[0]?.quantity + 1 : filtered[0]?.quantity - 1;
+      const max = filtered[0]?.product?.node?.stockQuantity
+      const min = 0
+      if (quantity > min && quantity <= max) {
+        const data: any = await updateItemQuantity(filtered[0]?.key, quantity, sessionToken)
+
+        if (data.message) throw new Error(data.message);
+
+        dispatch(actionObject(CART_PRODUCTS, { cartProducts: data?.cart }))
+        dispatch(setToast('check', 'Producto actualizado', 1))
+        dispatch(actionObject(REQUEST_LOADER, false))
+        return
+      }
+      dispatch(setToast('error', 'Limite Maximo', 1))
+      dispatch(actionObject(REQUEST_LOADER, false))
+    }
+  } catch (error) {
+    dispatch(actionObject(REQUEST_LOADER, false))
+    dispatch(setToast('error', 'Error al actualizar producto', 1))
+  }
 }
