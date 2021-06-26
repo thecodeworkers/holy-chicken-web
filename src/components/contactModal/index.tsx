@@ -13,7 +13,7 @@ const ModalContact = () => {
   const dispatch = useDispatch()
   const formik = FormikConfig()
   const [isActive, setActive] = useState(1)
-  const [fileName, setFileName] =useState('')
+  const [fileName, setFileName] = useState('')
   const { errors, touched } = formik
 
   const { resource: { general: { general } } } = useSelector((state: any) => state)
@@ -145,7 +145,6 @@ const ModalContact = () => {
                         placeholder='Nombre'
                         type='text'
                         name='name'
-                        id='name'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.name}
@@ -160,7 +159,6 @@ const ModalContact = () => {
                         placeholder='Apellido'
                         type='text'
                         name='lastname'
-                        id='lastname'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.lastname}
@@ -209,7 +207,6 @@ const ModalContact = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values.message}
                     name='message'
-                    id='message'
                     className={styles._textArea}
                     placeholder='Escriba su mensaje aqui...'
                   >
@@ -218,11 +215,11 @@ const ModalContact = () => {
 
                   <div className={styles._paperClipParent}>
                   <p className ={styles._fileName}>{fileName}</p>
-                    <label htmlFor="file-input" className={styles._filePointer}>
+                    <label className={styles._filePointer}>
 
                       <PaperClip color='#000' />
                     </label>
-                    <input id="file-input" type="file"
+                    <input type="file"
                     accept={'application/pdf, application/msword, image/*'}
 
                     onChange={(e) => getFile(e)} className={styles._file} />

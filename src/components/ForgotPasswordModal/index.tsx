@@ -49,7 +49,6 @@ const ForgotPasswordModal = () => {
             type="text"
             placeholder='Correo'
             name='email'
-            id='email'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}

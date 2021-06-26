@@ -11,12 +11,13 @@
   justify-content: space-between;
   align-items: flex-start;
   min-height: 21.875rem;
+  position: relative;
 
   & h3 {
-    font-family: $blackerTextHeavy;
+    font-family: $montserratExtraBold;
     margin-top: 7%;
     color: $mineShaft;
-    font-size: $blackerTextHeavy20;
+    font-size: $montserratExtraBold20;
     align-self: flex-start;
   }
 

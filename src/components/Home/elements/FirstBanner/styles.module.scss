@@ -54,6 +54,10 @@
 
 ._card{
   width: 14.5rem;
+  &:hover {
+    transform: scale(1.03) translateX(5px) translateY(-10px);
+    transition:all 0.4s;
+  }
 }
 
 ._textContainer{
