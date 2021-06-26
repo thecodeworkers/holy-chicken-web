@@ -5,16 +5,17 @@ import { ChickenLogo } from '@images/resources'
 import { ResponsiveMenu, Button } from '@components'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import { setShowModal, setLoader, logoutUser, setToast } from '@store/actions'
+import { setShowModal, setLoader, logoutUser, setToast, resetModals} from '@store/actions'
 import { useSelector } from 'react-redux'
 
 
 const NavbarResponsive = () => {
 
   const [show, setShow] = useState(0)
+  const [showCart, setShowCart] = useState(false)
   const [showPanel, setShowPanel] = useState(false)
 
-  const { auth } = useSelector((state: any) => state)
+  const { auth, cart } = useSelector((state: any) => state)
   const { isAuth } = auth
 
   const dispatch = useDispatch()
@@ -36,13 +37,26 @@ const NavbarResponsive = () => {
   }
 
   const openLoginModal = () => {
-    !isAuth ? dispatch(setShowModal({ loginModal: true })) : setShowPanel(true)
+    if(!isAuth) return(dispatch(setShowModal({ loginModal: true })))
+    setShowPanel(showPanel => !showPanel)
   }
 
   const logout = () => {
     dispatch(logoutUser())
     setShowPanel(false)
     dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
+  }
+
+  const openModal = (name) => {
+   dispatch(resetModals())
+   dispatch(setShowModal({ [name]: true }))
+  }
+  const showedCart = (showCart) => {
+    setShowCart(showCart => !showCart)
+
+    if(showCart) return  dispatch(setShowModal({ cartModal: false }))
+
+    if(!showCart) return  dispatch(setShowModal({ cartModal: true }))
   }
 
   return (
@@ -58,13 +72,22 @@ const NavbarResponsive = () => {
             </div>
           </div>
           <div className={styles._rightSection}>
-            <div onClick={() => navigation('/shop')}>
-              <Cart color='#000' />
-            </div>
+          <div className={styles._iconsList}>
+          <div className={styles._iconParent} onClick={() => showedCart(showCart)}>
+                <Cart color='#000' />
+                {
+                  cart?.number > 0 && (<div className={styles._numberParent}>
+                    <p>{cart?.number}</p>
+                  </div>)
+                }
+
+              </div>
             <div onClick={openLoginModal}>
               <Profile color='#000' />
             </div>
-          </div>
+            </div>
+
+        </div>
         </div>
       </nav>
 

@@ -26,10 +26,26 @@ const Toast = ({ status = 0, text = '', icon = 'check' }) => {
     return () => { clearTimeout(timeout) }
   }, [])
 
+  const returnIcon = (icon) => {
+    switch (icon) {
+      case 'check':
+        return 'images/icons/check.svg'
+
+      case 'error':
+        return 'images/icons/error.svg'
+
+      case 'warning':
+        return 'images/icons/warning.svg'
+
+      default:
+        return 'images/icons/check.svg'
+    }
+  }
+
   return (
     <div className={currentClass(status)}>
       <div className={styles._content}>
-        { toast?.type && <img src={icon == 'check' ? 'images/icons/check.svg' : 'images/icons/error.svg'} width='20px' height='20px' alt='check'></img> }
+        { toast?.type && <img src={returnIcon(icon)} width='20px' height='20px' alt='check'></img> }
         <p>{text}</p>
       </div>
     </div>

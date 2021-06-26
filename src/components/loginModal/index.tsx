@@ -8,13 +8,12 @@ import FormikConfig from './formik'
 const LoginModal = () => {
 
   const dispatch = useDispatch()
-  const changeStatus = () => setStatus(true)
-  const formik = FormikConfig(dispatch, changeStatus)
-  const [status, setStatus] = useState(false)
-  const [showTooltip, setShowTooltip] = useState(false)
+  const formik = FormikConfig(dispatch)
+
   const { intermitence: { loginModal }, auth } = useSelector((state: any) => state)
   const [show, setShow] = useState(false)
   const { errors, touched } = formik
+
   const showPassword = () => setShow(show => !show)
 
   let timeout
@@ -25,19 +24,14 @@ const LoginModal = () => {
       dispatch(setShowModal({ loginModal: false }))
       formik.resetForm()
       dispatch(setToast('', '', 0))
-      setStatus(false)
     }
   }
 
   useEffect(() => {
-    if(auth?.login?.login && status) {
-      dispatch(setToast('check', 'Usuario autenticado exitosamente', 1))
+    if(auth?.login?.login) {
       dispatch(setShowModal({ loginModal: false }))
-      setStatus(false)
       formik.resetForm()
     }
-
-    if(!auth?.login?.login && status) dispatch(setToast('error', 'Error al autenticar usuario', 1))
 
     return () => clearTimeout(timeout)
 
@@ -46,14 +40,6 @@ const LoginModal = () => {
   const openModal = (name) => {
     dispatch(resetModals())
     dispatch(setShowModal({ [name]: true }))
-  }
-
-  const tooltipTimer = () => {
-    setShowTooltip(true)
-
-    timeout = setTimeout(() => {
-      setShowTooltip(false)
-    }, 8000);
   }
 
   return (
@@ -95,7 +81,7 @@ const LoginModal = () => {
               color='#000'
               text='Ingresar'
               textColor='#FFF'
-              type='submit' flag={true}/>
+              type='submit' flag />
           </div>
         </form>
 

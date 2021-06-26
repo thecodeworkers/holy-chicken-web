@@ -5,7 +5,7 @@
 }
 
 ._modal {
-  padding: 4rem 3rem;
+  padding: 3rem;
   box-sizing: border-box;
   max-width: 550px;
 }
@@ -92,20 +92,9 @@
     align-self: center;
 
     &::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    & ::-webkit-scrollbar-track {
-      background: none;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: $black;
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: $black;
+      display: none;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
   }
 

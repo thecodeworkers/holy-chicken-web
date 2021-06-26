@@ -1,0 +1,207 @@
+@import '../../../public/styles/index.scss';
+
+._background {
+  height: calc(100vh - 5rem);
+  z-index: 996;
+  position: fixed;
+  bottom: 0px;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+._modal {
+  padding: 3rem 2.5rem;
+  box-sizing: border-box;
+  width: 18.75rem;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+}
+
+._cardParent {
+  background-color: $pampas;
+  border-radius: 38px;
+  padding: 1.2rem;
+  margin-top: 1.5rem;
+  box-sizing: border-box;
+}
+
+._totalParent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+._parentContainer{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-content: center;
+}
+
+._parentTitle{
+  font-size: $blackerTextHeavy22;
+  font-family: $blackerTextHeavy;
+  color: $mineShaft;
+}
+
+._parentTotal{
+  font-size: $montserratBold22;
+  font-family: $montserratBold;
+  color: $mineShaft;
+}
+
+._number{
+  font-size: $montserratBold20;
+  font-family: $montserratBold;
+  color: $mineShaft;
+}
+
+._btnParent {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+._hidden {
+  display: none;
+}
+
+._header{
+  text-align: center;
+}
+
+._title{
+  font-family: $blackerTextHeavyBold;
+  font-size: $blackerTextHeavy40;
+  margin-bottom: 1rem;
+}
+
+._subtitle{
+  font-size: $montserratRegular16;
+  font-family: $montserratRegular;
+  margin-bottom: 1rem;
+}
+
+._description{
+  font-size: $montserratRegular16;
+  font-family: $montserratRegular;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+._producItemContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+}
+
+._productContainer{
+  display: flex;
+  margin-bottom: 2.5rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+._close{
+  margin-top: -1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+._body{
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $black;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: none;
+  }
+}
+
+._quantityContainer{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 100%;
+}
+._numberParent {
+  display: flex;
+  align-items: center;
+}
+._circle {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $black;
+  border-radius: 50%;
+  cursor: pointer;
+
+  & p {
+    color: $white;
+    font-family: $montserratRegular;
+    font-size: $montserratMedium19;
+    font-weight: bold;
+  }
+}
+._input {
+  border: solid 1px $black;
+  border-radius: 1.25rem;
+  width: 2rem;
+  padding: 0.12rem 0.4rem;
+  background-color: transparent;
+  font-family: $montserratRegular;
+  text-align: center;
+  margin: 0 0.4rem;
+  font-weight: 500;
+}
+._productItemTitle{
+  font-size: $blackerTextHeavy16;
+  font-family: $blackerTextHeavyBold;
+  color: $mineShaft;
+  margin-bottom: 0.5rem;
+}
+
+._productItemSubtitle{
+  font-size: $montserratRegular12;
+  font-family: $montserratRegular;
+  color: $black;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+@include responsive(md) {
+
+  ._background{
+    width: 100%;
+  }
+ ._modal{
+   height: 100vh;
+   width: 100%;
+ }
+ ._header{
+   text-align: left;
+ }
+
+}

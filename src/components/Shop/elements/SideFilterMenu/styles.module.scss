@@ -1,0 +1,121 @@
+@import '@styles/index.scss';
+
+._container{
+  border-radius: 1.875rem;
+  box-shadow: 10px 10px 10px $gallery;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+._filterTitle{
+  font-family: $montserratBold;
+  font-size: $montserratBold14;
+  color: $black;
+}
+
+._row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.3rem 0;
+  width: 100%;
+}
+
+._littleTitle {
+  font-family: $montserratBold;
+  font-size: $blackerTextHeavy20;
+}
+
+._checkParent {
+  display: flex;
+  align-items: center;
+
+  & p {
+    font-family: $montserratRegular;
+    margin-left: 0.7rem;
+    font-size: $montserratBold16;
+  }
+}
+
+._radioBtn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  min-width:  0.8rem;
+  min-height:  0.8rem;
+  padding: 0.1rem;
+  background-clip: content-box;
+  border: 2px solid $black;
+  background-color: trasparent;
+  border-radius: 50%;
+  margin:0;
+
+  &:checked {
+    background-color: $black;
+  }
+}
+
+._btnParent {
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin menu {
+  background-color: $gallery;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 997;
+  display: flex;
+  justify-content: center;
+  flex-direction: column
+
+}
+
+._mainStatic {
+  @include menu;
+  transform: translateY(-100%)
+}
+
+._mainIn {
+  @include menu;
+  animation: menu-in 0.5s linear forwards;
+}
+
+._mainOut{
+  @include menu;
+  animation: menu-out 0.5s linear forwards;
+}
+
+@keyframes menu-in {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes menu-out {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(-100%);
+  }
+}

@@ -79,3 +79,10 @@
   font-family: $montserratRegular;
   box-sizing: border-box;
 }
+
+@mixin arrow($color, $padding, $border-width: 0 4px 4px 0) {
+  border: solid $color;
+  border-width: $border-width;
+  display: inline-block;
+  padding: $padding;
+}

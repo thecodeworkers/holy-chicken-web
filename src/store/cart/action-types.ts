@@ -1,0 +1,4 @@
+export const CURRENT_PRODUCT = 'CURRENT_PRODUCT'
+export const PRODUCTS_NUMBER = 'PRODUCTS_NUMBER'
+export const CART_PRODUCTS = 'CART_PRODUCTS'
+export const GET_CART = 'GET_CARD'

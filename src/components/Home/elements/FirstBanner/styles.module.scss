@@ -54,6 +54,10 @@
 
 ._card{
   width: 14.5rem;
+  &:hover {
+    transform: scale(1.03) translateX(5px) translateY(-10px);
+    transition:all 0.4s;
+  }
 }
 
 ._textContainer{
@@ -77,10 +81,9 @@
   margin-bottom: 1.5rem;
 }
 ._space{
-  width: 30px;
+  width: 10px;
   height: 100px;
-  margin: 20px;
-  display: none;
+  margin: 10px;
 }
 
 ._stepperContainer {
@@ -193,6 +196,12 @@
       width: 10px;
       height: 100%;
     }
+  }
+
+  ._space{
+    width: 15px;
+    height: 100px;
+    margin: 5px;
   }
 }
 
