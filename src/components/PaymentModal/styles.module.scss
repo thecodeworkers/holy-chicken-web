@@ -1,9 +1,25 @@
 @import '../../../public/styles/index.scss';
 
 ._main {
+  width: 100%;
+  height: calc(100vh - 5rem);
+  background-color: rgba(0,0,0,0.5);
+  z-index: 996;
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+._modal{
   display: inline-flex;
   max-width: 75rem;
   border-radius: 2.375rem;
+  background-color:$pampas;
+  height: 85vh;
 }
 
 ._hidden {
@@ -14,46 +30,21 @@
   margin-right: 1rem;
 }
 
-._itemParent {
-  display: flex;
-  margin-top: 1.2rem;
-
-  & p {
-    font-family: $montserratRegular;
-    font-size: 0.8rem;
-  }
-
-  & p:first-child {
-    font-family: $montserratBold;
-    margin-bottom: 0.1rem;
-  }
-  & a {
-    font-family: $montserratRegular;
-    font-size: 0.8rem;
-    text-decoration: none;
-    :active{
-      text-decoration: none;
-      a.nostyle:link {
-        text-decoration: inherit;
-        color: inherit;
-
-    }
-    }
-  }
-}
-
 ._leftSection {
   box-shadow: 0px 0px 14px $mercury;
   padding: 2.5rem;
   box-sizing: border-box;
   border-radius: 2.375rem;
   width: 45%;
+  background-color: $pampas;
+  height: 85vh;
 
   & h1 {
     font-family: $blackerTextHeavyBold;
     font-size: 1.8rem;
   }
 }
+
 
 ._rightSection {
   padding: 2.5rem;
@@ -65,49 +56,13 @@
   }
 }
 
-._textParent {
-  &:not(:first-child) {
-    margin-top: 1.5rem;
-  }
-}
-
-._socialMediaParent {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  & div {
-    cursor: pointer;
-  }
-
-  & div:not(:last-child) {
-    margin-right: 1rem;
-  }
-}
-
-._marginBottom {
-  margin-bottom: 2.5rem;
-}
 
 ._rightMain {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
   width: 100%;
-}
-
-._buttonsParent {
-  display: inline-flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 1.2rem;
-}
-
-._leftSide {
-  width: 60%;
-}
-
-._btnParent {
-  width: 7.5rem;
 }
 
 ._inputParent {
@@ -119,24 +74,6 @@
   }
 }
 
-._file{
-  display: none;
-}
-
-._filePointer{
-  cursor: pointer;
-}
-
-._fileName{
-  font-family: $montserratRegular;
-  font-size: 0.875rem;
-  color: $black;
-  margin-right: 1rem;
-}
-
-._link{
-  text-decoration: none;
-}
 
 ._inputRow {
   display: flex;
@@ -165,62 +102,6 @@
   @include input($red)
 }
 
-._textArea {
-  border: solid 1px $alto;
-  border-radius: 1.25rem;
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
-  padding: 0.8rem;
-  box-sizing: border-box;
-  font-family: $montserratRegular;
-  margin-top: 1.2rem;
-  height: 17rem;
-  min-height: 17rem;
-  max-height: 17rem;
-
-}
-
-._rightSide {
-  width: 40%;
-  margin-left: 1.5rem;
-}
-
-._textAreaParent {
-  position: relative;
-  width: 100%;
-}
-
-._paperClipParent {
-  position: absolute;
-  right: 0.938rem;
-  bottom: 0.938rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-._termsText {
-  font-family: $montserratRegular;
-  font-size: 0.55rem;
-  text-align: justify;
-}
-
-._termsParent {
-  margin-top: 0.4rem;
-}
-
-._sendBtn {
-  width: 120px;
-  display: block;
-  margin-left: auto;
-  margin-top: 1rem;
-}
-
-._halfWidth {
-  width: 48%;
-}
-
 ._title {
   font-size: 1.8rem;
   font-family: $blackerTextHeavyBold;
@@ -232,127 +113,56 @@
   cursor: pointer;
 }
 
-._closeIconParent {
-  cursor: pointer;
+
+._stepData{
+  background-color: $timberWolf;
+  border-radius: 10px;
+  width: 100%;
+  height: 3rem;
+  min-height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  & p {
+    font-family: $montserratRegular;
+    font-size: $montserratRegular16;
+    align-self: center;
+  }
+}
+._checkParent {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+
+  & p {
+    font-family: $montserratRegular;
+    margin-left: 0.7rem;
+    font-size: $montserratRegular16;
+  }
 }
 
-._responsiveIconParent {
-  display: none;
+._radioBtn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  min-height: 12px;
+  background-clip: content-box;
+  border: 2px solid $black;
+  background-color: trasparent;
+  border-radius: 50%;
 }
 
-
-@include responsive(lg) {
-  ._main {
-    display: block;
-    width: 100%;
-    overflow-y: scroll;
-    height: 60vh;
-    box-shadow: none;
-    overflow-y: scroll;
-
-    &::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    & ::-webkit-scrollbar-track {
-      background: none;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: $black;
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: none;
-    }
-  }
-
-  ._leftSection {
-    width: 100%;
-    box-shadow: none;
-    padding: 2.5rem 2rem;
-  }
-
-  ._rightSection {
-    padding: 0 2rem;
-    box-sizing: border-box;
-  }
-
-  ._rightMain {
-    display: block;
-    width: 100%;
-  }
-
-  ._inputRow {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  ._leftSide {
-    width: 100%;
-  }
-
-  ._rightSide {
-    margin: 0;
-    width: 100%;
-  }
-
-  ._halfWidth {
-    width: 100%;
-  }
-
-  ._btnParent {
-    width: 30%;
-  }
-
-  ._textArea {
-    min-height: 2.1rem;
-    height: 2.1rem;
-    max-height: 2.1rem;
-    width: 85%;
-    box-sizing: border-box;
-    width: 100%;
-
-  }
-
-  ._paperClipParent {
-    top: 2.1em;
-    right: 1rem;
-  }
-
-  ._sendBtn {
-    margin-right: auto;
-    padding-bottom: 2.5rem;
-  }
-
-  ._title {
-    font-size: 1.3rem;
-    font-family: $montserratBold;
-  }
-
-  ._marginBottom {
-    margin-top: 1.2rem;
-  }
-
-  ._termsParent {
-    width: 95%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1rem;
-  }
-
-  ._closeIconParent {
-    display: none;
-  }
-
-  ._responsiveIconParent {
-    display: block;
-  }
-
-  ._separation {
-   margin-top: 1.2rem;
-  }
-
+._leftBody{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
 }
+
