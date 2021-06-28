@@ -1,0 +1,188 @@
+@import '../../../public/styles/index.scss';
+
+._superParent {
+  display: flex;
+  justify-content: center;
+}
+
+._parent {
+  margin-top: 8rem;
+  height: calc(100vh - 14rem);
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+}
+
+._layout {
+  display: flex;
+  height: 100%;
+  padding-top: 2rem;
+  box-sizing: border-box;
+}
+
+._childOne {
+  width: 55%;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0.438rem;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $black;
+    border-radius: 0.625rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: none;
+  }
+}
+
+._childTwo {
+  width: 45%;
+}
+
+._row {
+  display: flex;
+  position: relative;
+
+  &:not(:first-child) {
+    margin-top: 1.25rem;
+  }
+  padding: 0.8rem;
+}
+
+._columnOne {
+  width: 50%;
+  padding: 0.6rem;
+  box-sizing: border-box;
+}
+
+._imgParent {
+  display: flex;
+}
+
+._img {
+  margin: 0 0.7rem;
+}
+
+._columnTwo {
+  width: 25%;
+  padding: 0.6rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+._columnThree {
+  width: 25%;
+  padding: 0.6rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+}
+
+._closeParent {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+._subtitle {
+  font-family: $montserratRegular;
+  font-size: $montserratRegular16;
+
+}
+
+._title {
+  font-family: $blackerTextHeavy;
+  font-size: $blackerTextHeavy40;
+}
+
+._rowTitle {
+  font-family: $blackerTextHeavy;
+  margin-bottom: 0.3rem;
+}
+
+._rowText {
+  font-family: $montserratRegular;
+  font-size: $montserratRegular14;
+  color: $gray;
+}
+
+._price {
+  font-family: $montserratRegular;
+}
+
+._card {
+  box-shadow: 2px 4px 10px $mercury;
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+._inputParent {
+  width: 100%;
+
+  & label {
+    padding-left: 0.7rem;
+    font-family: $montserratRegular;
+    font-size: $montserratRegular16;
+  }
+}
+
+._input {
+  @include generalInput($alto);
+}
+
+._inputRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+._btnParent {
+  margin-top: 0.5rem;
+  width: 11rem;
+  margin-left: 1rem;
+}
+
+._estimatedTotal {
+  display: flex;
+  margin: 1rem 0.7rem;
+  justify-content: space-between;
+
+  & p:first-child {
+    font-family: $blackerTextHeavy;
+    font-size: $montserratRegular16;
+  }
+
+  & p:last-child {
+    font-family: $montserratRegular;
+    font-size: $montserratRegular16;
+  }
+}
+
+._totalParent {
+  display: flex;
+  margin: 1.8rem 0.7rem 1rem 0.7rem;
+  justify-content: space-between;
+
+  & p:first-child {
+    font-family: $blackerTextHeavy;
+    font-size: $montserratRegular16;
+  }
+
+  & p:last-child {
+    font-family: $montserratBold;
+    font-size: $montserratRegular16;
+  }
+}
