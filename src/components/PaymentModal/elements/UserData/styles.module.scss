@@ -1,0 +1,122 @@
+@import '../../../../../public/styles/index.scss';
+
+
+._terms{
+  font-family: $montserratRegular;
+  font-size: $montserratRegular10;
+  color: $mineShaft;
+
+  & strong {
+    color: $mineShaft;
+    font-family: $montserratBold;
+  }
+}
+
+._titleParent {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+
+._title {
+  font-size: 1.8rem;
+  font-family: $blackerTextHeavyBold;
+  text-align: center;
+}
+
+._rightMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  width: 70%;
+  margin: 0 auto;
+}
+
+._inputParent {
+  width: 100%;
+  & label {
+    padding-left: 0.7rem;
+    font-family: $montserratRegular;
+    font-size: 0.9rem;
+  }
+}
+
+
+._inputRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1.2rem;
+}
+
+._halfWidth {
+  width: 48%;
+}
+
+@mixin input($borderColor) {
+  margin-top: 0.5rem;
+  border: solid 1px $borderColor;
+  border-radius: 1.25rem;
+  width: 100%;
+  height: 2.1rem;
+  padding: 0 0.8rem;
+  background-color: transparent;
+  font-family: $montserratRegular;
+  box-sizing: border-box;
+}
+
+._input {
+  @include input($alto)
+}
+
+._inputError {
+  @include input($red)
+}
+
+._buttonContainer{
+  display: flex;
+  flex-direction: column;
+  margin-top: 5rem;
+}
+
+._btnParent{
+  width: 120px;
+  margin: 2rem auto;
+}
+
+
+@include responsive(xxl) {
+  ._buttonContainer{
+    margin-top: 3rem;
+  }
+}
+
+@include responsive(md) {
+
+  ._titleParent{
+    margin-bottom: 1rem;
+  }
+  ._inputRow {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 0;
+  }
+  ._rightMain {
+    width: 100%;
+
+  }
+  ._halfWidth{
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  ._terms{
+    text-align: center;
+  }
+
+  ._buttonContainer{
+    margin-top: 0;
+  }
+
+}

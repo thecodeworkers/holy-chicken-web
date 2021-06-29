@@ -7,8 +7,8 @@ const formikConfig = () => (useFormik({
     name: '',
     lastname: '',
     phone: '',
+    identification: '',
     email: '',
-    message: ''
   },
 
   validationSchema: Yup.object({
@@ -23,11 +23,12 @@ const formikConfig = () => (useFormik({
     phone: Yup.string()
       .required(),
 
+    identification: Yup.string()
+      .required(),
+
     email: Yup.string()
       .required()
       .matches(emailRegex),
-
-    message: Yup.string()
   }),
 
   onSubmit: values => {
