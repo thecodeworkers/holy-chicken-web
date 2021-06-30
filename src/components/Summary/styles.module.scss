@@ -3,14 +3,17 @@
 ._superParent {
   display: flex;
   justify-content: center;
+  height: 100vh;
 }
 
 ._parent {
-  margin-top: 8rem;
-  height: calc(100vh - 14rem);
+  margin-top: 9rem;
+  height: auto;
   width: 85%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 7vh;
+  overflow-y: hidden;
 }
 
 ._layout {

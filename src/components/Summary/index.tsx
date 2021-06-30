@@ -22,9 +22,9 @@ const Summary = ({ data }) => {
             <div className={styles._childOne}>
 
               {
-                Array.from(Array(4).keys()).map(() => {
+                Array.from(Array(10).keys()).map((item, index) => {
                     return (
-                      <div className={styles._row}>
+                      <div className={styles._row} key={index}>
                       <div className={styles._closeParent}>
                         <img src='images/icons/close.svg' width='12px'></img>
                       </div>
