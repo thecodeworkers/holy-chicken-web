@@ -140,13 +140,14 @@ align-content: center;
   ._main{
     height: calc(100vh - 4rem);
   }
-
-
 }
 
 
 @include responsive(md) {
 
+  ._main{
+    height: 100%;
+  }
  ._stepData{
    display: none;
  }
@@ -155,6 +156,8 @@ align-content: center;
    display: flex;
    flex-direction: column;
    overflow-y: scroll;
+   height: 80vh;
+   margin-top: 3.75rem;
  }
  ._leftSection{
    width: 100%;
@@ -164,11 +167,18 @@ align-content: center;
    margin-left: 0;
  }
  ._rightSection{
-
-   padding: 2.5rem 2rem;
+  background-color: white;
+  padding: 2.5rem 2rem;
  }
  ._leftBody{
    margin-top: 1rem;
  }
 
+._checkParent{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+._parentTitle{
+  margin-top: 0.5rem;
+}
 }

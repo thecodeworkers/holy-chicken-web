@@ -22,8 +22,6 @@ const Shop = ({ content, data, filters, backup }) => {
       <ChangePasswordModal />
       {content ? (<>
         <FirstBanner content={content} filters={filters} backup={backup} />
-        {/* <SecondBanner data={content?.thirdBanner} />
-      <ThirdBanner data={content?.fourthBanner} /> */}
       </>
       ) : null}
       <Footer data={data?.footer} content={data?.socialNetworks}  />

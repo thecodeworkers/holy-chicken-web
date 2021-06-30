@@ -12,7 +12,8 @@ const DeliveryData = () => {
   const { errors, touched } = formik
   const [show, setShow] = useState(true)
   const [showAddress, setShowAddress] = useState(false)
-
+  const [date, setDate] = useState('text')
+  const [time, setTime] = useState('text')
   const setDelivery = (checked) => {
     if (checked == 'delivery') setShow(true)
     if (checked == 'pickup') setShow(false)
@@ -85,29 +86,33 @@ const DeliveryData = () => {
             </div>
 
             <div className={styles._inputDateRow}>
-              <div style={{ width: '100%' }}>
+            <div className={styles._fullContainer}>
                 <div className={styles._inputParent}>
 
                   <input
-                    type='date'
+                    type={date}
                     name='date'
+                    placeholder={'00/00/0000'}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.date}
+                    onClick={() => setDate('date')}
                     className={errors.date && touched.date ? styles._inputError : styles._inputDate} />
                 </div>
               </div>
             </div>
             <div className={styles._inputDateRow}>
-              <div style={{ width: '100%' }}>
+            <div className={styles._fullContainer}>
                 <div className={`${styles._inputParent} ${styles._separation}`}>
 
                   <input
-                    type='time'
+                    type={time}
                     name='time'
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    placeholder="00:00 PM"
                     value={formik.values.time}
+                    onClick={() => setTime('time')}
                     className={errors.time && touched.time ? styles._inputError : styles._inputDate} />
                 </div>
               </div>
@@ -162,7 +167,7 @@ const DeliveryData = () => {
               </div>
 
               <div className={styles._inputRow}>
-                <div style={{ width: '100%' }}>
+              <div className={styles._fullContainer}>
                   <div className={styles._inputParent}>
                     <label>Direcciónes guardadas</label>
                     <select name="select"
@@ -178,7 +183,7 @@ const DeliveryData = () => {
               </div>
 
               <div className={styles._inputRow}>
-                <div style={{ width: '100%' }}>
+                <div className={styles._fullContainer}>
                   <div className={styles._inputParent}>
                     <label>Dirección (zona, urbanzación, calle, casa/edificio)</label>
                     <input

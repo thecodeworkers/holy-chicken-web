@@ -61,7 +61,7 @@ const PaymentModal = () => {
           </div>
         </div>
         <div className={styles._rightSection}>
-      <UserData/>
+      <PaymentMethod/>
         </div>
       </div>
     </div>

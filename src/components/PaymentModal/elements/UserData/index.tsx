@@ -51,7 +51,7 @@ const UserData = () => {
                 </div>
 
                 <div className={styles._inputRow}>
-                  <div style={{ width: '100%' }}>
+                  <div className={styles._fullContainer}>
                     <div className={styles._inputParent}>
                       <label>Cedula</label>
                       <input
@@ -67,7 +67,7 @@ const UserData = () => {
                 </div>
 
                 <div className={styles._inputRow}>
-                  <div style={{ width: '100%' }}>
+                <div className={styles._fullContainer}>
                     <div className={styles._inputParent}>
                       <label>Email</label>
                       <input
@@ -83,7 +83,7 @@ const UserData = () => {
                 </div>
 
                 <div className={styles._inputRow}>
-                  <div style={{ width: '100%' }}>
+                <div className={styles._fullContainer}>
                     <div className={styles._inputParent}>
                       <label>Telefono</label>
                       <input
@@ -103,7 +103,7 @@ const UserData = () => {
                 <div className={styles._btnParent}>
                   <Button
                     color='#000'
-                    text='Ingresar'
+                    text='Siguiente'
                     textColor='#FFF'
                     type='submit' flag />
                 </div>

@@ -107,9 +107,11 @@ color: $mineShaft;
 ._checkParent {
   display: flex;
   align-items: center;
-
 }
 
+._fullContainer {
+ width: 100%;
+}
 ._radioBtn {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -183,6 +185,57 @@ color: $mineShaft;
 }
 
 
-@include responsive(xxl) {
+@include responsive(md) {
+  ._titleParent{
+    margin-bottom: 1rem;
+  }
+  ._inputRow {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 0;
+  }
+  ._rightMain {
+    width: 100%;
+    margin-bottom: 4rem;
+
+  }
+  ._buttonContainer{
+    bottom: 0;
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    right: 0;
+    left: 0;
+  }
+
+  ._btnParent{
+   margin-bottom: 1rem;
+  }
+
+  ._firstRow{
+    flex-direction: column;
+  }
+
+  ._radioContainer{
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  ._deliveryType{
+    margin-bottom: 0.6rem;
+  }
+  ._quarterWidth{
+    width: 100%;
+    margin-bottom: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  ._fullContainer {
+    margin-bottom:1.2rem;
+  }
+  ._threeQuarterWidth{
+    width: 100%;
+    margin-bottom:1.2rem;
+  }
 
 }
