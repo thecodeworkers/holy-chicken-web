@@ -1,0 +1,2 @@
+export const SET_REFERENCE = 'SET_REFERENCE'
+export const RESET_STATE = 'RESET_STATE'

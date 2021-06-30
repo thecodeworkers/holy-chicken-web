@@ -4,7 +4,7 @@ import { Insta, WhatsApp, Twitter } from '@images/icons'
 
 const SocialSwipe = () => {
 
-  const [animate, setAnimate]=useState(false)
+
   const [show, setShow] = useState(0)
 
   const assignClass = () => {
@@ -45,7 +45,7 @@ const SocialSwipe = () => {
         <p className={styles._text}>@holychicken.ccs</p>
         <p className={styles._text}>4.606</p>
         </div>
-        <img src={'images/resources/burguer.png'} width={170}></img>
+        <img src={'images/resources/burguer.png'} width={140}></img>
       </a>
       </div>
       <div className={styles._whiteCard} >
@@ -54,7 +54,7 @@ const SocialSwipe = () => {
         <p className={styles._text}>@HolyChickenCcs</p>
         <p className={styles._text}>4.206</p>
         </div>
-        <img src={'images/resources/burguer.png'} width={170}></img>
+        <img src={'images/resources/burguer.png'} width={140}></img>
         </a>
       </div>
       </div>
