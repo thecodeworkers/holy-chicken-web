@@ -75,6 +75,15 @@ const PaymentMethod = () => {
   })
   }
 
+  const buildTexts = (data) => {
+    const dynamicText = Object.entries(data).map(([key, value]) => {
+      if(key != 'name') return value
+    })
+
+    dynamicText.splice(0, 1)
+    return dynamicText
+  }
+
   return (
     <>
       <div className={styles._titleParent}>
@@ -87,7 +96,34 @@ const PaymentMethod = () => {
             <div className={styles._deliveryType}>
               <p className={styles._deliveryTitle}>Seleccione una opción</p>
 
-              {listPayments()}
+              {
+                   data.map((res, mapIndex) => {
+                    return (
+                      <div className={styles._radioContainer} key={mapIndex} >
+                      <div className={styles._checkParent} >
+                        <input type='checkbox'
+                          className={styles._radioBtn}
+                          defaultChecked={false}
+                          onClick={(check) => { showPicukp(check.currentTarget.checked) }}>
+                        </input>
+                        <div className={styles._addressDescription}>
+
+                          <p className={styles._radioTitle}>{res.name}</p>
+                          {showAddress ?
+                            <ul>
+                              {
+                                buildTexts(res).map((item: string , index: number) => {
+                                  return <li key={index}>{item}</li>
+                                })
+                              }
+                            </ul>
+                            : null}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })
+              }
 
             </div>
 
