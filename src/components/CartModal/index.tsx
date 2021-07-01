@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCart, setShowModal, removeCartItem } from '@store/actions'
+import { getCart, setShowModal, removeCartItem, setToast, setLoader } from '@store/actions'
 import { createMarkup } from '@utils'
-
+import { useRouter } from 'next/router'
 
 const CartModal = () => {
 
+  const router = useRouter()
   const dispatch = useDispatch()
 
   const { intermitence: { cartModal }, cart } = useSelector((state: any) => state)
@@ -15,6 +16,7 @@ const CartModal = () => {
   const closeModal = (event, flag = false) => {
     const { target } = event
     if(target.id == 'modal') {
+
       dispatch(setShowModal({ cartModal: false }))
     }
   }
@@ -26,6 +28,17 @@ const CartModal = () => {
     const { key } = dataItem
     dispatch(removeCartItem(key))
   }
+
+  const navigate = (route, loader) => {
+    if((route != router.pathname) && nodes.length) {
+      router.push('/summary')
+      if(loader) dispatch(setLoader(true))
+      return
+    }
+
+    dispatch(setToast('warning', 'Su carrito esta vacio', 1))
+  }
+
   return (
     <div className={cartModal ? styles._background : styles._hidden} onClick={closeModal} id={'modal'}>
       <div className={`_generalCard ${styles._modal}`} >
@@ -71,7 +84,7 @@ const CartModal = () => {
             <p className={styles._parentTotal}>{total}</p>
           </div>
           <div className={styles._btnParent}>
-            <Button text='Confirmar' color='#000' textColor='#FFF' />
+            <Button text='Confirmar' color='#000' textColor='#FFF' method={() => navigate('summary', true)} />
           </div>
         </div>
       </div>
