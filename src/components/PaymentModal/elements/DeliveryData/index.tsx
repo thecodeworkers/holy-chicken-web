@@ -187,7 +187,7 @@ const DeliveryData = () => {
                   <div className={styles._inputParent}>
                     <label>Dirección (zona, urbanzación, calle, casa/edificio)</label>
                     <input
-                      name='phone'
+                      name='address'
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.address}

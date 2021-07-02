@@ -44,13 +44,11 @@ const PaymentMethod = () => {
   const [show, setShow] = useState(true)
   const [showAddress, setShowAddress] = useState(false)
 
-  const setDelivery = (checked) => {
-    if (checked == 'delivery') setShow(true)
-    if (checked == 'pickup') setShow(false)
-  }
 
-  const showPicukp = (checked) => {
-    setShowAddress(checked => !checked)
+  const showPicukp = (current) => {
+
+   console.log(current);
+
   }
 
   const buildTexts = (data) => {
@@ -78,10 +76,10 @@ const PaymentMethod = () => {
                     return (
                       <div className={styles._radioContainer} key={mapIndex} >
                       <div className={styles._checkParent} >
-                        <input type='checkbox'
+                        <input type='checkbox' id={`${mapIndex}`}
                           className={styles._radioBtn}
                           defaultChecked={false}
-                          onClick={(check) => { showPicukp(check.currentTarget.checked) }}>
+                          onClick={(check) => { showPicukp(check.currentTarget ) }}>
                         </input>
                         <div className={styles._addressDescription}>
 
@@ -102,7 +100,6 @@ const PaymentMethod = () => {
                 })
               }
             </div>
-
           </div>
 
 
