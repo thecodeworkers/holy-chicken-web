@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import styles from './styles.module.scss'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import FormikConfig from './formik'
 import { Button } from '@components'
 
 const DeliveryData = () => {
 
-  const { intermitence: { paymentModal } , resource: { general: { general } } } = useSelector((state: any) => state)
-
-  const formik = FormikConfig()
+  const {resource: { general: { general } } } = useSelector((state: any) => state)
+  const dispatch = useDispatch()
+  const formik = FormikConfig(dispatch)
   const { errors, touched } = formik
   const [show, setShow] = useState(true)
   const [showAddress, setShowAddress] = useState(false)
@@ -157,11 +157,11 @@ const DeliveryData = () => {
                     <input
                       placeholder='Telefono'
                       type='text'
-                      name='lastname'
+                      name='phone'
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.lastname}
-                      className={errors.lastname && touched.lastname ? styles._inputError : styles._input} />
+                      value={formik.values.phone}
+                      className={errors.phone && touched.phone ? styles._inputError : styles._input} />
                   </div>
                 </div>
               </div>
@@ -190,10 +190,10 @@ const DeliveryData = () => {
                       name='phone'
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.phone}
+                      value={formik.values.address}
                       placeholder='Introducir dirección'
                       type='text'
-                      className={errors.phone && touched.phone ? styles._inputError : styles._input} />
+                      className={errors.address && touched.address ? styles._inputError : styles._input} />
                   </div>
                 </div>
               </div>

@@ -1,8 +1,8 @@
 import { useFormik } from 'formik'
 import { emailRegex, passwordRegex, onlyLettersRegex, onlyNumbersRegex } from '@utils/regex'
 import * as Yup from 'yup'
-
-const formikConfig = () => (useFormik({
+import { setStep } from '@store/actions'
+const formikConfig = (dispatch) => (useFormik({
   initialValues: {
     date: '',
     time: '',
@@ -11,6 +11,7 @@ const formikConfig = () => (useFormik({
     phone: '',
     identification: '',
     email: '',
+    address:'',
     reference: '',
     zipcode: '',
     country: '',
@@ -51,7 +52,7 @@ const formikConfig = () => (useFormik({
   }),
 
   onSubmit: values => {
-    console.log(JSON.stringify(values))
+    dispatch(setStep({ step: 3 }))
   }
 }))
 

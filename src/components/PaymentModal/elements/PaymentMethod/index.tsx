@@ -12,6 +12,7 @@ const data = [
   },
   {
     name: 'Pago movil',
+    phone: '+58 414-8065668',
     bank_name: 'Banco mercantil',
     identification: 'J500469381',
     email: 'Infoholychicken@gmail.com',
@@ -52,29 +53,6 @@ const PaymentMethod = () => {
     setShowAddress(checked => !checked)
   }
 
-  const listPayments = () => {
-    data.map((res, mapIndex) => {
-
-      return (
-        <div className={styles._radioContainer} key={mapIndex} >
-        <div className={styles._checkParent} >
-          <input type='checkbox'
-            className={styles._radioBtn}
-            defaultChecked={true}
-            onClick={(check) => { showPicukp(check.currentTarget.checked) }}>
-          </input>
-          <div className={styles._addressDescription}>
-            <p className={styles._radioTitle}>{res.name}</p>
-            {showAddress ?
-             <p>{res.bank_name}</p>
-              : null}
-          </div>
-        </div>
-      </div>
-    )
-  })
-  }
-
   const buildTexts = (data) => {
     const dynamicText = Object.entries(data).map(([key, value]) => {
       if(key != 'name') return value
@@ -95,7 +73,6 @@ const PaymentMethod = () => {
           <div className={styles._firstRow}>
             <div className={styles._deliveryType}>
               <p className={styles._deliveryTitle}>Seleccione una opción</p>
-
               {
                    data.map((res, mapIndex) => {
                     return (
@@ -110,10 +87,10 @@ const PaymentMethod = () => {
 
                           <p className={styles._radioTitle}>{res.name}</p>
                           {showAddress ?
-                            <ul>
+                            <ul className={styles._list}>
                               {
                                 buildTexts(res).map((item: string , index: number) => {
-                                  return <li key={index}>{item}</li>
+                                  return <li className={styles._listItem} key={index}>{item}</li>
                                 })
                               }
                             </ul>
@@ -124,7 +101,6 @@ const PaymentMethod = () => {
                   )
                 })
               }
-
             </div>
 
           </div>

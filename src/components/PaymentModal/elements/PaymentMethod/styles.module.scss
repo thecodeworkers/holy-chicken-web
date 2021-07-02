@@ -6,8 +6,6 @@
   margin-bottom: 4rem;
 }
 
-
-
 ._title {
   font-size: 1.8rem;
   font-family: $blackerTextHeavyBold;
@@ -102,11 +100,12 @@
 font-family: $montserratBold;
 font-size: $montserratBold18;
 color: $mineShaft;
+margin-left: 1.5rem;
 }
 
 ._checkParent {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 
 }
 
@@ -181,8 +180,53 @@ color: $mineShaft;
   display: flex;
   flex-direction: column;
 }
+._list{
+padding: 0;
+}
+
+._listItem{
+  font-size: $montserratRegular16;
+  font-family: $montserratRegular;
+  color: $mineShaft;
+  list-style: none;
+}
 
 
-@include responsive(xxl) {
+@include responsive(md) {
+  ._titleParent{
+    margin-bottom: 1rem;
+  }
+  ._inputRow {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 0;
+  }
+  ._rightMain {
+    width: 100%;
+    margin-bottom: 4rem;
+
+  }
+  ._buttonContainer{
+    bottom: 0;
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    right: 0;
+    left: 0;
+  }
+
+  ._btnParent{
+   margin-bottom: 1rem;
+  }
+
+  ._radioContainer{
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  ._deliveryType{
+    margin-bottom: 0.6rem;
+  }
 
 }
+

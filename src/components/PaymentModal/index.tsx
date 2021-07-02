@@ -4,7 +4,29 @@ import { UserData, DeliveryData, PaymentMethod, BillingData } from './elements'
 
 const PaymentModal = () => {
 
-  const { intermitence: { paymentModal } } = useSelector((state: any) => state)
+  const { intermitence: { paymentModal } , paymentStep: { step } } = useSelector((state: any) => state)
+
+  const currentStep= step
+
+  const slider = (param) => {
+    switch (param) {
+      case 1:
+        return <UserData  />
+
+      case 2:
+        return <DeliveryData  />
+
+      case 3:
+        return <PaymentMethod  />
+
+      case 4:
+        return <BillingData />
+
+      default:
+        return null
+    }
+  }
+
 
   return (
 
@@ -61,7 +83,7 @@ const PaymentModal = () => {
           </div>
         </div>
         <div className={styles._rightSection}>
-      <PaymentMethod/>
+        {slider(currentStep)}
         </div>
       </div>
     </div>

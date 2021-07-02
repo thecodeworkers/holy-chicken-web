@@ -22,7 +22,7 @@ const BillingData = () => {
   return (
     <>
       <div className={styles._titleParent}>
-        <p className={styles._title}>Forma de entrega</p>
+        <p className={styles._title}>Facturacion</p>
       </div>
       <form onSubmit={formik.handleSubmit}>
         <div className={styles._rightMain}>
@@ -93,7 +93,7 @@ const BillingData = () => {
               </div>
 
               <div className={styles._inputRow}>
-                <div style={{ width: '100%' }}>
+              <div className={styles._fullContainer}>
                   <div className={styles._inputParent}>
                     <label>Dirección (zona, urbanzación, calle, casa/edificio)</label>
                     <input
