@@ -160,7 +160,7 @@
 ._btnParent {
   margin-top: 0.5rem;
   width: 11rem;
-  margin-left: 1rem;
+  margin-left: 1rem
 }
 
 ._estimatedTotal {
@@ -205,5 +205,34 @@
     font-family: $montserratRegular;
     font-size: $montserratRegular18;
     color: $gray;
+  }
+}
+
+
+@include responsive(lg) {
+  ._layout {
+    flex-flow: column nowrap;
+  }
+
+  ._childOne, ._childTwo {
+    width: 100%;
+  }
+
+  ._parent {
+    overflow: auto;
+    margin-top: 7rem;
+  }
+
+  ._superParent {
+    height: auto;
+  }
+
+  ._img {
+    display: none;
+  }
+
+  ._card {
+    width: 95%;
+    margin-bottom: 1rem;
   }
 }
