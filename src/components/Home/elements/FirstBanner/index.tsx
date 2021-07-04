@@ -44,9 +44,8 @@ const FirstBanner = ({ data, content, publicity, resource }) => {
     determinateCurrent()
   }
 
-  const navigation = (route: string, loader = true) => {
+  const navigation = (route: string) => {
     if (route != router.pathname) {
-      if (loader) dispatch(setLoader(true))
       router.push(route)
     }
   }

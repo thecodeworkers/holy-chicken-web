@@ -4,18 +4,17 @@ import { ChickenLogo, Logo } from '@images/resources'
 import { Insta, WhatsApp, Twitter } from '@images/icons'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { setLoader, setShowModal } from '@store/actions'
+import { setShowModal } from '@store/actions'
 
 const Footer = ({ data, content }) => {
 
   const router = useRouter()
   const dispatch = useDispatch()
 
-  const navigation = (route: string, loader = true, reference = null, key = '') => {
+  const navigation = (route: string, reference = null, key = '') => {
     if (route == '/login') return dispatch(setShowModal({ loginModal: true }))
     if (route == '/contact') return dispatch(setShowModal({ contactModal: true }))
     if (router.pathname != route) {
-      if (loader) dispatch(setLoader(true))
       router.push(route)
     }
   }

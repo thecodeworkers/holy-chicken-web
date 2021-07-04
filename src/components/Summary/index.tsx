@@ -6,6 +6,7 @@ import { CountProduct, Button } from '@components'
 import { createMarkup } from '@utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeCartItem, applyCoupon } from '@store/actions'
+import { WebRow } from './elements'
 
 const Summary = ({ data, cartParam }) => {
 
@@ -52,41 +53,7 @@ const Summary = ({ data, cartParam }) => {
 
           <div className={styles._layout}>
             <div className={styles._childOne}>
-              {
-                items.length ?
-                  items.map((item, index) => {
-                    const element = item?.product?.node
-                    return (
-                      <div className={styles._row} key={index}>
-                        <div className={styles._closeParent} onClick={() => deleteItem(item)}>
-                          <img src='images/icons/close.svg' width='12px'></img>
-                        </div>
-                        <div className={styles._columnOne}>
-                          <div className={styles._imgParent}>
-                            <div className={styles._img}>
-                              <img src={element?.image?.mediaItemUrl ?? 'images/resources/burguer.png'} width='75px'></img>
-                            </div>
-                            <div>
-                              <p className={styles._rowTitle}>{element?.name}</p>
-                              <div className={styles._rowText} dangerouslySetInnerHTML={createMarkup(element?.description)}></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className={styles._columnTwo}>
-                          <div>
-                            <CountProduct productKey={item?.key} stock={element?.stockQuantity} quantity={item?.quantity} />
-                          </div>
-                        </div>
-                        <div className={styles._columnThree}>
-                          <p className={styles._price}>{element?.price}</p>
-                        </div>
-                      </div>
-                    )
-                  }) : ( <div className={styles._emptyCart}>
-                    <p>Tu carrito está vacío</p>
-                  </div> )
-              }
-
+              <WebRow items={items} />
             </div>
             <div className={styles._childTwo}>
               <div className={`${styles._card} _generalCard`}>
@@ -122,9 +89,7 @@ const Summary = ({ data, cartParam }) => {
                 </div>
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </>

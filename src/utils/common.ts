@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-// import { setLoader } from '@store/actions'
 import { useDispatch } from 'react-redux'
 
 export const normalizedArray = response => response ? response : []

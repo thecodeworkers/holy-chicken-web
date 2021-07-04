@@ -5,7 +5,7 @@ import { ChickenLogo } from '@images/resources'
 import { ResponsiveMenu, Button } from '@components'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import { setShowModal, setLoader, logoutUser, setToast, resetModals} from '@store/actions'
+import { setShowModal, logoutUser, setToast, resetModals} from '@store/actions'
 import { useSelector } from 'react-redux'
 
 
@@ -29,9 +29,8 @@ const NavbarResponsive = () => {
 
   const resetShow = () => setShow(0)
 
-  const navigation = (route: string, loader = true) => {
+  const navigation = (route: string) => {
     if (route != router.pathname) {
-      if (loader) dispatch(setLoader(true))
       router.push(route)
     }
   }

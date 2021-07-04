@@ -6,7 +6,9 @@ import '@styles/globals.scss'
 import Head from 'next/head'
 import { Loader } from '@components'
 import { useSelector } from 'react-redux'
-import { ModalContact, LoginModal, RegisterModal, ForgotPasswordModal, ChangePasswordModal, LocationModal, Toast} from '@components'
+import Router from 'next/router'
+import ProgressBar from '@badrap/bar-of-progress'
+import { ModalContact, LoginModal, RegisterModal, ForgotPasswordModal, ChangePasswordModal, LocationModal, Toast } from '@components'
 
 const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => {
 
@@ -19,6 +21,17 @@ const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => {
     store.__persistor.persist()
   }, [])
 
+  const progress = new ProgressBar({
+    size: 2,
+    color: '#FD8C2E',
+    delay: 100,
+    className: '_progressBar'
+  })
+
+  Router.events.on('routeChangeStart', progress.start);
+  Router.events.on('routeChangeComplete', progress.finish);
+  Router.events.on('routeChangeError', progress.finish);
+
   return (
     <>
       <Head>
@@ -26,16 +39,16 @@ const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => {
       </Head>
 
       <>
-      <Toast icon={toast?.type} text={toast?.text} status={toast?.status}></Toast>
-      <ModalContact />
-      <LoginModal />
-      <RegisterModal />
-      <ForgotPasswordModal />
-      <ChangePasswordModal />
-      <LocationModal />
+        <Toast icon={toast?.type} text={toast?.text} status={toast?.status}></Toast>
+        <ModalContact />
+        <LoginModal />
+        <RegisterModal />
+        <ForgotPasswordModal />
+        <ChangePasswordModal />
+        <LocationModal />
       </>
 
-      { show && <Loader />}
+      {show && <Loader />}
 
       <Component {...pageProps} />
     </>
