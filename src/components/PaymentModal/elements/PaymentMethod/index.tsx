@@ -14,15 +14,7 @@ const PaymentMethod = () => {
   const dispatch = useDispatch()
 
   const buildTexts = (data) => {
-    const test = Object.entries(data)
-    const dynamicText = test.map(([key, value,], index) => {
-
-      if (key == 'id') {
-        test.splice(index, 1)
-      }
-      return value
-    })
-    return dynamicText
+    return data?.description?.split('/')
   }
 
   const selectedMethod = (e, item) => {
