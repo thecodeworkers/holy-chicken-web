@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { useSelector } from 'react-redux'
 import FormikConfig from './formik'
 import { Button } from '@components'
+import loadConfig from 'next/dist/next-server/server/config'
 
-const data = [
+const data: Array<any> = [
   {
     name: 'Zelle',
     account_name: 'Holy Chicken LLC',
@@ -37,28 +38,47 @@ const data = [
 ]
 const PaymentMethod = () => {
 
-  const { intermitence: { paymentModal }, resource: { general: { general } } } = useSelector((state: any) => state)
+  const { intermitence: { paymentModal }, resource: { general: { general }, paymentMethods } } = useSelector((state: any) => state)
+
+  console.log(paymentMethods);
 
   const formik = FormikConfig()
   const { errors, touched } = formik
-  const [show, setShow] = useState(true)
+  const mapedData =  Array.from(Array(data.length).fill(false))
+  const [show, setShow]:any = useState(mapedData)
+
   const [showAddress, setShowAddress] = useState(false)
 
 
-  const showPicukp = (current) => {
-
-   console.log(current);
-
+  const pushDataStatus = (data) => {
+    const pushStatus = data.map((res, mapIndex) => {
+      return data[mapIndex].status = false
+    })
+    return data
   }
 
+  const showPicukp = (mapIndex) => {
+    let newArray = show
+    newArray[mapIndex] = true
+
+    data[mapIndex].status = true
+    setShow([false, false, false, false, true])
+    //  setShow([...show, show[mapIndex] = true])
+  }
   const buildTexts = (data) => {
     const dynamicText = Object.entries(data).map(([key, value]) => {
-      if(key != 'name') return value
+      if (key != 'name') return value
     })
 
     dynamicText.splice(0, 1)
     return dynamicText
   }
+
+
+  useEffect(() => {
+
+
+  }, [])
 
   return (
     <>
@@ -72,14 +92,16 @@ const PaymentMethod = () => {
             <div className={styles._deliveryType}>
               <p className={styles._deliveryTitle}>Seleccione una opción</p>
               {
-                   data.map((res, mapIndex) => {
-                    return (
-                      <div className={styles._radioContainer} key={mapIndex} >
+                pushDataStatus(data).map((res, mapIndex) => {
+                  console.log(data[mapIndex].status, 'RESPUES');
+
+                  return (
+                    <div className={styles._radioContainer} key={mapIndex} >
                       <div className={styles._checkParent} >
-                        <input type='checkbox' id={`${mapIndex}`}
+                        <input type='checkbox'
                           className={styles._radioBtn}
-                          defaultChecked={false}
-                          onClick={(check) => { showPicukp(check.currentTarget ) }}>
+                          checked={show[mapIndex]}
+                          onChange={(check) => { showPicukp(mapIndex) }}>
                         </input>
                         <div className={styles._addressDescription}>
 
@@ -87,7 +109,7 @@ const PaymentMethod = () => {
                           {showAddress ?
                             <ul className={styles._list}>
                               {
-                                buildTexts(res).map((item: string , index: number) => {
+                                buildTexts(res).map((item: string, index: number) => {
                                   return <li className={styles._listItem} key={index}>{item}</li>
                                 })
                               }
@@ -100,6 +122,7 @@ const PaymentMethod = () => {
                 })
               }
             </div>
+
           </div>
 
 

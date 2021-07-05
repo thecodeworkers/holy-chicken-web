@@ -4,7 +4,7 @@ import { UserData, DeliveryData, PaymentMethod, BillingData } from './elements'
 
 const PaymentModal = () => {
 
-  const { intermitence: { paymentModal } , paymentStep: { step } } = useSelector((state: any) => state)
+  const { intermitence: { paymentModal } , paymentStep: { user_data, step } } = useSelector((state: any) => state)
 
   const currentStep= 3
 
@@ -41,17 +41,26 @@ const PaymentModal = () => {
           <div className={styles._leftBody}>
             <div className={styles._stepContainer}>
               <div className={styles._checkParent}>
-                <div className={styles._radioBtn}></div>
+                <div className={currentStep == 1 ? styles._radioBtnChecked : styles._radioBtn }></div>
                 <p>Tus Datos</p>
               </div>
               <div className={styles._stepData}>
-                <p>Nombre, apellido</p>
+                {user_data?.name  ?
+                <p>{`${user_data.name},
+                ${user_data.lastname},
+                ${user_data.identification},
+                ${user_data.email}`}</p>
+
+
+                  : <p>Nombre, Apellido, Cedula, Email</p>
+
+                }
               </div>
             </div>
 
             <div>
               <div className={styles._checkParent}>
-                <div className={styles._radioBtn}></div>
+                <div className={currentStep == 2 ? styles._radioBtnChecked : styles._radioBtn }></div>
                 <p>Formas de entrega</p>
               </div>
               <div className={styles._stepData}>
@@ -60,7 +69,7 @@ const PaymentModal = () => {
             </div>
             <div>
               <div className={styles._checkParent}>
-                <div className={styles._radioBtn}></div>
+                <div className={currentStep == 3 ? styles._radioBtnChecked : styles._radioBtn }></div>
                 <p>Formas de pago</p>
               </div>
               <div className={styles._stepData}>

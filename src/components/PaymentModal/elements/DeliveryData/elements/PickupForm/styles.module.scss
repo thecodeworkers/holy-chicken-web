@@ -1,4 +1,4 @@
-@import '../../../../../public/styles/index.scss';
+@import '../../../../../../../public/styles/index.scss';
 
 ._titleParent {
   display: flex;
@@ -157,13 +157,6 @@ color: $mineShaft;
 
 ._firstRow{
   display: flex;
-  justify-content: space-between;
-  align-content: center;
-}
-
-._firstColumn{
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-content: center;
 }
