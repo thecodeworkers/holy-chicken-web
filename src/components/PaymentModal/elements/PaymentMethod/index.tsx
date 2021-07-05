@@ -44,27 +44,7 @@ const PaymentMethod = () => {
 
   const formik = FormikConfig()
   const { errors, touched } = formik
-  const mapedData =  Array.from(Array(data.length).fill(false))
-  const [show, setShow]:any = useState(mapedData)
 
-  const [showAddress, setShowAddress] = useState(false)
-
-
-  const pushDataStatus = (data) => {
-    const pushStatus = data.map((res, mapIndex) => {
-      return data[mapIndex].status = false
-    })
-    return data
-  }
-
-  const showPicukp = (mapIndex) => {
-    let newArray = show
-    newArray[mapIndex] = true
-
-    data[mapIndex].status = true
-    setShow([false, false, false, false, true])
-    //  setShow([...show, show[mapIndex] = true])
-  }
   const buildTexts = (data) => {
     const dynamicText = Object.entries(data).map(([key, value]) => {
       if (key != 'name') return value
@@ -73,12 +53,6 @@ const PaymentMethod = () => {
     dynamicText.splice(0, 1)
     return dynamicText
   }
-
-
-  useEffect(() => {
-
-
-  }, [])
 
   return (
     <>
@@ -92,21 +66,21 @@ const PaymentMethod = () => {
             <div className={styles._deliveryType}>
               <p className={styles._deliveryTitle}>Seleccione una opción</p>
               {
-                pushDataStatus(data).map((res, mapIndex) => {
-                  console.log(data[mapIndex].status, 'RESPUES');
-
+                data.map((res, mapIndex) => {
                   return (
                     <div className={styles._radioContainer} key={mapIndex} >
                       <div className={styles._checkParent} >
-                        <input type='checkbox'
+                        <input type='radio'
+                          value={res.name}
+                          name='paymentMethod'
                           className={styles._radioBtn}
-                          checked={show[mapIndex]}
-                          onChange={(check) => { showPicukp(mapIndex) }}>
+                          checked={formik.values.paymentMethod === res.name}
+                          onChange={formik.handleChange}>
                         </input>
                         <div className={styles._addressDescription}>
 
                           <p className={styles._radioTitle}>{res.name}</p>
-                          {showAddress ?
+                          {formik.values.paymentMethod === res.name ?
                             <ul className={styles._list}>
                               {
                                 buildTexts(res).map((item: string, index: number) => {

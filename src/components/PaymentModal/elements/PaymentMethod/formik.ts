@@ -5,7 +5,8 @@ import * as Yup from 'yup'
 const formikConfig = () => (useFormik({
   initialValues: {
     referenceNumber: '',
-    bankname: ''
+    bankname: '',
+    paymentMethod: ''
   },
 
   validationSchema: Yup.object({
@@ -13,9 +14,10 @@ const formikConfig = () => (useFormik({
       .required()
       .matches(onlyLettersRegex),
 
-      bankname: Yup.string()
+    bankname: Yup.string()
       .required()
       .matches(onlyLettersRegex),
+    paymentMethod: Yup.string().required()
   }),
 
   onSubmit: values => {
