@@ -6,7 +6,7 @@ const PaymentModal = () => {
 
   const { intermitence: { paymentModal } , paymentStep: { user_data, step } } = useSelector((state: any) => state)
 
-  const currentStep= step
+  const currentStep= 3
 
   const slider = (param) => {
     switch (param) {

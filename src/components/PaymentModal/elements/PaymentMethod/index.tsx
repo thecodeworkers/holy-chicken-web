@@ -1,56 +1,33 @@
 import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import FormikConfig from './formik'
 import { Button } from '@components'
 import loadConfig from 'next/dist/next-server/server/config'
 
-const data: Array<any> = [
-  {
-    name: 'Zelle',
-    account_name: 'Holy Chicken LLC',
-    email: 'pagos@theholychicken.com'
-  },
-  {
-    name: 'Pago movil',
-    phone: '+58 414-8065668',
-    bank_name: 'Banco mercantil',
-    identification: 'J500469381',
-    email: 'Infoholychicken@gmail.com',
-  },
-  {
-    name: 'Transferencia',
-    account_name: 'Grupo Holy Foods, C.A.',
-    bank_name: 'Banco mercantil',
-    account_number: '01050014111014703344',
-    identification: 'J500469381',
-    email: 'Infoholychicken@gmail.com',
-  },
-  {
-    name: 'Efectivo',
-    message: 'En caso de no disponer del monto exacto en efectivo, te ofrecemos las siguientes opciones:',
-    advice_one: '1- Recibir vuelto en efectivo, sujeto a nuestra disponibilidad.',
-    advice_two: '1- Recibir vuelto en efectivo, sujeto a nuestra disponibilidad.',
-  },
-  {
-    name: 'Tarjeta Internacional',
-  },
-]
 const PaymentMethod = () => {
 
   const { intermitence: { paymentModal }, resource: { general: { general }, paymentMethods } } = useSelector((state: any) => state)
 
-  console.log(paymentMethods);
-
   const formik = FormikConfig()
+  const [paymentSelected, setPaymentSelected] = useState('')
+  const dispatch = useDispatch()
 
   const buildTexts = (data) => {
-    const dynamicText = Object.entries(data).map(([key, value]) => {
-      if (key != 'name') return value
-    })
+    const test = Object.entries(data)
+    const dynamicText = test.map(([key, value,], index) => {
 
-    dynamicText.splice(0, 1)
+      if (key == 'id') {
+        test.splice(index, 1)
+      }
+      return value
+    })
     return dynamicText
+  }
+
+  const selectedMethod = (e, item) => {
+    setPaymentSelected(item)
+    return formik.handleChange(e)
   }
 
   return (
@@ -65,7 +42,7 @@ const PaymentMethod = () => {
             <div className={styles._deliveryType}>
               <p className={styles._deliveryTitle}>Seleccione una opción</p>
               {
-                data.map((res, mapIndex) => {
+                paymentMethods.map((res, mapIndex) => {
                   return (
                     <div className={styles._radioContainer} key={mapIndex} >
                       <div className={styles._checkParent} >
@@ -73,13 +50,13 @@ const PaymentMethod = () => {
                           value={res.name}
                           name='paymentMethod'
                           className={styles._radioBtn}
-                          checked={formik.values.paymentMethod === res.name}
-                          onChange={formik.handleChange}>
+                          checked={paymentSelected === res.title}
+                          onChange={(e) => selectedMethod(e, res.title)}>
                         </input>
                         <div className={styles._addressDescription}>
 
-                          <p className={styles._radioTitle}>{res.name}</p>
-                          {formik.values.paymentMethod === res.name ?
+                          <p className={styles._radioTitle}>{res.title}</p>
+                          {paymentSelected === res.title ?
                             <ul className={styles._list}>
                               {
                                 buildTexts(res).map((item: string, index: number) => {

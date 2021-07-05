@@ -6,7 +6,6 @@ const formikConfig = () => (useFormik({
   initialValues: {
     referenceNumber: '',
     bankname: '',
-    paymentMethod: ''
   },
 
   validationSchema: Yup.object({
@@ -17,7 +16,6 @@ const formikConfig = () => (useFormik({
     bankname: Yup.string()
       .required()
       .matches(onlyLettersRegex),
-    paymentMethod: Yup.string().required()
   }),
 
   onSubmit: values => {
