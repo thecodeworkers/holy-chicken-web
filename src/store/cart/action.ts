@@ -1,6 +1,6 @@
 import { actionObject, filter } from '@utils'
-import { CURRENT_PRODUCT, PRODUCTS_NUMBER, CART_PRODUCTS, GET_CART } from './action-types'
-import { addItemToCartMutation, getCartQuery, removeFromCartMutation, updateItemQuantity } from '@graphql'
+import { CURRENT_PRODUCT, PRODUCTS_NUMBER, CART_PRODUCTS, GET_CART, APPLY_COUPON } from './action-types'
+import { addItemToCartMutation, getCartQuery, removeFromCartMutation, updateItemQuantity, applyCouponMutation } from '@graphql'
 import { REQUEST_LOADER } from '../loader/actions-types'
 import { setToast, setShowModal } from '@store/actions'
 
@@ -12,7 +12,7 @@ export const getCart = () => async (dispatch, getState) => {
   const sessionToken = auth?.login?.sessionToken
   const result = await getCartQuery(auth.isAuth, sessionToken)
 
-  return console.log('RESUUUULT CART', result)
+  return result
 }
 
 export const setCartProducts = ({ databaseId, quantity = 1 }: any) => async (dispatch, getState) => {
@@ -73,7 +73,6 @@ export const updateQuantity: any = (product: any, type: any) => async (dispatch,
     const { auth, cart: { cartProducts } } = await getState()
 
     if (auth?.isAuth) {
-      dispatch(actionObject(REQUEST_LOADER, true))
 
       const sessionToken = auth?.login?.login?.customer?.sessionToken
 
@@ -92,14 +91,41 @@ export const updateQuantity: any = (product: any, type: any) => async (dispatch,
         dispatch(actionObject(CART_PRODUCTS, { cartProducts: data?.updateItemQuantities?.cart }))
         dispatch(setProductsNumber({ number: itemsNumber }))
         dispatch(setToast('check', 'Producto actualizado', 1))
-        dispatch(actionObject(REQUEST_LOADER, false))
+        // dispatch(actionObject(REQUEST_LOADER, false))
         return
       }
       dispatch(setToast('error', 'Limite Maximo', 1))
-      dispatch(actionObject(REQUEST_LOADER, false))
     }
   } catch (error) {
     dispatch(actionObject(REQUEST_LOADER, false))
     dispatch(setToast('error', 'Error al actualizar producto', 1))
   }
+}
+
+export const applyCoupon = (code) => async (dispatch, getState) => {
+
+  try {
+    dispatch(actionObject(REQUEST_LOADER, true))
+    const { auth } = await getState()
+    const sessionToken = auth?.login?.login?.customer?.sessionToken
+    const result = await applyCouponMutation(code, sessionToken)
+
+    if (result.message){
+      dispatch(actionObject(REQUEST_LOADER, false))
+      dispatch(setToast('error', 'Código de cupón inválido', 1))
+      return
+    }
+
+    const { applyCoupon } = result
+
+    dispatch(actionObject(CART_PRODUCTS, { cartProducts: applyCoupon?.cart }))
+    dispatch(actionObject(REQUEST_LOADER, false))
+    dispatch(setToast('check', 'Cupón de descuento aplicado exitosamente', 1))
+    dispatch(actionObject(APPLY_COUPON, { coupon: result ? true : false }))
+
+  } catch(error) {
+    dispatch(actionObject(REQUEST_LOADER, false))
+    dispatch(setToast('error', 'Ha ocurrido un error', 1))
+  }
+
 }
