@@ -6,7 +6,7 @@ const PaymentModal = () => {
 
   const { intermitence: { paymentModal } , paymentStep: { user_data, step } } = useSelector((state: any) => state)
 
-  const currentStep= 3
+  const currentStep= step
 
   const slider = (param) => {
     switch (param) {
@@ -41,7 +41,7 @@ const PaymentModal = () => {
           <div className={styles._leftBody}>
             <div className={styles._stepContainer}>
               <div className={styles._checkParent}>
-                <div className={currentStep == 1 ? styles._radioBtnChecked : styles._radioBtn }></div>
+                <div className={currentStep === 1 ? styles._radioBtnChecked : styles._radioBtn }></div>
                 <p>Tus Datos</p>
               </div>
               <div className={styles._stepData}>
@@ -60,7 +60,7 @@ const PaymentModal = () => {
 
             <div>
               <div className={styles._checkParent}>
-                <div className={currentStep == 2 ? styles._radioBtnChecked : styles._radioBtn }></div>
+                <div className={currentStep === 2 ? styles._radioBtnChecked : styles._radioBtn }></div>
                 <p>Formas de entrega</p>
               </div>
               <div className={styles._stepData}>
@@ -69,7 +69,7 @@ const PaymentModal = () => {
             </div>
             <div>
               <div className={styles._checkParent}>
-                <div className={currentStep == 3 ? styles._radioBtnChecked : styles._radioBtn }></div>
+                <div className={currentStep === 3 ? styles._radioBtnChecked : styles._radioBtn }></div>
                 <p>Formas de pago</p>
               </div>
               <div className={styles._stepData}>
@@ -78,12 +78,10 @@ const PaymentModal = () => {
             </div>
             <div>
               <div className={styles._checkParent}>
-                <div className={styles._radioBtn}></div>
+                <div className={currentStep === 4 ? styles._radioBtnChecked : styles._radioBtn }></div>
                 <p>Facturacion</p>
               </div>
-              <div className={styles._stepData}>
-                <p>0055</p>
-              </div>
+
             </div>
           </div>
           <div className={styles._totalParent}>

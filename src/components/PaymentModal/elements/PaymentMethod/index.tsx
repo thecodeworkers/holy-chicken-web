@@ -43,7 +43,6 @@ const PaymentMethod = () => {
   console.log(paymentMethods);
 
   const formik = FormikConfig()
-  const { errors, touched } = formik
 
   const buildTexts = (data) => {
     const dynamicText = Object.entries(data).map(([key, value]) => {

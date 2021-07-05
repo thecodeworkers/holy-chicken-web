@@ -6,7 +6,8 @@ import {DeliveryForm, PickupForm} from './elements'
 
 const DeliveryData = () => {
 
-  const { resource: { general: { general } } } = useSelector((state: any) => state)
+  const { resource: { general: { general }, paymentMethods } } = useSelector((state: any) => state)
+
 
   const dispatch = useDispatch()
   const [show, setShow] = useState(true)
@@ -69,7 +70,7 @@ const DeliveryData = () => {
               <div className={styles._inputParent}>
 
                 <input
-                  type={date}
+                  type='date'
                   name='date'
                   placeholder={'00/00/00'}
                   className={styles._inputDate}
@@ -85,13 +86,12 @@ const DeliveryData = () => {
               <div className={`${styles._inputParent} ${styles._separation}`}>
 
                 <input
-                  type={time}
+                  type='time'
                   name='time'
                   className={styles._inputDate}
                   placeholder="00:00 PM"
                   onFocus={() => setTime('time')}
                   onClick={() => setTime('time')}
-                  autoFocus={time == 'time' ? true : false}
                 />
               </div>
             </div>
