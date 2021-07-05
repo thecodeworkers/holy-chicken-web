@@ -21,11 +21,11 @@ const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => {
     store.__persistor.persist()
   }, [])
 
-  const progress = new ProgressBar({
-    size: 2,
-    color: '#FD8C2E',
+  let progress = new ProgressBar({
+    size: 1,
+    color: '#FFF',
+    className: 'bar-of-progress',
     delay: 100,
-    className: '_progressBar'
   })
 
   Router.events.on('routeChangeStart', progress.start);
@@ -51,6 +51,15 @@ const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => {
       {show && <Loader />}
 
       <Component {...pageProps} />
+
+      <style>{`
+        .bar-of-progress {
+          box-shadow: none !important;
+          height: 3px !important;
+          background-color: #FD8C2E !important;
+        }
+      `}
+      </style>
     </>
   )
 }

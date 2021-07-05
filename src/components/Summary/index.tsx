@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Navbar } from '@components'
 import styles from './styles.module.scss'
-import { CountProduct, Button } from '@components'
+import { CountProduct, Button, } from '@components'
 import { createMarkup } from '@utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeCartItem, applyCoupon } from '@store/actions'
-import { WebRow } from './elements'
+import { removeCartItem, applyCoupon, setToast } from '@store/actions'
+import { WebRow, ResponsiveRow } from './elements'
 
 const Summary = ({ data, cartParam }) => {
 
@@ -23,18 +23,14 @@ const Summary = ({ data, cartParam }) => {
     if(cart?.coupon) setInput('')
   }, [cart?.coupon])
 
-  const deleteItem = (dataItem: any) => {
-    const { key } = dataItem
-    dispatch(removeCartItem(key))
-  }
-
   const couponInput = (event) => {
     const value = event.target.value
     setInput(value)
   }
 
   const sendCoupon = () => {
-    if(input.length) dispatch(applyCoupon(input))
+    if(input.length) return dispatch(applyCoupon(input))
+    dispatch(setToast('warning', 'Por favor escriba un código de cupón', 1))
   }
 
   return (
@@ -52,8 +48,16 @@ const Summary = ({ data, cartParam }) => {
           </div>
 
           <div className={styles._layout}>
-            <div className={styles._childOne}>
-              <WebRow items={items} />
+            <div className={items.length ? styles._childOne : styles._childOneCenter}>
+
+              <div className={styles._webRowParent}>
+                <WebRow items={items} />
+              </div>
+
+              <div className={styles._responsiveRowParent}>
+                <ResponsiveRow items={items} />
+              </div>
+
             </div>
             <div className={styles._childTwo}>
               <div className={`${styles._card} _generalCard`}>

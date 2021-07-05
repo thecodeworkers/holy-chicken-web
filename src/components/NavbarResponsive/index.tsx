@@ -36,20 +36,23 @@ const NavbarResponsive = () => {
   }
 
   const openLoginModal = () => {
-    if(!isAuth) return(dispatch(setShowModal({ loginModal: true })))
     setShowPanel(showPanel => !showPanel)
   }
 
   const logout = () => {
-    dispatch(logoutUser())
+
+    if(isAuth) {
+      dispatch(logoutUser())
+      setShowPanel(false)
+      dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
+      return
+    }
+
+    dispatch(setShowModal({ loginModal: true }))
     setShowPanel(false)
-    dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
   }
 
-  const openModal = (name) => {
-   dispatch(resetModals())
-   dispatch(setShowModal({ [name]: true }))
-  }
+
   const showedCart = (showCart) => {
     setShowCart(showCart => !showCart)
 
@@ -92,7 +95,7 @@ const NavbarResponsive = () => {
 
       <div className={showPanel ? styles._panel : styles._hidden}>
         <div className={styles._buttonBlueParent} onClick={logout} >
-          <Button color='#118AC6' text='Cerrar sesión' textColor='#fff' ></Button>
+          <Button color='#118AC6' text={isAuth ? 'Cerrar sesión' : 'Iniciar sesión'} textColor='#fff'></Button>
         </div>
         <p className={styles._myOrders}>Mis órdenes</p >
       </div>

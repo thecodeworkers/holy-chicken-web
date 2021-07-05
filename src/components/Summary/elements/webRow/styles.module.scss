@@ -76,3 +76,12 @@
 ._price {
   font-family: $montserratRegular;
 }
+
+._emptyCart {
+  & p {
+    font-family: $montserratRegular;
+    font-size: $montserratRegular18;
+    color: $gray;
+    text-align: center;
+  }
+}

@@ -14,7 +14,7 @@ const WebRow = ({ items }) => {
   }
 
   return (
-    <>
+    <div>
       {
         items.length ?
           items.map((item, index) => {
@@ -27,7 +27,7 @@ const WebRow = ({ items }) => {
                 <div className={styles._columnOne}>
                   <div className={styles._imgParent}>
                     <div className={styles._img}>
-                      <img src={element?.image?.mediaItemUrl ?? 'images/resources/burguer.png'} width='75px'></img>
+                      <img src={element?.image?.mediaItemUrl ?? 'images/resources/burguer.png'} width='80px'></img>
                     </div>
                     <div>
                       <p className={styles._rowTitle}>{element?.name}</p>
@@ -49,7 +49,7 @@ const WebRow = ({ items }) => {
             <p>Tu carrito está vacío</p>
           </div>)
       }
-    </>
+    </div>
   )
 }
 

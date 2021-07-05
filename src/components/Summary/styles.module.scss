@@ -25,8 +25,34 @@
 
 ._childOne {
   width: 55%;
-  overflow-y: scroll;
+  overflow-y: auto;
   box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    width: 0.438rem;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $black;
+    border-radius: 0.625rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: none;
+  }
+}
+
+._childOneCenter {
+  width: 55%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &::-webkit-scrollbar {
     width: 0.438rem;
@@ -142,6 +168,14 @@
   }
 }
 
+._webRowParent {
+  display: block;
+}
+
+._responsiveRowParent {
+  display: none;
+}
+
 
 @include responsive(lg) {
   ._layout {
@@ -149,6 +183,10 @@
   }
 
   ._childOne, ._childTwo {
+    width: 100%;
+  }
+
+  ._childOneCenter {
     width: 100%;
   }
 
@@ -168,5 +206,15 @@
   ._card {
     width: 95%;
     margin-bottom: 1rem;
+    z-index: 999;
+  }
+
+  ._webRowParent {
+    display: none;
+  }
+
+  ._responsiveRowParent {
+    display: block;
   }
 }
+
