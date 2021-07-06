@@ -7,7 +7,7 @@ const Summary = ({ data }) => {
   return (
     <>
       <Head>
-        <title>Holy Chicken</title>
+        <title>Summary</title>
       </Head>
       <Navbar data={data?.header} />
 

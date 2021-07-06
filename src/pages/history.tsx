@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux'
 import { Shop } from '@components'
 import { wrapper } from '@store'
 import { getResources } from '@store/actions'
-import { Summary } from '@components'
+import { History } from '@components'
 
-const SummaryPage = () => {
+const HistoryPage = () => {
   const { resource: { general: { general } } } = useSelector((state: any) => state)
 
   return (
-    <Summary data={general} />
+    <History data={general}/>
   )
 }
 
@@ -17,4 +17,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
   ({ store }) => store.dispatch(getResources())
 )
 
-export default SummaryPage
+export default HistoryPage
