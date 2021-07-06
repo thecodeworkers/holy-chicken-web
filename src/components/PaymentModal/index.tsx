@@ -4,20 +4,20 @@ import { UserData, DeliveryData, PaymentMethod, BillingData } from './elements'
 
 const PaymentModal = () => {
 
-  const { intermitence: { paymentModal } , paymentStep: { user_data, step } } = useSelector((state: any) => state)
+  const { intermitence: { paymentModal }, paymentStep: { user_data, step } } = useSelector((state: any) => state)
 
-  const currentStep= 3
+  const currentStep = 2
 
   const slider = (param) => {
     switch (param) {
       case 1:
-        return <UserData  />
+        return <UserData />
 
       case 2:
-        return <DeliveryData  />
+        return <DeliveryData />
 
       case 3:
-        return <PaymentMethod  />
+        return <PaymentMethod />
 
       case 4:
         return <BillingData />
@@ -41,12 +41,12 @@ const PaymentModal = () => {
           <div className={styles._leftBody}>
             <div className={styles._stepContainer}>
               <div className={styles._checkParent}>
-                <div className={currentStep === 1 ? styles._radioBtnChecked : styles._radioBtn }></div>
+                <div className={currentStep === 1 ? styles._radioBtnChecked : styles._radioBtn}></div>
                 <p>Tus Datos</p>
               </div>
               <div className={styles._stepData}>
-                {user_data?.name  ?
-                <p>{`${user_data.name},
+                {user_data?.name ?
+                  <p>{`${user_data.name},
                 ${user_data.lastname},
                 ${user_data.identification},
                 ${user_data.email}`}</p>
@@ -60,7 +60,7 @@ const PaymentModal = () => {
 
             <div>
               <div className={styles._checkParent}>
-                <div className={currentStep === 2 ? styles._radioBtnChecked : styles._radioBtn }></div>
+                <div className={currentStep === 2 ? styles._radioBtnChecked : styles._radioBtn}></div>
                 <p>Formas de entrega</p>
               </div>
               <div className={styles._stepData}>
@@ -69,7 +69,7 @@ const PaymentModal = () => {
             </div>
             <div>
               <div className={styles._checkParent}>
-                <div className={currentStep === 3 ? styles._radioBtnChecked : styles._radioBtn }></div>
+                <div className={currentStep === 3 ? styles._radioBtnChecked : styles._radioBtn}></div>
                 <p>Formas de pago</p>
               </div>
               <div className={styles._stepData}>
@@ -78,7 +78,7 @@ const PaymentModal = () => {
             </div>
             <div>
               <div className={styles._checkParent}>
-                <div className={currentStep === 4 ? styles._radioBtnChecked : styles._radioBtn }></div>
+                <div className={currentStep === 4 ? styles._radioBtnChecked : styles._radioBtn}></div>
                 <p>Facturacion</p>
               </div>
 
@@ -90,7 +90,7 @@ const PaymentModal = () => {
           </div>
         </div>
         <div className={styles._rightSection}>
-        {slider(currentStep)}
+          {slider(currentStep)}
         </div>
       </div>
     </div>
