@@ -1,0 +1,98 @@
+@import '../../../public/styles/index.scss';
+
+._parent {
+  padding-top: 7.5rem;
+  padding-bottom: 3rem;
+  margin: auto;
+  display: flex;
+  height: 100vh;
+  box-sizing: border-box;
+  width: 85%;
+}
+
+._leftSide {
+  width: 55%;
+  height: 100%;
+}
+
+._list {
+  list-style: none;
+  padding: 0;
+
+  & li {
+    font-family: $montserratBold;
+    font-size: $montserratRegular18;
+  }
+}
+
+._orderParent {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+
+  & p {
+    font-family: $blackerTextHeavy;
+    font-size: $montserratExtraBold22;
+    margin-right: 1.3rem;
+  }
+}
+
+._input {
+  border: solid 1px $gray;
+  border-radius: 1.25rem;
+  width: 7rem;
+  height: 1.8rem;
+  background-color: transparent;
+  font-family: $montserratRegular;
+  text-align: center;
+  font-weight: 500;
+  font-family: $montserratBold;
+  font-size: $montserratExtraBold22;
+}
+
+
+._line {
+  height: 3px;
+  width: 80%;
+  background-color: $black;
+  margin-top: 15rem;
+  position: relative;
+}
+
+
+._pointsParent {
+  position: absolute;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+._circle {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: solid 3px $black;
+  background-color: $white;
+  position: relative;
+}
+
+._circleSelected {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: solid 3px $black;
+  background-color: $black;
+  position: relative;
+}
+
+._circles {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+._chickenParent {
+  width: 8rem;
+  position: absolute;
+  left: -135%;
+  transform: translateY(-130%);
+}
