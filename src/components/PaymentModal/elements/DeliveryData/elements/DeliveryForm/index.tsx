@@ -20,8 +20,10 @@ const DeliveryForm = () => {
     const filterCountry = filter(countries, value, 'slug')
     const city = filterCountry[0].cities?.nodes
     setCities(city || [])
+    deliveryform.setFieldValue('city', city?.name,)
     const filterCities = filter(city, city?.name, 'name')
     setRegions(filterCities[0].region?.content || [])
+    deliveryform.setFieldValue('municipality', filterCities[0].region?.content[0]?.name)
   }
 
   const setRegion = (value) => {
