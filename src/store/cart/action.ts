@@ -127,5 +127,4 @@ export const applyCoupon = (code) => async (dispatch, getState) => {
     dispatch(actionObject(REQUEST_LOADER, false))
     dispatch(setToast('error', 'Ha ocurrido un error', 1))
   }
-
 }

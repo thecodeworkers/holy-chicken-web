@@ -10,7 +10,8 @@ const initialState = {
   locationModal: false,
   individualProductModal: false,
   cartModal:false,
-  showLocationModal: true
+  showLocationModal: true,
+  paymentModal: false
 }
 
 const intermitenceReducer = (state = initialState, { type, payload }: AnyAction) => {

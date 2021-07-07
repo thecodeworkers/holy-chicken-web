@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Head from 'next/head'
-import { Navbar, ModalFrame, ModalContact, LoginModal, RegisterModal, ChangePasswordModal, CartModal } from '@components'
+import { Navbar, ModalFrame, ModalContact, LoginModal, RegisterModal, ChangePasswordModal, CartModal, PaymentModal } from '@components'
 import Footer from '../Footer'
 import { FirstBanner } from './elements'
 import ForgotPasswordModal from '../ForgotPasswordModal'
@@ -27,6 +27,7 @@ const Shop = ({ content, data, filters, backup }) => {
       <RegisterModal />
       <ForgotPasswordModal />
       <CartModal />
+      <PaymentModal />
       <Navbar data={data?.header} />
       <ChangePasswordModal />
       {content ? (<>
