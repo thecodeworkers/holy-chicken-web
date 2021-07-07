@@ -5,7 +5,13 @@ import { v4 as uuidv4 } from 'uuid';
 const addItemToCartMutation = async (product, quantity, jwtToken, sessionToken) => {
   const mutation = `
   mutation addCartItem {
-    addCartItems(input: { items: {productId: ${product}, quantity: ${quantity}}, clientMutationId: "${uuidv4()}"}) {
+    addCartItems(input: {
+      items: {
+        productId: ${product},
+        quantity: ${quantity}
+      },
+      clientMutationId: "${uuidv4()}"
+    }) {
       ${cart()}
     }
   }
@@ -15,9 +21,3 @@ const addItemToCartMutation = async (product, quantity, jwtToken, sessionToken) 
 }
 
 export default addItemToCartMutation
-
-
-
-
-
-
