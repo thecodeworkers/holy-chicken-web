@@ -3,7 +3,13 @@ import { AnyAction } from 'redux'
 
 const initialState = {
   user_data:{},
-  delivery_data:{},
+  delivery_data:{
+    date:'',
+    time:'',
+    type:'',
+    location: '',
+    form:{}
+  },
   payment_data:{},
   billing_data:{},
   step: 1

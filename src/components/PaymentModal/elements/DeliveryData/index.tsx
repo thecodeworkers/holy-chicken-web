@@ -4,20 +4,32 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Button } from '@components'
 import { DeliveryForm, PickupForm } from './elements'
 import { getFullTime, getHHMM, now } from '@utils'
+import { setStep } from '@store/actions'
 
 const DeliveryData = () => {
 
-  const { resource: { countries } } = useSelector((state: any) => state)
+  const { resource: { countries }, paymentStep: { delivery_data }} = useSelector((state: any) => state)
 
+  const dispatch = useDispatch()
   const [shippingMethod, setShippingMethod] = useState('delivery')
   const [dateTime, setDateTime] = useState(getFullTime(now(), '-'))
   const [time, setTime] = useState(getHHMM(now()))
 
-  const setNewDateTime = (value) => {
-    setDateTime(getFullTime(value, '-'))
+  const setDelivery =  (value) => {
+    setShippingMethod(value)
+    dispatch(setStep({ delivery_data: {...delivery_data, type: value}}))
   }
 
-  const setNewTime = (value) => setTime(value)
+  const setDate = (value) => {
+    setDateTime(getFullTime(value, '-'))
+    dispatch(setStep({ delivery_data: {...delivery_data, date: value}}))
+  }
+
+  const setNewTime = (value) => {
+    setTime(value)
+    dispatch( setStep({delivery_data: {...delivery_data, time: value}})
+   )
+  }
 
   return (
     <>
@@ -38,7 +50,7 @@ const DeliveryData = () => {
                     value='delivery'
                     className={styles._radioBtn}
                     checked={shippingMethod === 'delivery'}
-                    onChange={(check) => { setShippingMethod(check.currentTarget.value) }}>
+                    onChange={(check) => {  setDelivery(check.currentTarget.value) }}>
                   </input>
                   <p className={styles._radioTitle}>Delivery</p>
                 </div>
@@ -52,7 +64,7 @@ const DeliveryData = () => {
                     name='shippingMethod'
                     className={styles._radioBtn}
                     checked={shippingMethod === 'pickup'}
-                    onChange={(check) => { setShippingMethod(check.currentTarget.value) }}>
+                    onChange={(check) => { setDelivery(check.currentTarget.value) }}>
                   </input>
                   <p className={styles._radioTitle}>Pick Up</p>
                 </div>
@@ -68,9 +80,7 @@ const DeliveryData = () => {
                     placeholder={'00/00/0000'}
                     min={getFullTime(now(), '-', 1)}
                     className={styles._inputDate}
-                    onChange={(event) => setNewDateTime(event.currentTarget.value)}
-                  // onBlur={deliveryform.handleChange}
-                  // value={deliveryform.values.date}
+                    onChange={(event) => setDate(event.currentTarget.value)}
                   />
                 </div>
               </div>

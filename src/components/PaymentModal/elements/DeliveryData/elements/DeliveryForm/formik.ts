@@ -3,16 +3,13 @@ import { emailRegex, onlyLettersRegex, onlyNumbersRegex } from '@utils/regex'
 import * as Yup from 'yup'
 import { setStep } from '@store/actions'
 
-const deliveryConfig = (dispatch) => (useFormik({
+
+const deliveryConfig = (dispatch, delivery_data) => (useFormik({
   initialValues: {
-    date: '',
-    time: '',
     name: '',
     lastname: '',
     phone: '',
-    identification: '',
-    email: '',
-    address:'',
+    address: '',
     reference: '',
     zipcode: '',
     country: '',
@@ -21,10 +18,6 @@ const deliveryConfig = (dispatch) => (useFormik({
   },
 
   validationSchema: Yup.object({
-    date: Yup.string()
-    ,
-    time: Yup.string()
-     ,
     name: Yup.string()
 
       .matches(onlyLettersRegex),
@@ -34,19 +27,18 @@ const deliveryConfig = (dispatch) => (useFormik({
       .matches(onlyLettersRegex),
 
     phone: Yup.string()
-      ,
-
-    identification: Yup.string()
-     ,
-
-    email: Yup.string()
-
-      .matches(emailRegex),
+    ,
 
     reference: Yup.string()
-     ,
+    ,
+    city: Yup.string()
+    ,
+    municipality: Yup.string()
+    ,
+    country: Yup.string()
+    ,
 
-  zipcode: Yup.string()
+    zipcode: Yup.string()
 
       .matches(onlyNumbersRegex),
 
@@ -54,7 +46,7 @@ const deliveryConfig = (dispatch) => (useFormik({
 
   onSubmit: values => {
     console.log(values, 'delivery');
-    // dispatch(setStep({ step: 3 }))
+    dispatch( setStep({delivery_data: {...delivery_data, form: values, step: 3}}))
   }
 }))
 

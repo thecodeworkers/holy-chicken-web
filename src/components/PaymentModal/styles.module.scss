@@ -18,7 +18,7 @@
   display: inline-flex;
   max-width: 75rem;
   border-radius: 2.375rem;
-  background-color:$pampas;
+  background-color:$white;
   height: 85vh;
   width: 85%;
 }
@@ -37,7 +37,7 @@
   box-sizing: border-box;
   border-radius: 2.375rem;
   width: 45%;
-  background-color: $pampas;
+  background-color: $white;
   height: 85vh;
   display: flex;
   align-content: center;
@@ -182,6 +182,7 @@ align-content: center;
  ._leftSection{
    width: 100%;
    padding: 2.5rem 2rem;
+   background-color: $pampas;
  }
  ._checkParent{
    margin-left: 0;
@@ -190,6 +191,7 @@ align-content: center;
   background-color: white;
   padding: 2.5rem 2rem;
   margin: 0;
+  width: unset
  }
  ._leftBody{
    margin-top: 1rem;
