@@ -34,6 +34,10 @@ generalPage:page(id: "${generalId}") {
         slug
       }
     }
+    addresses {
+      local
+      address
+    }
   }
 }
 `

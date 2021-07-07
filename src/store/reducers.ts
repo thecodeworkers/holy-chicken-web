@@ -7,6 +7,7 @@ import auth from './auth/reducer'
 import toast from './toast/reducer'
 import cart from './cart/reducer'
 import product from './product/reducer'
+import paymentStep from './paymentStep/reducer'
 
 const reducers = combineReducers({
   loader,
@@ -16,7 +17,8 @@ const reducers = combineReducers({
   auth,
   toast,
   cart,
-  product
+  product,
+  paymentStep
 })
 
 export default reducers
