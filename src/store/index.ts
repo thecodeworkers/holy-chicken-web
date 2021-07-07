@@ -48,7 +48,11 @@ const makeStore: any = ({ isServer }) => {
     key: 'holyChickenRoot',
     storage,
     blacklist: [
-      'page', 'toast', 'loader', 'resource'
+      'page',
+      'toast',
+      'loader',
+      'product',
+      'resource'
     ]
   }
 

@@ -67,6 +67,21 @@ products(first: 10000000) {
           productCategoryId
         }
       }
+      variations(first: 300) {
+        nodes {
+          id
+          databaseId
+          name
+          price(format: RAW)
+          stockQuantity
+          stockStatus
+          attributes {
+            nodes {
+              value
+            }
+          }
+        }
+      }
     }
     ... on ExternalProduct {
       id
