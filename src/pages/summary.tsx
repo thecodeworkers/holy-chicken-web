@@ -6,10 +6,10 @@ import { getResources } from '@store/actions'
 import { Summary } from '@components'
 
 const SummaryPage = () => {
-  const { resource: { general: { general } } } = useSelector((state: any) => state)
+  const { resource: { general: { general } }, cart } = useSelector((state: any) => state)
 
   return (
-    <Summary data={general} />
+    <Summary data={general} cartParam={cart?.cartProducts} />
   )
 }
 

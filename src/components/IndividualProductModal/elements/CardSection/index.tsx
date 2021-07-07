@@ -1,7 +1,9 @@
 import styles from './styles.module.scss'
 import { CountProduct } from '@components'
 
-const CardSection = () => {
+const CardSection = ({ attributes }) => {
+  // console.log(attributes);
+
   return (
     <>
       <div>

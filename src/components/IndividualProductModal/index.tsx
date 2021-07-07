@@ -24,7 +24,7 @@ const IndividualProduct = ({ type = 'list' }) => {
         return <VerticalList />
 
       case 'holy-sanduches':
-        return <CardSection />
+        return <CardSection attributes={attributes} />
 
       case 'bebidas':
         return <VerticalListWithImage attributes={attributes}  />
