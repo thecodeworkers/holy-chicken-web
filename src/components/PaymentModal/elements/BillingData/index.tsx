@@ -42,7 +42,7 @@ const BillingData = () => {
                     value={'same'}
                     checked={dataType === 'same'}
                     className={styles._radioBtn}
-                    onClick={(check) => { setDataType(check.currentTarget.value) }}>
+                    onChange={(check) => { setDataType(check.currentTarget.value) }}>
                   </input>
                   <p className={styles._radioTitle}>Utilizar los mismos datos de delivery</p>
                 </div>
@@ -54,7 +54,7 @@ const BillingData = () => {
                     value={'none'}
                     checked={dataType === 'none'}
                     className={styles._radioBtn}
-                    onClick={(check) => { setDataType(check.currentTarget.value) }}>
+                    onChange={(check) => { setDataType(check.currentTarget.value) }}>
                   </input>
                   <p className={styles._radioTitle}>Ingresar otros datos</p>
                 </div>
