@@ -54,7 +54,7 @@ const IndividualProduct = ({ type = 'list' }) => {
       }
 
       const result = currentProduct.variations.nodes.find(filterCriteria)
-      if (result) correctProduct = result;
+      if (result) correctProduct = result
     }
 
     dispatch(setCartProducts(correctProduct))
