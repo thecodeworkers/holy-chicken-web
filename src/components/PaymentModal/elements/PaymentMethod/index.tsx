@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import FormikConfig from './formik'
 import { Button } from '@components'
 import loadConfig from 'next/dist/next-server/server/config'
+import { setStep } from '@store/actions'
 
 const PaymentMethod = () => {
 
-  const { intermitence: { paymentModal }, resource: { general: { general }, paymentMethods } } = useSelector((state: any) => state)
+  const { intermitence: { paymentModal }, resource: { general: { general }, paymentMethods }, paymentStep: { payment_data } } = useSelector((state: any) => state)
 
   const formik = FormikConfig()
   const [paymentSelected, setPaymentSelected] = useState('')
@@ -19,7 +20,12 @@ const PaymentMethod = () => {
 
   const selectedMethod = (e, item) => {
     setPaymentSelected(item)
+    dispatch(setStep({ payment_data: { ...payment_data, type: item } }))
     return formik.handleChange(e)
+  }
+
+  const NextStep = () => {
+    if (paymentSelected) dispatch(setStep({ step: 4 }))
   }
 
   return (
@@ -74,7 +80,8 @@ const PaymentMethod = () => {
                 color='#000'
                 text='Ingresar'
                 textColor='#FFF'
-                type='submit' flag />
+                type='submit' flag
+                method={NextStep} />
             </div>
           </div>
         </div>

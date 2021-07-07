@@ -8,28 +8,32 @@ import { setStep } from '@store/actions'
 
 const DeliveryData = () => {
 
-  const { resource: { countries }, paymentStep: { delivery_data }} = useSelector((state: any) => state)
+  const { resource: { countries }, paymentStep: { delivery_data } } = useSelector((state: any) => state)
 
   const dispatch = useDispatch()
   const [shippingMethod, setShippingMethod] = useState('delivery')
   const [dateTime, setDateTime] = useState(getFullTime(now(), '-'))
   const [time, setTime] = useState(getHHMM(now()))
 
-  const setDelivery =  (value) => {
+  const setDelivery = (value) => {
     setShippingMethod(value)
-    dispatch(setStep({ delivery_data: {...delivery_data, type: value}}))
+    dispatch(setStep({ delivery_data: { ...delivery_data, type: value } }))
   }
 
   const setDate = (value) => {
     setDateTime(getFullTime(value, '-'))
-    dispatch(setStep({ delivery_data: {...delivery_data, date: value}}))
+    dispatch(setStep({ delivery_data: { ...delivery_data, date: value } }))
   }
 
   const setNewTime = (value) => {
     setTime(value)
-    dispatch( setStep({delivery_data: {...delivery_data, time: value}})
-   )
+    dispatch(setStep({ delivery_data: { ...delivery_data, time: value } })
+    )
   }
+
+  useEffect(() => {
+    dispatch(setStep({ delivery_data: { ...delivery_data, type: shippingMethod } }))
+  }, [])
 
   return (
     <>
@@ -50,7 +54,7 @@ const DeliveryData = () => {
                     value='delivery'
                     className={styles._radioBtn}
                     checked={shippingMethod === 'delivery'}
-                    onChange={(check) => {  setDelivery(check.currentTarget.value) }}>
+                    onChange={(check) => { setDelivery(check.currentTarget.value) }}>
                   </input>
                   <p className={styles._radioTitle}>Delivery</p>
                 </div>

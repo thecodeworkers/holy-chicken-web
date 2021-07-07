@@ -1,12 +1,17 @@
+import React, { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { useSelector } from 'react-redux'
 import { UserData, DeliveryData, PaymentMethod, BillingData } from './elements'
 
 const PaymentModal = () => {
 
-  const { intermitence: { paymentModal }, paymentStep: { user_data, delivery_data, step } } = useSelector((state: any) => state)
+  const { intermitence: { paymentModal }, paymentStep: { user_data, delivery_data, step, payment_data } } = useSelector((state: any) => state)
 
-  const currentStep = 4
+  const [currentStep, setCurrentStep] = useState(step)
+
+  useEffect(() => {
+    setCurrentStep(step)
+  }, [step])
 
   const slider = (param) => {
     switch (param) {
@@ -64,7 +69,7 @@ const PaymentModal = () => {
                 <p>Formas de entrega</p>
               </div>
               <div className={styles._stepData}>
-              {delivery_data?.type ?  <p>{delivery_data?.type}</p> : <p>Tipo de entrega</p> }
+                {delivery_data?.type ? <p>{delivery_data?.type}</p> : <p>Tipo de entrega</p>}
               </div>
             </div>
             <div>
@@ -73,7 +78,7 @@ const PaymentModal = () => {
                 <p>Formas de pago</p>
               </div>
               <div className={styles._stepData}>
-                <p>Zelle</p>
+                {payment_data?.type ? <p>{payment_data?.type}</p> : <p>Forma de Pago</p>}
               </div>
             </div>
             <div>

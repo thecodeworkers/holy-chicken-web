@@ -2,16 +2,16 @@ import { SETSTEP } from './actions-types'
 import { AnyAction } from 'redux'
 
 const initialState = {
-  user_data:{},
-  delivery_data:{
-    date:'',
-    time:'',
-    type:'',
+  user_data: {},
+  delivery_data: {
+    date: '',
+    time: '',
+    type: '',
     location: '',
-    form:{}
+    form: {}
   },
-  payment_data:{},
-  billing_data:{},
+  payment_data: {},
+  billing_data: {},
   step: 1
 }
 

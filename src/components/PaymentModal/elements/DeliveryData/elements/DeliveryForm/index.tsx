@@ -7,7 +7,7 @@ import { filter } from '@utils'
 
 const DeliveryForm = () => {
 
-  const { resource: { general: { general }, countries}, paymentStep: { delivery_data} } = useSelector((state: any) => state)
+  const { resource: { general: { general }, countries }, paymentStep: { delivery_data } } = useSelector((state: any) => state)
 
   const dispatch = useDispatch()
   const deliveryform = deliveryConfig(dispatch, delivery_data)

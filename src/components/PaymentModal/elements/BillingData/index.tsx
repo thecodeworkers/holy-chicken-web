@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { useSelector } from 'react-redux'
 import FormikConfig from './formik'
@@ -7,19 +7,23 @@ import { filter } from '@utils'
 
 const BillingData = () => {
 
-  const { intermitence: { paymentModal }, resource: { general: { general }, countries } } = useSelector((state: any) => state)
+  const { intermitence: { paymentModal }, resource: { general: { general }, allCountries } } = useSelector((state: any) => state)
 
   const formik = FormikConfig()
   const { errors, touched } = formik
-  const [show, setShow] = useState(true)
-  const [showAddress, setShowAddress] = useState(false)
-  const [cities, setCities] = useState([])
+  const [states, setStates] = useState([])
+  const [dataType, setDataType] = useState('same')
 
-  const setDelivery = (checked) => {
-    if (checked == 'delivery') setShow(true)
-    if (checked == 'pickup') setShow(false)
+  const setDefaults = (value) => {
+    formik.setFieldValue('country', value)
+    const filterCountry = filter(allCountries, value, 'code')
+    const newStates = filterCountry[0].states
+    setStates(newStates || [])
   }
 
+  useEffect(() => {
+    setDefaults('VE')
+  }, [])
 
   return (
     <>
@@ -34,11 +38,11 @@ const BillingData = () => {
               <div className={styles._radioContainer}>
 
                 <div className={styles._checkParent} >
-                  <input type='checkbox'
-                    id={'delivery'}
+                  <input type='radio'
+                    value={'same'}
+                    checked={dataType === 'same'}
                     className={styles._radioBtn}
-                    defaultChecked={true}
-                    onClick={(check) => { setDelivery(check.currentTarget.id) }}>
+                    onClick={(check) => { setDataType(check.currentTarget.value) }}>
                   </input>
                   <p className={styles._radioTitle}>Utilizar los mismos datos de delivery</p>
                 </div>
@@ -46,11 +50,11 @@ const BillingData = () => {
               <div className={styles._radioContainer}>
 
                 <div className={styles._checkParent} >
-                  <input type='checkbox'
-                    id={'pickup'}
+                  <input type='radio'
+                    value={'none'}
+                    checked={dataType === 'none'}
                     className={styles._radioBtn}
-                    defaultChecked={false}
-                    onClick={(check) => { setDelivery(check.currentTarget.id) }}>
+                    onClick={(check) => { setDataType(check.currentTarget.value) }}>
                   </input>
                   <p className={styles._radioTitle}>Ingresar otros datos</p>
                 </div>
@@ -129,8 +133,8 @@ const BillingData = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values.country}
                     className={errors.country && touched.country ? styles._inputError : styles._input}>
-                    {countries?.length ? countries.map((country, index) =>
-                      <option key={index} value={country.slug}>{country.title}</option>
+                    {allCountries?.length ? allCountries.map((country, index) =>
+                      <option key={index} value={country.code}>{country.name}</option>
                     ) : <option>No Disponible</option>}
                   </select>
                 </div>
@@ -141,27 +145,29 @@ const BillingData = () => {
               <div className={styles._halfWidth}>
                 <div className={`${styles._inputParent} ${styles._separation}`}>
                   <label>Estado</label>
-                  <select name="select"
+                  <select name="state"
                     placeholder='Seleccione el país'
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.state}
                     className={errors.state && touched.state ? styles._inputError : styles._input}>
-                    <option>Distrito Capital</option>
+                    {states?.length ? states.map((country, index) =>
+                      <option key={index} value={country.code}>{country.name}</option>
+                    ) : <option>No Disponible</option>}
                   </select>
                 </div>
               </div>
               <div className={styles._halfWidth}>
                 <div className={`${styles._inputParent} ${styles._separation}`}>
                   <label>Ciudad</label>
-                  <select name="select"
-                    placeholder='Seleccione el país'
+                  <input
+                    placeholder='Ciudad'
+                    type='text'
+                    name='city'
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.city}
-                    className={errors.city && touched.city ? styles._inputError : styles._input}>
-                    <option>Caracas</option>
-                  </select>
+                    className={errors.zipcode && touched.zipcode ? styles._inputError : styles._input} />
                 </div>
               </div>
             </div>

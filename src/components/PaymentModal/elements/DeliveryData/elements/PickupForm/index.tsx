@@ -6,18 +6,19 @@ import { setStep } from '@store/actions'
 
 const PickupForm = () => {
 
-  const { resource: { general: { general }}, paymentStep: { delivery_data } } = useSelector((state: any) => state)
+  const { resource: { general: { general } }, paymentStep: { delivery_data } } = useSelector((state: any) => state)
   const dispatch = useDispatch()
   const [pickupMethod, setPickupMethod] = useState('')
 
   const setLocation = (value) => {
     setPickupMethod(value)
-    dispatch( setStep({delivery_data: {...delivery_data, location:value, step: 3}}))
+    dispatch(setStep({ delivery_data: { ...delivery_data, location: value } }))
   }
 
   const nextstep = () => {
-    dispatch( setStep({delivery_data: {...delivery_data, step: 3}}))
+    if (pickupMethod) dispatch(setStep({ step: 3 }))
   }
+
   return (
     <>
       <div className={styles._rightMain}>
@@ -49,10 +50,10 @@ const PickupForm = () => {
       <div className={styles._buttonContainer}>
         <div className={styles._btnParent}>
           <Button
-          color='#000'
-          text='Ingresar'
-          textColor='#FFF'
-          onClick={() => nextstep()}/>
+            color='#000'
+            text='Ingresar'
+            textColor='#FFF'
+            method={() => nextstep()} />
         </div>
       </div>
 
