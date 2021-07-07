@@ -7,9 +7,8 @@ import { ClothSection, VerticalList, VerticalListWithImage, CardSection } from '
 import { createMarkup } from '@utils'
 
 const IndividualProduct = ({ type = 'list' }) => {
-
   const dispatch = useDispatch()
-  const { intermitence: { individualProductModal }, cart: { currentProduct, cartProducts } } = useSelector((state: any) => state)
+  const { intermitence: { individualProductModal }, cart: { currentProduct, cartProducts }, product } = useSelector((state: any) => state)
 
   const closeModal = (event, flag = false) => {
     const { target } = event
@@ -24,7 +23,7 @@ const IndividualProduct = ({ type = 'list' }) => {
         return <VerticalList />
 
       case 'holy-sanduches':
-        return <CardSection />
+        return <CardSection attributes={attributes} />
 
       case 'bebidas':
         return <VerticalListWithImage attributes={attributes}  />
@@ -38,7 +37,27 @@ const IndividualProduct = ({ type = 'list' }) => {
   }
 
   const setProductstoCart = () => {
-    dispatch(setCartProducts(currentProduct))
+    let correctProduct = currentProduct
+
+    if (!!currentProduct?.variations) {
+      const { freeFresh, freeSauce, blessing, sauce } = product
+
+      const attributes = [
+        { value: freeFresh },
+        { value: freeSauce },
+        { value: blessing },
+        { value: sauce }
+      ]
+
+      const filterCriteria = (product) => {
+        return JSON.stringify(product.attributes.nodes) === JSON.stringify(attributes)
+      }
+
+      const result = currentProduct.variations.nodes.find(filterCriteria)
+      if (result) correctProduct = result
+    }
+
+    dispatch(setCartProducts(correctProduct))
   }
 
   return (
@@ -92,7 +111,7 @@ const IndividualProduct = ({ type = 'list' }) => {
           </div>
 
           <div>
-            <p>{currentProduct?.price}</p>
+            <p>{currentProduct?.price.includes('-') ? currentProduct?.price.split('-')[0] : currentProduct?.price}</p>
           </div>
         </div>
       </div>
