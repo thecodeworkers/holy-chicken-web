@@ -3,15 +3,17 @@ import styles from './styles.module.scss'
 import { useSelector } from 'react-redux'
 import FormikConfig from './formik'
 import { Button } from '@components'
+import { filter } from '@utils'
 
 const BillingData = () => {
 
-  const { intermitence: { paymentModal } , resource: { general: { general } } } = useSelector((state: any) => state)
+  const { intermitence: { paymentModal }, resource: { general: { general }, countries } } = useSelector((state: any) => state)
 
   const formik = FormikConfig()
   const { errors, touched } = formik
   const [show, setShow] = useState(true)
   const [showAddress, setShowAddress] = useState(false)
+  const [cities, setCities] = useState([])
 
   const setDelivery = (checked) => {
     if (checked == 'delivery') setShow(true)
@@ -53,137 +55,133 @@ const BillingData = () => {
                   <p className={styles._radioTitle}>Ingresar otros datos</p>
                 </div>
               </div>
+            </div>
+          </div>
+          <>
+            <div className={styles._inputRow}>
+              <div className={styles._halfWidth} >
+                <div className={styles._inputParent}>
+                  <label>Nombre</label>
+                  <input
+                    placeholder='Nombre'
+                    type='text'
+                    name='name'
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.name}
+                    className={errors.name && touched.name ? styles._inputError : styles._input} />
+                </div>
+              </div>
 
-
+              <div className={styles._halfWidth}>
+                <div className={`${styles._inputParent} ${styles._separation}`}>
+                  <label>Apellido</label>
+                  <input
+                    placeholder='Apellido'
+                    type='text'
+                    name='lastname'
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.lastname}
+                    className={errors.lastname && touched.lastname ? styles._inputError : styles._input} />
+                </div>
+              </div>
             </div>
 
-
-          </div>
-
-
-            <>
-              <div className={styles._inputRow}>
-                <div className={styles._halfWidth} >
-                  <div className={styles._inputParent}>
-                    <label>Nombre</label>
-                    <input
-                      placeholder='Nombre'
-                      type='text'
-                      name='name'
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.name}
-                      className={errors.name && touched.name ? styles._inputError : styles._input} />
-                  </div>
-                </div>
-
-                <div className={styles._halfWidth}>
-                  <div className={`${styles._inputParent} ${styles._separation}`}>
-                    <label>Apellido</label>
-                    <input
-                      placeholder='Apellido'
-                      type='text'
-                      name='lastname'
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.lastname}
-                      className={errors.lastname && touched.lastname ? styles._inputError : styles._input} />
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles._inputRow}>
+            <div className={styles._inputRow}>
               <div className={styles._fullContainer}>
-                  <div className={styles._inputParent}>
-                    <label>Dirección (zona, urbanzación, calle, casa/edificio)</label>
-                    <input
-                      name='phone'
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.phone}
-                      placeholder='Introducir dirección'
-                      type='text'
-                      className={errors.phone && touched.phone ? styles._inputError : styles._input} />
-                  </div>
+                <div className={styles._inputParent}>
+                  <label>Dirección (zona, urbanzación, calle, casa/edificio)</label>
+                  <input
+                    name='phone'
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.phone}
+                    placeholder='Introducir dirección'
+                    type='text'
+                    className={errors.phone && touched.phone ? styles._inputError : styles._input} />
                 </div>
               </div>
+            </div>
 
-              <div className={styles._inputRow}>
+            <div className={styles._inputRow}>
 
               <div className={styles._halfWidth}>
-                  <div className={`${styles._inputParent} ${styles._separation}`}>
-                    <label>Telefono</label>
-                    <input
-                      placeholder='Telefono'
-                      type='text'
-                      name='lastname'
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.lastname}
-                      className={errors.lastname && touched.lastname ? styles._inputError : styles._input} />
-                  </div>
-                </div>
-
-                <div className={styles._halfWidth}>
-                  <div className={`${styles._inputParent} ${styles._separation}`}>
-                    <label>Pais</label>
-                    <select name="select"
-                      placeholder='Seleccione el país'
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.country}
-                      className={errors.country && touched.country ? styles._inputError : styles._input}>
-                      <option>Venezuela</option>
-                      </select>
-                  </div>
+                <div className={`${styles._inputParent} ${styles._separation}`}>
+                  <label>Telefono</label>
+                  <input
+                    placeholder='Telefono'
+                    type='text'
+                    name='phone'
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.phone}
+                    className={errors.phone && touched.phone ? styles._inputError : styles._input} />
                 </div>
               </div>
 
-              <div className={styles._inputRow}>
               <div className={styles._halfWidth}>
-                  <div className={`${styles._inputParent} ${styles._separation}`}>
-                    <label>Estado</label>
-                    <select name="select"
-                      placeholder='Seleccione el país'
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.state}
-                      className={errors.state && touched.state ? styles._inputError : styles._input}>
-                      <option>Distrito Capital</option>
-                      </select>
-                  </div>
-                </div>
-                <div className={styles._halfWidth}>
-                  <div className={`${styles._inputParent} ${styles._separation}`}>
-                    <label>Ciudad</label>
-                    <select name="select"
-                      placeholder='Seleccione el país'
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.city}
-                      className={errors.city && touched.city ? styles._inputError : styles._input}>
-                      <option>Caracas</option>
-                      </select>
-                  </div>
+                <div className={`${styles._inputParent} ${styles._separation}`}>
+                  <label>Pais</label>
+                  <select name="country"
+                    placeholder='Seleccione el país'
+                    onChange={(event) => setDefaults(event.currentTarget.value)}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.country}
+                    className={errors.country && touched.country ? styles._inputError : styles._input}>
+                    {countries?.length ? countries.map((country, index) =>
+                      <option key={index} value={country.slug}>{country.title}</option>
+                    ) : <option>No Disponible</option>}
+                  </select>
                 </div>
               </div>
+            </div>
 
-              <div className={styles._inputRow}>
+            <div className={styles._inputRow}>
+              <div className={styles._halfWidth}>
+                <div className={`${styles._inputParent} ${styles._separation}`}>
+                  <label>Estado</label>
+                  <select name="select"
+                    placeholder='Seleccione el país'
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.state}
+                    className={errors.state && touched.state ? styles._inputError : styles._input}>
+                    <option>Distrito Capital</option>
+                  </select>
+                </div>
+              </div>
+              <div className={styles._halfWidth}>
+                <div className={`${styles._inputParent} ${styles._separation}`}>
+                  <label>Ciudad</label>
+                  <select name="select"
+                    placeholder='Seleccione el país'
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.city}
+                    className={errors.city && touched.city ? styles._inputError : styles._input}>
+                    <option>Caracas</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles._inputRow}>
               <div className={styles._halfWidth} >
-                  <div className={styles._inputParent}>
-                    <label>Codigo Postal</label>
-                    <input
-                      placeholder='Codigo Postal'
-                      type='text'
-                      name='zipcode'
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.zipcode}
-                      className={errors.zipcode && touched.zipcode ? styles._inputError : styles._input} />
-                  </div>
+                <div className={styles._inputParent}>
+                  <label>Codigo Postal</label>
+                  <input
+                    placeholder='Codigo Postal'
+                    type='text'
+                    name='zipcode'
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.zipcode}
+                    className={errors.zipcode && touched.zipcode ? styles._inputError : styles._input} />
                 </div>
-                </div>
-            </>
+              </div>
+            </div>
+          </>
 
 
           <div className={styles._buttonContainer}>
