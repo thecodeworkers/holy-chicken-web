@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCart, setShowModal, removeCartItem, setToast, setLoader } from '@store/actions'
+import { getCart, setShowModal, removeCartItem, setToast } from '@store/actions'
 import { createMarkup } from '@utils'
 import { useRouter } from 'next/router'
 
@@ -29,10 +29,9 @@ const CartModal = () => {
     dispatch(removeCartItem(key))
   }
 
-  const navigate = (route, loader) => {
+  const navigate = (route) => {
     if((route != router.pathname) && nodes.length) {
       router.push('/summary')
-      if(loader) dispatch(setLoader(true))
       return
     }
 
@@ -84,7 +83,7 @@ const CartModal = () => {
             <p className={styles._parentTotal}>{total}</p>
           </div>
           <div className={styles._btnParent}>
-            <Button text='Confirmar' color='#000' textColor='#FFF' method={() => navigate('summary', true)} />
+            <Button text='Confirmar' color='#000' textColor='#FFF' method={() => navigate('summary')} />
           </div>
         </div>
       </div>

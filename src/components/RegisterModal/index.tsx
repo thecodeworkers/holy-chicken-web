@@ -42,7 +42,6 @@ const RegisterModal = () => {
   const openLocations = () => {
     formik.resetForm()
     dispatch(resetModals())
-    dispatch(setShowModal({ locationModal: true }))
   }
 
   const tooltipTimer = () => {

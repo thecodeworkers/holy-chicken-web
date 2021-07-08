@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { Navbar, ModalFrame, ModalContact, LoginModal, RegisterModal, ChangePasswordModal, CartModal, PaymentModal } from '@components'
 import Footer from '../Footer'
 import { FirstBanner } from './elements'
 import ForgotPasswordModal from '../ForgotPasswordModal'
+import { useDispatch, useSelector} from 'react-redux'
+import { setShowModal } from '@store/actions'
 
 const Shop = ({ content, data, filters, backup }) => {
+
+  const dispatch = useDispatch()
+
+  const { intermitence } = useSelector((state: any) => state)
+
+  useEffect(() => {
+      if(intermitence?.showLocationModal) dispatch(setShowModal({ locationModal: true }))
+  }, [])
 
   return (
     <div>

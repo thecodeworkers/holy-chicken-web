@@ -10,6 +10,7 @@ const initialState = {
   locationModal: false,
   individualProductModal: false,
   cartModal:false,
+  showLocationModal: true,
   paymentModal: false
 }
 

@@ -13,12 +13,13 @@ const LocationModal = () => {
 
   const closeModal = (event) => {
     const { target } = event
-    if (target.id == 'location-modal') dispatch(setShowModal({ locationModal: false }))
+    // if (target.id == 'location-modal') dispatch(setShowModal({ locationModal: false }))
   }
 
   const navigate = () => {
-      dispatch(resetModals())
-      router.push('/shop')
+    dispatch(resetModals())
+    if(router.pathname != '/shop') router.push('/shop')
+    dispatch(setShowModal({ showLocationModal: false }))
   }
 
   return (
