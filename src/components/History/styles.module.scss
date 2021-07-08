@@ -1,0 +1,216 @@
+@import '../../../public/styles/index.scss';
+
+._parent {
+  padding-top: 7.5rem;
+  padding-bottom: 3rem;
+  margin: auto;
+  display: flex;
+  height: 100vh;
+  box-sizing: border-box;
+  width: 85%;
+}
+
+._leftSide {
+  width: 55%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+._list {
+  list-style: none;
+  padding: 0;
+
+  & li {
+    font-family: $montserratBold;
+    font-size: $montserratRegular18;
+  }
+}
+
+._orderParent {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+
+  & p {
+    font-family: $blackerTextHeavy;
+    font-size: $montserratExtraBold22;
+    margin-right: 1.3rem;
+  }
+}
+
+._input {
+  border: solid 1px $gray;
+  border-radius: 1.25rem;
+  width: 7rem;
+  height: 1.8rem;
+  background-color: transparent;
+  font-family: $montserratRegular;
+  text-align: center;
+  font-weight: 500;
+  font-family: $montserratBold;
+  font-size: $montserratExtraBold22;
+}
+
+._line {
+  height: 3px;
+  width: 80%;
+  background-color: $black;
+  margin-top: 2rem;
+  position: relative;
+}
+
+._pointsParent {
+  position: absolute;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+@mixin circle($background) {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  border: solid 3px $black;
+  background-color: $background;
+  position: relative;
+}
+
+._circle {
+  @include circle($white);
+}
+
+._circleSelected {
+  @include circle($black);
+}
+
+._text {
+  font-size: $montserratRegular12;
+  font-family: $montserratBold;
+}
+
+._labelParent {
+  display: inline-block;
+  min-width: 8rem;
+  position: absolute;
+  top: 170%;
+  left: -75%;
+}
+
+
+._circles {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+._chickenParent {
+  width: 8rem;
+  position: absolute;
+  left: -175%;
+  transform: translateY(-120%);
+}
+
+._lineParent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+._btnParent {
+  width: 190px;
+  display: block;
+  margin-left: auto;
+  margin-bottom: 2rem;
+}
+
+._rightSide {
+  width: 45%;
+  height: 100%;
+  padding-left: 5vw;
+  box-sizing: border-box;
+}
+
+._card {
+  height: 100%;
+  width: 100%;
+  background-color: $pampas;
+  border-radius: 2.375rem;
+  padding: 2rem 3rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    padding: 90px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 2rem 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $black;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: none;
+  }
+}
+
+._cardTitle {
+  text-align: center;
+  font-family: $blackerTextHeavy;
+  font-size: $montserratExtraBold22;
+}
+
+._fieldParent {
+  position: relative;
+  width: 100%;
+  color: $gray;
+
+  & label {
+    padding-left: 0.7rem;
+    font-family: $montserratRegular;
+    font-size: $montserratBold16;
+  }
+
+  &:nth-child(2) {
+    margin: 1.2rem 0;
+  }
+}
+
+._searchInput {
+  @include generalInput($alto);
+  font-size: $montserratBold16;
+  height: 2.3rem;
+  background-color: $white
+}
+
+._imageParent {
+  position: absolute;
+  cursor: pointer;
+  right: 0.8rem;
+  top: 18px;
+}
+
+._row {
+  display: flex;
+  padding: 0.6rem 0;
+  align-items: center;
+
+  & div {
+    width: 25%;
+    text-align: center;
+    font-family: $montserratRegular;
+    font-size: $montserratBold14;
+  }
+}
+
+
+._headerText {
+  font-family: $montserratBold;
+  font-size: $montserratBold14;
+}

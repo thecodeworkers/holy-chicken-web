@@ -42,7 +42,7 @@ const Summary = ({ data, cartParam }) => {
   return (
     <>
       <Head>
-        <title>Holy Chicken</title>
+        <title>Summary</title>
       </Head>
       <Navbar data={data?.header} />
       <PaymentModal />
