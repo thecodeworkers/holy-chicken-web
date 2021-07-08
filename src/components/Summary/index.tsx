@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Navbar } from '@components'
 import styles from './styles.module.scss'
-import { CountProduct, Button } from '@components'
+import { CountProduct, Button, } from '@components'
 import { createMarkup } from '@utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeCartItem, applyCoupon } from '@store/actions'
+import { removeCartItem, applyCoupon, setToast } from '@store/actions'
+import { WebRow, ResponsiveRow } from './elements'
 
 const Summary = ({ data, cartParam }) => {
 
@@ -22,18 +23,14 @@ const Summary = ({ data, cartParam }) => {
     if(cart?.coupon) setInput('')
   }, [cart?.coupon])
 
-  const deleteItem = (dataItem: any) => {
-    const { key } = dataItem
-    dispatch(removeCartItem(key))
-  }
-
   const couponInput = (event) => {
     const value = event.target.value
     setInput(value)
   }
 
   const sendCoupon = () => {
-    if(input.length) dispatch(applyCoupon(input))
+    if(input.length) return dispatch(applyCoupon(input))
+    dispatch(setToast('warning', 'Por favor escriba un código de cupón', 1))
   }
 
   return (
@@ -51,41 +48,15 @@ const Summary = ({ data, cartParam }) => {
           </div>
 
           <div className={styles._layout}>
-            <div className={styles._childOne}>
-              {
-                items.length ?
-                  items.map((item, index) => {
-                    const element = item?.product?.node
-                    return (
-                      <div className={styles._row} key={index}>
-                        <div className={styles._closeParent} onClick={() => deleteItem(item)}>
-                          <img src='images/icons/close.svg' width='12px'></img>
-                        </div>
-                        <div className={styles._columnOne}>
-                          <div className={styles._imgParent}>
-                            <div className={styles._img}>
-                              <img src={element?.image?.mediaItemUrl ?? 'images/resources/burguer.png'} width='75px'></img>
-                            </div>
-                            <div>
-                              <p className={styles._rowTitle}>{element?.name}</p>
-                              <div className={styles._rowText} dangerouslySetInnerHTML={createMarkup(element?.description)}></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className={styles._columnTwo}>
-                          <div>
-                            <CountProduct productKey={item?.key} stock={element?.stockQuantity} quantity={item?.quantity} />
-                          </div>
-                        </div>
-                        <div className={styles._columnThree}>
-                          <p className={styles._price}>{element?.price}</p>
-                        </div>
-                      </div>
-                    )
-                  }) : ( <div className={styles._emptyCart}>
-                    <p>Tu carrito está vacío</p>
-                  </div> )
-              }
+            <div className={items.length ? styles._childOne : styles._childOneCenter}>
+
+              <div className={styles._webRowParent}>
+                <WebRow items={items} />
+              </div>
+
+              <div className={styles._responsiveRowParent}>
+                <ResponsiveRow items={items} />
+              </div>
 
             </div>
             <div className={styles._childTwo}>
@@ -122,9 +93,7 @@ const Summary = ({ data, cartParam }) => {
                 </div>
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </>

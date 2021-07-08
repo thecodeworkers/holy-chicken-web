@@ -5,7 +5,7 @@ import { ChickenLogo } from '@images/resources'
 import { ResponsiveMenu, Button } from '@components'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import { setShowModal, setLoader, logoutUser, setToast, resetModals} from '@store/actions'
+import { setShowModal, logoutUser, setToast, resetModals} from '@store/actions'
 import { useSelector } from 'react-redux'
 
 
@@ -29,28 +29,30 @@ const NavbarResponsive = () => {
 
   const resetShow = () => setShow(0)
 
-  const navigation = (route: string, loader = true) => {
+  const navigation = (route: string) => {
     if (route != router.pathname) {
-      if (loader) dispatch(setLoader(true))
       router.push(route)
     }
   }
 
   const openLoginModal = () => {
-    if(!isAuth) return(dispatch(setShowModal({ loginModal: true })))
     setShowPanel(showPanel => !showPanel)
   }
 
   const logout = () => {
-    dispatch(logoutUser())
+
+    if(isAuth) {
+      dispatch(logoutUser())
+      setShowPanel(false)
+      dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
+      return
+    }
+
+    dispatch(setShowModal({ loginModal: true }))
     setShowPanel(false)
-    dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
   }
 
-  const openModal = (name) => {
-   dispatch(resetModals())
-   dispatch(setShowModal({ [name]: true }))
-  }
+
   const showedCart = (showCart) => {
     setShowCart(showCart => !showCart)
 
@@ -93,7 +95,7 @@ const NavbarResponsive = () => {
 
       <div className={showPanel ? styles._panel : styles._hidden}>
         <div className={styles._buttonBlueParent} onClick={logout} >
-          <Button color='#118AC6' text='Cerrar sesión' textColor='#fff' ></Button>
+          <Button color='#118AC6' text={isAuth ? 'Cerrar sesión' : 'Iniciar sesión'} textColor='#fff'></Button>
         </div>
         <p className={styles._myOrders}  onClick={() => navigation('/history')} >Mis órdenes</p >
       </div>

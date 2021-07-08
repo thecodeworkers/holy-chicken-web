@@ -25,8 +25,34 @@
 
 ._childOne {
   width: 55%;
-  overflow-y: scroll;
+  overflow-y: auto;
   box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    width: 0.438rem;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $black;
+    border-radius: 0.625rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: none;
+  }
+}
+
+._childOneCenter {
+  width: 55%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &::-webkit-scrollbar {
     width: 0.438rem;
@@ -50,57 +76,6 @@
   width: 45%;
 }
 
-._row {
-  display: flex;
-  position: relative;
-
-  &:not(:first-child) {
-    margin-top: 1.25rem;
-  }
-  padding: 0.8rem;
-
-  &:last-child {
-    margin-bottom: 2rem;
-  }
-}
-
-._columnOne {
-  width: 50%;
-  padding: 0.6rem;
-  box-sizing: border-box;
-}
-
-._imgParent {
-  display: flex;
-}
-
-._img {
-  margin: 0 0.7rem;
-}
-
-._columnTwo {
-  width: 25%;
-  padding: 0.6rem;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-}
-
-._columnThree {
-  width: 25%;
-  padding: 0.6rem;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: flex-end;
-}
-
-._closeParent {
-  cursor: pointer;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
 ._subtitle {
   font-family: $montserratRegular;
   font-size: $montserratRegular16;
@@ -110,21 +85,6 @@
 ._title {
   font-family: $blackerTextHeavy;
   font-size: $blackerTextHeavy40;
-}
-
-._rowTitle {
-  font-family: $blackerTextHeavy;
-  margin-bottom: 0.3rem;
-}
-
-._rowText {
-  font-family: $montserratRegular;
-  font-size: $montserratRegular14;
-  color: $gray;
-}
-
-._price {
-  font-family: $montserratRegular;
 }
 
 ._card {
@@ -160,7 +120,7 @@
 ._btnParent {
   margin-top: 0.5rem;
   width: 11rem;
-  margin-left: 1rem;
+  margin-left: 1rem
 }
 
 ._estimatedTotal {
@@ -207,3 +167,54 @@
     color: $gray;
   }
 }
+
+._webRowParent {
+  display: block;
+}
+
+._responsiveRowParent {
+  display: none;
+}
+
+
+@include responsive(lg) {
+  ._layout {
+    flex-flow: column nowrap;
+  }
+
+  ._childOne, ._childTwo {
+    width: 100%;
+  }
+
+  ._childOneCenter {
+    width: 100%;
+  }
+
+  ._parent {
+    overflow: auto;
+    margin-top: 7rem;
+  }
+
+  ._superParent {
+    height: auto;
+  }
+
+  ._img {
+    display: none;
+  }
+
+  ._card {
+    width: 95%;
+    margin-bottom: 1rem;
+    z-index: 999;
+  }
+
+  ._webRowParent {
+    display: none;
+  }
+
+  ._responsiveRowParent {
+    display: block;
+  }
+}
+
