@@ -27,7 +27,6 @@ const SideFilter = ({ show = 0, method}) => {
     dispatch(setProductFilter(data))
   }
 
-
   return (
     <div className={assignClass()}>
       <div className={styles._container}>
@@ -47,6 +46,7 @@ const SideFilter = ({ show = 0, method}) => {
             )
           })
         }
+
         <div className={styles._btnParent} onClick={method}>
           <Button color='#000000' textColor='white' text={'Continuar'}></Button>
         </div>

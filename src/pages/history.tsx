@@ -9,7 +9,7 @@ const HistoryPage = () => {
   const { resource: { general: { general } } } = useSelector((state: any) => state)
 
   return (
-    <History data={general}/>
+    <History data={general} />
   )
 }
 

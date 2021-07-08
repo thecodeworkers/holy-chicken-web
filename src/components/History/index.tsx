@@ -4,6 +4,7 @@ import Head from 'next/head'
 import styles from './styles.module.scss'
 import { Chiken } from '@images/resources'
 import { Search } from '@images/icons';
+import { OpenModal } from './elements'
 
 const circles = [
   { label: 'Preparando pedido' },
@@ -60,10 +61,12 @@ const orders = [
   }
 ]
 
-
 const History = ({ data }) => {
 
-  const [currentStep, setCurrentStep] = useState(4)
+  const [ currentStep, setCurrentStep ] = useState(4)
+  const [ show, setShow ] = useState(false)
+
+  const showModal = () => setShow(show => !show)
 
   return (
     <>
@@ -74,8 +77,6 @@ const History = ({ data }) => {
       <div className={styles._parent}>
 
         <div className={styles._leftSide}>
-          {/* <div className={styles._secondParent}> */}
-
           <div>
             <div className={styles._infoParent}>
               <ul className={styles._list}>
@@ -90,7 +91,6 @@ const History = ({ data }) => {
               <input className={styles._input} readOnly value='#000'></input>
             </div>
           </div>
-
 
           <div className={styles._lineParent}>
             <div className={styles._line}>
@@ -179,7 +179,7 @@ const History = ({ data }) => {
                       </div>
 
                       <div>
-                        <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' />
+                        <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={showModal} />
                       </div>
                     </div>
                   )
@@ -189,8 +189,9 @@ const History = ({ data }) => {
           </div>
         </div>
       </div>
-      <Footer data={null} content={null}></Footer>
 
+      <Footer data={data?.footer} content={data?.socialNetworks}  />
+      <OpenModal show={show} method={showModal}/>
     </>
   )
 
