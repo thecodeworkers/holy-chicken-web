@@ -4,12 +4,13 @@ import Head from 'next/head'
 import styles from './styles.module.scss'
 import { Chiken } from '@images/resources'
 import { Search } from '@images/icons';
-import { OpenModal } from './elements'
+import { OpenModal, OrderModal } from './elements'
 
 const circles = [
   { label: 'Preparando pedido' },
   { label: 'Por entregar' },
   { label: 'Orden en vía' },
+  { label: 'Confirmando pago' },
   { label: 'Orden Entregada' }
 ]
 
@@ -63,10 +64,12 @@ const orders = [
 
 const History = ({ data }) => {
 
-  const [ currentStep, setCurrentStep ] = useState(4)
+  const [ currentStep, setCurrentStep ] = useState(5)
   const [ show, setShow ] = useState(false)
+  const [ showOrder, setShowOrder ] = useState(false)
 
   const showModal = () => setShow(show => !show)
+  const showOrderModal = () => setShowOrder(showOrder => !showOrder)
 
   return (
     <>
@@ -102,8 +105,8 @@ const History = ({ data }) => {
                       const itemIndex = index + 1
 
                       return (
-                        <>
-                          <div className={itemIndex == currentStep ? styles._circleSelected : styles._circle} key={index}>
+                        <div key={index}>
+                          <div className={itemIndex == currentStep ? styles._circleSelected : styles._circle} >
 
                             <div className={styles._labelParent}>
                               <p className={styles._text}>{res.label}</p>
@@ -116,7 +119,7 @@ const History = ({ data }) => {
                               </div>
                             }
                           </div>
-                        </>
+                        </div>
                       )
                     })
                   }
@@ -126,7 +129,7 @@ const History = ({ data }) => {
           </div>
 
           <div className={styles._btnParent}>
-            <Button color='#000' textColor='#FFF' text='Órdenes Abiertas' />
+            <Button color='#000' textColor='#FFF' text='Órdenes Abiertas' method={showModal}/>
           </div>
         </div>
 
@@ -179,7 +182,7 @@ const History = ({ data }) => {
                       </div>
 
                       <div>
-                        <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={showModal} />
+                        <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={showOrderModal} />
                       </div>
                     </div>
                   )
@@ -192,6 +195,7 @@ const History = ({ data }) => {
 
       <Footer data={data?.footer} content={data?.socialNetworks}  />
       <OpenModal show={show} method={showModal}/>
+      <OrderModal show={showOrder} method={showOrderModal} />
     </>
   )
 

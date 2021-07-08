@@ -26,7 +26,6 @@ const NavBar = ({ data }) => {
       return
     }
     if (route != router.pathname) {
-      if (loader) dispatch(setLoader(true))
       router.push(route)
     }
   }
@@ -113,7 +112,7 @@ const NavBar = ({ data }) => {
                         <Button color='#118AC6' text={!isAuth ? 'Iniciar sesión' : 'Cerrar sesión'} textColor='#fff' ></Button>
                       </div>
                       {!isAuth && <p>¿Nuevo cliente? <a className={styles._link} onClick={() => openModal('registerModal')}> Crear Cuenta </a></p>}
-                      <p>Mis órdenes</p >
+                      <p onClick={() => navigation('/history')} className={styles._myOrders}>Mis órdenes</p >
                     </div>
                   </div>
                 }
