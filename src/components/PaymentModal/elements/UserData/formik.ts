@@ -33,7 +33,7 @@ const formikConfig = (dispatch) => (useFormik({
   }),
 
   onSubmit: values => {
-    dispatch(setStep({ user_data:values, step: 2 }))
+    dispatch(setStep({ billing_data:values, step: 5 }))
   }
 }))
 

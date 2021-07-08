@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import FormikConfig from './formik'
 import { Button } from '@components'
 import { filter } from '@utils'
@@ -8,8 +8,8 @@ import { filter } from '@utils'
 const BillingData = () => {
 
   const { intermitence: { paymentModal }, resource: { general: { general }, allCountries } } = useSelector((state: any) => state)
-
-  const formik = FormikConfig()
+  const dispatch = useDispatch()
+  const formik = FormikConfig(dispatch)
   const { errors, touched } = formik
   const [states, setStates] = useState([])
   const [dataType, setDataType] = useState('same')
@@ -97,13 +97,13 @@ const BillingData = () => {
                 <div className={styles._inputParent}>
                   <label>Dirección (zona, urbanzación, calle, casa/edificio)</label>
                   <input
-                    name='phone'
+                    name='address'
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.phone}
+                    value={formik.values.address}
                     placeholder='Introducir dirección'
                     type='text'
-                    className={errors.phone && touched.phone ? styles._inputError : styles._input} />
+                    className={errors.address && touched.address ? styles._inputError : styles._input} />
                 </div>
               </div>
             </div>

@@ -3,8 +3,8 @@ import styles from './styles.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import FormikConfig from './formik'
 import { Button } from '@components'
-import loadConfig from 'next/dist/next-server/server/config'
 import { setStep } from '@store/actions'
+import { Phone, Mail } from '@images/icons'
 
 const PaymentMethod = () => {
 
@@ -70,8 +70,42 @@ const PaymentMethod = () => {
                 })
               }
             </div>
+            <div className={styles._messageContainer}>
+              <p className={styles._paymentTitle}>Envíe el comprobante de pago al:</p>
+              <div className={`${styles._itemParent} ${styles._marginBottom}`}>
+                <div className={styles._iconParent}>
+                  <Phone />
+                </div>
+                <div>
+                  <p>Teléfono</p>
+                  <a className={styles._link} href="tel:+58 412-2485668">
+                    +58 412-2485668
+                  </a>
+                </div>
+              </div>
+
+              <div className={`${styles._itemParent} ${styles._marginBottom}`}>
+                <div className={styles._iconParent}>
+                  <Mail color='#000' />
+                </div>
+                <div>
+                  <p>Email</p>
+                  <a className={styles._link} href="mailto:infoholychicken@gmail.com">
+                    infoholychicken@gmail.com
+                  </a>
+                </div>
+              </div>
+              <div className={styles._advices}>
+              <p className={styles._advicesItem} >No olvide colocar, según la forma de pago lo siguiente:</p>
+              <p className={styles._advicesItemBold}>- Pago móvil, transferencia o Zelle:</p>
+              <p className={styles._advicesItem} >Debe verse legible el número de confirmación y banco.</p>
+              <p className={styles._advicesItemBold}>- Efectivo:</p>
+              <p className={styles._advicesItem} >Debe verse legible el número de serie del billete.</p>
+              </div>
+            </div>
 
           </div>
+
 
 
           <div className={styles._buttonContainer}>
