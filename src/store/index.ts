@@ -52,7 +52,8 @@ const makeStore: any = ({ isServer }) => {
       'toast',
       'loader',
       'product',
-      'resource'
+      'resource',
+      'intermitence'
     ]
   }
 
