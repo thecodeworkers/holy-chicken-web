@@ -1,0 +1,150 @@
+
+@use 'sass:map';
+@import '../../../../../public/styles/index.scss';
+
+$elements: (
+  1: (
+    63px,
+    63px,
+    -0.036s
+  ),
+
+  2: (
+    68px,
+    56px,
+    -0.072s
+  ),
+
+  3: (
+    71px,
+    48px,
+    -0.108s
+  ),
+
+  4: (
+    72px,
+    40px,
+    -0.144s
+  ),
+
+  5: (
+    71px,
+    32px,
+    -0.18s
+  ),
+
+  6: (
+    68px,
+    24px,
+    -0.216s
+  ),
+
+  7: (
+    63px,
+    17px,
+    -0.252s
+  ),
+
+  8: (
+    56px,
+    12px,
+    -0.288s
+  )
+);
+
+._circlesParent {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+  ._circles {
+    animation: rotation 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 40px 40px;
+
+    &:after {
+      content: " ";
+      display: block;
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: $mineShaft;
+      margin: -4px 0 0 -4px;
+    }
+  }
+
+@each $number, $element in $elements {
+  $items: map.get($elements, $number);
+  $top: nth($items, 1);
+  $left: nth($items, 2);
+  $delay: nth($items, 3);
+
+  ._circles:nth-child(#{$number}) {
+    animation-delay: $delay;
+
+    &:after {
+      top: $top;
+      left: $left;
+    }
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+._loadingModal {
+  display: inline-flex;
+  max-width: 30rem;
+  border-radius: 2.375rem;
+  background-color:$white;
+  height: 30vh;
+  width: 30%;
+}
+._centerBody{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2.5rem;
+}
+
+._loadingText{
+  font-family: $montserratMedium;
+  font-size: $montserratMedium16;
+  color: $mineShaft;
+  text-align: center;
+  width: 80%;
+  margin-top: 2rem;
+}
+
+._orderContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+._orderTitle{
+  font-family: $montserratBold;
+  font-size: $montserratBold40;
+  color: $black;
+}
+
+._buttonContainer{
+  margin-top: 1rem;
+}
+
+._btnParent{
+  width: 120px;
+
+}

@@ -52,9 +52,9 @@ const NavBar = ({ data }) => {
   const showedCart = (showCart) => {
     setShowCart(showCart => !showCart)
 
-    if(showCart) return  dispatch(setShowModal({ paymentModal: false }))
+    if(showCart) return  dispatch(setShowModal({ cartModal: false }))
 
-    if(!showCart) return  dispatch(setShowModal({ paymentModal: true }))
+    if(!showCart) return  dispatch(setShowModal({ cartModal: true }))
   }
 
   return (

@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Navbar } from '@components'
 import styles from './styles.module.scss'
-import { CountProduct, Button, } from '@components'
+import { CountProduct, Button, PaymentModal} from '@components'
 import { createMarkup } from '@utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeCartItem, applyCoupon, setToast } from '@store/actions'
+import { removeCartItem, applyCoupon, setToast ,setShowModal } from '@store/actions'
 import { WebRow, ResponsiveRow } from './elements'
 
 const Summary = ({ data, cartParam }) => {
@@ -33,13 +33,19 @@ const Summary = ({ data, cartParam }) => {
     dispatch(setToast('warning', 'Por favor escriba un código de cupón', 1))
   }
 
+  const openPayment = () => {
+    console.log('abierto');
+
+    dispatch(setShowModal({ paymentModal: true }))
+  }
+
   return (
     <>
       <Head>
         <title>Holy Chicken</title>
       </Head>
       <Navbar data={data?.header} />
-
+      <PaymentModal />
       <div className={styles._superParent}>
         <div className={styles._parent}>
           <div>
@@ -89,7 +95,7 @@ const Summary = ({ data, cartParam }) => {
                 </div>
 
                 <div>
-                  <Button color='#000' textColor='white' text='Check out' height='2.1rem' />
+                  <Button color='#000' textColor='white' text='Check out' height='2.1rem' method={openPayment} />
                 </div>
               </div>
             </div>
