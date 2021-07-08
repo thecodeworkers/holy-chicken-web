@@ -1,0 +1,83 @@
+@import '../../../../../public/styles/index.scss';
+
+._background   {
+  @include blurBackground();
+  justify-content: flex-end;
+}
+
+._card {
+  margin-right: 2rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  width: 22rem;
+}
+
+._radioBtn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  min-width:  0.8rem;
+  min-height:  0.8rem;
+  padding: 0.1rem;
+  background-clip: content-box;
+  border: 2px solid $black;
+  background-color: trasparent;
+  border-radius: 50%;
+
+  &:checked {
+    background-color: $black;
+  }
+}
+
+._title {
+  font-family: $blackerTextHeavy;
+  font-size: $blackerTextHeavy22;
+  text-align: center;
+  margin-top: 0.4rem;
+  margin-bottom: 2rem;
+}
+
+._itemParent {
+  display: flex;
+  justify-content: flex-start;
+}
+
+._row {
+  display: flex;
+  margin-left: 0.5rem;
+
+  & p {
+    font-family: $montserratRegular;
+    font-size: $montserratRegular14;
+  }
+
+  & p:first-child{
+    width: 3.5rem;
+  }
+}
+
+._block {
+  margin-bottom: 0.8rem;
+}
+
+._column {
+  display: flex;
+  flex-direction: column;
+}
+
+._bold {
+  font-weight: bold;
+}
+
+._hidden {
+  display: none;
+}
+
+._imgParent {
+  cursor: pointer;
+  display: inline-block;
+}
+

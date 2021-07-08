@@ -97,7 +97,7 @@ const NavbarResponsive = () => {
         <div className={styles._buttonBlueParent} onClick={logout} >
           <Button color='#118AC6' text={isAuth ? 'Cerrar sesión' : 'Iniciar sesión'} textColor='#fff'></Button>
         </div>
-        <p className={styles._myOrders}>Mis órdenes</p >
+        <p className={styles._myOrders}  onClick={() => navigation('/history')} >Mis órdenes</p >
       </div>
 
       <ResponsiveMenu show={show} method={resetShow} />

@@ -1,0 +1,118 @@
+@import '../../../../../public/styles/index.scss';
+
+._background {
+  @include blurBackground()
+}
+
+._card {
+  padding: 1.2rem;
+  box-sizing: border-box;
+  width: 380px;
+  position: relative;
+}
+
+._title {
+  font-family: $blackerTextHeavy;
+  font-size: $blackerTextHeavy22;
+  text-align: center;
+  margin-top: 0.4rem;
+  margin-bottom: 2rem;
+}
+
+._footer {
+  background-color: $black;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  border-radius: 0 0 2.375rem 2.375rem;
+}
+
+._footerParent {
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+
+  & p:first-child {
+    color: $white;
+    font-family: $blackerTextHeavy;
+    font-size: $blackerTextHeavy20;
+  }
+
+  & p:last-child {
+    color: $white;
+    font-family: $montserratBold;
+    font-size: $blackerTextHeavy20;
+  }
+}
+
+._products {
+  max-height: 18rem;
+  overflow: auto;
+  margin-bottom: 3.9rem;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $pampas;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: none;
+  }
+}
+
+._row {
+  display: flex;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+._columnOne {
+  width: 35%;
+}
+
+._columnTwo {
+  width: 50%;
+
+  & p:first-child {
+    font-family: $blackerTextHeavy;
+    font-size: $blackerTextHeavy16;
+    margin-bottom: 0.5rem;
+  }
+
+  & p:last-child {
+    font-family: $montserratRegular;
+    font-size: $montserratRegular12;
+    color: $gray;
+    line-height: 0.9rem;
+  }
+}
+
+._columnThree {
+  width: 15%;
+
+  & p {
+    font-family: $montserratBold;
+    font-size: $montserratBold20;
+  }
+}
+
+._hidden {
+  display: none;
+}
+
+._imgParent {
+  cursor: pointer;
+  display: inline-block;
+}

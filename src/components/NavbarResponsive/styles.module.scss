@@ -61,6 +61,12 @@
   font-size: $montserratRegular18;
   text-align: center;
   margin-top: 1.2em;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-position: under;
+  }
 }
 
 ._hidden {
