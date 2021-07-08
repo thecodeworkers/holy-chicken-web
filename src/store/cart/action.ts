@@ -15,7 +15,7 @@ export const getCart = () => async (dispatch, getState) => {
   return result
 }
 
-export const setCartProducts = ({ databaseId, quantity = 1 }: any, extras) => async (dispatch, getState) => {
+export const setCartProducts = ({ databaseId, quantity = 1 }: any, extras = null) => async (dispatch, getState) => {
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
     const { auth } = await getState()
