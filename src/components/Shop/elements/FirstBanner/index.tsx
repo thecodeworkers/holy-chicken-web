@@ -9,7 +9,7 @@ import DropDownFilter from '../DropDownFilter';
 import SideFilter from '../SideFilter';
 import SideFilterMenu from '../SideFilterMenu';
 import { useDispatch } from 'react-redux'
-import { searchProducts, setShowModal, setCurrentProduct } from '@store/actions'
+import { searchProducts, setShowModal, setCurrentProduct, resetStore } from '@store/actions'
 
 const FirstBanner = ({ content, backup }: any) => {
 

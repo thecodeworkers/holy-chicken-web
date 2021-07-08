@@ -57,7 +57,7 @@ const IndividualProduct = ({ type = 'list' }) => {
       if (result) correctProduct = result
     }
 
-    dispatch(setCartProducts(correctProduct))
+    dispatch(setCartProducts(correctProduct, product.addons))
   }
 
   return (

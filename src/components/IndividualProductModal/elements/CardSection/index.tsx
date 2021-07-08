@@ -1,10 +1,16 @@
 import styles from './styles.module.scss'
 import { CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelection } from '@store/actions';
+import { setExtras, setSelection } from '@store/actions';
 
 const CardSection = ({ attributes }) => {
-  const { freeFresh, freeSauce, blessing, sauce } = useSelector((state: any) => state.product)
+  const {
+    freeFresh,
+    freeSauce,
+    blessing,
+    sauce,
+    addons
+  } = useSelector((state: any) => state.product)
 
   const nodes = attributes?.nodes || [];
   const toopings = [nodes[0], nodes[1]];
@@ -101,7 +107,22 @@ const CardSection = ({ attributes }) => {
                               </div>
 
                               <div className={styles._column}>
-                                <CountProduct />
+                                <CountProduct
+                                  stock={30}
+                                  fixed
+                                  changeNumber={(action) => {
+                                    if (action == 'add') {
+                                      addons.push({ extra: option, price: 0.5 })
+                                      dispatch(setExtras(addons))
+                                    }
+
+                                    if (action == 'remove') {
+                                      const index = addons.findIndex((addon: any) => addon.extra == option)
+                                      if (index > -1) addons.splice(index, 1)
+                                      dispatch(setExtras(addons))
+                                    }
+                                  }}
+                                />
                               </div>
 
                               <div className={styles._column}>
