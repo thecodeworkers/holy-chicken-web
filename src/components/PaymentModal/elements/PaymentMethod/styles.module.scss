@@ -290,6 +290,17 @@ padding: 0;
     left: 0;
   }
 
+  ._firstRow {
+    flex-direction: column;
+  }
+  ._deliveryType{
+    width: 100%;
+  }
+
+  ._messageContainer{
+    width: 100%;
+  }
+
   ._btnParent{
    margin-bottom: 1rem;
   }

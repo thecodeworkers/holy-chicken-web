@@ -132,7 +132,7 @@ const BillingData = () => {
                     onChange={(event) => setDefaults(event.currentTarget.value)}
                     onBlur={formik.handleBlur}
                     value={formik.values.country}
-                    className={errors.country && touched.country ? styles._inputError : styles._input}>
+                    className={errors.country && touched.country ? styles._inputError : styles._inputSelect}>
                     {allCountries?.length ? allCountries.map((country, index) =>
                       <option key={index} value={country.code}>{country.name}</option>
                     ) : <option>No Disponible</option>}
@@ -150,7 +150,7 @@ const BillingData = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.state}
-                    className={errors.state && touched.state ? styles._inputError : styles._input}>
+                    className={errors.state && touched.state ? styles._inputError : styles._inputSelect}>
                     {states?.length ? states.map((country, index) =>
                       <option key={index} value={country.code}>{country.name}</option>
                     ) : <option>No Disponible</option>}

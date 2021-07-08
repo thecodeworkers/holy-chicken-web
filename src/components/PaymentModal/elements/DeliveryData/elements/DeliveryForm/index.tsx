@@ -96,7 +96,7 @@ const DeliveryForm = () => {
                 onChange={deliveryform.handleChange}
                 onBlur={deliveryform.handleBlur}
                 value={deliveryform.values.country}
-                className={errors.country && touched.country ? styles._inputError : styles._input}>
+                className={errors.country && touched.country ? styles._inputError : styles._inputSelect}>
                 <option>Dirección (zona, urbanzación, calle, casa/edificio</option>
               </select>
             </div>
@@ -142,7 +142,7 @@ const DeliveryForm = () => {
                 onChange={(event) => setDefaults(event.currentTarget.value)}
                 onBlur={deliveryform.handleBlur}
                 value={deliveryform.values.country}
-                className={errors.country && touched.country ? styles._inputError : styles._input}>
+                className={errors.country && touched.country ? styles._inputError : styles._inputSelect}>
                 {countries?.length ? countries.map((country, index) =>
                   <option key={index} value={country.slug}>{country.title}</option>
                 ) : <option>No Disponible</option>}
@@ -159,7 +159,7 @@ const DeliveryForm = () => {
                 onChange={(event) => setRegion(event.currentTarget.value)}
                 onBlur={deliveryform.handleBlur}
                 value={deliveryform.values.city}
-                className={errors.city && touched.city ? styles._inputError : styles._input}>
+                className={errors.city && touched.city ? styles._inputError : styles._inputSelect}>
                 {cities?.length ? cities.map((city, index) =>
                   <option key={index} value={city.name}>{city.name}</option>
                 ) : <option>No Disponible</option>}
@@ -191,7 +191,7 @@ const DeliveryForm = () => {
                 onChange={deliveryform.handleChange}
                 onBlur={deliveryform.handleBlur}
                 value={deliveryform.values.municipality}
-                className={errors.municipality && touched.municipality ? styles._inputError : styles._input}>
+                className={errors.municipality && touched.municipality ? styles._inputError : styles._inputSelect}>
                 {regions?.length ? regions.map((region, index) =>
                   <option key={index} value={region.key}>{region.name}</option>
                 ) : <option>No Disponible</option>}
