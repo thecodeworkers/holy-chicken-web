@@ -184,6 +184,10 @@ color: $mineShaft;
   flex-direction: column;
 }
 
+._inputSelect{
+  @include input($alto);
+  background-color: $timberWolf;
+}
 
 @include responsive(md) {
   ._titleParent{
@@ -196,7 +200,6 @@ color: $mineShaft;
   }
   ._rightMain {
     width: 100%;
-    margin-bottom: 4rem;
 
   }
   ._buttonContainer{

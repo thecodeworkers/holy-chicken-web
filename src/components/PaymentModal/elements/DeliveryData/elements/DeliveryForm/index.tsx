@@ -1,27 +1,40 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import deliveryConfig from './formik'
 import { Button } from '@components'
+import { filter } from '@utils'
 
 const DeliveryForm = () => {
 
-  const { resource: { general: { general } } } = useSelector((state: any) => state)
+  const { resource: { general: { general }, countries }, paymentStep: { delivery_data } } = useSelector((state: any) => state)
+
   const dispatch = useDispatch()
-  const deliveryform = deliveryConfig(dispatch)
+  const deliveryform = deliveryConfig(dispatch, delivery_data)
+  const [cities, setCities] = useState([])
+  const [regions, setRegions] = useState([])
   const { errors, touched } = deliveryform
-  const [showAddress, setShowAddress] = useState(false)
-  const [date, setDate] = useState('text')
-  const [time, setTime] = useState('text')
 
-  const showPicukp = (checked) => {
-    setShowAddress(checked => !checked)
+  const setDefaults = (value) => {
+    deliveryform.setFieldValue('country', value)
+    const filterCountry = filter(countries, value, 'slug')
+    const city = filterCountry[0].cities?.nodes
+    setCities(city || [])
+    deliveryform.setFieldValue('city', city?.name,)
+    const filterCities = filter(city, city?.name, 'name')
+    setRegions(filterCities[0].region?.content || [])
+    deliveryform.setFieldValue('municipality', filterCities[0].region?.content[0]?.name)
   }
 
-  const changeInput = () => {
-    return setDate('date')
+  const setRegion = (value) => {
+    deliveryform.setFieldValue('city', value)
+    const filterCities = filter(cities, value, 'name')
+    setRegions(filterCities[0].region?.content || [])
   }
 
+  useEffect(() => {
+    setDefaults('VE')
+  }, [])
 
   return (
     <form onSubmit={deliveryform.handleSubmit}>
@@ -83,7 +96,7 @@ const DeliveryForm = () => {
                 onChange={deliveryform.handleChange}
                 onBlur={deliveryform.handleBlur}
                 value={deliveryform.values.country}
-                className={errors.country && touched.country ? styles._inputError : styles._input}>
+                className={errors.country && touched.country ? styles._inputError : styles._inputSelect}>
                 <option>Dirección (zona, urbanzación, calle, casa/edificio</option>
               </select>
             </div>
@@ -124,13 +137,15 @@ const DeliveryForm = () => {
           <div className={styles._quarterWidth}>
             <div className={`${styles._inputParent} ${styles._separation}`}>
               <label>Pais</label>
-              <select name="select"
+              <select name="country"
                 placeholder='Seleccione el país'
-                onChange={deliveryform.handleChange}
+                onChange={(event) => setDefaults(event.currentTarget.value)}
                 onBlur={deliveryform.handleBlur}
                 value={deliveryform.values.country}
-                className={errors.country && touched.country ? styles._inputError : styles._input}>
-                <option>Venezuela</option>
+                className={errors.country && touched.country ? styles._inputError : styles._inputSelect}>
+                {countries?.length ? countries.map((country, index) =>
+                  <option key={index} value={country.slug}>{country.title}</option>
+                ) : <option>No Disponible</option>}
               </select>
             </div>
           </div>
@@ -139,13 +154,15 @@ const DeliveryForm = () => {
           <div className={styles._quarterWidth}>
             <div className={`${styles._inputParent} ${styles._separation}`}>
               <label>Ciudad</label>
-              <select name="select"
+              <select name="city"
                 placeholder='Seleccione el país'
-                onChange={deliveryform.handleChange}
+                onChange={(event) => setRegion(event.currentTarget.value)}
                 onBlur={deliveryform.handleBlur}
                 value={deliveryform.values.city}
-                className={errors.city && touched.city ? styles._inputError : styles._input}>
-                <option>Caracas</option>
+                className={errors.city && touched.city ? styles._inputError : styles._inputSelect}>
+                {cities?.length ? cities.map((city, index) =>
+                  <option key={index} value={city.name}>{city.name}</option>
+                ) : <option>No Disponible</option>}
               </select>
             </div>
           </div>
@@ -169,13 +186,15 @@ const DeliveryForm = () => {
           <div className={styles._threeQuarterWidth} >
             <div className={`${styles._inputParent} ${styles._separation}`}>
               <label>Municipio</label>
-              <select name="select"
+              <select name="municipality"
                 placeholder='Seleccione el país'
                 onChange={deliveryform.handleChange}
                 onBlur={deliveryform.handleBlur}
-                value={deliveryform.values.city}
-                className={errors.city && touched.city ? styles._inputError : styles._input}>
-                <option>Chacao</option>
+                value={deliveryform.values.municipality}
+                className={errors.municipality && touched.municipality ? styles._inputError : styles._inputSelect}>
+                {regions?.length ? regions.map((region, index) =>
+                  <option key={index} value={region.key}>{region.name}</option>
+                ) : <option>No Disponible</option>}
               </select>
             </div>
           </div>

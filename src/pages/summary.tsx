@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Shop } from '@components'
 import { wrapper } from '@store'
 import { getResources } from '@store/actions'
 import { Summary } from '@components'

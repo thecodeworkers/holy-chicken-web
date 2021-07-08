@@ -3,31 +3,29 @@ import styles from './styles.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import FormikConfig from './formik'
 import { Button } from '@components'
-import loadConfig from 'next/dist/next-server/server/config'
+import { setStep } from '@store/actions'
+import { Phone, Mail } from '@images/icons'
 
 const PaymentMethod = () => {
 
-  const { intermitence: { paymentModal }, resource: { general: { general }, paymentMethods } } = useSelector((state: any) => state)
+  const { intermitence: { paymentModal }, resource: { general: { general }, paymentMethods }, paymentStep: { payment_data } } = useSelector((state: any) => state)
 
   const formik = FormikConfig()
   const [paymentSelected, setPaymentSelected] = useState('')
   const dispatch = useDispatch()
 
   const buildTexts = (data) => {
-    const test = Object.entries(data)
-    const dynamicText = test.map(([key, value,], index) => {
-
-      if (key == 'id') {
-        test.splice(index, 1)
-      }
-      return value
-    })
-    return dynamicText
+    return data?.description?.split('/')
   }
 
   const selectedMethod = (e, item) => {
     setPaymentSelected(item)
+    dispatch(setStep({ payment_data: { ...payment_data, type: item } }))
     return formik.handleChange(e)
+  }
+
+  const NextStep = () => {
+    if (paymentSelected) dispatch(setStep({ step: 4 }))
   }
 
   return (
@@ -72,8 +70,42 @@ const PaymentMethod = () => {
                 })
               }
             </div>
+            <div className={styles._messageContainer}>
+              <p className={styles._paymentTitle}>Envíe el comprobante de pago al:</p>
+              <div className={`${styles._itemParent} ${styles._marginBottom}`}>
+                <div className={styles._iconParent}>
+                  <Phone />
+                </div>
+                <div>
+                  <p>Teléfono</p>
+                  <a className={styles._link} href="tel:+58 412-2485668">
+                    +58 412-2485668
+                  </a>
+                </div>
+              </div>
+
+              <div className={`${styles._itemParent} ${styles._marginBottom}`}>
+                <div className={styles._iconParent}>
+                  <Mail color='#000' />
+                </div>
+                <div>
+                  <p>Email</p>
+                  <a className={styles._link} href="mailto:infoholychicken@gmail.com">
+                    infoholychicken@gmail.com
+                  </a>
+                </div>
+              </div>
+              <div className={styles._advices}>
+              <p className={styles._advicesItem} >No olvide colocar, según la forma de pago lo siguiente:</p>
+              <p className={styles._advicesItemBold}>- Pago móvil, transferencia o Zelle:</p>
+              <p className={styles._advicesItem} >Debe verse legible el número de confirmación y banco.</p>
+              <p className={styles._advicesItemBold}>- Efectivo:</p>
+              <p className={styles._advicesItem} >Debe verse legible el número de serie del billete.</p>
+              </div>
+            </div>
 
           </div>
+
 
 
           <div className={styles._buttonContainer}>
@@ -82,7 +114,8 @@ const PaymentMethod = () => {
                 color='#000'
                 text='Ingresar'
                 textColor='#FFF'
-                type='submit' flag />
+                type='submit' flag
+                method={NextStep} />
             </div>
           </div>
         </div>

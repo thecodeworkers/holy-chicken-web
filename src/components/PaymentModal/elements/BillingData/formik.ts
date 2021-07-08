@@ -1,12 +1,13 @@
 import { useFormik } from 'formik'
 import { emailRegex, onlyLettersRegex, onlyNumbersRegex } from '@utils/regex'
 import * as Yup from 'yup'
+import { setStep } from '@store/actions'
 
-const formikConfig = () => (useFormik({
+const formikConfig = (dispatch) => (useFormik({
   initialValues: {
     name: '',
     lastname: '',
-    address:'',
+    address: '',
     phone: '',
     zipcode: '',
     country: '',
@@ -15,10 +16,6 @@ const formikConfig = () => (useFormik({
   },
 
   validationSchema: Yup.object({
-    date: Yup.string()
-      .required(),
-    time: Yup.string()
-      .required(),
     name: Yup.string()
       .required()
       .matches(onlyLettersRegex),
@@ -28,26 +25,21 @@ const formikConfig = () => (useFormik({
       .matches(onlyLettersRegex),
 
     phone: Yup.string()
-      .required(),
-
-    identification: Yup.string()
-      .required(),
-
-    email: Yup.string()
-      .required()
-      .matches(emailRegex),
-
-    reference: Yup.string()
-      .required(),
-
-  zipcode: Yup.string()
       .required()
       .matches(onlyNumbersRegex),
+    zipcode: Yup.string()
+      .required(),
 
+    city: Yup.string()
+    ,
+    state: Yup.string()
+    ,
+    country: Yup.string()
+    ,
   }),
 
   onSubmit: values => {
-    console.log(JSON.stringify(values))
+    dispatch(setStep({ user_data:values, step: 2 }))
   }
 }))
 

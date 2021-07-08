@@ -6,8 +6,6 @@ import { Button } from '@components'
 
 const UserData = () => {
 
-  // const { resource: { general: { general } } } = useSelector((state: any) => state)
-
   const dispatch = useDispatch()
   const formik = FormikConfig(dispatch)
   const { errors, touched } = formik
