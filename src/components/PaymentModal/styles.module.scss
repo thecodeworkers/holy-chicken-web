@@ -116,7 +116,7 @@
   border: 2px solid $black;
   background-color: trasparent;
   border-radius: 50%;
-
+  cursor: pointer;
 }
 ._radioBtnChecked {
   -webkit-appearance: none;
@@ -132,6 +132,7 @@
   background-color: trasparent;
   border-radius: 50%;
   background-color: black;
+  cursor: pointer;
 }
 
 ._leftBody{

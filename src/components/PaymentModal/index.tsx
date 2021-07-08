@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { UserData, DeliveryData, PaymentMethod, BillingData } from './elements'
-
+import { setShowModal} from '@store/actions'
 const PaymentModal = () => {
 
   const { intermitence: { paymentModal }, paymentStep: { user_data, delivery_data, step, payment_data } } = useSelector((state: any) => state)
-
+  const dispatch = useDispatch()
   const [currentStep, setCurrentStep] = useState(step)
 
   useEffect(() => {
@@ -40,13 +40,13 @@ const PaymentModal = () => {
 
         <div className={styles._leftSection}>
           <div className={styles._closeParent}>
-            <img src='images/icons/circle-arrow.svg' width='25px' height='25px'></img>
+            <img onClick={() => dispatch(setShowModal({ paymentModal: false }))} src='images/icons/close.svg' width='20px' height='20px'></img>
           </div>
 
           <div className={styles._leftBody}>
             <div className={styles._stepContainer}>
               <div className={styles._checkParent}>
-                <div className={currentStep === 1 ? styles._radioBtnChecked : styles._radioBtn}></div>
+                <div  onClick={() => setCurrentStep(1)} className={currentStep === 1 ? styles._radioBtnChecked : styles._radioBtn}></div>
                 <p>Tus Datos</p>
               </div>
               <div className={styles._stepData}>
@@ -55,17 +55,14 @@ const PaymentModal = () => {
                 ${user_data.lastname},
                 ${user_data.identification},
                 ${user_data.email}`}</p>
-
-
                   : <p>Nombre, Apellido, Cedula, Email</p>
-
                 }
               </div>
             </div>
 
             <div>
               <div className={styles._checkParent}>
-                <div className={currentStep === 2 ? styles._radioBtnChecked : styles._radioBtn}></div>
+                <div onClick={() => setCurrentStep(2)} className={currentStep === 2 ? styles._radioBtnChecked : styles._radioBtn}></div>
                 <p>Formas de entrega</p>
               </div>
               <div className={styles._stepData}>
@@ -74,7 +71,7 @@ const PaymentModal = () => {
             </div>
             <div>
               <div className={styles._checkParent}>
-                <div className={currentStep === 3 ? styles._radioBtnChecked : styles._radioBtn}></div>
+                <div onClick={() => setCurrentStep(3)} className={currentStep === 3 ? styles._radioBtnChecked : styles._radioBtn}></div>
                 <p>Formas de pago</p>
               </div>
               <div className={styles._stepData}>
@@ -83,7 +80,7 @@ const PaymentModal = () => {
             </div>
             <div>
               <div className={styles._checkParent}>
-                <div className={currentStep === 4 ? styles._radioBtnChecked : styles._radioBtn}></div>
+                <div onClick={() => setCurrentStep(4)} className={currentStep === 4 ? styles._radioBtnChecked : styles._radioBtn}></div>
                 <p>Facturacion</p>
               </div>
 
