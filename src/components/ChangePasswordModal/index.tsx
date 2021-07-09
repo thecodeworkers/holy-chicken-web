@@ -41,7 +41,7 @@ const ChangePasswordModal = () => {
         <p className={styles._title}> Nueva Contraseña</p>
         <form>
           <div className={styles._inputParent} onFocus={tooltipTimer} onBlur={() => setShowTooltip(false)}>
-          <Tooltip paddinHorizontal={0} top='-75%'show={showTooltip}/>
+            <Tooltip paddinHorizontal={0} top='-75%' show={showTooltip} />
             <label>Contraseña</label>
             <input type={!show ? 'password' : 'text'} className={styles._input} placeholder='Contraseña' />
             <div className={styles._imageParent} onClick={showPassword}>
@@ -59,7 +59,7 @@ const ChangePasswordModal = () => {
           </div>
 
           <div className={styles._btnParent}>
-            <Button color='#000' textColor='#FFF' text='Guardar'/>
+            <Button color='#000' textColor='#FFF' text='Guardar' />
           </div>
         </form>
       </div>
