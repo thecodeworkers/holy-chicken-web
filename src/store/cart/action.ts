@@ -6,6 +6,7 @@ import { setToast, setShowModal } from '@store/actions'
 import checkoutMutation from '@graphql/mutation/checkout'
 import { setStep } from '@store/paymentStep/action'
 
+
 export const setCurrentProduct = (data: any) => actionObject(CURRENT_PRODUCT, data)
 export const setProductsNumber = (number: any) => actionObject(PRODUCTS_NUMBER, number)
 
@@ -176,6 +177,7 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
       dispatch(setToast('check', 'Orden Procesada con exito', 1))
     }
     dispatch(setStep({ loading: false }))
+    dispatch(setProductsNumber({ number: null }))
     dispatch(actionObject(REQUEST_LOADER, false))
   } catch (error) {
     dispatch(actionObject(REQUEST_LOADER, false))

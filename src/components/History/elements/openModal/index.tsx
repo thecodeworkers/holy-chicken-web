@@ -18,6 +18,18 @@ const orders = [
     date: '00/00/00',
     hour: '00:00 PM',
     status: 'Por confirmar'
+  },
+  {
+    order: '#001',
+    date: '00/00/00',
+    hour: '00:00 PM',
+    status: 'Por confirmar'
+  },
+  {
+    order: '#003',
+    date: '00/00/00',
+    hour: '00:00 PM',
+    status: 'Por confirmar'
   }
 ]
 
@@ -33,6 +45,8 @@ const OpenModal = ({ show, method }) => {
 
         <p className={styles._title}>Ordenes abiertas</p>
 
+
+        <div className={styles._ordersParent}>
         {
           orders.map((item, index) => {
             return (
@@ -70,6 +84,8 @@ const OpenModal = ({ show, method }) => {
             )
           })
         }
+        </div>
+
       </div>
     </div>
   )
