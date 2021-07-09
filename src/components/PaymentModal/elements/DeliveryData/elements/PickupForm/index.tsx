@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import styles from './styles.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from '@components'
@@ -18,6 +18,14 @@ const PickupForm = () => {
   const nextstep = () => {
     if (pickupMethod) dispatch(setStep({ step: 3 }))
   }
+
+  const setDefaultForm = () => {
+    if (delivery_data?.location) setPickupMethod(delivery_data.location)
+  }
+
+  useEffect(() => {
+    setDefaultForm()
+  }, [])
 
   return (
     <>
