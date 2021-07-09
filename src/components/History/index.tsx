@@ -103,7 +103,7 @@ const History = ({ data }) => {
 
           <div className={styles._lineParent}>
           <div className={styles._responsiveChicken}>
-            <Chiken />
+            <Chiken id='chicken-one' />
             </div>
 
             <p className={styles._chickenLabel}>{label}</p>
@@ -128,7 +128,7 @@ const History = ({ data }) => {
                             {
                               itemIndex == currentStep &&
                               <div className={styles._chickenParent}>
-                                <Chiken />
+                                <Chiken id='chicken-two'/>
                               </div>
                             }
                           </div>
@@ -207,12 +207,12 @@ const History = ({ data }) => {
       </div>
 
       <div className={styles._panelParent}>
-        <ResponsiveHistory />
+        <ResponsiveHistory modalMethod={showOrderModal}/>
       </div>
 
       <Footer data={data?.footer} content={data?.socialNetworks}  />
       <OpenModal show={show} method={showModal}/>
-      <OrderModal show={showOrder} method={showOrderModal} />
+      <OrderModal show={showOrder} method={showOrderModal}  />
     </>
   )
 

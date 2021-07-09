@@ -2,9 +2,33 @@
 
 ._panel {
   background-color: $pampas;
-  padding: 2rem;
+  padding: 2rem 2rem 1rem 2rem;
   box-sizing: border-box;
   border-radius: 2.375rem 2.375rem 0 0;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  max-height: 25rem;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    padding: 90px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 2rem 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $white;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: none;
+  }
 }
 
 ._title {
@@ -13,7 +37,6 @@
   box-sizing: border-box;
   text-align: center;
 }
-
 
 ._columnTwo {
   width: 30%;
@@ -47,9 +70,9 @@
 }
 
 ._searchInput {
-  @include generalInput($alto);
+  @include generalInput($black);
   font-size: $montserratBold16;
-  height: 2.3rem;
+  height: 2.5rem;
   background-color: $white
 }
 

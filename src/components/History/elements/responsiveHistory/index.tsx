@@ -53,7 +53,7 @@ const orders = [
 
 
 
-const ResponsiveHistory = () => {
+const ResponsiveHistory = ({ modalMethod }) => {
 
   const [showData, setShowData] = useState(false)
 
@@ -84,7 +84,6 @@ const ResponsiveHistory = () => {
         <Search color={'#000000'} />
       </div>
     </div>
-
 
     {
       showData &&
@@ -123,7 +122,7 @@ const ResponsiveHistory = () => {
               </div>
 
               <div>
-                <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={null} />
+                <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={modalMethod} />
               </div>
             </div>
           )
