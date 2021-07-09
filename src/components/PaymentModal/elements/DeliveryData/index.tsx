@@ -11,7 +11,7 @@ const DeliveryData = () => {
   const { paymentStep: { delivery_data } } = useSelector((state: any) => state)
 
   const dispatch = useDispatch()
-  const [shippingMethod, setShippingMethod] = useState('delivery')
+  const [shippingMethod, setShippingMethod] = useState('pickup')
   const [dateTime, setDateTime] = useState(getFullTime(now(), '-'))
   const [time, setTime] = useState(getHHMM(now()))
 
@@ -51,20 +51,6 @@ const DeliveryData = () => {
 
                 <div className={styles._checkParent} >
                   <input type='radio'
-                    name='shippingMethod'
-                    value='delivery'
-                    className={styles._radioBtn}
-                    checked={shippingMethod === 'delivery'}
-                    onChange={(check) => { setDelivery(check.currentTarget.value) }}>
-                  </input>
-                  <p className={styles._radioTitle}>Delivery</p>
-                </div>
-              </div>
-
-              <div className={styles._radioContainer}>
-
-                <div className={styles._checkParent} >
-                  <input type='radio'
                     value='pickup'
                     name='shippingMethod'
                     className={styles._radioBtn}
@@ -72,6 +58,19 @@ const DeliveryData = () => {
                     onChange={(check) => { setDelivery(check.currentTarget.value) }}>
                   </input>
                   <p className={styles._radioTitle}>Pick Up</p>
+                </div>
+              </div>
+              <div className={styles._radioContainer}>
+
+                <div className={styles._checkParent} >
+                  <input type='radio'
+                    name='shippingMethod'
+                    value='delivery'
+                    className={styles._radioBtn}
+                    checked={shippingMethod === 'delivery'}
+                    onChange={(check) => { setDelivery(check.currentTarget.value) }}>
+                  </input>
+                  <p className={styles._radioTitle}>Delivery</p>
                 </div>
               </div>
             </div>

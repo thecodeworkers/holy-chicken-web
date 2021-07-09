@@ -15,7 +15,7 @@ const Summary = ({ data, cartParam }) => {
   const dispatch = useDispatch()
 
   const [input, setInput] = useState('')
-  const total = cartParam?.total ?? '0.00$'
+  const total = cartParam?.subtotal ?? '0.00$'
   const subtotal = cartParam?.subtotal ?? '0.00$'
   const items = cartParam?.contents?.nodes ?? []
 

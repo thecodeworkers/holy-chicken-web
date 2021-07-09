@@ -3,6 +3,7 @@ import { actionObject, orderBy, productFilter, WooCommerceClient } from '../../u
 import { pages, resources } from '../../graphql/query'
 import { GET_PAGES } from '@store/page/action-types'
 import { SEARCH_PRODUCTS, SET_FILTER, CLEAN_FILTER } from './action-types'
+import { getCart } from '@store/cart/action'
 
 
 export const getResources: any = (consult: string = '') => async (dispatch, getState) => {
@@ -21,6 +22,7 @@ export const getResources: any = (consult: string = '') => async (dispatch, getS
   resource['outstanding'] = orderBy(resource.products, 'totalSales', 'asc').slice(0, 3)
   resource['shop'] = resource.products
   resource['allCountries'] = allCountries
+  dispatch(getCart())
   dispatch(actionObject(SET_RESOURCES, { ...resource, productsCopy: resource?.products }))
 }
 

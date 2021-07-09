@@ -20,7 +20,7 @@ const PaymentMethod = () => {
 
   const selectedMethod = (e, item, id) => {
     setPaymentSelected(item)
-    dispatch(setStep({ payment_data: { ...payment_data, ...{ type: item, paymentMethod: id } } }))
+    dispatch(setStep({ payment_data: { ...payment_data, ...{ type: item, paymentMethod: id, valid: true } } }))
     return formik.handleChange(e)
   }
 
