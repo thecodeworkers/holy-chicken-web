@@ -3,14 +3,11 @@ import styles from './styles.module.scss'
 import { ModalFrame, Button } from '@components'
 import { Phone, Mail, Insta, Twitter, WhatsApp, Location, PaperClip } from '@images/icons'
 import { useDispatch } from 'react-redux'
-import { setShowModal } from '@store/actions'
 import { useSelector } from 'react-redux'
 import FormikConfig from './formik'
-import { getPageFiles } from 'next/dist/next-server/server/get-page-files'
 
 const ModalContact = () => {
 
-  const dispatch = useDispatch()
   const formik = FormikConfig()
   const [isActive, setActive] = useState(1)
   const [fileName, setFileName] = useState('')
@@ -22,7 +19,7 @@ const ModalContact = () => {
     setActive(props)
   }
 
-  const getFile = (event) =>{
+  const getFile = (event) => {
     setFileName(event.target.files[0].name);
   }
 
@@ -41,8 +38,8 @@ const ModalContact = () => {
             </div>
             <div>
               <p>Teléfono</p>
-              <a className={styles._link} href = "tel:+58 412-2485668">
-              +58 412-2485668
+              <a className={styles._link} href="tel:+58 412-2485668">
+                +58 412-2485668
               </a>
             </div>
           </div>
@@ -53,8 +50,8 @@ const ModalContact = () => {
             </div>
             <div>
               <p>Email</p>
-              <a className={styles._link} href = "mailto:infoholychicken@gmail.com">
-              infoholychicken@gmail.com
+              <a className={styles._link} href="mailto:infoholychicken@gmail.com">
+                infoholychicken@gmail.com
               </a>
             </div>
           </div>
@@ -68,15 +65,15 @@ const ModalContact = () => {
               <div className={styles._textParent}>
                 <p>Las Mercedes</p>
                 <p>Calle París de Las Mercedes,
-            entre Calle Nueva York y Calle Caron</p>
+                  entre Calle Nueva York y Calle Caron</p>
               </div>
 
               <div className={styles._textParent}>
                 <p>El Hatillo</p>
                 <p>Calle Bolívar del pueblo de El Hatillo.
-                A una cuadra de la Plaza Bolívar.
-                Quinta Nuti.
-            </p>
+                  A una cuadra de la Plaza Bolívar.
+                  Quinta Nuti.
+                </p>
               </div>
 
               <div className={styles._textParent}>
@@ -84,7 +81,7 @@ const ModalContact = () => {
                 <p>
                   Av. Principal de La Castellana,
                   Sector La Castellana.
-            </p>
+                </p>
               </div>
             </div>
           </div>
@@ -203,19 +200,18 @@ const ModalContact = () => {
                     className={styles._textArea}
                     placeholder='Escriba su mensaje aqui...'
                   >
-
                   </textarea>
 
                   <div className={styles._paperClipParent}>
-                  <p className ={styles._fileName}>{fileName}</p>
+                    <p className={styles._fileName}>{fileName}</p>
                     <label className={styles._filePointer}>
 
                       <PaperClip color='#000' />
                     </label>
                     <input type="file"
-                    accept={'application/pdf, application/msword, image/*'}
+                      accept={'application/pdf, application/msword, image/*'}
 
-                    onChange={(e) => getFile(e)} className={styles._file} />
+                      onChange={(e) => getFile(e)} className={styles._file} />
                   </div>
                 </div>
 

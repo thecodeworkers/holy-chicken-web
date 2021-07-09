@@ -1,16 +1,23 @@
-import { useState } from 'react'
 import styles from './styles.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import FormikConfig from './formik'
 import { Button } from '@components'
+import { useEffect } from 'react'
 
 const UserData = () => {
 
+  const { paymentStep: { user_data } } = useSelector((state: any) => state)
   const dispatch = useDispatch()
   const formik = FormikConfig(dispatch)
   const { errors, touched } = formik
 
+  const setDefaults = () => {
+    for (let key in user_data) formik.setFieldValue(key, user_data[key])
+  }
 
+  useEffect(() => {
+    setDefaults()
+  }, [])
   return (
     <>
       <div className={styles._titleParent}>

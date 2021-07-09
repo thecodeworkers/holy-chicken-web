@@ -12,15 +12,15 @@ const initialState = {
   },
   payment_data: {},
   billing_data: {},
-  step: 1
+  step: 1,
+  loading: false,
+  confirmProcess: false,
 }
 
 const setPaymentStepReducer = (state = initialState, { type, payload }: AnyAction) => {
-
   switch (type) {
     case SETSTEP:
       return { ...state, ...payload }
-
     default:
       return state
   }

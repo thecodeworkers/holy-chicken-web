@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { GeneralCard, Button, Stepper } from '@components'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { setCurrentProduct, setLoader, setShowModal } from '@store/actions'
+import { setCurrentProduct, setShowModal } from '@store/actions'
 
 const FirstBanner = ({ data, content, publicity, resource }) => {
 
@@ -110,7 +110,7 @@ const FirstBanner = ({ data, content, publicity, resource }) => {
                         description={item?.description}
                         price={item?.price}
                         hot={spicy}
-                         />
+                      />
                     </div>
                   )
 

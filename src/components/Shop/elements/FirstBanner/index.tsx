@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import styles from './styles.module.scss'
 import { GeneralCard, IndividualProductModal } from '@components'
 import { useRouter } from 'next/router'
@@ -14,7 +14,6 @@ import { searchProducts, setShowModal, setCurrentProduct, resetStore } from '@st
 const FirstBanner = ({ content, backup }: any) => {
 
   const dispatch = useDispatch()
-  const [showSide, setShowSide] = useState(false)
   const router = useRouter()
   const perPage = 12
   const [page, setPage] = useState(1)
@@ -40,102 +39,102 @@ const FirstBanner = ({ content, backup }: any) => {
     setPage(1)
   }
 
-  const openIndividualModal = (item: any) =>  {
+  const openIndividualModal = (item: any) => {
     dispatch(setShowModal({ individualProductModal: true }))
     dispatch(setCurrentProduct({ currentProduct: item }))
   }
 
   return (
     <>
-    <div className={styles._content}>
-      <div className={styles._main}>
-        <div className={styles._header}>
-          <p className={styles._title}>Bienvenido al cielo</p>
-          <p className={styles._subtitle}>Arma tu pedacito de cielo como tú quieras.</p>
-        </div>
-
-        <div className={styles._shopContainer}>
-          <div className={styles._filterContainer}>
-            <SideFilter />
+      <div className={styles._content}>
+        <div className={styles._main}>
+          <div className={styles._header}>
+            <p className={styles._title}>Bienvenido al cielo</p>
+            <p className={styles._subtitle}>Arma tu pedacito de cielo como tú quieras.</p>
           </div>
-           <SideFilterMenu show={show} method={deployMenu}/>
-          <div className={styles._productContainer}>
-            <div className={styles._searchContainer}>
-              <div className={styles._inputParent}>
-                <input
-                  placeholder='Pide tu deseo…'
-                  name='search'
-                  className={styles._input}
-                  value={searchValue}
-                  onChange={search}
-                />
-                <div className={styles._imageParent} >
-                  <Search color={'#000000'} />
-                </div>
-              </div>
-            <DropDownFilter/>
+
+          <div className={styles._shopContainer}>
+            <div className={styles._filterContainer}>
+              <SideFilter />
             </div>
-            <div className={styles._responsive}>
-              <div className={styles._inputContainer}>
+            <SideFilterMenu show={show} method={deployMenu} />
+            <div className={styles._productContainer}>
+              <div className={styles._searchContainer}>
                 <div className={styles._inputParent}>
                   <input
                     placeholder='Pide tu deseo…'
                     name='search'
-                    className={styles._input} />
+                    className={styles._input}
+                    value={searchValue}
+                    onChange={search}
+                  />
                   <div className={styles._imageParent} >
                     <Search color={'#000000'} />
                   </div>
                 </div>
+                <DropDownFilter />
               </div>
-              <div className={styles._filter}>
-                <div className={styles._filterButtonContainer} onClick={deployMenu} >
-                  <p className={styles._filterTitle}>Filtro</p>
-                  <Filter color={'#000000'} />
-                </div>
-              <DropDownFilter/>
-              </div>
-            </div>
-
-            {
-              backup.length ?
-                <div className={styles._cardContainer}>
-                  {
-                    paginate(backup, page, perPage).map((item, index) => {
-                      return (
-                        <div
-                        className={item.stockStatus == 'OUT_OF_STOCK' ? styles._cardDisabled : styles._card}
-                         key={index}
-                         onClick={() => item.stockStatus === 'OUT_OF_STOCK' ? null : openIndividualModal(item) }>
-                          <GeneralCard
-                            name={item?.name}
-                            image={item.image?.mediaItemUrl}
-                            description={item?.description}
-                            price={item?.price.includes('-') ? item?.price.split('-')[0] : item?.price}
-                            hot={item?.spicy?.isSpicy}
-                            />
-                        </div>
-                      )
-                    })
-                  }
-                </div> : (
-                  <div className={styles._emptyMessage}>
-                    <p>Su busqueda no coindice con ningún producto</p>
+              <div className={styles._responsive}>
+                <div className={styles._inputContainer}>
+                  <div className={styles._inputParent}>
+                    <input
+                      placeholder='Pide tu deseo…'
+                      name='search'
+                      className={styles._input} />
+                    <div className={styles._imageParent} >
+                      <Search color={'#000000'} />
+                    </div>
                   </div>
-                )
-            }
+                </div>
+                <div className={styles._filter}>
+                  <div className={styles._filterButtonContainer} onClick={deployMenu} >
+                    <p className={styles._filterTitle}>Filtro</p>
+                    <Filter color={'#000000'} />
+                  </div>
+                  <DropDownFilter />
+                </div>
+              </div>
 
-            <div className={styles._paginationContainer}>
               {
-                backup.length ? (
-                  <Pagination currentPage={page} items={backup} perPage={perPage} changePage={setPage} />
-                ) : null
+                backup.length ?
+                  <div className={styles._cardContainer}>
+                    {
+                      paginate(backup, page, perPage).map((item, index) => {
+                        return (
+                          <div
+                            className={item.stockStatus == 'OUT_OF_STOCK' ? styles._cardDisabled : styles._card}
+                            key={index}
+                            onClick={() => item.stockStatus === 'OUT_OF_STOCK' ? null : openIndividualModal(item)}>
+                            <GeneralCard
+                              name={item?.name}
+                              image={item.image?.mediaItemUrl}
+                              description={item?.description}
+                              price={item?.price.includes('-') ? item?.price.split('-')[0] : item?.price}
+                              hot={item?.spicy?.isSpicy}
+                            />
+                          </div>
+                        )
+                      })
+                    }
+                  </div> : (
+                    <div className={styles._emptyMessage}>
+                      <p>Su busqueda no coindice con ningún producto</p>
+                    </div>
+                  )
               }
+
+              <div className={styles._paginationContainer}>
+                {
+                  backup.length ? (
+                    <Pagination currentPage={page} items={backup} perPage={perPage} changePage={setPage} />
+                  ) : null
+                }
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <IndividualProductModal />
+      <IndividualProductModal />
     </>
   )
 }

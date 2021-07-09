@@ -8,7 +8,7 @@ import { setStep } from '@store/actions'
 
 const DeliveryData = () => {
 
-  const { resource: { countries }, paymentStep: { delivery_data } } = useSelector((state: any) => state)
+  const { paymentStep: { delivery_data } } = useSelector((state: any) => state)
 
   const dispatch = useDispatch()
   const [shippingMethod, setShippingMethod] = useState('delivery')
@@ -32,7 +32,8 @@ const DeliveryData = () => {
   }
 
   useEffect(() => {
-    dispatch(setStep({ delivery_data: { ...delivery_data, type: shippingMethod } }))
+    if (delivery_data?.type) setShippingMethod(delivery_data.type)
+    if (!delivery_data?.type) dispatch(setStep({ delivery_data: { ...delivery_data, type: shippingMethod } }))
   }, [])
 
   return (
@@ -111,10 +112,8 @@ const DeliveryData = () => {
             :
             <PickupForm />
           }
-
         </div>
       </div>
-
     </>
   )
 }

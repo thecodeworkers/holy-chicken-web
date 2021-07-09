@@ -7,7 +7,7 @@ const formikConfig = (dispatch) => (useFormik({
   initialValues: {
     name: '',
     lastname: '',
-    address: '',
+    address_1: '',
     phone: '',
     zipcode: '',
     country: '',
@@ -16,30 +16,18 @@ const formikConfig = (dispatch) => (useFormik({
   },
 
   validationSchema: Yup.object({
-    name: Yup.string()
-      .required()
-      .matches(onlyLettersRegex),
-
-    lastname: Yup.string()
-      .required()
-      .matches(onlyLettersRegex),
-
-    phone: Yup.string()
-      .required()
-      .matches(onlyNumbersRegex),
-    zipcode: Yup.string()
-      .required(),
-
-    city: Yup.string()
-    ,
-    state: Yup.string()
-    ,
-    country: Yup.string()
-    ,
+    name: Yup.string().required().matches(onlyLettersRegex),
+    lastname: Yup.string().required().matches(onlyLettersRegex),
+    phone: Yup.string().required().matches(onlyNumbersRegex),
+    zipcode: Yup.string().required(),
+    city: Yup.string(),
+    state: Yup.string(),
+    country: Yup.string(),
+    address_1: Yup.string()
   }),
 
   onSubmit: values => {
-    dispatch(setStep({ user_data:values, step: 2 }))
+    dispatch(setStep({ billing_data: values, loading: true, confirmProcess: true }))
   }
 }))
 

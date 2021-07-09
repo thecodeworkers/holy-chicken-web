@@ -4,7 +4,6 @@ import { Navbar } from '@components'
 import Footer from '../Footer'
 import { FirstBanner, SecondBanner } from './elements'
 
-
 const AboutUs = ({ content, data }) => {
 
   return (

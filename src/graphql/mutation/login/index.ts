@@ -8,18 +8,39 @@ const loginMutation = async ({ email, password, sessionToken }) => {
       authToken
       sessionToken
       customer {
+        databaseId
         sessionToken
         jwtAuthToken
+        billing {
+          address1
+          address2
+          city
+          country
+          email
+          firstName
+          lastName
+          phone
+          postcode
+          state
+        }
+        shipping {
+          state
+          postcode
+          phone
+          lastName
+          firstName
+          email
+          country
+          company
+          city
+          address2
+          address1
+        }
       }
       user {
         email
         firstName
         lastName
-      }
-      customer {
-        billing {
-          phone
-        }
       }
     }
   }
