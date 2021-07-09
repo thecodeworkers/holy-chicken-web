@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { emailRegex, onlyLettersRegex, onlyNumbersRegex } from '@utils/regex'
+import { onlyLettersRegex, onlyNumbersRegex } from '@utils/regex'
 import * as Yup from 'yup'
 import { setStep } from '@store/actions'
 

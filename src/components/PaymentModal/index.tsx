@@ -35,7 +35,6 @@ const PaymentModal = () => {
     }
   }
 
-
   return (
 
     <div className={paymentModal ? styles._main : styles._hidden} id={'paymentModal'}>

@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from '@components'
@@ -64,8 +64,6 @@ const PickupForm = () => {
             method={() => nextstep()} />
         </div>
       </div>
-
-
     </>
   )
 }

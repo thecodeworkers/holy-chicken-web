@@ -8,7 +8,7 @@ const Pagination = ({ items, perPage, changePage, currentPage }) => {
   const [lastPage, setLastPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const montserratLight = 'Montserrat-Light';
-	const montserratBold = "Montserrat-Bold";
+  const montserratBold = "Montserrat-Bold";
   const totalItems = items.length
 
   useEffect(() => {
@@ -91,6 +91,3 @@ const Pagination = ({ items, perPage, changePage, currentPage }) => {
 }
 
 export default memo(Pagination)
-
-
-// background-color: ${pageNumber == currentPage ? '#262833' : '#DBDADA'};

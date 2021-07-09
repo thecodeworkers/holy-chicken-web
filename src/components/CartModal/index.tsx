@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCart, setShowModal, removeCartItem, setToast } from '@store/actions'
+import { setShowModal, removeCartItem, setToast } from '@store/actions'
 import { createMarkup } from '@utils'
 import { useRouter } from 'next/router'
 
@@ -15,7 +14,7 @@ const CartModal = () => {
 
   const closeModal = (event, flag = false) => {
     const { target } = event
-    if(target.id == 'modal') {
+    if (target.id == 'modal') {
 
       dispatch(setShowModal({ cartModal: false }))
     }
@@ -30,7 +29,7 @@ const CartModal = () => {
   }
 
   const navigate = (route) => {
-    if((route != router.pathname) && nodes.length) {
+    if ((route != router.pathname) && nodes.length) {
       router.push('/summary')
       return
     }
@@ -67,7 +66,7 @@ const CartModal = () => {
                       }
 
                       <div className={styles._quantityContainer}>
-                        <CountProduct productKey={item?.key} stock={dataItem?.stockQuantity} quantity={item?.quantity}/>
+                        <CountProduct productKey={item?.key} stock={dataItem?.stockQuantity} quantity={item?.quantity} />
                         <p className={styles._number}>{item?.price}</p>
                       </div>
                     </div>
