@@ -6,6 +6,7 @@ const initialState = {
     current: '',
     catering: false,
     location: false,
+    outstanding: false
   },
   shopReference: {
     current: '',
