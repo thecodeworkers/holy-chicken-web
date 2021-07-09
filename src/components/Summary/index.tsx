@@ -34,8 +34,6 @@ const Summary = ({ data, cartParam }) => {
   }
 
   const openPayment = () => {
-    console.log('abierto');
-
     dispatch(setShowModal({ paymentModal: true }))
   }
 

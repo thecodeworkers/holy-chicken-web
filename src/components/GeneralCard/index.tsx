@@ -10,7 +10,7 @@ const GeneralCard = (
     price = '7$',
     hot = null
   }
-  ) => {
+) => {
 
   return (
     <div className={styles._parent}>
@@ -23,14 +23,14 @@ const GeneralCard = (
       <div className={styles._sectionParent}>
         <p>{price}</p>
         <div className={styles._btnParent}>
-        <Button color='#118AC6' textColor='white' text='Agregar' height={'1.9rem'}></Button>
+          <Button color='#118AC6' textColor='white' text='Agregar' height={'1.9rem'}></Button>
         </div>
       </div>
 
       {
-        hot && ( <div className={styles._icon}>
-        <img src='images/icons/chilipepper.svg' alt='icono de producto picante' width='100%'></img>
-      </div> )
+        hot && (<div className={styles._icon}>
+          <img src='images/icons/chilipepper.svg' alt='icono de producto picante' width='100%'></img>
+        </div>)
       }
 
     </div>

@@ -24,7 +24,7 @@ const ResponsiveMenu = ({ show = 0, method }) => {
   }
 
   const navigation = (route: string) => {
-    if(route == '/contact') {
+    if (route == '/contact') {
       dispatch(resetModals())
       dispatch(setShowModal({ contactModal: true }))
       method()
@@ -47,7 +47,7 @@ const ResponsiveMenu = ({ show = 0, method }) => {
   }
 
   const sessionHandler = () => {
-    if(!isAuth) return openModal('loginModal')
+    if (!isAuth) return openModal('loginModal')
     dispatch(logoutUser())
     method()
     dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))

@@ -5,22 +5,22 @@ import { setShowModal } from '@store/actions'
 const ModalFrame = ({ children, separation = '5rem' }) => {
 
   const dispatch = useDispatch()
-  const { intermitence: { contactModal }} = useSelector((store: any) => store)
+  const { intermitence: { contactModal } } = useSelector((store: any) => store)
 
   const closeModal = (event: any) => {
     const { target } = event
-    if(target.id == 'close-contact') return dispatch(setShowModal({ contactModal: false }))
+    if (target.id == 'close-contact') return dispatch(setShowModal({ contactModal: false }))
   }
 
   return (
-  <>
-  <div className={contactModal ? '_parent' : '_hidden'} id='close-contact' onClick={closeModal}>
-    <div className={styles._modal}>
-      {children}
-    </div>
-  </div>
+    <>
+      <div className={contactModal ? '_parent' : '_hidden'} id='close-contact' onClick={closeModal}>
+        <div className={styles._modal}>
+          {children}
+        </div>
+      </div>
 
-  <style>{`
+      <style>{`
     ._parent {
       width: 100%;
       height: calc(100vh - ${separation});
@@ -48,8 +48,8 @@ const ModalFrame = ({ children, separation = '5rem' }) => {
       }
     }
   `}
-  </style>
-  </>
+      </style>
+    </>
   )
 }
 

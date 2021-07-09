@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { Button, Tooltip } from '@components'
+import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal, resetModals, setToast } from '@store/actions'
 import FormikConfig from './formik'
@@ -20,7 +20,7 @@ const LoginModal = () => {
 
   const closeModal = (event) => {
     const { target } = event
-    if(target.id == 'background') {
+    if (target.id == 'background') {
       dispatch(setShowModal({ loginModal: false }))
       formik.resetForm()
       dispatch(setToast('', '', 0))
@@ -28,7 +28,7 @@ const LoginModal = () => {
   }
 
   useEffect(() => {
-    if(auth?.login?.login) {
+    if (auth?.login?.login) {
       dispatch(setShowModal({ loginModal: false }))
       formik.resetForm()
     }
@@ -72,7 +72,7 @@ const LoginModal = () => {
               className={errors.password && touched.password ? styles._inputError : styles._input} />
 
             <div className={styles._imageParent} onClick={showPassword}>
-            <img src={!show ? 'images/icons/show-password.svg' : 'images/icons/hide-password.svg'}  width='18px' height='18px' />
+              <img src={!show ? 'images/icons/show-password.svg' : 'images/icons/hide-password.svg'} width='18px' height='18px' />
             </div>
           </div>
 
@@ -85,7 +85,7 @@ const LoginModal = () => {
           </div>
         </form>
 
-        <p className={styles._blackLink}  onClick={() => openModal('locationModal')}>Comprar sin registrarse</p>
+        <p className={styles._blackLink} onClick={() => openModal('locationModal')}>Comprar sin registrarse</p>
         <p className={styles._grayLink}>¿Nuevo cliente? <a onClick={() => openModal('registerModal')}>Crear Cuenta</a></p>
         <p className={styles._grayLink}>¿Olvidaste tu contraseña? <a onClick={() => openModal('forgotPasswordModal')}>Recuperar Contraseña</a></p>
       </div>

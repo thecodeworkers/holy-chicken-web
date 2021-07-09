@@ -5,7 +5,7 @@ import { ChickenLogo } from '@images/resources'
 import { ResponsiveMenu, Button } from '@components'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import { setShowModal, logoutUser, setToast, resetModals} from '@store/actions'
+import { setShowModal, logoutUser, setToast } from '@store/actions'
 import { useSelector } from 'react-redux'
 
 
@@ -41,7 +41,7 @@ const NavbarResponsive = () => {
 
   const logout = () => {
 
-    if(isAuth) {
+    if (isAuth) {
       dispatch(logoutUser())
       setShowPanel(false)
       dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
@@ -52,13 +52,12 @@ const NavbarResponsive = () => {
     setShowPanel(false)
   }
 
-
   const showedCart = (showCart) => {
     setShowCart(showCart => !showCart)
 
-    if(showCart) return  dispatch(setShowModal({ cartModal: false }))
+    if (showCart) return dispatch(setShowModal({ cartModal: false }))
 
-    if(!showCart) return  dispatch(setShowModal({ cartModal: true }))
+    if (!showCart) return dispatch(setShowModal({ cartModal: true }))
   }
 
   return (
@@ -74,8 +73,8 @@ const NavbarResponsive = () => {
             </div>
           </div>
           <div className={styles._rightSection}>
-          <div className={styles._iconsList}>
-          <div className={styles._iconParent} onClick={() => showedCart(showCart)}>
+            <div className={styles._iconsList}>
+              <div className={styles._iconParent} onClick={() => showedCart(showCart)}>
                 <Cart color='#000' />
                 {
                   cart?.number > 0 && (<div className={styles._numberParent}>
@@ -84,12 +83,12 @@ const NavbarResponsive = () => {
                 }
 
               </div>
-            <div onClick={openLoginModal}>
-              <Profile color='#000' />
-            </div>
+              <div onClick={openLoginModal}>
+                <Profile color='#000' />
+              </div>
             </div>
 
-        </div>
+          </div>
         </div>
       </nav>
 
@@ -97,7 +96,7 @@ const NavbarResponsive = () => {
         <div className={styles._buttonBlueParent} onClick={logout} >
           <Button color='#118AC6' text={isAuth ? 'Cerrar sesión' : 'Iniciar sesión'} textColor='#fff'></Button>
         </div>
-        <p className={styles._myOrders}  onClick={() => navigation('/history')} >Mis órdenes</p >
+        <p className={styles._myOrders} onClick={() => navigation('/history')} >Mis órdenes</p >
       </div>
 
       <ResponsiveMenu show={show} method={resetShow} />

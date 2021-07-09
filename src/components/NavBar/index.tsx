@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styles from './styles.module.scss'
 import { Logo } from '@images/resources'
 import { Cart, Profile, Search } from '@images/icons'

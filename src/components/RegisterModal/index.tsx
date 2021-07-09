@@ -30,7 +30,7 @@ const RegisterModal = () => {
   }
 
   useEffect(() => {
-    if(auth.register?.registerCustomer) {
+    if (auth.register?.registerCustomer) {
       dispatch(setShowModal({ registerModal: false }))
       formik.resetForm()
     }
@@ -63,13 +63,13 @@ const RegisterModal = () => {
               <div className={styles._inputParent}>
                 <label>Nombre</label>
                 <input
-                placeholder='Nombre'
-                type='text'
-                name='firstName'
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.firstName}
-                className={errors.firstName && touched.firstName ? styles._inputError : styles._input} />
+                  placeholder='Nombre'
+                  type='text'
+                  name='firstName'
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.firstName}
+                  className={errors.firstName && touched.firstName ? styles._inputError : styles._input} />
               </div>
             </div>
 
@@ -99,7 +99,7 @@ const RegisterModal = () => {
               onBlur={formik.handleBlur}
               value={formik.values.phone}
               className={errors.phone && touched.phone ? styles._inputError : styles._input}
-              />
+            />
           </div>
 
           <div className={styles._inputParent}>
@@ -112,13 +112,13 @@ const RegisterModal = () => {
               onBlur={formik.handleBlur}
               value={formik.values.email}
               className={errors.email && touched.email ? styles._inputError : styles._input}
-               />
+            />
           </div>
 
           <div className={`${styles._row} ${styles._marginTop}`}>
             <div className={styles._halfWidth}>
               <div className={styles._inputParent} onFocus={tooltipTimer} onBlur={() => setShowTooltip(false)}>
-              <Tooltip paddinHorizontal={1} top='-75%'show={showTooltip}/>
+                <Tooltip paddinHorizontal={1} top='-75%' show={showTooltip} />
                 <label>Contraseña</label>
                 <input
                   type={!show ? 'password' : 'text'}
@@ -128,7 +128,7 @@ const RegisterModal = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
                   className={errors.password && touched.password ? styles._inputError : styles._input}
-                  />
+                />
                 <div className={styles._imageParent} onClick={showPassword}>
                   <img src={!show ? 'images/icons/show-password.svg' : 'images/icons/hide-password.svg'} width='18px' height='18px' />
                 </div>
@@ -147,7 +147,7 @@ const RegisterModal = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.confirmPassword}
                   className={errors.confirmPassword && touched.confirmPassword ? styles._inputError : styles._input}
-                  />
+                />
                 <div className={styles._imageParent} onClick={showPasswordTwo}>
                   <img src={!showTwo ? 'images/icons/show-password.svg' : 'images/icons/hide-password.svg'} width='18px' height='18px' />
                 </div>
@@ -161,7 +161,7 @@ const RegisterModal = () => {
             </div>
 
             <div className={styles._halfWidth}>
-              <Button color='#000' textColor='#FFF' text='Confirmar' type='submit' flag/>
+              <Button color='#000' textColor='#FFF' text='Confirmar' type='submit' flag />
             </div>
           </div>
         </form>

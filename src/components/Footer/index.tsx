@@ -1,6 +1,6 @@
 import styles from './styles.module.scss'
 import React from 'react'
-import { ChickenLogo, Logo } from '@images/resources'
+import { ChickenLogo } from '@images/resources'
 import { Insta, WhatsApp, Twitter } from '@images/icons'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
@@ -18,7 +18,6 @@ const Footer = ({ data, content }) => {
       router.push(route)
     }
   }
-
 
   return content ? (
     <>
