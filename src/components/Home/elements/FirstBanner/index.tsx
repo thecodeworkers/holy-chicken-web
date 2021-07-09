@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { GeneralCard, Button, Stepper } from '@components'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { setCurrentProduct, setLoader, setShowModal } from '@store/actions'
+import { setCurrentProduct, setShowModal } from '@store/actions'
 
 const FirstBanner = ({ data, content, resource }) => {
 
@@ -44,9 +44,8 @@ const FirstBanner = ({ data, content, resource }) => {
     determinateCurrent()
   }
 
-  const navigation = (route: string, loader = true) => {
+  const navigation = (route: string) => {
     if (route != router.pathname) {
-      if (loader) dispatch(setLoader(true))
       router.push(route)
     }
   }
@@ -111,7 +110,7 @@ const FirstBanner = ({ data, content, resource }) => {
                         description={item?.description}
                         price={item?.price}
                         hot={spicy}
-                         />
+                      />
                     </div>
                   )
 

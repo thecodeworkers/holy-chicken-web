@@ -1,4 +1,4 @@
-import { useEffect, useState  } from 'react'
+import { useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button, Toast } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -29,7 +29,6 @@ const ForgotPasswordModal = () => {
     }
 
   }, [auth?.emailSended])
-
 
   const openChangePassword = (  ) => {
     dispatch(resetModals())

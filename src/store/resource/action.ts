@@ -1,8 +1,9 @@
 import { SET_RESOURCES, } from './action-types'
-import { actionObject, formatWooCommerceAmount, orderBy, productFilter } from '../../utils'
+import { actionObject, orderBy, productFilter, WooCommerceClient } from '../../utils'
 import { pages, resources } from '../../graphql/query'
 import { GET_PAGES } from '@store/page/action-types'
 import { SEARCH_PRODUCTS, SET_FILTER, CLEAN_FILTER } from './action-types'
+import { getCart } from '@store/cart/action'
 
 
 export const getResources: any = (consult: string = '') => async (dispatch, getState) => {
@@ -17,9 +18,11 @@ export const getResources: any = (consult: string = '') => async (dispatch, getS
   }
 
   const resource = await resources()
+  const allCountries = await WooCommerceClient('data/countries')
   resource['outstanding'] = orderBy(resource.products, 'totalSales', 'asc').slice(0, 3)
   resource['shop'] = resource.products
-
+  resource['allCountries'] = allCountries
+  dispatch(getCart())
   dispatch(actionObject(SET_RESOURCES, { ...resource, productsCopy: resource?.products }))
 }
 
@@ -60,5 +63,5 @@ export const orderProducts: any = (value) => async (dispatch, getState) => {
 
 
 export const cleanFilter: any = (value) => async (dispatch, getState) => {
-  dispatch(actionObject(CLEAN_FILTER, { }))
+  dispatch(actionObject(CLEAN_FILTER, {}))
 }

@@ -1,21 +1,41 @@
 import React, { useState } from 'react'
 import styles from './styles.module.scss'
 import { useDispatch } from 'react-redux'
-import { setProductsNumber, updateQuantity } from '@store/actions'
+import { updateQuantity } from '@store/actions'
 
-const CountProduct = ({ productKey = '', stock = 0, quantity = 1 }) => {
+const CountProduct = ({
+  productKey = '',
+  stock = 0,
+  quantity = 1,
+  fixed = false,
+  changeNumber = null
+}) => {
   const dispatch = useDispatch()
   const [productNumber, setProductNumber] = useState(quantity)
 
   const aumented = () => {
-    if(productNumber < stock) setProductNumber(quantity + 1)
-    if (productKey) dispatch(updateQuantity(productKey, 'add'))
+    if (!fixed) {
+      if (productNumber < stock) setProductNumber(quantity + 1)
+      if (productKey) dispatch(updateQuantity(productKey, 'add'))
+    } else {
+      if (productNumber < stock) {
+        setProductNumber((quantity) => quantity + 1)
+        if (changeNumber) changeNumber('add')
+      }
+    }
   }
 
   const decrement = () => {
-    if (quantity >= 2) {
-      setProductNumber(quantity - 1)
-      if (productKey) dispatch(updateQuantity(productKey, 'rest'))
+    if (!fixed) {
+      if (quantity >= 2) {
+        setProductNumber(quantity - 1)
+        if (productKey) dispatch(updateQuantity(productKey, 'rest'))
+      }
+    } else {
+      if (productNumber >= 2) {
+        setProductNumber((quantity) => quantity - 1)
+        if (changeNumber) changeNumber('remove')
+      }
     }
   }
 

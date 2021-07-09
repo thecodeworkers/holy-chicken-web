@@ -32,18 +32,18 @@ const Home = ({ content, data, resource }) => {
         <title>Holy Chicken</title>
       </Head>
 
-      <Navbar data={data?.header}/>
+      <Navbar data={data?.header} />
       <IndividualProductModal />
       <CartModal />
       {content ? (<>
-      <FirstBanner data={content?.firstBanner} content={content?.outstanding} resource={resource}/>
-      <SocialSwipe />
-      <Catering publicity={content?.secondBanner} reference={cateringRef} />
-      <SecondBanner data={content?.thirdBanner} reference ={locationRef}/>
-      <ThirdBanner data={content?.fourthBanner} />
+        <FirstBanner data={content?.firstBanner} content={content?.outstanding} publicity={content?.secondBanner} resource={resource} />
+        <SocialSwipe />
+        <Catering publicity={content?.secondBanner} reference={cateringRef} />
+       <SecondBanner data={content?.thirdBanner} reference ={locationRef}/>
+        <ThirdBanner data={content?.fourthBanner} />
       </>
-    ) : null}
-     <Footer data={data?.footer} content={data?.socialNetworks}  />
+      ) : null}
+      <Footer data={data?.footer} content={data?.socialNetworks} />
     </div>
   )
 }

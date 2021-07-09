@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styles from './styles.module.scss'
 import { Logo } from '@images/resources'
 import { Cart, Profile, Search } from '@images/icons'
@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import Button from '../Button'
 import { NavbarResponsive } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal, logoutUser, resetModals, setToast, setLoader } from '@store/actions'
+import { setShowModal, logoutUser, resetModals, setToast } from '@store/actions'
 
 const NavBar = ({ data }) => {
 
@@ -26,7 +26,6 @@ const NavBar = ({ data }) => {
       return
     }
     if (route != router.pathname) {
-      if (loader) dispatch(setLoader(true))
       router.push(route)
     }
   }
@@ -113,7 +112,7 @@ const NavBar = ({ data }) => {
                         <Button color='#118AC6' text={!isAuth ? 'Iniciar sesión' : 'Cerrar sesión'} textColor='#fff' ></Button>
                       </div>
                       {!isAuth && <p>¿Nuevo cliente? <a className={styles._link} onClick={() => openModal('registerModal')}> Crear Cuenta </a></p>}
-                      <p>Mis órdenes</p >
+                      <p onClick={() => navigation('/history')} className={styles._myOrders}>Mis órdenes</p >
                     </div>
                   </div>
                 }

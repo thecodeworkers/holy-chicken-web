@@ -1,0 +1,87 @@
+@import '../../../../../public/styles/index.scss';
+
+._row {
+  display: flex;
+  position: relative;
+
+  &:not(:first-child) {
+    margin-top: 1.25rem;
+  }
+  padding: 0.8rem;
+
+  &:last-child {
+    margin-bottom: 2rem;
+  }
+}
+
+._columnOne {
+  width: 50%;
+  padding: 0.6rem;
+  box-sizing: border-box;
+}
+
+._imgParent {
+  display: flex;
+}
+
+._img {
+  margin: 0 0.7rem;
+}
+
+._columnTwo {
+  width: 25%;
+  padding: 0.6rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+._columnThree {
+  width: 25%;
+  padding: 0.6rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+}
+
+._closeParent {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+._subtitle {
+  font-family: $montserratRegular;
+  font-size: $montserratRegular16;
+
+}
+
+._title {
+  font-family: $blackerTextHeavy;
+  font-size: $blackerTextHeavy40;
+}
+
+._rowTitle {
+  font-family: $blackerTextHeavy;
+  margin-bottom: 0.3rem;
+}
+
+._rowText {
+  font-family: $montserratRegular;
+  font-size: $montserratRegular14;
+  color: $gray;
+}
+
+._price {
+  font-family: $montserratRegular;
+}
+
+._emptyCart {
+  & p {
+    font-family: $montserratRegular;
+    font-size: $montserratRegular18;
+    color: $gray;
+    text-align: center;
+  }
+}

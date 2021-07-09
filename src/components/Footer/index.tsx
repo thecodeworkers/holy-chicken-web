@@ -1,6 +1,6 @@
 import styles from './styles.module.scss'
 import React from 'react'
-import { ChickenLogo, Logo } from '@images/resources'
+import { ChickenLogo } from '@images/resources'
 import { Insta, WhatsApp, Twitter } from '@images/icons'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,15 +12,6 @@ const Footer = ({ data, content }) => {
   const dispatch = useDispatch()
   const { scrollReference } = useSelector((state: any) => state)
 
-  // const navigation = (route: string, loader = true, reference = null, key = '') => {
-  //   if (route == '/login') return dispatch(setShowModal({ loginModal: true }))
-  //   if (route == '/contact') return dispatch(setShowModal({ contactModal: true }))
-  //   if (router.pathname != route) {
-  //     if (loader) dispatch(setLoader(true))
-  //     router.push(route)
-  //   }
-  // }
-
   const navigation = (...args) => {
     console.log(args);
 
@@ -31,9 +22,6 @@ const Footer = ({ data, content }) => {
       if (args[2]) dispatch(seletedReference({ [args[3]]: { current: args[2] } }))
       router.push(args[0])
 
-      return ;
-    }
-
     if (args[2]) {
        dispatch(seletedReference({
          [args[3]]: {
@@ -43,13 +31,13 @@ const Footer = ({ data, content }) => {
        }))
      }
   }
+}
   const clickOption = (route, loader: boolean = false, reference = null, key = '') => {
 
 
     navigation(route, loader, reference, key)
     // onPress()
   }
-
 
   return content ? (
     <>

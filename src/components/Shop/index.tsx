@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
-import { Navbar, ModalFrame, ModalContact, LoginModal, RegisterModal, ChangePasswordModal, CartModal } from '@components'
+import { Navbar, ModalContact, LoginModal, RegisterModal, ChangePasswordModal, CartModal } from '@components'
 import Footer from '../Footer'
 import { FirstBanner } from './elements'
 import ForgotPasswordModal from '../ForgotPasswordModal'
+import { useDispatch, useSelector } from 'react-redux'
+import { setShowModal } from '@store/actions'
 
 const Shop = ({ content, data, filters, backup }) => {
+
+  const dispatch = useDispatch()
+
+  const { intermitence } = useSelector((state: any) => state)
+
+  useEffect(() => {
+    if (intermitence?.showLocationModal) dispatch(setShowModal({ locationModal: true }))
+  }, [])
 
   return (
     <div>
@@ -21,11 +31,9 @@ const Shop = ({ content, data, filters, backup }) => {
       <ChangePasswordModal />
       {content ? (<>
         <FirstBanner content={content} filters={filters} backup={backup} />
-        {/* <SecondBanner data={content?.thirdBanner} />
-      <ThirdBanner data={content?.fourthBanner} /> */}
       </>
       ) : null}
-      <Footer data={data?.footer} content={data?.socialNetworks}  />
+      <Footer data={data?.footer} content={data?.socialNetworks} />
     </div>
   )
 }

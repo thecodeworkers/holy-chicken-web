@@ -1,0 +1,60 @@
+@import '../../../../../public/styles/index.scss';
+
+._row {
+  position: relative;
+  padding: 0.8rem;
+
+  &:not(:first-child) {
+    margin-top: 1.25rem;
+  }
+
+  &:last-child {
+    margin-bottom: 2rem;
+  }
+}
+
+._closeParent {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+._rowTitle {
+  font-family: $blackerTextHeavy;
+  margin-bottom: 0.7rem;
+  margin-left: 1.8rem;
+}
+
+._rowText {
+  font-family: $montserratRegular;
+  font-size: $montserratRegular14;
+  color: $gray;
+  margin-left: 1.8rem;
+}
+
+._countParent {
+  margin-left: 1.8rem;
+  margin-right: 2.5rem;
+}
+
+._price {
+  font-family: $montserratBold;
+}
+
+._priceParent {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+._emptyCart {
+  margin-bottom: 2rem;
+
+  & p {
+    font-family: $montserratRegular;
+    font-size: $montserratRegular18;
+    color: $gray;
+    text-align: center;
+  }
+}

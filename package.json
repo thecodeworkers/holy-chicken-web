@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@badrap/bar-of-progress": "^0.1.2",
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "antd": "^4.15.5",
     "axios": "^0.21.1",
     "formik": "^2.2.8",

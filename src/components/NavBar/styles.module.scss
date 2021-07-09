@@ -154,9 +154,17 @@
   cursor: pointer;
 }
 
-
 ._responsive {
   display: none;
+}
+
+._myOrders {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-position: under;
+  }
 }
 
 @include responsive(lg) {
@@ -167,6 +175,5 @@
 
   ._main {
     display: none;
-  }
-
+   }
 }
