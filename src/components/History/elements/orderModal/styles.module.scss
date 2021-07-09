@@ -29,7 +29,7 @@
 }
 
 ._footerParent {
-  padding: 1.5rem;
+  padding: 1.6rem;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -80,6 +80,10 @@
 
 ._columnOne {
   width: 35%;
+
+  & img {
+    margin-left: 15%;
+  }
 }
 
 ._columnTwo {
@@ -115,4 +119,21 @@
 ._imgParent {
   cursor: pointer;
   display: inline-block;
+}
+
+
+@include responsive(lg) {
+  ._background {
+    @include blurBackgroundResponsive();
+    height:100%;
+  }
+
+  ._card {
+    width: 90%;
+    margin-top: 3.75rem;
+  }
+
+  ._products {
+    max-height: 250px;
+  }
 }

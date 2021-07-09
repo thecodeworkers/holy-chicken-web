@@ -76,6 +76,16 @@
   position: relative;
 }
 
+
+@mixin circleResponsive($background) {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: solid 3px $black;
+  background-color: $background;
+  position: relative;
+}
+
 ._circle {
   @include circle($white);
 }
@@ -96,7 +106,6 @@
   top: 170%;
   left: -75%;
 }
-
 
 ._circles {
   display: flex;
@@ -209,8 +218,78 @@
   }
 }
 
-
 ._headerText {
   font-family: $montserratBold;
   font-size: $montserratBold14;
+}
+
+._responsiveChicken, ._panelParent, ._chickenLabel{
+  display: none;
+}
+
+@include responsive(lg) {
+  ._rightSide {
+    display: none;
+  }
+
+  ._leftSide {
+    width: 100%;
+  }
+
+  ._circle {
+    @include circleResponsive($white);
+  }
+
+  ._circleSelected {
+    @include circleResponsive($black);
+  }
+
+  ._labelParent {
+    display: none;
+  }
+
+  ._line {
+    width: 100%;
+  }
+
+  ._chickenParent {
+    display: none
+  }
+
+  ._responsiveChicken {
+    width: 8rem;
+    display: block;
+  }
+
+  ._lineParent {
+    flex-direction: column;
+    margin: 3rem 0 4rem 0;
+  }
+
+  ._parent {
+    padding-top: 4.5rem;
+    height: auto;
+    padding-bottom: 0;
+  }
+
+  ._btnParent {
+    margin-right: auto;
+  }
+
+  ._chickenLabel {
+    font-family: $montserratBold;
+    font-size: $montserratBold16;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  ._panelParent, ._chickenLabel {
+    display: block;
+  }
+
+  ._panelParent {
+    position: relative;
+    margin-top: 11rem;
+  }
+
 }

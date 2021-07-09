@@ -4,7 +4,7 @@ import Head from 'next/head'
 import styles from './styles.module.scss'
 import { Chiken } from '@images/resources'
 import { Search } from '@images/icons';
-import { OpenModal, OrderModal } from './elements'
+import { OpenModal, OrderModal, ResponsiveHistory } from './elements'
 
 const circles = [
   { label: 'Preparando pedido' },
@@ -67,9 +67,15 @@ const History = ({ data }) => {
   const [ currentStep, setCurrentStep ] = useState(5)
   const [ show, setShow ] = useState(false)
   const [ showOrder, setShowOrder ] = useState(false)
+  const [ label, setLabel ] = useState('Preparando pedido')
 
   const showModal = () => setShow(show => !show)
   const showOrderModal = () => setShowOrder(showOrder => !showOrder)
+
+  const changeStep = (step, label) => {
+    setCurrentStep(step)
+    setLabel(label)
+  }
 
   return (
     <>
@@ -96,7 +102,14 @@ const History = ({ data }) => {
           </div>
 
           <div className={styles._lineParent}>
+          <div className={styles._responsiveChicken}>
+            <Chiken id='chicken-one' />
+            </div>
+
+            <p className={styles._chickenLabel}>{label}</p>
+
             <div className={styles._line}>
+
               <div className={styles._pointsParent}>
                 <div className={styles._circles}>
                   {
@@ -106,7 +119,7 @@ const History = ({ data }) => {
 
                       return (
                         <div key={index}>
-                          <div className={itemIndex == currentStep ? styles._circleSelected : styles._circle} >
+                          <div className={itemIndex == currentStep ? styles._circleSelected : styles._circle}  onClick={() => changeStep(itemIndex, res.label)}>
 
                             <div className={styles._labelParent}>
                               <p className={styles._text}>{res.label}</p>
@@ -115,7 +128,7 @@ const History = ({ data }) => {
                             {
                               itemIndex == currentStep &&
                               <div className={styles._chickenParent}>
-                                <Chiken />
+                                <Chiken id='chicken-two'/>
                               </div>
                             }
                           </div>
@@ -193,9 +206,13 @@ const History = ({ data }) => {
         </div>
       </div>
 
+      <div className={styles._panelParent}>
+        <ResponsiveHistory modalMethod={showOrderModal}/>
+      </div>
+
       <Footer data={data?.footer} content={data?.socialNetworks}  />
       <OpenModal show={show} method={showModal}/>
-      <OrderModal show={showOrder} method={showOrderModal} />
+      <OrderModal show={showOrder} method={showOrderModal}  />
     </>
   )
 
