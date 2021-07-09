@@ -7,7 +7,7 @@ import { filter } from '@utils'
 
 const BillingData = () => {
 
-  const { intermitence: { paymentModal }, resource: { general: { general }, allCountries } } = useSelector((state: any) => state)
+  const { resource: { allCountries }, paymentStep: { delivery_data } } = useSelector((state: any) => state)
   const dispatch = useDispatch()
   const formik = FormikConfig(dispatch)
   const { errors, touched } = formik
@@ -21,6 +21,16 @@ const BillingData = () => {
     setStates(newStates || [])
   }
 
+  const setDeliveryData = (erase = false) => {
+    for (let key in formik.values) formik.setFieldValue(key, (erase) ? '' : delivery_data?.form[key] || '')
+    if (erase) setDefaults('VE')
+  }
+
+  useEffect(() => {
+    if (dataType === 'same') setDeliveryData()
+    if (dataType === 'none') setDeliveryData(true)
+  }, [dataType])
+
   useEffect(() => {
     setDefaults('VE')
   }, [])
@@ -32,35 +42,36 @@ const BillingData = () => {
       </div>
       <form onSubmit={formik.handleSubmit}>
         <div className={styles._rightMain}>
+          {delivery_data?.type !== 'pickup' && (
+            <div className={styles._firstRow}>
+              <div className={styles._deliveryType}>
+                <div className={styles._radioContainer}>
 
-          <div className={styles._firstRow}>
-            <div className={styles._deliveryType}>
-              <div className={styles._radioContainer}>
-
-                <div className={styles._checkParent} >
-                  <input type='radio'
-                    value={'same'}
-                    checked={dataType === 'same'}
-                    className={styles._radioBtn}
-                    onChange={(check) => { setDataType(check.currentTarget.value) }}>
-                  </input>
-                  <p className={styles._radioTitle}>Utilizar los mismos datos de delivery</p>
+                  <div className={styles._checkParent} >
+                    <input type='radio'
+                      value={'same'}
+                      checked={dataType === 'same'}
+                      className={styles._radioBtn}
+                      onChange={(check) => { setDataType(check.currentTarget.value) }}>
+                    </input>
+                    <p className={styles._radioTitle}>Utilizar los mismos datos de delivery</p>
+                  </div>
                 </div>
-              </div>
-              <div className={styles._radioContainer}>
+                <div className={styles._radioContainer}>
 
-                <div className={styles._checkParent} >
-                  <input type='radio'
-                    value={'none'}
-                    checked={dataType === 'none'}
-                    className={styles._radioBtn}
-                    onChange={(check) => { setDataType(check.currentTarget.value) }}>
-                  </input>
-                  <p className={styles._radioTitle}>Ingresar otros datos</p>
+                  <div className={styles._checkParent} >
+                    <input type='radio'
+                      value={'none'}
+                      checked={dataType === 'none'}
+                      className={styles._radioBtn}
+                      onChange={(check) => { setDataType(check.currentTarget.value) }}>
+                    </input>
+                    <p className={styles._radioTitle}>Ingresar otros datos</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
           <>
             <div className={styles._inputRow}>
               <div className={styles._halfWidth} >
@@ -97,13 +108,13 @@ const BillingData = () => {
                 <div className={styles._inputParent}>
                   <label>Dirección (zona, urbanzación, calle, casa/edificio)</label>
                   <input
-                    name='address'
+                    name='address_1'
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.address}
+                    value={formik.values.address_1}
                     placeholder='Introducir dirección'
                     type='text'
-                    className={errors.address && touched.address ? styles._inputError : styles._input} />
+                    className={errors.address_1 && touched.address_1 ? styles._inputError : styles._input} />
                 </div>
               </div>
             </div>
@@ -153,7 +164,7 @@ const BillingData = () => {
                     className={errors.state && touched.state ? styles._inputError : styles._inputSelect}>
                     {states?.length ? states.map((country, index) =>
                       <option key={index} value={country.code}>{country.name}</option>
-                    ) : <option>No Disponible</option>}
+                    ) : <option value=''>No Disponible</option>}
                   </select>
                 </div>
               </div>
@@ -188,8 +199,6 @@ const BillingData = () => {
               </div>
             </div>
           </>
-
-
           <div className={styles._buttonContainer}>
             <div className={styles._btnParent}>
               <Button
