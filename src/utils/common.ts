@@ -12,11 +12,17 @@ export const paginate = (items: Array<any>, page_number: number = 1, page_size: 
 }
 
 export const scrolling = (reference) => {
-  if (reference) {
+
+  if(reference) {
     const target = reference.current;
     window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
   }
 }
+
+export const scrollTo = (ref: any) => {
+  window.scrollTo({ top: ref.offsetTop, behavior: 'smooth' });
+}
+
 export const createMarkup = (text) => { return { __html: text }; }
 
 export const isRetina = () => {

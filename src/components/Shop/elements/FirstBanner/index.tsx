@@ -11,7 +11,7 @@ import SideFilterMenu from '../SideFilterMenu';
 import { useDispatch } from 'react-redux'
 import { searchProducts, setShowModal, setCurrentProduct, resetStore } from '@store/actions'
 
-const FirstBanner = ({ content, backup }: any) => {
+const FirstBanner = ({ content, backup, reference}: any) => {
 
   const dispatch = useDispatch()
   const router = useRouter()
@@ -46,8 +46,8 @@ const FirstBanner = ({ content, backup }: any) => {
 
   return (
     <>
-      <div className={styles._content}>
-        <div className={styles._main}>
+      <div className={styles._content}ref={reference}>
+        <div className={styles._main} >
           <div className={styles._header}>
             <p className={styles._title}>Bienvenido al cielo</p>
             <p className={styles._subtitle}>Arma tu pedacito de cielo como tú quieras.</p>

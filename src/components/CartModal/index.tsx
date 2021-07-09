@@ -42,7 +42,7 @@ const CartModal = () => {
       <div className={`_generalCard ${styles._modal}`} >
         <div className={styles._header}>
           <p className={styles._title}>Mi Pedido</p>
-          <p className={styles._subtitle}>¡Consume $00.00 más y el delivery es gratis!</p>
+          <p className={styles._subtitle}>¡Free delivery en Chacao y Las Mercedes!</p>
         </div>
         <div className={styles._body}>
 

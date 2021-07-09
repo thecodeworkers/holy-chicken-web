@@ -218,7 +218,7 @@ const DeliveryForm = () => {
                 value={deliveryform.values.municipality}
                 className={errors.municipality && touched.municipality ? styles._inputError : styles._inputSelect}>
                 {regions?.length ? regions.map((region, index) =>
-                  <option key={index} value={region.key}>{region.name} ${getShipping(region.key).cost}</option>
+                  <option key={index} value={region.key}>{region.name}  &nbsp;  ${getShipping(region.key).cost}</option>
                 ) : <option>No Disponible</option>}
               </select>
             </div>
