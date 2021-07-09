@@ -1,19 +1,29 @@
 import styles from './styles.module.scss'
 import { Home } from '@images/icons'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetModals, setShowModal, setStep } from '@store/actions'
+import { resetModals, setShowModal, setStep, updateShippingMethod } from '@store/actions'
 import { useRouter } from 'next/router'
+import { filter } from '@utils'
 
 const LocationModal = () => {
 
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const { intermitence: { locationModal }, resource: { general: { general } }, paymentStep: { delivery_data } } = useSelector((state: any) => state)
+  const { intermitence: { locationModal }, resource: { general: { general } }, paymentStep: { delivery_data }, cart: { cartProducts } } = useSelector((state: any) => state)
 
   const closeModal = (event) => {
     const { target } = event
     // if (target.id == 'location-modal') dispatch(setShowModal({ locationModal: false }))
+  }
+
+  const getShipping = (label) => {
+    if (cartProducts?.availableShippingMethods) {
+      const shippingMethods = cartProducts?.availableShippingMethods[0]?.rates || []
+      const filterMethod = filter(shippingMethods, label, 'label')
+      if (filterMethod[0]) return filterMethod[0]
+    }
+    return ''
   }
 
   const navigate = (value) => {
@@ -21,7 +31,11 @@ const LocationModal = () => {
     if (router.pathname != '/shop') router.push('/shop')
     dispatch(setShowModal({ showLocationModal: false }))
     dispatch(setStep({ delivery_data: { ...delivery_data, location: value } }))
+    console.log(getShipping('Pickup'))
+    dispatch(updateShippingMethod(getShipping('Pickup')?.id))
   }
+
+
 
   return (
     <div className={locationModal ? styles._background : styles._hidden} id='location-modal' onClick={closeModal}>

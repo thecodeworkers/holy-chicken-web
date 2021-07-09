@@ -5,7 +5,7 @@ import { UserData, DeliveryData, PaymentMethod, BillingData, LoadingModal } from
 import { setShowModal, setStep } from '@store/actions'
 const PaymentModal = () => {
 
-  const { intermitence: { paymentModal }, paymentStep: { user_data, delivery_data, step, payment_data, confirmProcess } } = useSelector((state: any) => state)
+  const { intermitence: { paymentModal }, paymentStep: { user_data, delivery_data, step, payment_data, confirmProcess }, cart: { cartProducts } } = useSelector((state: any) => state)
   const dispatch = useDispatch()
   const [currentStep, setCurrentStep] = useState(step)
   useEffect(() => {
@@ -13,14 +13,29 @@ const PaymentModal = () => {
   }, [step])
 
   const newStep = (newData) => {
-    dispatch(setStep({ step: newData }))
+    switch (newData) {
+      case 2:
+        if (user_data?.valid)
+          dispatch(setStep({ step: newData }))
+        break;
+      case 3:
+        if (delivery_data?.valid)
+          dispatch(setStep({ step: newData }))
+        break;
+      case 4:
+        if (payment_data?.valid)
+          dispatch(setStep({ step: newData }))
+        break;
+      default:
+        dispatch(setStep({ step: newData }))
+        break;
+    }
   }
 
   const slider = (param) => {
     switch (param) {
       case 1:
         return <UserData />
-
       case 2:
         return <DeliveryData />
 
@@ -91,7 +106,7 @@ const PaymentModal = () => {
             </div>
             <div className={styles._totalParent}>
               <p className={styles._parentTitle}>Total</p>
-              <p className={styles._parentTitle}>24$</p>
+              <p className={styles._parentTitle}>{cartProducts.total}</p>
             </div>
           </div>
           <div className={styles._rightSection}>

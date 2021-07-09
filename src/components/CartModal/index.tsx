@@ -21,7 +21,7 @@ const CartModal = () => {
   }
 
   const nodes = cart?.cartProducts?.contents?.nodes ?? []
-  const total = cart?.cartProducts?.total ?? "$0.00"
+  const total = cart?.cartProducts?.subtotal ?? "$0.00"
 
   const deleteItem = (dataItem: any) => {
     const { key } = dataItem

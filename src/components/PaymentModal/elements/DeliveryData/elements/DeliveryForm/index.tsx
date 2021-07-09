@@ -25,6 +25,8 @@ const DeliveryForm = () => {
     const filterCities = filter(city, city?.name, 'name')
     setRegions(filterCities[0].region?.content || [])
     deliveryform.setFieldValue('municipality', filterCities[0].region?.content[0]?.name)
+    const shipping = getShipping(filterCities[0].region?.content[0]?.key)?.id
+    dispatch(updateShippingMethod(shipping))
   }
 
   const setRegion = (value) => {
