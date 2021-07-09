@@ -1,0 +1,79 @@
+@import '../../../../../public/styles/index.scss';
+
+._panel {
+  background-color: $pampas;
+  padding: 2rem;
+  box-sizing: border-box;
+  border-radius: 2.375rem 2.375rem 0 0;
+}
+
+._title {
+  font-family: $blackerTextHeavy;
+  font-size: $blackerTextHeavy22;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+
+._columnTwo {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: 3%;
+}
+
+._rowTitle {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+}
+
+._fieldParent {
+  position: relative;
+  width: 100%;
+  color: $gray;
+
+  & label {
+    padding-left: 0.7rem;
+    font-family: $montserratRegular;
+    font-size: $montserratBold16;
+  }
+
+  &:nth-child(2) {
+    margin: 1.2rem 0;
+  }
+}
+
+._searchInput {
+  @include generalInput($alto);
+  font-size: $montserratBold16;
+  height: 2.3rem;
+  background-color: $white
+}
+
+._imageParent {
+  position: absolute;
+  cursor: pointer;
+  right: 0.8rem;
+  top: 18px;
+}
+
+._row {
+  display: flex;
+  padding: 0.6rem 0;
+  align-items: center;
+
+  & div {
+    width: 25%;
+    text-align: center;
+    font-family: $montserratRegular;
+    font-size: $montserratBold14;
+  }
+}
+
+._headerText {
+  font-family: $montserratBold;
+  font-size: $montserratBold14;
+}
