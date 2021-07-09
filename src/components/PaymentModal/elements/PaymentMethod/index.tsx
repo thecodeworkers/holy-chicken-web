@@ -8,7 +8,7 @@ import { Phone, Mail } from '@images/icons'
 
 const PaymentMethod = () => {
 
-  const { intermitence: { paymentModal }, resource: { general: { general }, paymentMethods }, paymentStep: { payment_data } } = useSelector((state: any) => state)
+  const { resource: { paymentMethods }, paymentStep: { payment_data } } = useSelector((state: any) => state)
 
   const formik = FormikConfig()
   const [paymentSelected, setPaymentSelected] = useState('')
@@ -18,15 +18,23 @@ const PaymentMethod = () => {
     return data?.description?.split('/')
   }
 
-  const selectedMethod = (e, item) => {
+  const selectedMethod = (e, item, id) => {
     setPaymentSelected(item)
-    dispatch(setStep({ payment_data: { ...payment_data, type: item } }))
+    dispatch(setStep({ payment_data: { ...payment_data, ...{ type: item, paymentMethod: id } } }))
     return formik.handleChange(e)
   }
 
   const NextStep = () => {
     if (paymentSelected) dispatch(setStep({ step: 4 }))
   }
+
+  const setDefaultForm = () => {
+    if (payment_data?.type) setPaymentSelected(payment_data.type)
+  }
+
+  useEffect(() => {
+    setDefaultForm()
+  }, [])
 
   return (
     <>
@@ -49,7 +57,7 @@ const PaymentMethod = () => {
                           name='paymentMethod'
                           className={styles._radioBtn}
                           checked={paymentSelected === res.title}
-                          onChange={(e) => selectedMethod(e, res.title)}>
+                          onChange={(e) => selectedMethod(e, res.title, res.id)}>
                         </input>
                         <div className={styles._addressDescription}>
 
@@ -96,11 +104,11 @@ const PaymentMethod = () => {
                 </div>
               </div>
               <div className={styles._advices}>
-              <p className={styles._advicesItem} >No olvide colocar, según la forma de pago lo siguiente:</p>
-              <p className={styles._advicesItemBold}>- Pago móvil, transferencia o Zelle:</p>
-              <p className={styles._advicesItem} >Debe verse legible el número de confirmación y banco.</p>
-              <p className={styles._advicesItemBold}>- Efectivo:</p>
-              <p className={styles._advicesItem} >Debe verse legible el número de serie del billete.</p>
+                <p className={styles._advicesItem} >No olvide colocar, según la forma de pago lo siguiente:</p>
+                <p className={styles._advicesItemBold}>- Pago móvil, transferencia o Zelle:</p>
+                <p className={styles._advicesItem} >Debe verse legible el número de confirmación y banco.</p>
+                <p className={styles._advicesItemBold}>- Efectivo:</p>
+                <p className={styles._advicesItem} >Debe verse legible el número de serie del billete.</p>
               </div>
             </div>
 

@@ -15,9 +15,11 @@ cart {
   availableShippingMethods {
     rates {
       id
+      instanceId
       label
+      methodId
+      cost
     }
-    supportsShippingCalculator
   }
   chosenShippingMethods
   contents(first: 1000000) {

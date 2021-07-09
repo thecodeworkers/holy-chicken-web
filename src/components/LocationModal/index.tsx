@@ -1,7 +1,7 @@
 import styles from './styles.module.scss'
 import { Home } from '@images/icons'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetModals, setShowModal } from '@store/actions'
+import { resetModals, setShowModal, setStep } from '@store/actions'
 import { useRouter } from 'next/router'
 
 const LocationModal = () => {
@@ -9,17 +9,18 @@ const LocationModal = () => {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const { intermitence: { locationModal }, resource: { general: { general } } }= useSelector((state: any) => state)
+  const { intermitence: { locationModal }, resource: { general: { general } }, paymentStep: { delivery_data } } = useSelector((state: any) => state)
 
   const closeModal = (event) => {
     const { target } = event
     // if (target.id == 'location-modal') dispatch(setShowModal({ locationModal: false }))
   }
 
-  const navigate = () => {
+  const navigate = (value) => {
     dispatch(resetModals())
-    if(router.pathname != '/shop') router.push('/shop')
+    if (router.pathname != '/shop') router.push('/shop')
     dispatch(setShowModal({ showLocationModal: false }))
+    dispatch(setStep({ delivery_data: { ...delivery_data, location: value } }))
   }
 
   return (
@@ -29,9 +30,9 @@ const LocationModal = () => {
 
         <div className={styles._cardsParent}>
           {
-            general.addresses.map((item, index) => {
+            general?.addresses?.map((item, index) => {
               return (
-                <div className={styles._card} key={index} onClick={navigate}>
+                <div className={styles._card} key={index} onClick={() => navigate(item.local)}>
                   <div className={styles._topContent}>
                     <div className={styles._home}>
                       <Home color='#000' />
