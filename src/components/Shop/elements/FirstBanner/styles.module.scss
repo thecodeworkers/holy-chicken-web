@@ -25,13 +25,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 3rem;
 }
 
 ._title{
   font-family: $blackerTextHeavyBold;
   font-size:$blackerTextHeavyBold60;
   color: $black;
-  margin-bottom: 1rem;
 }
 
 ._subtitle{
@@ -102,6 +102,7 @@
   @include generalInput($alto);
   font-size: $montserratBold16;
   height: 2.3rem;
+  margin-top: 0;
 }
 
 ._inputParent {
@@ -118,11 +119,12 @@
     margin: 1.2rem 0;
   }
 }
+
 ._imageParent {
   position: absolute;
   cursor: pointer;
   right: 0.8rem;
-  top: 16px;
+  top: 11px;
 }
 
 ._checkParent {
@@ -180,7 +182,8 @@ display: none;
   margin-bottom: 1rem;
 }
 ._filterButtonContainer{
-  border-radius: 1.25rem;
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: 1.25rem;
   padding: 0 0.8rem;
   cursor: pointer;
   display: flex;
@@ -274,7 +277,7 @@ width: 100%;
 
 }
 ._filterButtonContainer{
-  min-width: 130px;
+  min-width: 135px;
   height: 2.5rem;
 }
 ._input{
@@ -307,7 +310,9 @@ width: 100%;
   font-size: 0.8rem;
 }
 ._imageParent{
-  top:20px
+  top:12px
 }
-
+._header{
+  margin-bottom: 1rem;
+}
 }

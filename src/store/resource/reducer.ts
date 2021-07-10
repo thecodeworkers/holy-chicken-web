@@ -12,6 +12,9 @@ const initialState = {
     categories: []
   },
   shop: [],
+  paymentMethods: {},
+  countries: [],
+  allCountries: []
 }
 
 const resourceReducer = (state = initialState, { type, payload }: AnyAction) => {

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import styles from './styles.module.scss'
-import { useRouter } from 'next/router'
 import { LeftArrow, DownArrow } from '@images/icons';
 import { orderProducts } from '@store/actions'
 import { useDispatch } from 'react-redux'
@@ -8,7 +7,6 @@ import { useDispatch } from 'react-redux'
 const DropDownFilter = ({ }) => {
 
   const [show, setShow] = useState(false)
-  const router = useRouter()
   const dispatch = useDispatch()
 
   const sortBy = (value) => {
@@ -17,8 +15,8 @@ const DropDownFilter = ({ }) => {
 
   const showDropDown = (event) => {
     const { target } = event
-    if(target.id == 'drop' ||
-     target.id == 'title') {
+    if (target.id == 'drop' ||
+      target.id == 'title') {
       setShow(show => !show)
     }
 

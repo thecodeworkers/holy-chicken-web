@@ -15,9 +15,11 @@ cart {
   availableShippingMethods {
     rates {
       id
+      instanceId
       label
+      methodId
+      cost
     }
-    supportsShippingCalculator
   }
   chosenShippingMethods
   contents(first: 1000000) {
@@ -36,6 +38,7 @@ cart {
             salePrice(format: RAW)
             price
             stockQuantity
+            description
           }
           attributes(first: 100000) {
             nodes {

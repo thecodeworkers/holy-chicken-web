@@ -6,6 +6,9 @@ import intermitence from './intermitence/reducer'
 import auth from './auth/reducer'
 import toast from './toast/reducer'
 import cart from './cart/reducer'
+import product from './product/reducer'
+import paymentStep from './paymentStep/reducer'
+import scrollReference from './scrollReference/reducer'
 
 const reducers = combineReducers({
   loader,
@@ -14,7 +17,10 @@ const reducers = combineReducers({
   intermitence,
   auth,
   toast,
-  cart
+  cart,
+  product,
+  paymentStep,
+  scrollReference
 })
 
 export default reducers

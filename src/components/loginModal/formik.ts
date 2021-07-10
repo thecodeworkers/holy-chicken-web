@@ -21,7 +21,6 @@ const formikConfig = (dispatch) => (useFormik({
 
   onSubmit: values => {
     dispatch(loginUser(values))
-    // method()
   }
 }))
 
