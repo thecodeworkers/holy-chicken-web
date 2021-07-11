@@ -1,7 +1,7 @@
 import styles from './styles.module.scss'
 import { CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux';
-import { setExtras, setSelection } from '@store/actions';
+import { setExtras, setSelection, setSpecials } from '@store/actions';
 
 const CardSection = ({ attributes }) => {
   const {
@@ -9,7 +9,9 @@ const CardSection = ({ attributes }) => {
     freeSauce,
     blessing,
     sauce,
-    addons
+    addons,
+    blessingAddons,
+    sauceAddons
   } = useSelector((state: any) => state.product)
 
   const nodes = attributes?.nodes || [];
@@ -84,8 +86,8 @@ const CardSection = ({ attributes }) => {
 
         <div className={styles._webParent}>
           {
-            extras.map((node, index) => (
-              <div key={index}>
+            extras.map((node, nodeIndex) => (
+              <div key={nodeIndex}>
                 <p className={styles._littleTitleCard}>{node?.name}</p>
                 {
                   node?.options.map((option, index) => {
@@ -97,10 +99,68 @@ const CardSection = ({ attributes }) => {
                               <div className={styles._column}>
                                 <div className={styles._checkParent}>
                                   <input
-                                    type='radio'
+                                    type='checkbox'
                                     className={styles._radioBtn}
                                     value={option}
-                                    defaultChecked={false}
+                                    onChange={(event) => {
+                                      const target = event.target
+                                      const isChecked = target.checked
+                                      const currentValue = target.value
+
+                                      if (nodeIndex == 0) {
+                                        if (blessing == 'N/A' && isChecked) {
+                                          dispatch(setSelection({ blessing: currentValue }))
+                                          return
+                                        }
+
+                                        if (blessing != 'N/A' && !isChecked) {
+                                          if (!blessingAddons.length) {
+                                            dispatch(setSelection({ blessing: 'N/A' }))
+                                            return
+                                          }
+
+                                          const index = blessingAddons.findIndex((addon: any) => addon.extra == currentValue)
+                                          if (index > -1) blessingAddons.splice(index, 1)
+                                          dispatch(setSpecials({ blessingAddons }))
+
+                                          return
+                                        }
+
+                                        if (blessing != 'N/A' && isChecked) {
+                                          blessingAddons.push({ extra: currentValue, price: 0.5 })
+                                          dispatch(setSpecials({ blessingAddons }))
+
+                                          return ;
+                                        }
+                                      }
+
+                                      if (nodeIndex == 1) {
+                                        if (sauce == 'N/A' && isChecked) {
+                                          dispatch(setSelection({ sauce: currentValue }))
+                                          return
+                                        }
+
+                                        if (sauce != 'N/A' && !isChecked) {
+                                          if (!sauceAddons.length) {
+                                            dispatch(setSelection({ sauce: 'N/A' }))
+                                            return
+                                          }
+
+                                          const index = sauceAddons.findIndex((addon: any) => addon.extra == currentValue)
+                                          if (index > -1) sauceAddons.splice(index, 1)
+                                          dispatch(setSpecials({ sauceAddons }))
+
+                                          return
+                                        }
+
+                                        if (sauce != 'N/A' && isChecked) {
+                                          sauceAddons.push({ extra: currentValue, price: 0.5 })
+                                          dispatch(setSpecials({ sauceAddons }))
+
+                                          return ;
+                                        }
+                                      }
+                                    }}
                                   ></input>
                                   <p>{option}</p>
                                 </div>
