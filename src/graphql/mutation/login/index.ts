@@ -36,6 +36,29 @@ const loginMutation = async ({ email, password, sessionToken }) => {
           address2
           address1
         }
+        orders {
+          nodes {
+            orderNumber
+            date
+            databaseId
+            status
+            dateCompleted
+            total
+            subtotal
+            lineItems {
+              nodes {
+                product {
+                  name
+                  id
+                  image {
+                    mediaItemUrl
+                  }
+                  description
+                }
+              }
+            }
+          }
+        }
       }
       user {
         email

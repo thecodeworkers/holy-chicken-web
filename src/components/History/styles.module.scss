@@ -1,5 +1,30 @@
 @import '../../../public/styles/index.scss';
 
+@mixin cardTitle {
+  text-align: center;
+  font-family: $blackerTextHeavy;
+  font-size: $montserratExtraBold22;
+}
+
+@mixin circle($background) {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  border: solid 3px $black;
+  background-color: $background;
+  position: relative;
+}
+
+
+@mixin circleResponsive($background) {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: solid 3px $black;
+  background-color: $background;
+  position: relative;
+}
+
 ._parent {
   padding-top: 7.5rem;
   padding-bottom: 3rem;
@@ -67,24 +92,6 @@
   width: 100%;
 }
 
-@mixin circle($background) {
-  width: 1.7rem;
-  height: 1.7rem;
-  border-radius: 50%;
-  border: solid 3px $black;
-  background-color: $background;
-  position: relative;
-}
-
-
-@mixin circleResponsive($background) {
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
-  border: solid 3px $black;
-  background-color: $background;
-  position: relative;
-}
 
 ._circle {
   @include circle($white);
@@ -148,6 +155,8 @@
   padding: 2rem 3rem;
   box-sizing: border-box;
   overflow-y: auto;
+  display: flex;
+  flex-flow: column;
 
   &::-webkit-scrollbar {
     width: 7px;
@@ -170,10 +179,14 @@
 }
 
 ._cardTitle {
-  text-align: center;
-  font-family: $blackerTextHeavy;
-  font-size: $montserratExtraBold22;
+  @include cardTitle;
 }
+
+._cardTitleOpacity {
+  @include cardTitle;
+  opacity: .3;
+}
+
 
 ._fieldParent {
   position: relative;
@@ -191,11 +204,20 @@
   }
 }
 
-._searchInput {
+@mixin searchInput {
   @include generalInput($alto);
   font-size: $montserratBold16;
   height: 2.3rem;
-  background-color: $white
+  background-color: $white;
+}
+
+._searchInput {
+  @include searchInput;
+}
+
+._searchInputOpacity {
+  @include searchInput;
+  opacity: .4;
 }
 
 ._imageParent {
@@ -291,5 +313,16 @@
     position: relative;
     margin-top: 11rem;
   }
+}
 
+._textParent {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & p {
+    font-family: $montserratRegular;
+    font-size: $montserratRegular18;
+  }
 }

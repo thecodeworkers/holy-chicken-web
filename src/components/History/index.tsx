@@ -5,6 +5,7 @@ import styles from './styles.module.scss'
 import { Chiken } from '@images/resources'
 import { Search } from '@images/icons';
 import { OpenModal, OrderModal, ResponsiveHistory } from './elements'
+import { useSelector } from 'react-redux'
 
 const circles = [
   { label: 'Preparando pedido' },
@@ -64,17 +65,47 @@ const orders = [
 
 const History = ({ data }) => {
 
+  const { auth, resource: { products } } = useSelector((state: any) => state)
+
   const [ currentStep, setCurrentStep ] = useState(5)
   const [ show, setShow ] = useState(false)
   const [ showOrder, setShowOrder ] = useState(false)
   const [ label, setLabel ] = useState('Preparando pedido')
+  const [ currentProduct, setCurrentProduct ] = useState([])
 
   const showModal = () => setShow(show => !show)
-  const showOrderModal = () => setShowOrder(showOrder => !showOrder)
+
+  const showOrderModal = (product) => {
+    setShowOrder(showOrder => !showOrder)
+    if(product) setCurrentProduct(product)
+  }
 
   const changeStep = (step, label) => {
     setCurrentStep(step)
     setLabel(label)
+  }
+  const ordersArray = auth?.login?.login?.customer?.orders?.nodes ?? []
+
+  const parseDate = (date) => {
+
+    const newDate = new Date(date)
+    const day = newDate.getDate()
+    const month = newDate.getMonth() + 1
+    const year = newDate.getFullYear()
+
+    return `${month}/${day}/${year}`
+  }
+
+  const parseHour = (date) => {
+      const newDate = new Date(date)
+      let hours = newDate.getHours()
+      let minutes: any = newDate.getMinutes()
+      let ampm = hours >= 12 ? 'PM' : 'AM '
+      hours = hours % 12
+      hours = hours ? hours : 12
+      minutes = minutes < 10 ? `0${minutes}` : minutes
+      let strTime = `${hours}:${minutes} ${ampm}`
+      return strTime
   }
 
   return (
@@ -97,7 +128,7 @@ const History = ({ data }) => {
 
             <div className={styles._orderParent}>
               <p>Orden</p>
-              <input className={styles._input} readOnly value='#000'></input>
+              <input className={styles._input} readOnly value={ordersArray.length ? `#${ordersArray[0].orderNumber}` : 'N/A'}></input>
             </div>
           </div>
 
@@ -148,60 +179,74 @@ const History = ({ data }) => {
 
         <div className={styles._rightSide}>
           <div className={styles._card}>
-            <p className={styles._cardTitle}>Historial</p>
+            <p className={auth?.isAuth ? styles._cardTitle : styles._cardTitleOpacity}>Historial</p>
             <div className={styles._fieldParent}>
               <input
                 placeholder='Escribe el número de orden'
                 name='search'
-                className={styles._searchInput}
+                className={auth?.isAuth ? styles._searchInput : styles._searchInputOpacity}
+                readOnly={auth?.isAuth ? false : true}
               />
               <div className={styles._imageParent} >
                 <Search color={'#000000'} />
               </div>
             </div>
 
-            <div className={styles._table}>
-              <div className={styles._row}>
-                <div>
-                  <p className={styles._headerText}>Orden</p>
+            {
+              auth?.isAuth ?
+              ( <div className={styles._table}>
+                <div className={styles._row}>
+                  <div>
+                    <p className={styles._headerText}>Orden</p>
+                  </div>
+
+                  <div >
+                    <p className={styles._headerText}>Fecha</p>
+                  </div>
+
+                  <div>
+                    <p className={styles._headerText}>Hora</p>
+                  </div>
+
+                  <div>
+                    <p className={styles._headerText}>Tu carrito</p>
+                  </div>
                 </div>
 
-                <div >
-                  <p className={styles._headerText}>Fecha</p>
+                {
+                  ordersArray.map((item, index) => {
+
+                    const product = item?.lineItems
+
+                    // console.log('PRODUUUCT PAPA', product)
+
+                    return (
+                      <div className={styles._row} key={index}>
+                        <div>
+                          <p>{`#${item.orderNumber}`}</p>
+                        </div>
+
+                        <div>
+                          <p>{parseDate(item.date)}</p>
+                        </div>
+                        <div>
+                          <p>{parseHour(item.date)}</p>
+                        </div>
+
+                        <div>
+                          <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={() => showOrderModal(product)} />
+                        </div>
+                      </div>
+                    )
+                  })
+                }
+              </div> ) : (
+                <div className={styles._textParent}>
+                  <p>Debe iniciar sesión para visualizar su historial</p>
                 </div>
+              )
+            }
 
-                <div>
-                  <p className={styles._headerText}>Hora</p>
-                </div>
-
-                <div>
-                  <p className={styles._headerText}>Tu carrito</p>
-                </div>
-              </div>
-
-              {
-                orders.map((item, index) => {
-                  return (
-                    <div className={styles._row} key={index}>
-                      <div>
-                        <p>{item.number}</p>
-                      </div>
-
-                      <div>
-                        <p>{item.date}</p>
-                      </div>
-                      <div>
-                        <p>{item.hour}</p>
-                      </div>
-
-                      <div>
-                        <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={showOrderModal} />
-                      </div>
-                    </div>
-                  )
-                })
-              }
-            </div>
           </div>
         </div>
       </div>
@@ -212,7 +257,7 @@ const History = ({ data }) => {
 
       <Footer data={data?.footer} content={data?.socialNetworks}  />
       <OpenModal show={show} method={showModal}/>
-      <OrderModal show={showOrder} method={showOrderModal}  />
+      <OrderModal show={showOrder} method={showOrderModal} data={currentProduct} />
     </>
   )
 

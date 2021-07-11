@@ -1,6 +1,17 @@
 import styles from './styles.module.scss'
+import { createMarkup } from '@utils'
+import { useSelector } from 'react-redux'
 
-const OrderModal = ({ show, method }) => {
+const OrderModal = ({ show, method, data }) => {
+
+  const { resource: { products } } = useSelector((state: any) => state)
+
+  const findPrice = (id) => {
+    const product = products.find(element => element.id == id)
+    const price = product ? product?.price : '$0.00'
+    return price
+  }
+
   return (
     <div className={show ? styles._background : styles._hidden}>
       <div className={`_generalCard ${styles._card}`}>
@@ -12,20 +23,25 @@ const OrderModal = ({ show, method }) => {
 
         <div className={styles._products}>
           {
-            Array.from(Array(5).keys()).map((item, index) => {
+            data?.nodes?.length &&
+            data.nodes.map((item, index) => {
+
+              const { product } = item
+
               return (
                 <div className={styles._row} key={index}>
                   <div className={styles._columnOne}>
-                    <img src='images/resources/burguer.png' width='70px'></img>
+                    <img src={product?.image?.mediaItemUrl} width='75px'></img>
                   </div>
 
                   <div className={styles._columnTwo}>
-                    <p>Not so holy</p>
-                    <p>210 gramos de pollo crispy marinado con picante</p>
+                    <p>{product?.name}</p>
+                    <div dangerouslySetInnerHTML={createMarkup(product.description)}></div>
+
                   </div>
 
                   <div className={styles._columnThree}>
-                    <p>7$</p>
+                    <p>{findPrice(product?.id)}</p>
                   </div>
                 </div>
               )
