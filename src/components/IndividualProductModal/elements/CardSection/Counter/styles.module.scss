@@ -1,4 +1,4 @@
-@import '../../../public/styles/index.scss';
+@import '@styles/index.scss';
 
 ._numberParent {
   display: flex;
@@ -13,7 +13,6 @@
   align-items: center;
   background-color: $black;
   border-radius: 50%;
-  cursor: pointer;
 
   & p {
     color: $white;

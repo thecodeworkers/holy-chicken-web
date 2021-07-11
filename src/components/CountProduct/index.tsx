@@ -9,14 +9,11 @@ const CountProduct = ({
   quantity = 1,
   fixed = false,
   changeNumber = null,
-  active = false
 }) => {
   const dispatch = useDispatch()
   const [productNumber, setProductNumber] = useState(quantity)
 
   const aumented = () => {
-    if (fixed && !active) return ;
-
     if (!fixed) {
       if (productNumber < stock) setProductNumber(quantity + 1)
       if (productKey) dispatch(updateQuantity(productKey, 'add'))
@@ -29,8 +26,6 @@ const CountProduct = ({
   }
 
   const decrement = () => {
-    if (fixed && !active) return ;
-
     if (!fixed) {
       if (quantity >= 2) {
         setProductNumber(quantity - 1)
@@ -55,11 +50,6 @@ const CountProduct = ({
           <p>+</p>
         </div>
       </div>
-      <style>{`
-        .${styles._circle} {
-          cursor: ${active ? 'pointer' : 'not-allowed'}
-        }
-      `}</style>
     </>
   )
 }
