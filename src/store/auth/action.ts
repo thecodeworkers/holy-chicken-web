@@ -1,6 +1,6 @@
-import { registerMutation, loginMutation, restorePasswordEmail } from '@graphql'
+import { registerMutation, loginMutation, restorePasswordEmail, resetUserPasswordMutation } from '@graphql'
 import { actionObject } from '@utils'
-import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL, LOGOUT_USER } from './action-types'
+import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL, LOGOUT_USER, RESTORE_PASSWORD } from './action-types'
 import { REQUEST_LOADER, LOADER } from '@store/loader/actions-types'
 import { setToast } from '@store/toast/action'
 
@@ -44,22 +44,48 @@ export const logoutUser = () => async (dispatch) => {
 }
 
 export const sendRestorePasswordEmail = (body) => async (dispatch) => {
-
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
     const result = await restorePasswordEmail(body)
-    dispatch(actionObject(RESTORE_PASSWORD_EMAIL, { emailSended: result ? true : false }))
+    dispatch(actionObject(RESTORE_PASSWORD_EMAIL, {
+      emailSended: result ? true : false,
+      tmpEmail: body.email
+    }))
     dispatch(setToast('check', 'Correo enviado exitosamente ', 1))
   } catch(error) {
     dispatch(setToast('error', 'Error al enviar correo', 1))
     return error
-  }
-
-  finally {
+  } finally {
     dispatch(actionObject(REQUEST_LOADER, false))
   }
 }
 
+export const restorePassword = (password) => async (dispatch, getState) => {
+  try {
+    dispatch(actionObject(REQUEST_LOADER, true))
+    const { auth: { tmpEmail }, intermitence: { key } } = getState()
+
+    const body = {
+      email: tmpEmail,
+      key,
+      password
+    }
+
+    const result = await resetUserPasswordMutation(body)
+    if (!result?.sessionToken) throw 'error';
+
+    dispatch(actionObject(RESTORE_PASSWORD, {
+      tmpEmail: ''
+    }))
+
+    dispatch(setToast('check', 'Contraseña cambiada con exito', 1))
+  } catch(error) {
+    dispatch(setToast('error', 'Error al cambiar la contraseña', 1))
+    return error
+  } finally {
+    dispatch(actionObject(REQUEST_LOADER, false))
+  }
+}
 
 export const resetForgotStatus = () => async (dispatch) => {
   await dispatch(actionObject(RESTORE_PASSWORD_EMAIL, { emailSended: false }))
