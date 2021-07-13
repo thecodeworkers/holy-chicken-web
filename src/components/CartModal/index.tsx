@@ -51,7 +51,6 @@ const CartModal = () => {
               <p className={styles._description}>Tu carrito está vacío</p> :
               nodes.map((item, index) => {
                 const dataItem = item?.product?.node
-                console.log(dataItem);
 
                 return (
                   <div key={index} className={styles._productContainer}>

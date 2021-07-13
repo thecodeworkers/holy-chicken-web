@@ -58,7 +58,7 @@ const FirstBanner = ({ data, content, resource, reference }) => {
   return (
 
     <div className={styles._content}>
-      <div className={styles._main}>
+      <div className={styles._main} ref={reference}>
         {
           Array.from(Array(newArray?.length).keys()).map((index) => {
             const currentClass = index + 1;
