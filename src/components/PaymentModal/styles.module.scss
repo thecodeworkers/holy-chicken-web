@@ -76,7 +76,7 @@
   height: 3rem;
   min-height: 3rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-content: center;
 
 
@@ -85,7 +85,7 @@
     font-family: $montserratRegular;
     font-size: $montserratRegular16;
     align-self: center;
-    text-align: center;
+    margin-left: 2.5rem;
     text-overflow: ellipsis;
   }
 }
@@ -160,9 +160,41 @@ align-content: center;
   ._main{
     height: calc(100vh - 4rem);
   }
+
+._modal{
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 80vh;
+  margin-top: 3.75rem;
+}
+._leftSection{
+  width: 100%;
+  padding: 2.5rem 2rem;
+  background-color: $pampas;
+  height: 35vh;
+}
+._checkParent{
+  margin-left: 0;
+}
+._rightSection{
+ background-color: white;
+ padding: 2.5rem 2rem;
+ margin: 0;
+ width: unset
+}
+._leftBody{
+  margin-top: 1rem;
 }
 
-
+._checkParent{
+ margin-top: 0.5rem;
+ margin-bottom: 0.5rem;
+}
+._parentTitle{
+ margin-top: 0.5rem;
+}
+}
 @include responsive(md) {
 
   ._main{
@@ -172,36 +204,4 @@ align-content: center;
    display: none;
  }
 
- ._modal{
-   display: flex;
-   flex-direction: column;
-   overflow-y: scroll;
-   height: 80vh;
-   margin-top: 3.75rem;
- }
- ._leftSection{
-   width: 100%;
-   padding: 2.5rem 2rem;
-   background-color: $pampas;
- }
- ._checkParent{
-   margin-left: 0;
- }
- ._rightSection{
-  background-color: white;
-  padding: 2.5rem 2rem;
-  margin: 0;
-  width: unset
- }
- ._leftBody{
-   margin-top: 1rem;
- }
-
-._checkParent{
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-._parentTitle{
-  margin-top: 0.5rem;
-}
 }

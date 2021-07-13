@@ -57,11 +57,11 @@ const PaymentMethod = () => {
                           name='paymentMethod'
                           className={styles._radioBtn}
                           checked={paymentSelected === res.title}
-                          onChange={(e) => selectedMethod(e, res.title, res.id)}>
+                          onChange={(e) => selectedMethod(e, res?.title, res.id)}>
                         </input>
                         <div className={styles._addressDescription}>
 
-                          <p className={styles._radioTitle}>{res.title}</p>
+                          <p className={styles._radioTitle}>{res?.title}</p>
                           {paymentSelected === res.title ?
                             <ul className={styles._list}>
                               {
