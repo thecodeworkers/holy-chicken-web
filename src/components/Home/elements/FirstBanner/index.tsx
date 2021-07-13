@@ -56,8 +56,9 @@ const FirstBanner = ({ data, content, resource, reference }) => {
   }
 
   return (
+
     <div className={styles._content}>
-      <div className={styles._main}>
+      <div className={styles._main} ref={reference}>
         {
           Array.from(Array(newArray?.length).keys()).map((index) => {
             const currentClass = index + 1;
@@ -86,10 +87,10 @@ const FirstBanner = ({ data, content, resource, reference }) => {
             )
           })
 
-        }
-        <div className={styles._stepperContainer} ref={reference}>
-          <div className={styles._stepper}>
-            <Stepper currentStep={currentIndex + 1} length={newArray?.length} onPress={index => changeImage(index, styles._show, false)} />
+          }
+          <div className={styles._stepperContainer} >
+            <div className={styles._stepper}>
+              <Stepper currentStep={currentIndex + 1} length={newArray?.length} onPress={index => changeImage(index, styles._show, false)} />
 
           </div>
         </div>

@@ -39,7 +39,7 @@ const CartModal = () => {
 
   return (
     <div className={cartModal ? styles._background : styles._hidden} onClick={closeModal} id={'modal'}>
-      <div className={`_generalCard ${styles._modal}`} >
+      <div className={styles._modal} >
         <div className={styles._header}>
           <p className={styles._title}>Mi Pedido</p>
           <p className={styles._subtitle}>¡Free delivery en Chacao y Las Mercedes!</p>
@@ -67,7 +67,7 @@ const CartModal = () => {
 
                       <div className={styles._quantityContainer}>
                         <CountProduct productKey={item?.key} stock={dataItem?.stockQuantity} quantity={item?.quantity} />
-                        <p className={styles._number}>{item?.price}</p>
+                        <p className={styles._number}>{dataItem?.price}</p>
                       </div>
                     </div>
                   </div>

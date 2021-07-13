@@ -14,9 +14,12 @@ const DropDownFilter = ({ }) => {
   }
 
   const showDropDown = (event) => {
+
     const { target } = event
     if (target.id == 'drop' ||
-      target.id == 'title') {
+      target.id == 'title' ||
+      target.id == 'left-arrow' ||
+      target.id == 'down-arrow') {
       setShow(show => !show)
     }
 
@@ -25,8 +28,8 @@ const DropDownFilter = ({ }) => {
   return (
     <div className={styles._dropDown} onClick={showDropDown} id={'drop'} >
       <p className={styles._filterTitle} ><strong id={'title'}>Ordenar por</strong></p>
-      <div className={styles._arrowContainer}>
-        {!show ? <LeftArrow color={'#000000'} /> : <DownArrow color={'#000000'} />}
+      <div className={styles._arrowContainer} >
+        {!show ? <LeftArrow id={'left-arrow'} color={'#000000'}/> :  <DownArrow  id={'down-arrow'} color={'#000000'}/>}
       </div>
       {show ?
         <div className={styles._drop}>

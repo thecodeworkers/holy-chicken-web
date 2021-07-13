@@ -13,7 +13,6 @@
 }
 
 ._modal {
-  padding: 3rem 2.5rem;
   box-sizing: border-box;
   width: 18.75rem;
   height: 80%;
@@ -21,6 +20,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-content: center;
+  background-color: $white;
 }
 
 ._cardParent {
@@ -37,6 +37,10 @@
   justify-content: flex-end;
   align-items: center;
   margin-top: 1rem;
+  padding: 3rem 2.5rem;
+  border-bottom-left-radius:  2.375rem;
+  border-bottom-right-radius:  2.375rem;
+  background-color: $pampas;
 }
 
 ._parentContainer{
@@ -75,6 +79,9 @@
 
 ._header{
   text-align: center;
+  padding: 3rem 2.5rem;
+  border-top-left-radius:  2.375rem;
+  border-top-right-radius:  2.375rem;
 }
 
 ._title{
@@ -119,6 +126,7 @@
 
 ._body{
   overflow-y: scroll;
+  padding: 3rem 2.5rem;
 
   &::-webkit-scrollbar {
     width: 10px;

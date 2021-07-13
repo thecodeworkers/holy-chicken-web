@@ -108,3 +108,15 @@
     font-size: $montserratRegular12;
   }
 }
+
+._buttonBlueParent{
+  width: 100%;
+  margin: 0 auto
+}
+
+@include responsive(md) {
+  ._buttonBlueParent{
+    width: 160px;
+  }
+
+}
