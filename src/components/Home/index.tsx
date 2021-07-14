@@ -9,6 +9,7 @@ import Head from 'next/head'
 import { setStringKey, setShowModal, getTmpSession } from '@store/actions'
 
 const Home = ({ content, data, resource }) => {
+
   const { scrollReference: { homeReference } } = useSelector((state: any) => state)
 
   const dispatch = useDispatch()
@@ -33,12 +34,12 @@ const Home = ({ content, data, resource }) => {
   }, [homeReference?.catering])
 
   const locationRef = useCallback((node) => {
-    scrollingReference(node, 'location')
+    scrollingReference(node, 'location', 120)
   }, [homeReference?.location])
 
-  const scrollingReference = (node, state) => {
+  const scrollingReference = (node, state, offset = 0) => {
     if(homeReference?.current == state) {
-      if(node) scrollTo(node)
+      if(node) scrollTo(node, offset)
     }
   }
 
