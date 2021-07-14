@@ -12,10 +12,11 @@ const Shop = ({ content, data, filters, backup }) => {
 
   const dispatch = useDispatch()
 
-  const { intermitence } = useSelector((state: any) => state)
+  const { intermitence, paymentStep: { delivery_data } } = useSelector((state: any) => state)
 
   useEffect(() => {
-    if (intermitence?.showLocationModal) dispatch(setShowModal({ locationModal: true }))
+    const location = delivery_data?.location
+    if (intermitence?.showLocationModal && !location) dispatch(setShowModal({ locationModal: true }))
   }, [])
 
   const { scrollReference: { shopReference } } = useSelector((state: any) => state)

@@ -35,7 +35,6 @@ const LocationModal = () => {
   }
 
 
-
   return (
     <div className={locationModal ? styles._background : styles._hidden} id='location-modal' onClick={closeModal}>
       <div className={` ${styles._modal} _generalCard`}>
