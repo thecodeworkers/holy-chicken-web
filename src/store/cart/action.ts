@@ -8,6 +8,7 @@ import { setStep } from '@store/paymentStep/action'
 import { getDollarEquivalent } from '@utils/dolarClient'
 import getStripe from '@utils/getStripe'
 
+
 export const setCurrentProduct = (data: any) => actionObject(CURRENT_PRODUCT, data)
 export const setProductsNumber = (number: any) => actionObject(PRODUCTS_NUMBER, number)
 
@@ -24,9 +25,9 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
     const { auth } = await getState()
-    const sessionToken = auth?.login?.login?.customer?.sessionToken
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
 
-    if (auth?.isAuth) {
+    if (sessionToken) {
       const result = await addItemToCartMutation(databaseId, quantity, null, sessionToken)
       if (result.message) throw new Error(result.message)
 
@@ -63,7 +64,7 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
       dispatch(setShowModal({ cartModal: true }))
     }
 
-    if (!auth.isAuth) {
+    if (!sessionToken) {
       dispatch(setToast('warning', 'Por favor inicie sesión para continuar', 1))
     }
 
@@ -226,6 +227,7 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
       dispatch(setToast('check', 'Orden Procesada con exito', 1))
     }
     dispatch(setStep({ loading: false }))
+    dispatch(setProductsNumber({ number: null }))
     dispatch(actionObject(REQUEST_LOADER, false))
   } catch (error) {
     dispatch(actionObject(REQUEST_LOADER, false))

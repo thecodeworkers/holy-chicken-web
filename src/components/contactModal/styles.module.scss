@@ -30,7 +30,7 @@
   & a {
     font-family: $montserratRegular;
     font-size: 0.8rem;
-    text-decoration: none;
+    text-decoration: underline;
     :active{
       text-decoration: none;
       a.nostyle:link {

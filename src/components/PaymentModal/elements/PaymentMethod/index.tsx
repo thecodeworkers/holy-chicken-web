@@ -42,7 +42,6 @@ const PaymentMethod = () => {
         <p className={styles._title}>Forma de entrega</p>
       </div>
       <div className={styles._rightMain}>
-
         <div className={styles._firstRow}>
           <div className={styles._deliveryType}>
             <p className={styles._deliveryTitle}>Seleccione una opción</p>

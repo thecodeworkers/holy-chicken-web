@@ -78,7 +78,7 @@
 ._buttonContainer{
   display: flex;
   flex-direction: column;
-  margin-top: 5rem;
+  margin-top: 1.5rem;
 }
 
 ._btnParent{
@@ -88,13 +88,6 @@
 
 ._fullContainer {
   width:100%
-}
-
-
-@include responsive(xxl) {
-  ._buttonContainer{
-    margin-top: 3rem;
-  }
 }
 
 @include responsive(md) {

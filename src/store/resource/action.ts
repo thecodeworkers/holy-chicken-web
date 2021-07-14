@@ -5,9 +5,7 @@ import { GET_PAGES } from '@store/page/action-types'
 import { SEARCH_PRODUCTS, SET_FILTER, CLEAN_FILTER } from './action-types'
 import { getCart } from '@store/cart/action'
 
-
 export const getResources: any = (consult: string = '') => async (dispatch, getState) => {
-
   const { page } = getState()
   let data = page
 

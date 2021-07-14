@@ -3,7 +3,7 @@ import { Button } from '@components'
 import { useDispatch } from 'react-redux'
 import { setShowModal } from '@store/actions'
 
-const SecondBanner = ({ data }) => {
+const SecondBanner = ({ data, reference }) => {
 
   const dispatch = useDispatch()
   const locations = data?.locations
@@ -13,7 +13,7 @@ const SecondBanner = ({ data }) => {
     return dispatch(setShowModal({ contactModal: true }))
   }
   return (
-    <div className={styles._content}>
+    <div className={styles._content} ref={reference} >
 
       <p className={styles._blackTitle}>{data?.title}</p>
 
@@ -38,13 +38,13 @@ const SecondBanner = ({ data }) => {
         </div>
         <div className={styles._address}>
           <p className={styles._title}>{data?.email?.title}</p>
-          <a href="mailto:infoholychicken@gmail.com">
+          <a  className={styles._link} href="mailto:infoholychicken@gmail.com">
             <p className={styles._subtitle}>{data?.email?.content}</p>
           </a>
         </div>
         <div className={styles._address}>
           <p className={styles._title}>{data?.phone?.title}</p>
-          <a href="tel:+58 412-2485668">
+          <a className={styles._link} href="tel:+58 412-2485668">
             <p className={styles._subtitle}>{data?.phone?.content}</p>
           </a>
         </div>

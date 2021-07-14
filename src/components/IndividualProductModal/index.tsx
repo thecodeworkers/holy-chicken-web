@@ -10,6 +10,32 @@ const IndividualProduct = ({ type = 'list' }) => {
   const dispatch = useDispatch()
   const { intermitence: { individualProductModal }, cart: { currentProduct }, product } = useSelector((state: any) => state)
 
+  const allAddons = [
+    ...product.addons,
+    ...product.blessingAddons,
+    ...product.sauceAddons
+  ]
+
+  const totalPrice = () => {
+    const totalAddons = allAddons.reduce((previous, next) => previous + next.price, 0)
+    let totalPrice = currentProduct?.price.includes('-') ? `${currentProduct?.price.split('-')[0]}` : currentProduct?.price
+
+    if (totalPrice) {
+      totalPrice = totalPrice.split('$')
+      totalPrice = parseFloat(totalPrice[1])
+      totalPrice += totalAddons
+
+      const { blessing, sauce } = product
+
+      totalPrice += blessing != 'N/A' ? 0.5 : 0
+      totalPrice += sauce != 'N/A' ? 0.5 : 0
+
+      return `$${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
+    }
+
+    return ''
+  }
+
   const closeModal = (event, flag = false) => {
     const { target } = event
     if (target.id == 'individual-product' || flag) {
@@ -59,7 +85,7 @@ const IndividualProduct = ({ type = 'list' }) => {
       if (result) correctProduct = result
     }
 
-    dispatch(setCartProducts(correctProduct, product.addons))
+    dispatch(setCartProducts(correctProduct, allAddons))
   }
 
   return (
@@ -113,7 +139,7 @@ const IndividualProduct = ({ type = 'list' }) => {
           </div>
 
           <div>
-            <p>{currentProduct?.price.includes('-') ? currentProduct?.price.split('-')[0] : currentProduct?.price}</p>
+            <p>{totalPrice()}</p>
           </div>
         </div>
       </div>

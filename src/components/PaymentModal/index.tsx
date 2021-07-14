@@ -99,7 +99,7 @@ const PaymentModal = () => {
               <div>
                 <div className={styles._checkParent}>
                   <div onClick={() => newStep(4)} className={currentStep === 4 ? styles._radioBtnChecked : styles._radioBtn}></div>
-                  <p>Facturacion</p>
+                  <p>Facturación</p>
                 </div>
 
               </div>

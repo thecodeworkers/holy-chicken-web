@@ -87,7 +87,7 @@
 }
 
 ._marginBottom {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 ._iconParent {
@@ -155,10 +155,10 @@ margin-left: 1.5rem;
   -moz-appearance: none;
   appearance: none;
   display: inline-block;
-  width: 0.8rem;
-  height: 0.8rem;
-  min-width:  0.8rem;
-  min-height:  0.8rem;
+  width: 1rem;
+  height: 1rem;
+  min-width:  1rem;
+  min-height:  1rem;
   padding: 0.1rem;
   background-clip: content-box;
   border: 2px solid $black;
@@ -243,7 +243,7 @@ padding: 0;
 
 
 ._advicesItem{
-  font-size: $montserratRegular16;
+  font-size: $montserratRegular14;
   font-family: $montserratRegular;
   color: $mineShaft;
   list-style: none;

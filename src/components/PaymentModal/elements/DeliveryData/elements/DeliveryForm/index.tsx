@@ -115,22 +115,6 @@ const DeliveryForm = () => {
         <div className={styles._inputRow}>
           <div className={styles._fullContainer}>
             <div className={styles._inputParent}>
-              <label>Direcciónes guardadas</label>
-              <select name="select"
-                placeholder='Seleccione el país'
-                onChange={deliveryform.handleChange}
-                onBlur={deliveryform.handleBlur}
-                value={deliveryform.values.country}
-                className={errors.country && touched.country ? styles._inputError : styles._inputSelect}>
-                <option>Dirección (zona, urbanzación, calle, casa/edificio</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles._inputRow}>
-          <div className={styles._fullContainer}>
-            <div className={styles._inputParent}>
               <label>Dirección (zona, urbanzación, calle, casa/edificio)</label>
               <input
                 name='address_1'
@@ -193,7 +177,7 @@ const DeliveryForm = () => {
           </div>
         </div>
 
-        <div className={styles._inputRow}>
+        <div className={styles._inputLeftRow}>
           <div className={styles._quarterWidth} >
             <div className={styles._inputParent}>
               <label>Codigo Postal</label>
@@ -208,8 +192,8 @@ const DeliveryForm = () => {
             </div>
           </div>
 
-          <div className={styles._threeQuarterWidth} >
-            <div className={`${styles._inputParent} ${styles._separation}`}>
+          <div className={styles._quarterWidth} >
+            <div className={`${styles._inputParent} ${styles._marginLeft}`}>
               <label>Municipio</label>
               <select name="municipality"
                 placeholder='Seleccione el país'
@@ -218,7 +202,7 @@ const DeliveryForm = () => {
                 value={deliveryform.values.municipality}
                 className={errors.municipality && touched.municipality ? styles._inputError : styles._inputSelect}>
                 {regions?.length ? regions.map((region, index) =>
-                  <option key={index} value={region.key}>{region.name} ${getShipping(region.key).cost}</option>
+                  <option key={index} value={region.key}>{region.name}  &nbsp;  ${getShipping(region.key).cost}</option>
                 ) : <option>No Disponible</option>}
               </select>
             </div>

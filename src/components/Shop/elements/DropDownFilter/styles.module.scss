@@ -19,7 +19,6 @@
   background-color: $pampas;
   border-bottom-left-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;
-  // padding: 0 0.8rem;
   position: absolute;
   width: 100%;
   top: 30px;
@@ -98,6 +97,7 @@
 @include responsive(md) {
   ._dropDown {
     height: 2.5rem;
+    width: 170px;
   }
 
   ._drop {

@@ -81,3 +81,39 @@
   display: inline-block;
 }
 
+._ordersParent {
+  max-height: 15.625rem;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $pampas;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $pampas;
+  }
+}
+
+@include responsive(lg) {
+  ._background {
+    @include blurBackgroundResponsive();
+    justify-content: center;
+    height: 100%;
+  }
+
+  ._card {
+    margin-top: 3.75rem;
+    width: 90%;
+    margin-right: 0;
+  }
+}
+

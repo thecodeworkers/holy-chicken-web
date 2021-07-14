@@ -69,6 +69,14 @@
   margin-top:1rem;
 }
 
+._link{
+  text-decoration: underline;
+  a.nostyle:link {
+    text-decoration: inherit;
+    color: inherit;
+}
+}
+
 @include responsive(xl) {
 
   ._times{

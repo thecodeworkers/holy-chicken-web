@@ -8,7 +8,7 @@ const CountProduct = ({
   stock = 0,
   quantity = 1,
   fixed = false,
-  changeNumber = null
+  changeNumber = null,
 }) => {
   const dispatch = useDispatch()
   const [productNumber, setProductNumber] = useState(quantity)
@@ -40,15 +40,17 @@ const CountProduct = ({
   }
 
   return (
-    <div className={styles._numberParent}>
-      <div className={styles._circle} onClick={decrement}>
-        <p>-</p>
+    <>
+      <div className={styles._numberParent}>
+        <div className={styles._circle} onClick={decrement}>
+          <p>-</p>
+        </div>
+        <input type='text' value={productNumber} readOnly className={styles._input}></input>
+        <div className={styles._circle} onClick={aumented}>
+          <p>+</p>
+        </div>
       </div>
-      <input type='text' value={productNumber} readOnly className={styles._input}></input>
-      <div className={styles._circle} onClick={aumented}>
-        <p>+</p>
-      </div>
-    </div>
+    </>
   )
 }
 

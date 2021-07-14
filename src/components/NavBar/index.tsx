@@ -119,9 +119,9 @@ const NavBar = ({ data }) => {
                 }
 
               </div>
-              <div className={styles._iconParent} onClick={() => navigation('/shop')}>
+              {/* <div className={styles._iconParent} onClick={() => navigation('/shop')}>
                 <Search color='#000' />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
