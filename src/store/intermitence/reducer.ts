@@ -25,7 +25,7 @@ const intermitenceReducer = (state = initialState, { type, payload }: AnyAction)
       return { ...state, ...payload }
 
     case RESET_MODALS:
-      return initialState
+      return { initialState, locationModal: true }
 
     default:
       return state
