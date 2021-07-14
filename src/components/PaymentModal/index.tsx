@@ -99,14 +99,14 @@ const PaymentModal = () => {
               <div>
                 <div className={styles._checkParent}>
                   <div onClick={() => newStep(4)} className={currentStep === 4 ? styles._radioBtnChecked : styles._radioBtn}></div>
-                  <p>Facturacion</p>
+                  <p>Facturación</p>
                 </div>
 
               </div>
             </div>
             <div className={styles._totalParent}>
               <p className={styles._parentTitle}>Total</p>
-              <p className={styles._parentTitle}>{cartProducts.total}</p>
+              <p className={styles._parentTitle}>{cartProducts?.total}</p>
             </div>
           </div>
           <div className={styles._rightSection}>

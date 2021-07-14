@@ -5,7 +5,7 @@ import { ChickenLogo } from '@images/resources'
 import { ResponsiveMenu, Button } from '@components'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import { setShowModal, logoutUser, setToast } from '@store/actions'
+import { setShowModal, logoutUser, setToast, resetModals } from '@store/actions'
 import { useSelector } from 'react-redux'
 
 
@@ -37,6 +37,13 @@ const NavbarResponsive = () => {
 
   const openLoginModal = () => {
     setShowPanel(showPanel => !showPanel)
+  }
+
+
+  const openModal = (name) => {
+    setShowPanel(showPanel => !showPanel)
+    dispatch(resetModals())
+    dispatch(setShowModal({ [name]: true }))
   }
 
   const logout = () => {
@@ -96,6 +103,7 @@ const NavbarResponsive = () => {
         <div className={styles._buttonBlueParent} onClick={logout} >
           <Button color='#118AC6' text={isAuth ? 'Cerrar sesión' : 'Iniciar sesión'} textColor='#fff'></Button>
         </div>
+        <p className={styles._myOrders}>¿Nuevo cliente? <a onClick={() => openModal('registerModal')}>Crear Cuenta</a></p>
         <p className={styles._myOrders} onClick={() => navigation('/history')} >Mis órdenes</p >
       </div>
 

@@ -6,7 +6,6 @@ import { createMarkup } from '@utils'
 import { useRouter } from 'next/router'
 
 const CartModal = () => {
-
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -37,9 +36,16 @@ const CartModal = () => {
     dispatch(setToast('warning', 'Su carrito esta vacio', 1))
   }
 
+  const getVariableTotalPrice = (quantity, total) => {
+    let price = total.split('$')[1]
+    price = parseFloat(price) / quantity
+
+    return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
+  }
+
   return (
     <div className={cartModal ? styles._background : styles._hidden} onClick={closeModal} id={'modal'}>
-      <div className={`_generalCard ${styles._modal}`} >
+      <div className={styles._modal} >
         <div className={styles._header}>
           <p className={styles._title}>Mi Pedido</p>
           <p className={styles._subtitle}>¡Free delivery en Chacao y Las Mercedes!</p>
@@ -51,6 +57,7 @@ const CartModal = () => {
               <p className={styles._description}>Tu carrito está vacío</p> :
               nodes.map((item, index) => {
                 const dataItem = item?.product?.node
+                const totalPrice = dataItem?.price ? dataItem?.price : getVariableTotalPrice(item.quantity, item.total)
 
                 return (
                   <div key={index} className={styles._productContainer}>
@@ -67,7 +74,7 @@ const CartModal = () => {
 
                       <div className={styles._quantityContainer}>
                         <CountProduct productKey={item?.key} stock={dataItem?.stockQuantity} quantity={item?.quantity} />
-                        <p className={styles._number}>{item?.price}</p>
+                        <p className={styles._number}>{totalPrice}</p>
                       </div>
                     </div>
                   </div>

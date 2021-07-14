@@ -1,14 +1,26 @@
-import React, {useState, useCallback, useRef} from 'react'
-import Head from 'next/head'
+import {useState, useCallback, useRef, useEffect} from 'react'
 import { Navbar, IndividualProductModal, CartModal } from '@components'
-import Footer from '../Footer'
 import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner, Catering } from './elements'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 import { scrollTo } from '@utils/common'
-import { useSelector } from 'react-redux'
+import Footer from '../Footer'
+import Head from 'next/head'
+import { setStringKey, setShowModal } from '@store/actions'
 
 const Home = ({ content, data, resource }) => {
-
   const { scrollReference: { homeReference } } = useSelector((state: any) => state)
+
+  const dispatch = useDispatch()
+  const router = useRouter()
+
+  useEffect(() => {
+    const passwordKey = router.query?.key
+    if (passwordKey) {
+      dispatch(setShowModal({ changePasswordModal: true }))
+      dispatch(setStringKey(passwordKey))
+    }
+  }, [])
 
   const outstandingRef = useCallback((node) => {
     scrollingReference(node, 'outstanding')

@@ -16,29 +16,29 @@ const Footer = ({ data, content }) => {
 
     if (args[0] == '/login') return dispatch(setShowModal({ loginModal: true }))
     if (args[0] == '/contact') return dispatch(setShowModal({ contactModal: true }))
-     if (router.pathname != args[0]) {
+    if (router.pathname != args[0]) {
       if (args[1]) dispatch(seletedReference({ [args[2]]: { current: args[1] } }))
       router.push(args[0])
 
       return;
+    }
+    if (args[1]) {
+      dispatch(seletedReference({
+        [args[2]]: {
+          current: args[1],
+          [args[1]]: !scrollReference.homeReference[args[1]]
+        }
+      }))
+    }
+    if (args[1] == 'menu') {
+      dispatch(seletedReference({
+        [args[2]]: {
+          current: args[1],
+          [args[1]]: !scrollReference.shopReference[args[1]]
+        }
+      }))
+    }
   }
-  if (args[1]) {
-    dispatch(seletedReference({
-      [args[2]]: {
-        current: args[1],
-        [args[1]]: !scrollReference.homeReference[args[1]]
-      }
-    }))
-  }
-  if (args[1]== 'menu') {
-    dispatch(seletedReference({
-      [args[2]]: {
-        current: args[1],
-        [args[1]]: !scrollReference.shopReference[args[1]]
-      }
-    }))
-  }
-}
   const clickOption = (route, reference = null, key = '') => {
 
 
@@ -52,7 +52,7 @@ const Footer = ({ data, content }) => {
         <div className={styles._footer}>
 
           <div className={styles._content}>
-            <div className={styles._logoMain} onClick={() => clickOption('/')} >
+            <div className={styles._logoMain} onClick={() => clickOption('/', 'outstanding', 'homeReference')} >
               <ChickenLogo color='#fff' />
             </div>
             <div className={styles._textContainer}>
@@ -61,25 +61,25 @@ const Footer = ({ data, content }) => {
             </div>
             <div className={styles._links}>
               <div>
-              <p onClick={() => clickOption('contact')} className={styles._link} >Contáctanos</p>
+                <p onClick={() => clickOption('/contact')} className={styles._link} >Contáctanos</p>
               </div>
               <div>
-              <p onClick={() => clickOption('about-us')} className={styles._link} >About us</p>
+                <p onClick={() => clickOption('about-us')} className={styles._link} >About us</p>
               </div>
               <div>
-              <p onClick={() => clickOption('/', 'outstanding','homeReference')} className={styles._link} >Destacados</p>
+                <p onClick={() => clickOption('/', 'outstanding', 'homeReference')} className={styles._link} >Destacados</p>
               </div>
               <div>
-              <p onClick={() => clickOption('/', 'catering','homeReference')} className={styles._link} >Catering</p>
+                <p onClick={() => clickOption('/', 'catering', 'homeReference')} className={styles._link} >Catering</p>
               </div>
               <div>
-              <p onClick={() => clickOption('/', 'location','homeReference')} className={styles._link} >Location</p>
+                <p onClick={() => clickOption('/', 'location', 'homeReference')} className={styles._link} >Location</p>
               </div>
               <div>
-              <p onClick={() => clickOption('/shop', 'menu','shopReference')} className={styles._link} >Menú</p>
+                <p onClick={() => clickOption('/shop', 'menu', 'shopReference')} className={styles._link} >Menú</p>
               </div>
               <div>
-              <p onClick={() => clickOption('/login')} className={styles._link} >Login</p>
+                <p onClick={() => clickOption('/login')} className={styles._link} >Login</p>
               </div>
               {/* {
                 data?.footerNavigation.map((item, index) => {
@@ -131,7 +131,9 @@ const Footer = ({ data, content }) => {
                   </a>
                 </div>
                 <div className={styles._copy}>
-                  <img src='images/icons/banana-logo.svg' className={styles._makers} />
+                  <a href='https://www.instagram.com/_bananacreative/' >
+                    <img src='images/icons/banana-logo.svg' className={styles._makers} />
+                  </a>
                 </div>
               </div>
             </div>
