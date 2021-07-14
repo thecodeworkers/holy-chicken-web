@@ -21,6 +21,7 @@
   justify-content: space-between;
   align-content: center;
   background-color: $white;
+  border-radius:  2.375rem;
 }
 
 ._cardParent {
@@ -80,8 +81,6 @@
 ._header{
   text-align: center;
   padding: 3rem 2.5rem;
-  border-top-left-radius:  2.375rem;
-  border-top-right-radius:  2.375rem;
 }
 
 ._title{

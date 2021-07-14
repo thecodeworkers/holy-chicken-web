@@ -27,6 +27,7 @@ const NavBar = ({ data }) => {
     }
     if (route != router.pathname) {
       router.push(route)
+      dispatch(resetModals())
     }
   }
 
@@ -50,6 +51,7 @@ const NavBar = ({ data }) => {
   }
 
   const showedCart = (showCart) => {
+    dispatch(resetModals())
     setShowCart(showCart => !showCart)
 
     if(showCart) return  dispatch(setShowModal({ cartModal: false }))
