@@ -42,6 +42,7 @@ const FirstBanner = ({ content, backup, reference}: any) => {
   const openIndividualModal = (item: any) => {
     dispatch(setShowModal({ individualProductModal: true }))
     dispatch(setCurrentProduct({ currentProduct: item }))
+    dispatch(resetStore())
   }
 
   return (

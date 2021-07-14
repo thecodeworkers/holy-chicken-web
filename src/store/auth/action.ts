@@ -1,7 +1,7 @@
-import { registerMutation, loginMutation, restorePasswordEmail, resetUserPasswordMutation } from '@graphql'
+import { registerMutation, loginMutation, restorePasswordEmail, resetUserPasswordMutation, getTmpSessionToken } from '@graphql'
 import { actionObject } from '@utils'
-import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL, LOGOUT_USER, RESTORE_PASSWORD } from './action-types'
-import { REQUEST_LOADER, LOADER } from '@store/loader/actions-types'
+import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL, LOGOUT_USER, RESTORE_PASSWORD, GET_TMP_SESSION } from './action-types'
+import { REQUEST_LOADER } from '@store/loader/actions-types'
 import { setToast } from '@store/toast/action'
 
 export const registerUser = (body: any) => async (dispatch) => {
@@ -89,4 +89,11 @@ export const restorePassword = (password) => async (dispatch, getState) => {
 
 export const resetForgotStatus = () => async (dispatch) => {
   await dispatch(actionObject(RESTORE_PASSWORD_EMAIL, { emailSended: false }))
+}
+
+export const getTmpSession = () => async (dispatch) => {
+  const response = await getTmpSessionToken();
+  const tmpSessionToken = response?.sessionToken || ''
+
+  return dispatch(actionObject(GET_TMP_SESSION, { tmpSessionToken }))
 }
