@@ -106,7 +106,7 @@ const PaymentModal = () => {
             </div>
             <div className={styles._totalParent}>
               <p className={styles._parentTitle}>Total</p>
-              <p className={styles._parentTitle}>{cartProducts.total}</p>
+              <p className={styles._parentTitle}>{cartProducts?.total}  <span className={styles._bs}>~ {cartProducts?.totalBs || "Bs.0,00"}</span></p>
             </div>
           </div>
           <div className={styles._rightSection}>

@@ -13,6 +13,9 @@ const addItemToCartMutation = async (product, quantity, jwtToken, sessionToken) 
       clientMutationId: "${uuidv4()}"
     }) {
       ${cart()}
+      added {
+        key
+      }
     }
   }
 `

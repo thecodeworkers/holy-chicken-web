@@ -12,6 +12,7 @@ cart {
   contentsTotal
   needsShippingAddress
   isEmpty
+  feeTotal
   availableShippingMethods {
     rates {
       id
