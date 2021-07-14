@@ -31,7 +31,7 @@ const ChangePasswordModal = () => {
       dispatch(setShowModal({ changePasswordModal: false }))
       formik.resetForm()
 
-      window.history.replaceState(null, '', '/')
+      // window.history.replaceState(null, '', '/')
     }
 
     return () => clearTimeout(timeout)
