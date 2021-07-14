@@ -45,6 +45,9 @@ const loginMutation = async ({ email, password, sessionToken }) => {
             dateCompleted
             total
             subtotal
+            trackOrder {
+              step
+            }
             lineItems {
               nodes {
                 product {

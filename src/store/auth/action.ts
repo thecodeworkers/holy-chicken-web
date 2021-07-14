@@ -29,8 +29,6 @@ export const loginUser = (body: any) => async (dispatch) => {
 
     if(result.message) throw new Error(result.message)
 
-    console.log(result)
-
     dispatch(actionObject(LOGIN_USER, { login: result, isAuth: result?.login ? true : false }))
     dispatch(dispatch(setToast('check', 'Usuario autenticado exitosamente', 1)))
   } catch (error) {

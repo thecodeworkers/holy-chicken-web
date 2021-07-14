@@ -8,7 +8,7 @@
   position: absolute;
   width: 100%;
   bottom: 0;
-  max-height: 25rem;
+  max-height: 25.5rem;
   overflow: auto;
 
   &::-webkit-scrollbar {
@@ -53,7 +53,15 @@
   align-items: center;
 }
 
-._fieldParent {
+._rowTitleOpacity {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+  opacity: .4;
+}
+
+@mixin input() {
   position: relative;
   width: 100%;
   color: $gray;
@@ -67,6 +75,15 @@
   &:nth-child(2) {
     margin: 1.2rem 0;
   }
+}
+
+._fieldParent {
+  @include input()
+}
+
+._fieldParentOpacity {
+  @include input();
+  opacity: .4;
 }
 
 ._searchInput {
@@ -99,4 +116,25 @@
 ._headerText {
   font-family: $montserratBold;
   font-size: $montserratBold14;
+}
+
+
+._arrowParent {
+  display: block;
+}
+
+._downArrow {
+  transform: rotate(180deg);
+}
+
+._textParent {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & p {
+    font-family: $montserratRegular;
+    font-size: $montserratRegular18;
+  }
 }
