@@ -4,6 +4,7 @@ import { setShowModal } from '@store/actions'
 import { Button, Tooltip } from '@components'
 import formikConfig from './formik'
 import styles from './styles.module.scss'
+import { useRouter } from 'next/router'
 
 const ChangePasswordModal = () => {
   const dispatch = useDispatch()
@@ -26,12 +27,15 @@ const ChangePasswordModal = () => {
     if (target.id == 'change-password-modal') dispatch(setShowModal({ changePasswordModal: false }))
   }
 
+  const router = useRouter()
+
   useEffect(() => {
     if (!tmpEmail) {
       dispatch(setShowModal({ changePasswordModal: false }))
       formik.resetForm()
 
-      // window.history.replaceState(null, '', '/')
+      if (router.query.key)
+        window.history.replaceState(null, '', '/')
     }
 
     return () => clearTimeout(timeout)
