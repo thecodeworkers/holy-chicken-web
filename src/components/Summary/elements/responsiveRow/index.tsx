@@ -13,12 +13,21 @@ const ResponsiveRow = ({ items }) => {
     dispatch(removeCartItem(key))
   }
 
+  const getVariableTotalPrice = (quantity, total) => {
+    let price = total.split('$')[1]
+    price = parseFloat(price) / quantity
+
+    return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
+  }
+
   return (
     <>
       {
         items.length ?
           items.map((item: any, index: number) => {
             const element = item?.product?.node
+            const totalPrice = element?.price ? element?.price : getVariableTotalPrice(item.quantity, item.total)
+
             return (
               <div key={index}>
                 <div className={styles._row}>
@@ -32,7 +41,7 @@ const ResponsiveRow = ({ items }) => {
                     <div className={styles._countParent}>
                       <CountProduct productKey={item?.key} stock={element?.stockQuantity} quantity={item?.quantity} />
                     </div>
-                    <p className={styles._price}>{element?.price}</p>
+                    <p className={styles._price}>{totalPrice}</p>
                   </div>
                 </div>
               </div>

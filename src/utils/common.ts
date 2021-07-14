@@ -19,8 +19,8 @@ export const scrolling = (reference) => {
   }
 }
 
-export const scrollTo = (ref: any) => {
-  window.scrollTo({ top: ref.offsetTop, behavior: 'smooth' });
+export const scrollTo = (ref: any, offset = 0) => {
+  window.scrollTo({ top: ref.offsetTop - offset, behavior: 'smooth' });
 }
 
 export const createMarkup = (text) => { return { __html: text }; }

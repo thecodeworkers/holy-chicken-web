@@ -12,7 +12,7 @@ const HomePage = () => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  ({ store }) => store.dispatch(getResources('homePage'))
+  ({ store }) => store.dispatch(getResources('homePage', true))
 )
 
 export default HomePage
