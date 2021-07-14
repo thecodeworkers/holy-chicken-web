@@ -22,9 +22,9 @@ export const setCartProducts = ({ databaseId, quantity = 1 }: any, extras = null
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
     const { auth } = await getState()
-    const sessionToken = auth?.login?.login?.customer?.sessionToken
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
 
-    if (auth?.isAuth) {
+    if (sessionToken) {
       const result = await addItemToCartMutation(databaseId, quantity, null, sessionToken)
       if (result.message) throw new Error(result.message)
 
@@ -38,7 +38,7 @@ export const setCartProducts = ({ databaseId, quantity = 1 }: any, extras = null
       dispatch(setShowModal({ cartModal: true }))
     }
 
-    if (!auth.isAuth) {
+    if (!sessionToken) {
       dispatch(setToast('warning', 'Por favor inicie sesión para continuar', 1))
     }
 

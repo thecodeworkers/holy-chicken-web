@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { scrollTo } from '@utils/common'
 import Footer from '../Footer'
 import Head from 'next/head'
-import { setStringKey, setShowModal } from '@store/actions'
+import { setStringKey, setShowModal, getTmpSession } from '@store/actions'
 
 const Home = ({ content, data, resource }) => {
   const { scrollReference: { homeReference } } = useSelector((state: any) => state)
@@ -20,6 +20,8 @@ const Home = ({ content, data, resource }) => {
       dispatch(setShowModal({ changePasswordModal: true }))
       dispatch(setStringKey(passwordKey))
     }
+
+    dispatch(getTmpSession())
   }, [])
 
   const outstandingRef = useCallback((node) => {
@@ -62,4 +64,3 @@ const Home = ({ content, data, resource }) => {
   )
 }
 export default Home
-

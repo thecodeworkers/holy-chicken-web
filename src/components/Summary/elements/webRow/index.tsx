@@ -13,12 +13,21 @@ const WebRow = ({ items }) => {
     dispatch(removeCartItem(key))
   }
 
+  const getVariableTotalPrice = (quantity, total) => {
+    let price = total.split('$')[1]
+    price = parseFloat(price) / quantity
+
+    return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
+  }
+
   return (
     <div>
       {
         items.length ?
           items.map((item, index) => {
             const element = item?.product?.node
+            const totalPrice = element?.price ? element?.price : getVariableTotalPrice(item.quantity, item.total)
+
             return (
               <div className={styles._row} key={index}>
                 <div className={styles._closeParent} onClick={() => deleteItem(item)}>
@@ -41,7 +50,7 @@ const WebRow = ({ items }) => {
                   </div>
                 </div>
                 <div className={styles._columnThree}>
-                  <p className={styles._price}>{element?.price}</p>
+                  <p className={styles._price}>{totalPrice}</p>
                 </div>
               </div>
             )
