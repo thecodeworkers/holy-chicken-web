@@ -38,12 +38,17 @@ const reconcile = (state, payload) => {
         trueState = { ...trueState, auth: credentials }
         break
 
+      case 'paymentStep':
+        const paymentStep = state[key]
+        trueState = { ...trueState, paymentStep }
+        break
+
       case 'cart':
         const cart = state[key]
         trueState = { ...trueState, cart }
         break
 
-        case 'intermitence':
+      case 'intermitence':
         const intermitence = state[key]
         trueState = { ...trueState, intermitence }
         break

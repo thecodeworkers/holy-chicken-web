@@ -14,6 +14,10 @@
   backdrop-filter: blur(14px);
 }
 
+._bs{
+  font-size: $montserratLight10;
+  font-family: $montserratMedium;
+}
 ._modal{
   display: inline-flex;
   max-width: 75rem;
