@@ -110,7 +110,7 @@ const FirstBanner = ({ content, backup, reference}: any) => {
                               name={item?.name}
                               image={item.image?.mediaItemUrl}
                               description={item?.description}
-                              price={item?.price.includes('-') ? item?.price.split('-')[0] : item?.price}
+                              price={item?.price?.includes('-') ? item?.price?.split('-')[0] : item?.price}
                               hot={item?.spicy?.isSpicy}
                             />
                           </div>

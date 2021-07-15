@@ -8,7 +8,11 @@ import { createMarkup } from '@utils'
 
 const IndividualProduct = ({ type = 'list' }) => {
   const dispatch = useDispatch()
-  const { intermitence: { individualProductModal }, cart: { currentProduct, cartProducts }, product } = useSelector((state: any) => state)
+  const {
+    intermitence: { individualProductModal },
+    cart: { currentProduct, cartProducts },
+    product, variableProduct
+   } = useSelector((state: any) => state)
 
   const allAddons = [
     ...product.addons,
@@ -63,6 +67,12 @@ const IndividualProduct = ({ type = 'list' }) => {
   }
 
   const setProductstoCart = () => {
+
+    console.log('CurrenT', currentProduct)
+
+    // console.log(variableProduct?.currentVariableProduct)
+
+    const productVariable = variableProduct?.currentVariableProduct
     let correctProduct = currentProduct
 
     if (!!currentProduct?.variations) {
@@ -82,6 +92,8 @@ const IndividualProduct = ({ type = 'list' }) => {
       const result = currentProduct.variations.nodes.find(filterCriteria)
       if (result) correctProduct = result
     }
+
+    if(productVariable) correctProduct = productVariable
 
     dispatch(setCartProducts(correctProduct, allAddons))
   }

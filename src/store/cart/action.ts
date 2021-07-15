@@ -19,6 +19,8 @@ export const getCart = () => async (dispatch, getState) => {
 }
 
 export const setCartProducts = ({ databaseId, quantity = 1 }: any, extras = null) => async (dispatch, getState) => {
+
+  console.log('DATA BASE ID', databaseId)
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
     const { auth } = await getState()
