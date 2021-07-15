@@ -24,8 +24,8 @@ const DeliveryForm = () => {
     deliveryform.setFieldValue('city', city[0]?.name)
     const filterCities = filter(city, city?.name, 'name')
     setRegions(filterCities[0].region?.content || [])
-    deliveryform.setFieldValue('municipality', filterCities[0].region?.content[0]?.name)
-    const shipping = getShipping(filterCities[0].region?.content[0]?.key)?.id
+    deliveryform.setFieldValue('municipality', filterCities[0]?.region?.content[0]?.name)
+    const shipping = getShipping(filterCities[0]?.region?.content[0]?.key)?.id
     dispatch(updateShippingMethod(shipping))
   }
 
@@ -152,7 +152,7 @@ const DeliveryForm = () => {
                 value={deliveryform.values.country}
                 className={errors.country && touched.country ? styles._inputError : styles._inputSelect}>
                 {countries?.length ? countries.map((country, index) =>
-                  <option key={index} value={country.slug}>{country.title}</option>
+                  <option key={index} value={country?.slug}>{country?.title}</option>
                 ) : <option>No Disponible</option>}
               </select>
             </div>
@@ -168,8 +168,8 @@ const DeliveryForm = () => {
                 onBlur={deliveryform.handleBlur}
                 value={deliveryform.values.city}
                 className={errors.city && touched.city ? styles._inputError : styles._inputSelect}>
-                {cities?.length ? cities.map((city, index) =>
-                  <option key={index} value={city.name}>{city.name}</option>
+                {cities?.length ? cities?.map((city, index) =>
+                  <option key={index} value={city?.name}>{city?.name}</option>
                 ) : <option>No Disponible</option>}
               </select>
             </div>
@@ -201,7 +201,7 @@ const DeliveryForm = () => {
                 value={deliveryform.values.municipality}
                 className={errors.municipality && touched.municipality ? styles._inputError : styles._inputSelect}>
                 {regions?.length ? regions.map((region, index) =>
-                  <option key={index} value={region.key}>{region.name}  &nbsp;  ${getShipping(region.key).cost}</option>
+                  <option key={index} value={region?.key}>{region?.name}  &nbsp;  ${getShipping(region?.key).cost}</option>
                 ) : <option>No Disponible</option>}
               </select>
             </div>

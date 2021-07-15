@@ -30,7 +30,7 @@ const RegisterModal = () => {
   }
 
   useEffect(() => {
-    if (auth.register?.registerCustomer) {
+    if (auth?.register?.registerCustomer) {
       dispatch(setShowModal({ registerModal: false }))
       formik.resetForm()
     }

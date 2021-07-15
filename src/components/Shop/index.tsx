@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal } from '@store/actions'
 import { scrollTo } from '@utils/common'
 
-const Shop = ({ content, data, filters, backup }) => {
+const Shop = ({ content, data, filters, backup, storeData }) => {
 
   const dispatch = useDispatch()
 
@@ -44,7 +44,7 @@ const Shop = ({ content, data, filters, backup }) => {
       <Navbar data={data?.header} />
       <ChangePasswordModal />
       {content ? (<>
-        <FirstBanner content={content} filters={filters} backup={backup} reference={menuRef} />
+        <FirstBanner content={content} filters={filters} backup={backup} reference={menuRef} data={storeData} />
       </>
       ) : null}
       <Footer data={data?.footer} content={data?.socialNetworks} />

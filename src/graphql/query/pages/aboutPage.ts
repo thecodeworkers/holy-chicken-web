@@ -25,6 +25,9 @@ aboutPage:page(id: "${aboutUsId}") {
         slug
         title
       }
+      file {
+        mediaItemUrl
+      }
     }
     roadmap {
       title

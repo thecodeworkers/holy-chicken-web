@@ -32,7 +32,7 @@ const DeliveryData = () => {
   }
 
   useEffect(() => {
-    if (delivery_data?.type) setShippingMethod(delivery_data.type)
+    if (delivery_data?.type) setShippingMethod(delivery_data?.type)
     if (!delivery_data?.type) dispatch(setStep({ delivery_data: { ...delivery_data, type: shippingMethod } }))
   }, [])
 
