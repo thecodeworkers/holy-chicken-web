@@ -78,7 +78,7 @@
 ._buttonContainer{
   display: flex;
   flex-direction: column;
-  margin-top: 1.5rem;
+
 }
 
 ._btnParent{
@@ -112,9 +112,7 @@
     text-align: center;
   }
 
-  ._buttonContainer{
-    margin-top: 0;
-  }
+
   ._fullContainer {
     margin-bottom:1.2rem;
   }

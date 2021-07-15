@@ -96,7 +96,6 @@ const DeliveryForm = () => {
             </div>
           </div>
 
-
           <div className={styles._quarterWidth}>
             <div className={`${styles._inputParent} ${styles._separation}`}>
               <label>Telefono</label>
@@ -177,7 +176,7 @@ const DeliveryForm = () => {
           </div>
         </div>
 
-        <div className={styles._inputLeftRow}>
+        <div className={styles._inputRow}>
           <div className={styles._quarterWidth} >
             <div className={styles._inputParent}>
               <label>Codigo Postal</label>
@@ -193,7 +192,7 @@ const DeliveryForm = () => {
           </div>
 
           <div className={styles._quarterWidth} >
-            <div className={`${styles._inputParent} ${styles._marginLeft}`}>
+            <div className={`${styles._inputParent}`}>
               <label>Municipio</label>
               <select name="municipality"
                 placeholder='Seleccione el país'
@@ -208,8 +207,9 @@ const DeliveryForm = () => {
             </div>
           </div>
 
+          <div className={styles._quarterWidth} >
+            </div>
         </div>
-
 
         <div className={styles._buttonContainer}>
           <div className={styles._btnParent}>

@@ -1,26 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
-import { ModalFrame, Button } from '@components'
+import { ModalFrame, Button, Tooltip} from '@components'
 import { Phone, Mail, Insta, Twitter, WhatsApp, Location, PaperClip } from '@images/icons'
-import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import FormikConfig from './formik'
 
 const ModalContact = () => {
-
-  const formik = FormikConfig()
   const [isActive, setActive] = useState(1)
   const [fileName, setFileName] = useState('')
-  const { errors, touched } = formik
 
+  const formik = FormikConfig()
+  const { errors, touched } = formik
+  const [showTooltip, setShowTooltip] = useState(false)
   const { resource: { general: { general } } } = useSelector((state: any) => state)
+  let timeout
 
   const activeLink = (props) => {
     setActive(props)
   }
 
-  const getFile = (event) => {
-    setFileName(event.target.files[0].name);
+  const tooltipTimer = () => {
+    setShowTooltip(true)
+
+    //  timeout = setTimeout(() => {
+    //    setShowTooltip(false)
+    // }, 8000);
   }
 
   return (
@@ -202,16 +206,12 @@ const ModalContact = () => {
                   >
                   </textarea>
 
-                  <div className={styles._paperClipParent}>
-                    <p className={styles._fileName}>{fileName}</p>
-                    <label className={styles._filePointer}>
+                  <div className={styles._paperClipParent} onClick={tooltipTimer}>
 
+                    <label className={styles._filePointer}>
+                    <Tooltip paddinHorizontal={5} top='-75px' left={'-125px'}  advice={true} show={showTooltip} />
                       <PaperClip color='#000' />
                     </label>
-                    <input type="file"
-                      accept={'application/pdf, application/msword, image/*'}
-
-                      onChange={(e) => getFile(e)} className={styles._file} />
                   </div>
                 </div>
 

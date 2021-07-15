@@ -32,6 +32,7 @@ const ResponsiveMenu = ({ show = 0, method }) => {
     }
     if (route != router.pathname) {
       router.push(route)
+      dispatch(resetModals())
       method()
     }
   }

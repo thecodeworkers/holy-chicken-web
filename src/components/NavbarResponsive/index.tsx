@@ -33,6 +33,7 @@ const NavbarResponsive = () => {
   const navigation = (route: string) => {
     if (route != router.pathname) {
       router.push(route)
+      dispatch(resetModals())
     }
   }
 
@@ -61,6 +62,7 @@ const NavbarResponsive = () => {
   }
 
   const showedCart = (showCart) => {
+
     setShowCart(showCart => !showCart)
 
     if (showCart) return dispatch(setShowModal({ cartModal: false }))

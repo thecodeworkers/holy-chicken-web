@@ -1,0 +1,2 @@
+export const GET_TMP_SESSION = 'GET_TMP_SESSION'
+export const RESET_GUEST_STORE = 'RESET_GUEST_STORE'
