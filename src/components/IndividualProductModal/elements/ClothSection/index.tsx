@@ -5,6 +5,8 @@ import { setVariableProduct } from '@store/actions'
 
 const ClothSection = ({ size = true, attributes }) => {
 
+  const attributesLength = attributes?.nodes?.length
+
   const dispatch = useDispatch()
 
   const [ currentSize, setCurrentSize ] = useState('l')
@@ -14,26 +16,43 @@ const ClothSection = ({ size = true, attributes }) => {
 
   const variations = currentProduct?.variations?.nodes ?? []
 
-
   const compareValues = () => {
-
     let selectedProduct
 
     variations.forEach(product => {
       const valueOne = product?.attributes?.nodes[0].value
-      const valueTwo = product?.attributes?.nodes[1] ? product?.attributes?.nodes[1].value : null
+      const valueTwo = size ? product?.attributes?.nodes[1].value : null
+
       if(valueOne == currentSize.toUpperCase() && valueTwo == currentColor) selectedProduct = product
     })
 
     return selectedProduct
   }
 
-  useEffect(() =>{
-    const value = compareValues()
-    if(value) dispatch(setVariableProduct({ currentVariableProduct: value }))
+  const compareValue = () => {
+    let selectedProduct
+
+    variations.forEach(product => {
+      const value = product?.attributes?.nodes[0].value
+      if(value == currentColor) selectedProduct = product
+    })
+
+    return selectedProduct
+  }
+
+  useEffect(() => {
+    if(attributesLength == 1) {
+      const value = compareValue()
+      if(value) dispatch(setVariableProduct({ currentVariableProduct: value }))
+    }
+
+    if(attributesLength == 2) {
+      const value = compareValues()
+      if(value) dispatch(setVariableProduct({ currentVariableProduct: value }))
+    }
 
     return () =>  { dispatch(setVariableProduct({ currentVariableProduct: null })) }
-  },  [currentSize, currentSize])
+  },  [currentSize, currentColor])
 
   return (
     <div>
@@ -41,8 +60,8 @@ const ClothSection = ({ size = true, attributes }) => {
 
       <div className={styles._circlesParent} >
         {
-          attributes?.nodes[1]?.options.length &&
-          attributes?.nodes[1].options.map((res, index) => {
+          attributes?.nodes[attributesLength == 2 ? 1 : 0]?.options.length &&
+          attributes?.nodes[attributesLength == 2 ? 1 : 0]?.options.map((res, index) => {
             return (
               <div className={res == currentColor ? styles._circleSelected : styles._circleThree}
                   style={{

@@ -48,6 +48,9 @@ const IndividualProduct = ({ type = 'list' }) => {
   }
 
   const featuresType = (type, attributes) => {
+
+    const attributesLength =  attributes?.nodes?.length
+
     switch (type) {
       case 'temptations':
         return <VerticalList />
@@ -59,7 +62,7 @@ const IndividualProduct = ({ type = 'list' }) => {
         return <VerticalListWithImage attributes={attributes}  />
 
       case 'merch':
-        return <ClothSection size={true} attributes={attributes} />
+        return <ClothSection size={attributesLength == 2 ? true : false} attributes={attributes} />
 
       default:
         return <div></div>
@@ -67,10 +70,6 @@ const IndividualProduct = ({ type = 'list' }) => {
   }
 
   const setProductstoCart = () => {
-
-    console.log('CurrenT', currentProduct)
-
-    // console.log(variableProduct?.currentVariableProduct)
 
     const productVariable = variableProduct?.currentVariableProduct
     let correctProduct = currentProduct
