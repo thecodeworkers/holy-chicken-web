@@ -10,7 +10,7 @@ const IndividualProduct = ({ type = 'list' }) => {
   const dispatch = useDispatch()
   const {
     intermitence: { individualProductModal },
-    cart: { currentProduct, cartProducts },
+    cart: { currentProduct },
     product, variableProduct
    } = useSelector((state: any) => state)
 
@@ -85,6 +85,8 @@ const IndividualProduct = ({ type = 'list' }) => {
       ]
 
       const filterCriteria = (product) => {
+        console.log(JSON.stringify(product.attributes.nodes), 'comparing')
+        console.log(JSON.stringify(attributes), 'other')
         return JSON.stringify(product.attributes.nodes) === JSON.stringify(attributes)
       }
 

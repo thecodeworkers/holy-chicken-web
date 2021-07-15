@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { emailRegex, passwordRegex, onlyLettersRegex } from '@utils/regex'
+import { emailRegex, passwordRegex, onlyLettersRegex, phoneRegex } from '@utils/regex'
 import * as Yup from 'yup'
 import { setStep } from '@store/actions'
 
@@ -22,7 +22,7 @@ const formikConfig = (dispatch) => (useFormik({
       .matches(onlyLettersRegex),
 
     phone: Yup.string()
-      .required(),
+      .required().matches(phoneRegex),
 
     identification: Yup.string()
       .required(),

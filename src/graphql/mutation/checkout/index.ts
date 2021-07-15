@@ -2,7 +2,7 @@ import { GraphQlClient } from '@utils'
 import { v4 as uuidv4 } from 'uuid';
 
 const checkoutMutation = async (billing, delivery, paymentMethod, user, sessionToken) => {
-  const { form: shipping, type } = delivery
+  const { form: shipping, type, shippingMethod } = delivery
   const mutation = `
   mutation Checkout {
     checkout(input: {
@@ -34,10 +34,10 @@ const checkoutMutation = async (billing, delivery, paymentMethod, user, sessionT
         postcode: "${shipping?.zipcode}",
         state: ""
       },`: ''
-      }
+    }
       customerNote: "${user?.name} ${user?.lastname}, Telefono: ${user?.phone}, CI ${user?.identification}, Correo: ${user?.email}",
       shipToDifferentAddress: true,
-      shippingMethod: "${shipping?.shippingMethod}"
+      shippingMethod: "${shippingMethod}"
     }) {
       result
       order{

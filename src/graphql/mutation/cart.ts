@@ -12,6 +12,7 @@ cart {
   contentsTotal
   needsShippingAddress
   isEmpty
+  feeTotal
   availableShippingMethods {
     rates {
       id
@@ -61,6 +62,18 @@ cart {
       subtotalTax
       tax
       total
+      variation {
+        attributes {
+          label
+          name
+          id
+          value
+        }
+        node {
+          price
+          name
+        }
+      }
     }
   }
   totalTaxes {

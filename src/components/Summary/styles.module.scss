@@ -16,6 +16,11 @@
   overflow-y: hidden;
 }
 
+._bs{
+  font-size: $montserratLight10;
+  font-family: $montserratMedium;
+}
+
 ._layout {
   display: flex;
   height: 100%;

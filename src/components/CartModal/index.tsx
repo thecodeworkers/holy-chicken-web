@@ -14,13 +14,13 @@ const CartModal = () => {
   const closeModal = (event, flag = false) => {
     const { target } = event
     if (target.id == 'modal') {
-
       dispatch(setShowModal({ cartModal: false }))
     }
   }
 
   const nodes = cart?.cartProducts?.contents?.nodes ?? []
-  const total = cart?.cartProducts?.subtotal ?? "$0.00"
+  const total = cart?.cartProducts?.total ?? "$0.00"
+  const bs = cart?.cartProducts?.totalBs ?? "Bs.0,00"
 
   const deleteItem = (dataItem: any) => {
     const { key } = dataItem
@@ -86,7 +86,7 @@ const CartModal = () => {
         <div className={styles._totalParent}>
           <div className={styles._parentContainer}>
             <p className={styles._parentTitle}>Total estimado</p>
-            <p className={styles._parentTotal}>{total}</p>
+            <p className={styles._parentTotal}>{total} <span className={styles._bs}>~ {bs}</span></p>
           </div>
           <div className={styles._btnParent}>
             <Button text='Confirmar' color='#000' textColor='#FFF' method={() => navigate('summary')} />

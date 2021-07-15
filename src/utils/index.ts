@@ -1,4 +1,7 @@
 export { default as WooCommerceClient } from './wooCommerceClient'
 export { default as GraphQlClient } from './graphqlClient'
+export { default as DolarClient } from './dolarClient'
+export * from './apiHelper'
 export * from './common'
 export * from './dateTransform'
+export * from './stripeFormat'
