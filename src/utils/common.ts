@@ -126,3 +126,13 @@ export const formatWooCommerceAmount = (amount: string): number => {
   }
   return 0
 }
+
+export const setCamelCaseKey = (obj) => {
+  const newObj = {}
+  for (let key in obj) {
+    let newKey: any = key.split('_')
+    newKey = (newKey[1]) ? `${newKey[0]}${newKey[1][0].toUpperCase()}${newKey[1].slice(1, key.length)}` : newKey[0]
+    newObj[newKey] = obj[key]
+  }
+  return newObj
+}

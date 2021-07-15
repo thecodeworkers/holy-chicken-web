@@ -5,7 +5,8 @@ import styles from './styles.module.scss'
 import { Chiken } from '@images/resources'
 import { Search } from '@images/icons';
 import { OpenModal, OrderModal, ResponsiveHistory } from './elements'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateUserData } from '@store/actions'
 
 const circles = [
   { label: 'Preparando pedido' },
@@ -16,7 +17,7 @@ const circles = [
 ]
 
 const History = ({ data }) => {
-
+  const dispatch = useDispatch()
   const { auth, resource: { products } } = useSelector((state: any) => state)
 
   const [currentStep, setCurrentStep] = useState(5)
@@ -88,6 +89,10 @@ const History = ({ data }) => {
     const match = ordersArray.find(element => element.orderNumber == value)
     if (match) setCurrentOrder(match)
   }
+
+  useEffect(()=>{
+    dispatch(updateUserData())
+  },[])
 
   return (
     <>
