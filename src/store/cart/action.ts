@@ -34,7 +34,6 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
       let { addCartItems } = result
       const itemsNumber = addCartItems?.cart?.contents?.itemCount
 
-      addCartItems.cart.totalBs = await getDollarEquivalent(formatWooCommerceAmount(addCartItems?.cart?.total))
       if (extras) {
 
         let extraAmount = 0
@@ -56,6 +55,9 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
         addCartItems = feeResult?.addFee
       }
 
+
+      addCartItems.cart.totalBs = await getDollarEquivalent(formatWooCommerceAmount(addCartItems?.cart?.total))
+
       dispatch(actionObject(CART_PRODUCTS, { cartProducts: addCartItems?.cart }))
       dispatch(setProductsNumber({ number: itemsNumber }))
       dispatch(setToast('check', 'Producto agregado al carrito ', 1))
@@ -68,7 +70,6 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
     }
 
   } catch (error) {
-    console.log(error)
     dispatch(setToast('check', 'Error al agregar producto al carrito', 1))
   } finally {
     dispatch(actionObject(REQUEST_LOADER, false))

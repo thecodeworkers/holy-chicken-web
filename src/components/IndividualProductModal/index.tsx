@@ -75,13 +75,9 @@ const IndividualProduct = ({ type = 'list' }) => {
         { value: sauce }
       ]
 
-      const filterCriteria = (product) => {
-        console.log(JSON.stringify(product.attributes.nodes), 'comparing')
-        console.log(JSON.stringify(attributes), 'other')
-        return JSON.stringify(product.attributes.nodes) === JSON.stringify(attributes)
-      }
-
+      const filterCriteria = (product) => JSON.stringify(product.attributes.nodes) === JSON.stringify(attributes)
       const result = currentProduct.variations.nodes.find(filterCriteria)
+
       if (result) correctProduct = result
     }
 
