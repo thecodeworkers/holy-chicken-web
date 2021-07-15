@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateUserData } from '@store/actions'
 
 const circles = [
-  { label: 'Preparando pedido' },
   { label: 'Por entregar' },
   { label: 'Orden en vía' },
   { label: 'Confirmando pago' },
@@ -20,7 +19,7 @@ const History = ({ data }) => {
   const dispatch = useDispatch()
   const { auth, resource: { products } } = useSelector((state: any) => state)
 
-  const [currentStep, setCurrentStep] = useState(5)
+  const [currentStep, setCurrentStep] = useState(4)
   const [show, setShow] = useState(false)
   const [showOrder, setShowOrder] = useState(false)
   const [label, setLabel] = useState('Preparando pedido')
@@ -211,6 +210,7 @@ const History = ({ data }) => {
                       historyCopy.map((item, index) => {
 
                         const product = item?.lineItems
+                        const total = item.total
 
                         return (
                           <div className={styles._row} key={index}>
@@ -226,7 +226,7 @@ const History = ({ data }) => {
                             </div>
 
                             <div>
-                              <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={() => showOrderModal(product)} />
+                              <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={() => showOrderModal( { ...product, total })} />
                             </div>
                           </div>
                         )

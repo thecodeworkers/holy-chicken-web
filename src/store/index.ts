@@ -53,7 +53,8 @@ const makeStore: any = ({ isServer }) => {
       'loader',
       'product',
       'resource',
-      'intermitence'
+      'intermitence',
+      'auth'
     ]
   }
 

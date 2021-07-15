@@ -7,7 +7,7 @@
 ._card {
   padding: 1.2rem;
   box-sizing: border-box;
-  width: 380px;
+  width: 400px;
   position: relative;
 }
 
@@ -87,7 +87,7 @@
 }
 
 ._columnTwo {
-  width: 50%;
+  width: 45%;
 
   & p:first-child {
     font-family: $blackerTextHeavy;
@@ -104,7 +104,7 @@
 }
 
 ._columnThree {
-  width: 15%;
+  width: 20%;
 
   & p {
     font-family: $montserratBold;

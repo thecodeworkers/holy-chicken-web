@@ -28,20 +28,21 @@ const OrderModal = ({ show, method, data }) => {
 
               const { product } = item
 
+              console.log('IREEWER', item)
               return (
                 <div className={styles._row} key={index}>
                   <div className={styles._columnOne}>
-                    <img src={product?.image?.mediaItemUrl} width='75px'></img>
+                    <img src={item?.image?.mediaItemUrl} width='75px'></img>
                   </div>
 
                   <div className={styles._columnTwo}>
-                    <p>{product?.name}</p>
-                    <div dangerouslySetInnerHTML={createMarkup(product.description)}></div>
+                    <p>{item?.name}</p>
+                    <div dangerouslySetInnerHTML={createMarkup(item?.description)}></div>
 
                   </div>
 
                   <div className={styles._columnThree}>
-                    <p>{findPrice(product?.id)}</p>
+                    <p>{findPrice(item?.id)}</p>
                   </div>
                 </div>
               )
@@ -52,7 +53,7 @@ const OrderModal = ({ show, method, data }) => {
         <div className={styles._footer}>
           <div className={styles._footerParent}>
             <p>Total estimado</p>
-            <p>$11.5</p>
+            <p>{data?.total}</p>
           </div>
         </div>
       </div>
