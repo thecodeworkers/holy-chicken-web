@@ -5,14 +5,14 @@ import { wrapper } from '@store'
 import { getResources } from '@store/actions'
 
 const ShopPage = () => {
-  const { resource: { general: { general }, products, productsCategories, shop, } } = useSelector((state: any) => state)
+  const {  page: { storePage: { store } },resource: { general: { general }, products, productsCategories, shop, } } = useSelector((state: any) => state)
 
-  return <Shop content={products} backup={shop} data={general} filters={productsCategories} />
+  return <Shop content={products} storeData={store} backup={shop} data={general} filters={productsCategories} />
 
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  ({ store }) => store.dispatch(getResources())
+  ({ store }) => store.dispatch(getResources('storePage'))
 
 )
 

@@ -2,7 +2,6 @@ import styles from './styles.module.scss'
 import { Button } from '@components'
 
 const SecondBanner = ({ data }) => {
-
   return (
     <>
       <div className={styles._container}>
@@ -13,7 +12,9 @@ const SecondBanner = ({ data }) => {
             <p className={styles._title}>{data?.title}</p>
             <p className={styles._subtitle}>{data?.content}</p>
             <div className={styles._buttonContainer} >
-              <Button color='#000000' textColor='white' text={data.button.title}></Button>
+              <a href={data.file?.mediaItemUrl || data.button?.link}>
+                <Button color='#000000' textColor='white' text={data.button.title}></Button>
+              </a>
             </div>
             <p className={styles._advice}>{data?.advice}</p>
           </div>
