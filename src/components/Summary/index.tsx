@@ -15,9 +15,10 @@ const Summary = ({ data, cartParam }) => {
   const dispatch = useDispatch()
 
   const [input, setInput] = useState('')
-  const total = cartParam?.subtotal ?? '0.00$'
-  const subtotal = cartParam?.subtotal ?? '0.00$'
+  const total = cartParam?.total ?? '0.00$'
+  const subtotal = cartParam?.subtotal ?? '$0.00'
   const items = cartParam?.contents?.nodes ?? []
+  const bs = cart?.cartProducts?.totalBs ?? "Bs.0,00"
 
   useEffect(() => {
     if(cart?.coupon) setInput('')
@@ -89,7 +90,7 @@ const Summary = ({ data, cartParam }) => {
 
                 <div className={styles._totalParent}>
                   <p>Total</p>
-                  <p>{total}</p>
+                  <p>{total} <span className={styles._bs}>~ {bs}</span></p>
                 </div>
 
                 <div>

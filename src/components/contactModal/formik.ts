@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { emailRegex, passwordRegex, onlyLettersRegex } from '@utils/regex'
+import { emailRegex, passwordRegex, onlyLettersRegex, phoneRegex } from '@utils/regex'
 import * as Yup from 'yup'
 
 const formikConfig = () => (useFormik({
@@ -21,7 +21,7 @@ const formikConfig = () => (useFormik({
       .matches(onlyLettersRegex),
 
     phone: Yup.string()
-      .required(),
+      .required().matches(phoneRegex),
 
     email: Yup.string()
       .required()

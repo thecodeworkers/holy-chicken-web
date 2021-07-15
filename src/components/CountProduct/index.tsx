@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styles from './styles.module.scss'
 import { useDispatch } from 'react-redux'
 import { updateQuantity } from '@store/actions'
+import { useEffect } from 'react'
 
 const CountProduct = ({
   productKey = '',
@@ -38,6 +39,10 @@ const CountProduct = ({
       }
     }
   }
+
+  useEffect(()=>{
+    setProductNumber(quantity)
+  },[quantity])
 
   return (
     <>
