@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
+import { formatWooCommerceAmount } from './stripeFormat'
 
 export const normalizedArray = response => response ? response : []
 
@@ -118,14 +117,14 @@ export const productFilter = (nodes: Array<any>, comparison, key) => {
   return (comparison.categories.length) ? nodes.filter(nodeFilter) : nodes
 }
 
-export const formatWooCommerceAmount = (amount: string): number => {
-  if (amount) {
-    amount = amount.replaceAll(',', '')
-    amount = amount.replaceAll('$', '')
-    return Number(amount)
-  }
-  return 0
-}
+// export const formatWooCommerceAmount = (amount: string): number => {
+//   if (amount) {
+//     amount = amount.replaceAll(',', '')
+//     amount = amount.replaceAll('$', '')
+//     return Number(amount)
+//   }
+//   return 0
+// }
 
 export const setCamelCaseKey = (obj) => {
   const newObj = {}

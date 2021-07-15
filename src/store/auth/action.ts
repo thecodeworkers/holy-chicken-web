@@ -3,6 +3,8 @@ import { actionObject, filter, setCamelCaseKey, WooCommerceClient } from '@utils
 import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL, LOGOUT_USER, RESTORE_PASSWORD, GET_TMP_SESSION } from './action-types'
 import { REQUEST_LOADER } from '@store/loader/actions-types'
 import { setToast } from '@store/toast/action'
+import { resetGuestStore } from '../guest/action'
+import { resetCartStore } from '../cart/action'
 
 export const registerUser = (body: any) => async (dispatch) => {
 
@@ -22,7 +24,6 @@ export const registerUser = (body: any) => async (dispatch) => {
 }
 
 export const loginUser = (body: any) => async (dispatch) => {
-
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
     const result = await loginMutation(body)
@@ -33,6 +34,9 @@ export const loginUser = (body: any) => async (dispatch) => {
 
     dispatch(actionObject(LOGIN_USER, { login: result, isAuth: result?.login ? true : false }))
     dispatch(dispatch(setToast('check', 'Usuario autenticado exitosamente', 1)))
+    dispatch(resetGuestStore())
+    dispatch(resetCartStore())
+
   } catch (error) {
     dispatch(setToast('error', 'Error al autenticar usuario', 1))
   }
