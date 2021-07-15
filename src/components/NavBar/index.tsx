@@ -18,6 +18,7 @@ const NavBar = ({ data }) => {
   const [showCart, setShowCart] = useState(false)
   const { auth, cart } = useSelector((state: any) => state)
   const { isAuth } = auth
+  const number = cart?.cartProducts?.contents?.itemCount
 
   const navigation = (route: string, loader = true) => {
     if (route == '/contact') {
@@ -54,9 +55,9 @@ const NavBar = ({ data }) => {
     dispatch(resetModals())
     setShowCart(showCart => !showCart)
 
-    if(showCart) return  dispatch(setShowModal({ cartModal: false }))
+    if (showCart) return dispatch(setShowModal({ cartModal: false }))
 
-    if(!showCart) return  dispatch(setShowModal({ cartModal: true }))
+    if (!showCart) return dispatch(setShowModal({ cartModal: true }))
   }
 
   return (
@@ -92,8 +93,8 @@ const NavBar = ({ data }) => {
               <div className={styles._iconParent} onClick={() => showedCart(showCart)}>
                 <Cart color='#000' />
                 {
-                  cart?.number > 0 && (<div className={styles._numberParent}>
-                    <p>{cart?.number}</p>
+                  number > 0 && (<div className={styles._numberParent}>
+                    <p>{number || 0}</p>
                   </div>)
                 }
 

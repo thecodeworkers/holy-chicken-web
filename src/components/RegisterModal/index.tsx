@@ -47,9 +47,9 @@ const RegisterModal = () => {
   const tooltipTimer = () => {
     setShowTooltip(true)
 
-    // timeout = setTimeout(() => {
-    //   setShowTooltip(false)
-    // }, 8000);
+    timeout = setTimeout(() => {
+      setShowTooltip(false)
+    }, 8000);
   }
 
   return (

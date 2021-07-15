@@ -23,9 +23,9 @@ const ModalContact = () => {
   const tooltipTimer = () => {
     setShowTooltip(true)
 
-    timeout = setTimeout(() => {
-      setShowTooltip(false)
-    }, 8000);
+    //  timeout = setTimeout(() => {
+    //    setShowTooltip(false)
+    // }, 8000);
   }
 
   return (
@@ -210,7 +210,7 @@ const ModalContact = () => {
                   <div className={styles._paperClipParent} onClick={tooltipTimer}>
 
                     <label className={styles._filePointer}>
-                    <Tooltip paddinHorizontal={5} top='-300%' left={'-900%'} advice={true} show={showTooltip} />
+                    <Tooltip paddinHorizontal={5} top='-75px' left={'-125px'}  advice={true} show={showTooltip} />
                       <PaperClip color='#000' />
                     </label>
                   </div>

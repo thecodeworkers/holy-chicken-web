@@ -32,6 +32,11 @@
   box-sizing: border-box;
 }
 
+._bs{
+  font-size: $montserratLight10;
+  font-family: $montserratMedium;
+}
+
 ._totalParent {
   display: flex;
   flex-direction: column;
