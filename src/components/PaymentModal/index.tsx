@@ -23,7 +23,6 @@ const PaymentModal = () => {
           dispatch(setStep({ step: newData }))
         break;
       case 3:
-        console.log(delivery_data)
         if (delivery_data?.valid)
           dispatch(setStep({ step: newData }))
         break;

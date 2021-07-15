@@ -68,7 +68,6 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
     }
 
   } catch (error) {
-    console.log(error)
     dispatch(setToast('check', 'Error al agregar producto al carrito', 1))
   } finally {
     dispatch(actionObject(REQUEST_LOADER, false))

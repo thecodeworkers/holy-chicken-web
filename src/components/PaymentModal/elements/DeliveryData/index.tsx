@@ -60,6 +60,10 @@ const DeliveryData = () => {
                   <p className={styles._radioTitle}>Pick Up</p>
                 </div>
               </div>
+              {shippingMethod === 'pickup' ?
+
+                <PickupForm /> : null}
+
               <div className={styles._radioContainer}>
 
                 <div className={styles._checkParent} >
@@ -109,7 +113,7 @@ const DeliveryData = () => {
           {shippingMethod === 'delivery' ?
             <DeliveryForm />
             :
-            <PickupForm />
+           null
           }
         </div>
       </div>
