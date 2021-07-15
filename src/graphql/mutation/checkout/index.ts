@@ -11,12 +11,12 @@ const checkoutMutation = async (billing, delivery, paymentMethod, user, sessionT
         city: "${billing?.city}",
         country: ${billing?.country},
         email: "${user?.email}",
-        firstName: "${billing.name}",
-        lastName: "${billing.lastname}"
+        firstName: "${billing?.name}",
+        lastName: "${billing?.lastname}"
         overwrite: true,
-        phone: "${billing.phone}",
-        postcode: "${billing.zipcode}",
-        state: "${billing.state}",
+        phone: "${billing?.phone}",
+        postcode: "${billing?.zipcode}",
+        state: "${billing?.state}",
       },
       clientMutationId: "${uuidv4()}",
       isPaid: false

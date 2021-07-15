@@ -16,7 +16,7 @@ const Home = ({ content, data, resource }) => {
   const router = useRouter()
 
   useEffect(() => {
-    const passwordKey = router.query?.key
+    const passwordKey = router?.query?.key
     if (passwordKey) {
       dispatch(setShowModal({ changePasswordModal: true }))
       dispatch(setStringKey(passwordKey))

@@ -24,8 +24,8 @@ const VerticalListWithImage = ({ attributes }) => {
       <div className={styles._imgParent}>
 
         {
-          attributes?.nodes[0]?.options.length &&
-          attributes?.nodes[0]?.options.map((res, index) => {
+          attributes?.nodes[0]?.options?.length &&
+          attributes?.nodes[0]?.options?.map((res, index) => {
             return (
               <div className={styles._row} key={index}>
                 <div className={styles._checkParent} key={index}>

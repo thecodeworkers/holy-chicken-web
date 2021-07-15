@@ -97,20 +97,20 @@ const FirstBanner = ({ content, backup, reference, data }: any) => {
               </div>
 
               {
-                backup.length ?
+                backup?.length ?
                   <div className={styles._cardContainer}>
                     {
                       paginate(backup, page, perPage).map((item, index) => {
                         return (
                           <div
-                            className={item.stockStatus == 'OUT_OF_STOCK' ? styles._cardDisabled : styles._card}
+                            className={item?.stockStatus == 'OUT_OF_STOCK' ? styles._cardDisabled : styles._card}
                             key={index}
-                            onClick={() => item.stockStatus === 'OUT_OF_STOCK' ? null : openIndividualModal(item)}>
+                            onClick={() => item?.stockStatus === 'OUT_OF_STOCK' ? null : openIndividualModal(item)}>
                             <GeneralCard
                               name={item?.name}
                               image={item.image?.mediaItemUrl}
                               description={item?.description}
-                              price={item?.price.includes('-') ? item?.price.split('-')[0] : item?.price}
+                              price={item?.price?.includes('-') ? item?.price?.split('-')[0] : item?.price}
                               hot={item?.spicy?.isSpicy}
                             />
                           </div>

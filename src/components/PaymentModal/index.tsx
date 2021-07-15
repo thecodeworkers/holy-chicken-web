@@ -74,9 +74,9 @@ const PaymentModal = () => {
                 <div className={styles._stepData}>
                   {user_data?.name ?
                     <p>{`${user_data.name},
-                ${user_data.lastname},
-                ${user_data.identification},
-                ${user_data.email}`}</p>
+                ${user_data?.lastname},
+                ${user_data?.identification},
+                ${user_data?.email}`}</p>
                     : <p>Nombre, Apellido, Cedula, Email</p>
                   }
                 </div>

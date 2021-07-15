@@ -65,7 +65,7 @@ const SecondBanner = ({ data, reference }) => {
         </div>
       </div>
       <div className={styles._buttonContainer} onClick={openModal}>
-        <Button color='#FD8C2E' textColor='white' text={data.button.title}></Button>
+        <Button color='#FD8C2E' textColor='white' text={data?.button?.title}></Button>
       </div>
 
     </div>

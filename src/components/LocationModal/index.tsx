@@ -51,11 +51,11 @@ const LocationModal = () => {
                     <div className={styles._home}>
                       <Home color='#000' />
                     </div>
-                    <p className={styles._locationTitle}>{item.local}</p>
-                    <p className={styles._locationText}>{item.description}</p>
+                    <p className={styles._locationTitle}>{item?.local}</p>
+                    <p className={styles._locationText}>{item?.description}</p>
                   </div>
                   <div className={styles._cardFooter}>
-                    <p>{item.address}</p>
+                    <p>{item?.address}</p>
                   </div>
                 </div>
               )

@@ -59,10 +59,10 @@ const ResponsiveMenu = ({ show = 0, method }) => {
       <div className={styles._content}>
         <div>
           {
-            general?.header?.mainNavigation.map((item, index) => {
+            general?.header?.mainNavigation?.map((item, index) => {
               return (
                 <div className={styles._list} key={index}>
-                  <p className={activeLink(item?.link)} onClick={() => navigation(item?.link)}>{item.title}</p>
+                  <p className={activeLink(item?.link)} onClick={() => navigation(item?.link)}>{item?.title}</p>
                 </div>
               )
             }

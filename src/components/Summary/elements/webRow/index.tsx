@@ -26,7 +26,7 @@ const WebRow = ({ items }) => {
         items.length ?
           items.map((item, index) => {
             const element = item?.product?.node
-            const totalPrice = element?.price ? element?.price : getVariableTotalPrice(item.quantity, item.total)
+            const totalPrice = element?.price ? element?.price : getVariableTotalPrice(item?.quantity, item?.total)
 
             return (
               <div className={styles._row} key={index}>

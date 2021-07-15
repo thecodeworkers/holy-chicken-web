@@ -57,7 +57,7 @@ const CartModal = () => {
               <p className={styles._description}>{contentCart.emptyCart}</p> :
               nodes.map((item, index) => {
                 const dataItem = item?.product?.node
-                const totalPrice = dataItem?.price ? dataItem?.price : getVariableTotalPrice(item.quantity, item.total)
+                const totalPrice = dataItem?.price ? dataItem?.price : getVariableTotalPrice(item?.quantity, item?.total)
 
                 return (
                   <div key={index} className={styles._productContainer}>

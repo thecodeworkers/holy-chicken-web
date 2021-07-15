@@ -89,7 +89,7 @@ const NavBar = ({ data }) => {
           <div className={styles._rightSide}>
             <div className={styles._iconsList}>
               <div onClick={() => navigation('/shop')}>
-                <Button color='#FD8C2E' text={contentNavigation.askNow} textColor='#fff'></Button>
+                <Button color='#FD8C2E' text={contentNavigation?.askNow} textColor='#fff'></Button>
               </div>
 
               <div className={styles._iconParent} onClick={() => showedCart(showCart)}>
@@ -114,10 +114,10 @@ const NavBar = ({ data }) => {
                       <div
                         className={styles._buttonBlueParent}
                         onClick={!isAuth ? () => openModal('loginModal') : logout}>
-                        <Button color='#118AC6' text={!isAuth ? contentNavigation.login : contentNavigation.logout} textColor='#fff' ></Button>
+                        <Button color='#118AC6' text={!isAuth ? contentNavigation?.login : contentNavigation?.logout} textColor='#fff' ></Button>
                       </div>
-                      {!isAuth && <p>{contentNavigation.newClient} <a className={styles._link} onClick={() => openModal('registerModal')}> {contentNavigation.createAccount} </a></p>}
-                      <p onClick={() => navigation('/history')} className={styles._myOrders}>{contentNavigation.myOrders}</p >
+                      {!isAuth && <p>{contentNavigation.newClient} <a className={styles._link} onClick={() => openModal('registerModal')}> {contentNavigation?.createAccount} </a></p>}
+                      <p onClick={() => navigation('/history')} className={styles._myOrders}>{contentNavigation?.myOrders}</p >
                     </div>
                   </div>
                 }

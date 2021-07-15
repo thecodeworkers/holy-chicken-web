@@ -26,7 +26,7 @@ const ResponsiveRow = ({ items }) => {
         items.length ?
           items.map((item: any, index: number) => {
             const element = item?.product?.node
-            const totalPrice = element?.price ? element?.price : getVariableTotalPrice(item.quantity, item.total)
+            const totalPrice = element?.price ? element?.price : getVariableTotalPrice(item?.quantity, item?.total)
 
             return (
               <div key={index}>
