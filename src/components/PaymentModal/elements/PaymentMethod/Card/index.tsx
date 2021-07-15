@@ -51,25 +51,25 @@ const PaymentMethod = ({ data }) => {
 
 
 
-  return (
+  return data?.title?.toLowerCase() === 'tarjeta de credito' ? (
     <>
       <div className={styles._titleParent}>
         <p className={styles._title}>Datos de tarjeta</p>
       </div>
       <form onSubmit={formik.handleSubmit}>
-        {data?.title?.toLowerCase() === 'tarjeta de credito' ?
-          <div className={styles._list}>
-            <div className={styles._formCardContainer}>
-              <div className={`${styles._inputParent} ${styles._separation}`}>
-                <label>Nombre en la tarjeta</label>
-                <input disabled={disabled} id="name" name="name" type="text" className={errors.name && touched.name ? [styles._inputError, styles._input].join(' ') : styles._input}
-                  onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.name} />
-              </div>
-              <div className={styles._cardContainer}>
-                <CardElement options={cardOptions} />
-              </div>
+
+        <div className={styles._list}>
+          <div className={styles._formCardContainer}>
+            <div className={`${styles._inputParent} ${styles._separation}`}>
+              <label>Nombre en la tarjeta</label>
+              <input disabled={disabled} id="name" name="name" type="text" className={errors.name && touched.name ? [styles._inputError, styles._input].join(' ') : styles._input}
+                onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.name} />
             </div>
-          </div> : null}
+            <div className={styles._cardContainer}>
+              <CardElement options={cardOptions} />
+            </div>
+          </div>
+        </div>
         <div className={styles._buttonContainer}>
           <div className={styles._btnParent}>
             <Button
@@ -82,7 +82,7 @@ const PaymentMethod = ({ data }) => {
         </div>
       </form>
     </>
-  )
+  ) : null
 }
 
 export default PaymentMethod

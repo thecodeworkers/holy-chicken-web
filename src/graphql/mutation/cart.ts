@@ -62,6 +62,18 @@ cart {
       subtotalTax
       tax
       total
+      variation {
+        attributes {
+          label
+          name
+          id
+          value
+        }
+        node {
+          price
+          name
+        }
+      }
     }
   }
   totalTaxes {

@@ -12,6 +12,10 @@ const PaymentModal = () => {
     setCurrentStep(step)
   }, [step])
 
+  useEffect(() => {
+    dispatch(setStep({ loading: false, confirmProcess: false }))
+  }, [])
+
   const newStep = (newData) => {
     switch (newData) {
       case 2:
@@ -19,6 +23,7 @@ const PaymentModal = () => {
           dispatch(setStep({ step: newData }))
         break;
       case 3:
+        console.log(delivery_data)
         if (delivery_data?.valid)
           dispatch(setStep({ step: newData }))
         break;

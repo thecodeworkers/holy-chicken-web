@@ -9,7 +9,7 @@ const PickupForm = () => {
 
   const { resource: { general: { general } }, paymentStep: { delivery_data }, cart: { cartProducts } } = useSelector((state: any) => state)
   const dispatch = useDispatch()
-  const [pickupMethod, setPickupMethod] = useState('')
+  const [pickupMethod, setPickupMethod] = useState(delivery_data?.location)
 
   const getShipping = (label) => {
     if (cartProducts?.availableShippingMethods) {
@@ -29,7 +29,10 @@ const PickupForm = () => {
   }
 
   const setDefaultForm = () => {
-    if (delivery_data?.location) setPickupMethod(delivery_data.location)
+    if (delivery_data?.location) {
+      setPickupMethod(delivery_data.location)
+      dispatch(setStep({ delivery_data: { ...delivery_data, valid: true } }))
+    }
     dispatch(updateShippingMethod(getShipping('Pickup').id))
   }
 

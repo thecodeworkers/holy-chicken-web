@@ -21,6 +21,7 @@ const CartModal = () => {
   const nodes = cart?.cartProducts?.contents?.nodes ?? []
   const total = cart?.cartProducts?.total ?? "$0.00"
   const bs = cart?.cartProducts?.totalBs ?? "Bs.0,00"
+
   const deleteItem = (dataItem: any) => {
     const { key } = dataItem
     dispatch(removeCartItem(key))

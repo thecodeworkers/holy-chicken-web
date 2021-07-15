@@ -14,8 +14,8 @@ export const setProductsNumber = (number: any) => actionObject(PRODUCTS_NUMBER, 
 
 export const getCart = () => async (dispatch, getState) => {
   const { auth } = await getState()
-  const sessionToken = auth?.login?.sessionToken
-  const result = await getCartQuery(auth.isAuth, sessionToken)
+  const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
+  const result = await getCartQuery(sessionToken)
   if (result?.cart) result.cart.totalBs = await getDollarEquivalent(formatWooCommerceAmount(result?.cart?.total))
   dispatch(actionObject(CART_PRODUCTS, { cartProducts: result?.cart }))
   return result
@@ -34,8 +34,7 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
       let { addCartItems } = result
       const itemsNumber = addCartItems?.cart?.contents?.itemCount
 
-      if (addCartItems?.cart) addCartItems.cart.totalBs = await getDollarEquivalent(formatWooCommerceAmount(addCartItems?.cart?.total))
-
+      addCartItems.cart.totalBs = await getDollarEquivalent(formatWooCommerceAmount(addCartItems?.cart?.total))
       if (extras) {
 
         let extraAmount = 0
@@ -101,10 +100,10 @@ export const removeCartItem = (key) => async (dispatch, getState) => {
 export const updateQuantity: any = (product: any, type: any) => async (dispatch, getState) => {
   try {
     const { auth, cart: { cartProducts } } = await getState()
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
+    if (sessionToken) {
 
-    if (auth?.isAuth) {
 
-      const sessionToken = auth?.login?.login?.customer?.sessionToken
 
       const filtered = filter(cartProducts?.contents?.nodes, product, 'key')
       const quantity = (type === 'add') ? filtered[0]?.quantity + 1 : filtered[0]?.quantity - 1;
@@ -139,7 +138,7 @@ export const applyCoupon = (code) => async (dispatch, getState) => {
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
     const { auth } = await getState()
-    const sessionToken = auth?.login?.login?.customer?.sessionToken
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
     const result = await applyCouponMutation(code, sessionToken)
 
     if (result.message) {
@@ -168,10 +167,8 @@ export const updateShippingMethod: any = (method) => async (dispatch, getState) 
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
     const { auth } = await getState()
-
-    if (auth?.isAuth) {
-
-      const sessionToken = auth?.login?.login?.customer?.sessionToken
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
+    if (sessionToken) {
 
       const data: any = await updateShippingMethodMutation(method, sessionToken)
 
@@ -193,10 +190,9 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
     const { auth, paymentStep: { delivery_data, user_data, billing_data, payment_data }, cart: { cartProducts } } = await getState()
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
+    if (sessionToken) {
 
-    if (auth?.isAuth) {
-
-      const sessionToken = auth?.login?.login?.customer?.sessionToken
       const databaseId = auth?.login?.login?.customer?.databaseId
 
       let status = 'pending'
@@ -214,6 +210,8 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
 
         if (error && paymentIntent?.status !== 'succeeded') throw new Error(error.code);
       }
+
+      delivery_data['shippingMethod'] = cartProducts?.chosenShippingMethods
 
       const data: any = await checkoutMutation(billing_data, delivery_data, payment_data, user_data, sessionToken)
 

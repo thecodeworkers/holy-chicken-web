@@ -18,7 +18,7 @@ const NavBar = ({ data }) => {
   const [showCart, setShowCart] = useState(false)
   const { auth, cart } = useSelector((state: any) => state)
   const { isAuth } = auth
-  const number = cart?.cartProducts?.contents?.nodes?.length
+  const number = cart?.cartProducts?.contents?.itemCount
 
   const navigation = (route: string, loader = true) => {
     if (route == '/contact') {

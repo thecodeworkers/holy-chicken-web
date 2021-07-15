@@ -9,7 +9,7 @@ import getStripe from '@utils/getStripe'
 import { Elements } from '@stripe/react-stripe-js'
 
 const PaymentMethod = () => {
-  const stripe = getStripe()
+  /* const stripe = getStripe() */
   const { resource: { paymentMethods }, paymentStep: { payment_data } } = useSelector((state: any) => state)
 
   const [paymentSelected, setPaymentSelected] = useState('')
@@ -37,7 +37,8 @@ const PaymentMethod = () => {
   }, [])
 
   return (
-    <Elements stripe={stripe}>
+    <>
+      { /* <Elements stripe={stripe}> */}
       <div className={styles._titleParent}>
         <p className={styles._title}>Forma de entrega</p>
       </div>
@@ -69,7 +70,7 @@ const PaymentMethod = () => {
                                 })
                               }
                             </ul>
-                            <Card data={res} />
+                            {/* <Card data={res} /> */}
                           </>
                           : null}
                       </div>
@@ -124,7 +125,8 @@ const PaymentMethod = () => {
           </div>
         </div>
       </div>
-    </Elements>
+      {/* </Elements> */}
+    </>
   )
 }
 
