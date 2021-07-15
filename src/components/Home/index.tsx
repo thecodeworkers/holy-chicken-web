@@ -1,12 +1,12 @@
-import {useState, useCallback, useRef, useEffect} from 'react'
-import { Navbar, IndividualProductModal, CartModal } from '@components'
-import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner, Catering } from './elements'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
+import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner, Catering } from './elements'
+import { Navbar, IndividualProductModal, CartModal } from '@components'
+import { setStringKey, setShowModal, getTmpSession } from '@store/actions'
 import { scrollTo } from '@utils/common'
 import Footer from '../Footer'
 import Head from 'next/head'
-import { setStringKey, setShowModal, getTmpSession } from '@store/actions'
 
 const Home = ({ content, data, resource }) => {
 

@@ -1,20 +1,20 @@
 import { actionObject, fetchPostJSON, filter, formatWooCommerceAmount, WooCommerceClient } from '@utils'
-import { CURRENT_PRODUCT, PRODUCTS_NUMBER, CART_PRODUCTS, GET_CART, APPLY_COUPON, CART_ORDER } from './action-types'
+import { CURRENT_PRODUCT, PRODUCTS_NUMBER, CART_PRODUCTS, GET_CART, APPLY_COUPON, CART_ORDER, RESET_CART_STORE } from './action-types'
 import { addItemToCartMutation, getCartQuery, removeFromCartMutation, updateItemQuantity, applyCouponMutation, updateShippingMethodMutation, addFee } from '@graphql'
 import { REQUEST_LOADER } from '../loader/actions-types'
 import { setToast, setShowModal } from '@store/actions'
-import checkoutMutation from '@graphql/mutation/checkout'
 import { setStep } from '@store/paymentStep/action'
 import { getDollarEquivalent } from '@utils/dolarClient'
 import getStripe from '@utils/getStripe'
+import checkoutMutation from '@graphql/mutation/checkout'
 
 
 export const setCurrentProduct = (data: any) => actionObject(CURRENT_PRODUCT, data)
 export const setProductsNumber = (number: any) => actionObject(PRODUCTS_NUMBER, number)
 
 export const getCart = () => async (dispatch, getState) => {
-  const { auth } = await getState()
-  const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
+  const { auth, guest } = await getState()
+  const sessionToken = auth?.login?.login?.customer?.sessionToken || guest.tmpSessionToken
   const result = await getCartQuery(sessionToken)
   if (result?.cart) result.cart.totalBs = await getDollarEquivalent(formatWooCommerceAmount(result?.cart?.total))
   dispatch(actionObject(CART_PRODUCTS, { cartProducts: result?.cart }))
@@ -24,8 +24,8 @@ export const getCart = () => async (dispatch, getState) => {
 export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = null) => async (dispatch, getState) => {
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
-    const { auth } = await getState()
-    const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
+    const { auth, guest } = await getState()
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || guest.tmpSessionToken
 
     if (sessionToken) {
       const result = await addItemToCartMutation(databaseId, quantity, null, sessionToken)
@@ -77,8 +77,8 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
 export const removeCartItem = (key) => async (dispatch, getState) => {
 
   try {
-    const { auth } = await getState()
-    const sessionToken = auth?.login?.login?.customer?.sessionToken
+    const { auth, guest } = await getState()
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || guest.tmpSessionToken
     const result = await removeFromCartMutation(key, sessionToken)
 
     const { removeItemsFromCart } = result
@@ -98,12 +98,10 @@ export const removeCartItem = (key) => async (dispatch, getState) => {
 
 export const updateQuantity: any = (product: any, type: any) => async (dispatch, getState) => {
   try {
-    const { auth, cart: { cartProducts } } = await getState()
-    const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
+    const { auth, cart: { cartProducts }, guest } = await getState()
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || guest.tmpSessionToken
+
     if (sessionToken) {
-
-
-
       const filtered = filter(cartProducts?.contents?.nodes, product, 'key')
       const quantity = (type === 'add') ? filtered[0]?.quantity + 1 : filtered[0]?.quantity - 1;
       const max = filtered[0]?.product?.node?.stockQuantity
@@ -133,11 +131,10 @@ export const updateQuantity: any = (product: any, type: any) => async (dispatch,
 }
 
 export const applyCoupon = (code) => async (dispatch, getState) => {
-
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
-    const { auth } = await getState()
-    const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
+    const { auth, guest } = await getState()
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || guest.tmpSessionToken
     const result = await applyCouponMutation(code, sessionToken)
 
     if (result.message) {
@@ -165,10 +162,10 @@ export const applyCoupon = (code) => async (dispatch, getState) => {
 export const updateShippingMethod: any = (method) => async (dispatch, getState) => {
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
-    const { auth } = await getState()
-    const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
-    if (sessionToken) {
+    const { auth, guest } = await getState()
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || guest.tmpSessionToken
 
+    if (sessionToken) {
       const data: any = await updateShippingMethodMutation(method, sessionToken)
 
       if (data.message) throw new Error(data.message);
@@ -188,8 +185,8 @@ export const updateShippingMethod: any = (method) => async (dispatch, getState) 
 export const checkoutOrder: any = () => async (dispatch, getState) => {
   try {
     dispatch(actionObject(REQUEST_LOADER, true))
-    const { auth, paymentStep: { delivery_data, user_data, billing_data, payment_data }, cart: { cartProducts } } = await getState()
-    const sessionToken = auth?.login?.login?.customer?.sessionToken || auth.tmpSessionToken
+    const { auth, paymentStep: { delivery_data, user_data, billing_data, payment_data }, cart: { cartProducts }, guest } = await getState()
+    const sessionToken = auth?.login?.login?.customer?.sessionToken || guest.tmpSessionToken
     if (sessionToken) {
 
       const databaseId = auth?.login?.login?.customer?.databaseId
@@ -231,3 +228,5 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
     dispatch(setToast('error', 'Error al procesar orden', 1))
   }
 }
+
+export const resetCartStore = () => actionObject(RESET_CART_STORE)

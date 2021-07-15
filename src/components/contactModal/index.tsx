@@ -1,16 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { ModalFrame, Button, Tooltip} from '@components'
 import { Phone, Mail, Insta, Twitter, WhatsApp, Location, PaperClip } from '@images/icons'
-import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import FormikConfig from './formik'
 
 const ModalContact = () => {
-
-  const formik = FormikConfig()
   const [isActive, setActive] = useState(1)
   const [fileName, setFileName] = useState('')
+
+  const formik = FormikConfig()
   const { errors, touched } = formik
   const [showTooltip, setShowTooltip] = useState(false)
   const { resource: { general: { general } } } = useSelector((state: any) => state)
