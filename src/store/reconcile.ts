@@ -28,6 +28,11 @@ const reconcile = (state, payload) => {
 
         break
 
+      case 'guest':
+        const guest = state[key]
+        trueState = { ...trueState, guest }
+        break
+
       case 'auth':
         const credentials = state[key]
         trueState = { ...trueState, auth: credentials }
