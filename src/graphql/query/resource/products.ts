@@ -80,6 +80,9 @@ products(first: 10000000) {
               value
             }
           }
+          image {
+            mediaItemUrl
+          }
         }
       }
     }
