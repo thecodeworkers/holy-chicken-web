@@ -16,7 +16,9 @@ const NavBar = ({ data }) => {
   const router = useRouter()
   const [show, setShow] = useState(false)
   const [showCart, setShowCart] = useState(false)
-  const { auth, cart } = useSelector((state: any) => state)
+  const { auth, cart, resource: { general = {} } } = useSelector((state: any) => state)
+  const { navigation: contentNavigation = {} } = general?.general || {}
+
   const { isAuth } = auth
   const number = cart?.cartProducts?.contents?.itemCount
 
@@ -28,6 +30,7 @@ const NavBar = ({ data }) => {
     }
     if (route != router.pathname) {
       router.push(route)
+      dispatch(resetModals())
     }
   }
 
@@ -51,6 +54,7 @@ const NavBar = ({ data }) => {
   }
 
   const showedCart = (showCart) => {
+    dispatch(resetModals())
     setShowCart(showCart => !showCart)
 
     if (showCart) return dispatch(setShowModal({ cartModal: false }))
@@ -85,7 +89,7 @@ const NavBar = ({ data }) => {
           <div className={styles._rightSide}>
             <div className={styles._iconsList}>
               <div onClick={() => navigation('/shop')}>
-                <Button color='#FD8C2E' text='Pedir ahora' textColor='#fff'></Button>
+                <Button color='#FD8C2E' text={contentNavigation?.askNow} textColor='#fff'></Button>
               </div>
 
               <div className={styles._iconParent} onClick={() => showedCart(showCart)}>
@@ -110,10 +114,10 @@ const NavBar = ({ data }) => {
                       <div
                         className={styles._buttonBlueParent}
                         onClick={!isAuth ? () => openModal('loginModal') : logout}>
-                        <Button color='#118AC6' text={!isAuth ? 'Iniciar sesión' : 'Cerrar sesión'} textColor='#fff' ></Button>
+                        <Button color='#118AC6' text={!isAuth ? contentNavigation?.login : contentNavigation?.logout} textColor='#fff' ></Button>
                       </div>
-                      {!isAuth && <p>¿Nuevo cliente? <a className={styles._link} onClick={() => openModal('registerModal')}> Crear Cuenta </a></p>}
-                      <p onClick={() => navigation('/history')} className={styles._myOrders}>Mis órdenes</p >
+                      {!isAuth && <p>{contentNavigation.newClient} <a className={styles._link} onClick={() => openModal('registerModal')}> {contentNavigation?.createAccount} </a></p>}
+                      <p onClick={() => navigation('/history')} className={styles._myOrders}>{contentNavigation?.myOrders}</p >
                     </div>
                   </div>
                 }

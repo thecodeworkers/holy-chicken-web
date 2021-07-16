@@ -22,7 +22,7 @@ const IndividualProduct = () => {
 
   const totalPrice = () => {
     const totalAddons = allAddons.reduce((previous, next) => previous + next.price, 0)
-    let totalPrice = currentProduct?.price.includes('-') ? `${currentProduct?.price.split('-')[0]}` : currentProduct?.price
+    let totalPrice = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
 
     if (totalPrice) {
       totalPrice = totalPrice.split('$')
@@ -82,13 +82,9 @@ const IndividualProduct = () => {
         { value: sauce }
       ]
 
-      const filterCriteria = (product) => {
-        console.log(JSON.stringify(product.attributes.nodes), 'comparing')
-        console.log(JSON.stringify(attributes), 'other')
-        return JSON.stringify(product.attributes.nodes) === JSON.stringify(attributes)
-      }
+      const filterCriteria = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(attributes)
+      const result = currentProduct?.variations?.nodes.find(filterCriteria)
 
-      const result = currentProduct.variations.nodes.find(filterCriteria)
       if (result) correctProduct = result
     }
 

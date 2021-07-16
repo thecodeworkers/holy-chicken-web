@@ -115,7 +115,7 @@ const Extras = ({ extras }) => {
             <div key={nodeIndex}>
               <p className={styles._littleTitleCard}>{node?.name}</p>
               {
-                node?.options.map((option, index) => {
+                node?.options?.map((option, index) => {
                   return  (
                     <div key={index} className={styles._row}>
                       {
@@ -172,7 +172,7 @@ const Extras = ({ extras }) => {
             <div key={nodeIndex}>
               <p className={styles._littleTitle}>{node?.name}</p>
               {
-                node?.options.map((option, index) => (
+                node?.options?.map((option, index) => (
                   <div key={index} className={styles._responsiveRow}>
                     {
                       option != 'N/A' ? (

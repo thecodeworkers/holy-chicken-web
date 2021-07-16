@@ -11,7 +11,7 @@ import SideFilterMenu from '../SideFilterMenu';
 import { useDispatch } from 'react-redux'
 import { searchProducts, setShowModal, setCurrentProduct, resetStore } from '@store/actions'
 
-const FirstBanner = ({ content, backup, reference}: any) => {
+const FirstBanner = ({ content, backup, reference, data }: any) => {
 
   const dispatch = useDispatch()
   const router = useRouter()
@@ -47,11 +47,11 @@ const FirstBanner = ({ content, backup, reference}: any) => {
 
   return (
     <>
-      <div className={styles._content}ref={reference}>
+      <div className={styles._content} ref={reference}>
         <div className={styles._main} >
           <div className={styles._header}>
-            <p className={styles._title}>Bienvenido al cielo</p>
-            <p className={styles._subtitle}>Arma tu pedacito de cielo como tú quieras.</p>
+            <p className={styles._title}>{data?.title}</p>
+            <p className={styles._subtitle}>{data?.subtitle}</p>
           </div>
 
           <div className={styles._shopContainer}>
@@ -97,15 +97,15 @@ const FirstBanner = ({ content, backup, reference}: any) => {
               </div>
 
               {
-                backup.length ?
+                backup?.length ?
                   <div className={styles._cardContainer}>
                     {
                       paginate(backup, page, perPage).map((item, index) => {
                         return (
                           <div
-                            className={item.stockStatus == 'OUT_OF_STOCK' ? styles._cardDisabled : styles._card}
+                            className={item?.stockStatus == 'OUT_OF_STOCK' ? styles._cardDisabled : styles._card}
                             key={index}
-                            onClick={() => item.stockStatus === 'OUT_OF_STOCK' ? null : openIndividualModal(item)}>
+                            onClick={() => item?.stockStatus === 'OUT_OF_STOCK' ? null : openIndividualModal(item)}>
                             <GeneralCard
                               name={item?.name}
                               image={item.image?.mediaItemUrl}

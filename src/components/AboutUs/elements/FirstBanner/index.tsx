@@ -19,11 +19,11 @@ const FirstBanner = ({ data }) => {
 
                   <div className={styles._leftHistory}>
                     <div className={styles._imageLeftContainer}>
-                      <img className={styles._image} src={item?.image.mediaItemUrl} />
+                      <img className={styles._image} src={item?.image?.mediaItemUrl} />
                     </div>
 
                     <div className={styles._textLeftContainer}>
-                      {index == 0 ? <p className={styles._title}>{data.title}</p> : null}
+                      {index == 0 ? <p className={styles._title}>{data?.title}</p> : null}
                       <p className={styles._textContent}>{item?.content}</p>
                     </div>
                   </div>

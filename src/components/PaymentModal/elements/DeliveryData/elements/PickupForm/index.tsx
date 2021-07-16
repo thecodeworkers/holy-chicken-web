@@ -30,7 +30,7 @@ const PickupForm = () => {
 
   const setDefaultForm = () => {
     if (delivery_data?.location) {
-      setPickupMethod(delivery_data.location)
+      setPickupMethod(delivery_data?.location)
       dispatch(setStep({ delivery_data: { ...delivery_data, valid: true } }))
     }
     dispatch(updateShippingMethod(getShipping('Pickup').id))
@@ -60,7 +60,7 @@ const PickupForm = () => {
                     </input>
                     <div className={styles._addressDescription}>
                       <p className={styles._addressTitle}>{item?.local}</p>
-                      {pickupMethod === item.local ? <p className={styles._addressSubtitle}>{item?.address}</p> : null}
+                      {pickupMethod === item?.local ? <p className={styles._addressSubtitle}>{item?.address}</p> : null}
                     </div>
                   </div>
                 </div>

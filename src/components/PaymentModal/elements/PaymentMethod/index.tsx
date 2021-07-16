@@ -29,7 +29,7 @@ const PaymentMethod = () => {
   }
 
   const setDefaultForm = () => {
-    if (payment_data?.type) setPaymentSelected(payment_data.type)
+    if (payment_data?.type) setPaymentSelected(payment_data?.type)
   }
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const PaymentMethod = () => {
           <div className={styles._deliveryType}>
             <p className={styles._deliveryTitle}>Seleccione una opción</p>
             {
-              paymentMethods.map((res, mapIndex) => {
+              paymentMethods?.map((res, mapIndex) => {
                 return (
                   <div className={styles._radioContainer} key={mapIndex} >
                     <div className={styles._checkParent} >

@@ -15,7 +15,8 @@ const NavbarResponsive = () => {
   const [showCart, setShowCart] = useState(false)
   const [showPanel, setShowPanel] = useState(false)
 
-  const { auth, cart } = useSelector((state: any) => state)
+  const { auth, cart, resource: { general = {} } } = useSelector((state: any) => state)
+  const { navigation: contentNavigation = {} } = general?.general || {}
   const { isAuth } = auth
 
   const dispatch = useDispatch()
@@ -32,6 +33,7 @@ const NavbarResponsive = () => {
   const navigation = (route: string) => {
     if (route != router.pathname) {
       router.push(route)
+      dispatch(resetModals())
     }
   }
 
@@ -60,6 +62,7 @@ const NavbarResponsive = () => {
   }
 
   const showedCart = (showCart) => {
+
     setShowCart(showCart => !showCart)
 
     if (showCart) return dispatch(setShowModal({ cartModal: false }))
@@ -101,10 +104,10 @@ const NavbarResponsive = () => {
 
       <div className={showPanel ? styles._panel : styles._hidden}>
         <div className={styles._buttonBlueParent} onClick={logout} >
-          <Button color='#118AC6' text={isAuth ? 'Cerrar sesión' : 'Iniciar sesión'} textColor='#fff'></Button>
+          <Button color='#118AC6' text={isAuth ? contentNavigation?.logout : contentNavigation?.login} textColor='#fff'></Button>
         </div>
-        <p className={styles._myOrders}>¿Nuevo cliente? <a onClick={() => openModal('registerModal')}>Crear Cuenta</a></p>
-        <p className={styles._myOrders} onClick={() => navigation('/history')} >Mis órdenes</p >
+        <p className={styles._myOrders}>{contentNavigation?.newClient} <a onClick={() => openModal('registerModal')}>{contentNavigation?.createAccount}</a></p>
+        <p className={styles._myOrders} onClick={() => navigation('/history')} >{contentNavigation?.myOrders}</p >
       </div>
 
       <ResponsiveMenu show={show} method={resetShow} />

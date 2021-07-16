@@ -23,7 +23,6 @@ const PaymentModal = () => {
           dispatch(setStep({ step: newData }))
         break;
       case 3:
-        console.log(delivery_data)
         if (delivery_data?.valid)
           dispatch(setStep({ step: newData }))
         break;
@@ -75,9 +74,9 @@ const PaymentModal = () => {
                 <div className={styles._stepData}>
                   {user_data?.name ?
                     <p>{`${user_data.name},
-                ${user_data.lastname},
-                ${user_data.identification},
-                ${user_data.email}`}</p>
+                ${user_data?.lastname},
+                ${user_data?.identification},
+                ${user_data?.email}`}</p>
                     : <p>Nombre, Apellido, Cedula, Email</p>
                   }
                 </div>

@@ -81,16 +81,6 @@ const Footer = ({ data, content }) => {
               <div>
                 <p onClick={() => clickOption('/login')} className={styles._link} >Login</p>
               </div>
-              {/* {
-                data?.footerNavigation.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <p onClick={() => clickOption(item.link, 'homeReference')} className={styles._link} >{item?.titulo}</p>
-                    </div>
-                  )
-                }
-                )
-              } */}
             </div>
 
             <div className={styles._socialContainer}>
@@ -123,7 +113,7 @@ const Footer = ({ data, content }) => {
 
               <div className={styles._copyContainer}>
                 <div className={styles._copyContent}>
-                  <p className={styles._copy}>{data.copyright}</p>
+                  <p className={styles._copy}>{data?.copyright}</p>
                 </div>
                 <div className={styles._copy}>
                   <a href='https://www.thecodeworkers.com' >

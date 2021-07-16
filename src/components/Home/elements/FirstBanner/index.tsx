@@ -101,7 +101,7 @@ const FirstBanner = ({ data, content, resource, reference }) => {
 
             {
               outstanding?.map((item, index) => {
-                const spicy = item.spicy.isSpicy
+                const spicy = item?.spicy?.isSpicy
                 return (
                   <div className={styles._card} key={index} onClick={() => openIndividualModal(item)}>
                     <GeneralCard
