@@ -6,7 +6,7 @@ import { setShowModal, setProductsNumber, setCartProducts } from '@store/actions
 import { ClothSection, VerticalList, VerticalListWithImage, CardSection } from './elements'
 import { createMarkup } from '@utils'
 
-const IndividualProduct = ({ type = 'list' }) => {
+const IndividualProduct = () => {
   const dispatch = useDispatch()
   const {
     intermitence: { individualProductModal },
@@ -53,13 +53,11 @@ const IndividualProduct = ({ type = 'list' }) => {
 
     switch (type) {
       case 'temptations':
-        return <VerticalList />
+      case 'bebidas':
+        return <VerticalList attributes={attributes} category={type}/>
 
       case 'holy-sanduches':
         return <CardSection attributes={attributes} />
-
-      case 'bebidas':
-        return <VerticalListWithImage attributes={attributes}  />
 
       case 'merch':
         return <ClothSection size={attributesLength == 2 ? true : false} attributes={attributes} />
@@ -113,7 +111,6 @@ const IndividualProduct = ({ type = 'list' }) => {
               <div>
                 <p className={styles._title}>{currentProduct?.name}</p>
               </div>
-              {/* <CountProduct key={null}/> */}
             </div>
 
             <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description) }></div>

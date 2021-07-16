@@ -88,6 +88,23 @@
   flex-wrap: wrap;
 }
 
+._chooseOneParent {
+  display: flex;
+  align-items: center;
+  margin-left: 4rem;
+
+  & p {
+    margin-left: 0.3rem;
+    font-family: $montserratRegular;
+    font-size: $montserratRegular12;
+  }
+}
+
+._titleParent {
+  display: flex;
+  align-items: center;
+}
+
 @include responsive(lg) {
   ._circlesParent {
     margin-top: 1rem;

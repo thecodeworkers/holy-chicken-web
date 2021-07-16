@@ -21,7 +21,7 @@ const ClothSection = ({ size = true, attributes }) => {
 
     variations.forEach(product => {
       const valueOne = product?.attributes?.nodes[0].value
-      const valueTwo = size ? product?.attributes?.nodes[1].value : null
+      const valueTwo = product?.attributes?.nodes[1].value
 
       if(valueOne == currentSize.toUpperCase() && valueTwo == currentColor) selectedProduct = product
     })
@@ -56,7 +56,16 @@ const ClothSection = ({ size = true, attributes }) => {
 
   return (
     <div>
-      <p className={styles._littleTitle}>DISEÑOS</p>
+      <div className={styles._titleParent}>
+        <p className={styles._littleTitle}>DISEÑOS</p>
+
+        {
+          attributes?.nodes.length && (<div className={styles._chooseOneParent}>
+            <img src='images/icons/alarm.svg' width='13px' className={styles._icon}></img>
+            <p>Debe seleccionar uno</p>
+          </div>)
+        }
+      </div>
 
       <div className={styles._circlesParent} >
         {
