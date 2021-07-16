@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: holychicken-dev-web-service
-  namespace: holychicken-dev
+  namespace: holychicken
   labels:
     app: holychicken-dev-web
 spec:
