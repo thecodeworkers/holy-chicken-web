@@ -6,8 +6,8 @@ const ClothSection = ({ size = true, attributes }) => (
 
     <div className={styles._circlesParent}>
       {
-        attributes?.nodes[1]?.options.length &&
-        attributes?.nodes[1].options.map((res, index) => {
+        attributes?.nodes[1]?.options?.length &&
+        attributes?.nodes[1]?.options?.map((res, index) => {
           return (<div className={styles._circleThree} style={{ backgroundColor: res }} key={index}></div>)
         })
       }
@@ -17,8 +17,8 @@ const ClothSection = ({ size = true, attributes }) => (
       size && (
         <div className={styles._sizesParent}>
           {
-            attributes?.nodes[0]?.options.length &&
-            attributes?.nodes[0]?.options.map((res) => {
+            attributes?.nodes[0]?.options?.length &&
+            attributes?.nodes[0]?.options?.map((res) => {
               return (
                 <div className={styles._row}>
                   <div className={styles._checkParent}>

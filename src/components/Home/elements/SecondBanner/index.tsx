@@ -38,13 +38,13 @@ const SecondBanner = ({ data, reference }) => {
         </div>
         <div className={styles._address}>
           <p className={styles._title}>{data?.email?.title}</p>
-          <a  className={styles._link} href="mailto:infoholychicken@gmail.com">
+          <a className={styles._link} href={`mailto:${data?.email?.content}`}>
             <p className={styles._subtitle}>{data?.email?.content}</p>
           </a>
         </div>
         <div className={styles._address}>
           <p className={styles._title}>{data?.phone?.title}</p>
-          <a className={styles._link} href="tel:+58 412-2485668">
+          <a className={styles._link} href={`tel:${data?.phone?.content}`}>
             <p className={styles._subtitle}>{data?.phone?.content}</p>
           </a>
         </div>
@@ -65,7 +65,7 @@ const SecondBanner = ({ data, reference }) => {
         </div>
       </div>
       <div className={styles._buttonContainer} onClick={openModal}>
-        <Button color='#FD8C2E' textColor='white' text={data.button.title}></Button>
+        <Button color='#FD8C2E' textColor='white' text={data?.button?.title}></Button>
       </div>
 
     </div>

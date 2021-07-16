@@ -3,7 +3,8 @@ import { GET_PAGES } from './action-types'
 
 const initialState = {
   homePage: {},
-  aboutPage:{}
+  aboutPage:{},
+  storePage: {}
 }
 
 const pageReducer = (state = initialState, { type, payload }: AnyAction) => {

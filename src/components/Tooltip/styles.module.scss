@@ -21,6 +21,17 @@
   left: 1.875rem;
 }
 
+._arrowDownRight{
+  width: 0;
+  height: 0;
+  border-left: 0.75rem solid transparent;
+  border-right: 0.75rem solid transparent;
+  border-top: 0.75rem solid $denim;
+  position: absolute;
+  bottom: -0.625rem;
+  right: 1.875rem;
+}
+
 @include responsive(lg) {
 ._text{
   text-align: center;

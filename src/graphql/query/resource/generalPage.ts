@@ -38,6 +38,21 @@ generalPage:page(id: "${generalId}") {
       local
       address
     }
+    navigation {
+      askNow
+      createAccount
+      login
+      logout
+      myOrders
+      newClient
+    }
+    cart {
+      confirm
+      emptyCart
+      estimateTotal
+      myask
+      promotion
+    }
   }
 }
 `

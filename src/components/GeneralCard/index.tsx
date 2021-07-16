@@ -18,7 +18,7 @@ const GeneralCard = ({
       <div className={styles.textContainer} dangerouslySetInnerHTML={createMarkup(description)}></div>
 
       <div className={styles._sectionParent}>
-        <p>{price.split('-')[0]}</p>
+        <p>{price?.split('-')[0]}</p>
         <div className={styles._btnParent}>
           <Button color='#118AC6' textColor='white' text='Agregar' height={'1.9rem'}></Button>
         </div>
