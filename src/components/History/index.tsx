@@ -153,7 +153,7 @@ const History = ({ data }) => {
                         const metadata = ordersArray[0]?.metaData
                         const step = metadata.find(_ => _.key == 'step')
 
-                        trustedCurrentStep = trackStatus[step.value]
+                        trustedCurrentStep = trackStatus[step?.value || 'making']
                       }
 
                       return (
