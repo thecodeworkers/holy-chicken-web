@@ -5,6 +5,7 @@ import resource from './resource/reducer'
 import intermitence from './intermitence/reducer'
 import auth from './auth/reducer'
 import toast from './toast/reducer'
+import contact from './contact/reducer'
 import cart from './cart/reducer'
 import product from './product/reducer'
 import paymentStep from './paymentStep/reducer'
@@ -19,6 +20,7 @@ const reducers = combineReducers({
   intermitence,
   auth,
   toast,
+  contact,
   cart,
   product,
   paymentStep,

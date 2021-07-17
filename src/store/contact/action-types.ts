@@ -1,0 +1,2 @@
+export const CONTACT_FORM = 'CONTACT_FORM'
+export const RESET_REDUCER = 'RESET_REDUCER'
