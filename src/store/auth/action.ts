@@ -4,8 +4,8 @@ import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL, LOGOUT_USER, RESTORE
 import { REQUEST_LOADER } from '@store/loader/actions-types'
 import { setToast } from '@store/toast/action'
 import { resetGuestStore } from '../guest/action'
+import { SET_TMP_BUY } from '../guest/action-types'
 import { resetCartStore } from '../cart/action'
-import { SET_TMP_BUY } from '@store/guest/action-types'
 
 export const registerUser = (body: any) => async (dispatch) => {
 
@@ -94,13 +94,6 @@ export const restorePassword = (password) => async (dispatch, getState) => {
 
 export const resetForgotStatus = () => async (dispatch) => {
   await dispatch(actionObject(RESTORE_PASSWORD_EMAIL, { emailSended: false }))
-}
-
-export const getTmpSession = () => async (dispatch) => {
-  const response = await getTmpSessionToken();
-  const tmpSessionToken = response?.sessionToken || ''
-
-  return dispatch(actionObject(GET_TMP_SESSION, { tmpSessionToken }))
 }
 
 export const updateUserData: any = () => async (dispatch, getState) => {
