@@ -1,39 +1,21 @@
 import styles from './styles.module.scss'
+import { parseDate, parseHour } from '../../functions'
 
-const orders = [
-  {
-    order: '#001',
-    date: '00/00/00',
-    hour: '00:00 PM',
-    status: 'Por confirmar'
-  },
-  {
-    order: '#001',
-    date: '00/00/00',
-    hour: '00:00 PM',
-    status: 'Por confirmar'
-  },
-  {
-    order: '#003',
-    date: '00/00/00',
-    hour: '00:00 PM',
-    status: 'Por confirmar'
-  },
-  {
-    order: '#001',
-    date: '00/00/00',
-    hour: '00:00 PM',
-    status: 'Por confirmar'
-  },
-  {
-    order: '#003',
-    date: '00/00/00',
-    hour: '00:00 PM',
-    status: 'Por confirmar'
-  }
-]
+const statusMessage = {
+  pending: 'Pendiente',
+  processing: 'Procesando',
+  'on-hold': 'En espera',
+  completed: 'Completada',
+  cancelled: 'Cancelada',
+  refunded: 'Reembolsada',
+  failed: 'Fallida'
+}
 
-const OpenModal = ({ show, method }) => {
+const OpenModal = ({ show, method, data }) => {
+  const orders = data.filter(order => {
+    const status = order.status.toLowerCase()
+    return status == 'pending' || status == 'processing'
+  })
 
   return (
     <div className={ show ? styles._background : styles._hidden}>
@@ -61,22 +43,22 @@ const OpenModal = ({ show, method }) => {
                   <div className={styles._block}>
                     <div className={styles._row}>
                       <p className={styles._bold}>Orden</p>
-                      <p>{item.order}</p>
+                      <p>{`#${item.orderNumber}`}</p>
                     </div>
 
                     <div className={styles._row}>
                       <p>Fecha</p>
-                      <p>{item.date}</p>
+                      <p>{parseDate(item.date)}</p>
                     </div>
 
                     <div className={styles._row}>
                       <p>Hora</p>
-                      <p>{item.hour}</p>
+                      <p>{parseHour(item.date)}</p>
                     </div>
 
                     <div className={styles._row}>
                       <p className={styles._bold}>Status</p>
-                      <p>{item.status}</p>
+                      <p>{statusMessage[item.status]}</p>
                     </div>
                   </div>
                 </div>

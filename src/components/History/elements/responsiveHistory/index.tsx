@@ -7,9 +7,13 @@ import { useSelector } from 'react-redux'
 
 const ResponsiveHistory = ({ modalMethod }) => {
 
-  const { auth } = useSelector((state: any) => state)
+  const { auth, guest: { tmpOrders } } = useSelector((state: any) => state)
 
-  const ordersArray = auth?.login?.login?.customer?.orders?.nodes ?? []
+  const ordersArray = auth?.login?.login?.customer?.orders?.nodes
+                        ? auth?.login?.login?.customer?.orders?.nodes
+                        : tmpOrders?.orders?.nodes
+                        ? tmpOrders?.orders?.nodes
+                        : []
 
   const [showData, setShowData] = useState(false)
   const [searchValue, setSearchValue] = useState('')

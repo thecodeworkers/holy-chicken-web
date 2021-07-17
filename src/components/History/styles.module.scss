@@ -134,10 +134,15 @@
 }
 
 ._btnParent {
-  width: 190px;
-  display: block;
+  width: 215px;
+  display: flex;
+  align-items: center;
   margin-left: auto;
   margin-bottom: 2rem;
+  & img {
+    margin-left: 15px;
+    cursor: pointer;
+  }
 }
 
 ._rightSide {

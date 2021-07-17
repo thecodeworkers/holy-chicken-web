@@ -1,10 +1,11 @@
-import { registerMutation, loginMutation, restorePasswordEmail, resetUserPasswordMutation, getTmpSessionToken } from '@graphql'
+import { registerMutation, loginMutation, restorePasswordEmail, resetUserPasswordMutation, getTmpSessionToken, getOrdersQuery } from '@graphql'
 import { actionObject, filter, setCamelCaseKey, WooCommerceClient } from '@utils'
 import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL, LOGOUT_USER, RESTORE_PASSWORD, GET_TMP_SESSION } from './action-types'
 import { REQUEST_LOADER } from '@store/loader/actions-types'
 import { setToast } from '@store/toast/action'
 import { resetGuestStore } from '../guest/action'
 import { resetCartStore } from '../cart/action'
+import { SET_TMP_BUY } from '@store/guest/action-types'
 
 export const registerUser = (body: any) => async (dispatch) => {
 
@@ -29,8 +30,6 @@ export const loginUser = (body: any) => async (dispatch) => {
     const result = await loginMutation(body)
 
     if (result.message) throw new Error(result.message)
-
-    console.log(result)
 
     dispatch(actionObject(LOGIN_USER, { login: result, isAuth: result?.login ? true : false }))
     dispatch(dispatch(setToast('check', 'Usuario autenticado exitosamente', 1)))
@@ -105,20 +104,26 @@ export const getTmpSession = () => async (dispatch) => {
 }
 
 export const updateUserData: any = () => async (dispatch, getState) => {
-
-  const { auth, resource: { productsCopy } } = getState()
   try {
+    const { auth, resource: { productsCopy }, guest: { tmpSessionToken } } = getState()
     const customer = auth?.login?.login?.customer
-    dispatch(actionObject(REQUEST_LOADER, true))
-    if (customer) {
 
+    dispatch(actionObject(REQUEST_LOADER, true))
+
+    if (customer) {
       let orders = await WooCommerceClient('orders?per_page=100')
       orders = filter(orders, customer.databaseId, 'customer_id')
 
-      orders = orders.map((order) => {
+      orders = orders.map((order, index) => {
         order = setCamelCaseKey(order)
         order.orderNumber = order.number
         order.date = order.dateCreated
+
+        if (customer?.orders?.nodes) {
+          const oldOrders = customer.orders.nodes
+          order.trackOrder = oldOrders[index].trackOrder
+        }
+
         order.lineItems = {
           nodes: order.lineItems.map(item => {
             item = setCamelCaseKey(item)
@@ -130,9 +135,24 @@ export const updateUserData: any = () => async (dispatch, getState) => {
         return order
       })
 
-      const newLogin = { ...auth?.login?.login, ...{ customer: { ...customer, ...{ orders: { nodes: orders } } } } }
+      const newLogin = {
+        ...auth?.login?.login,
+        ...{
+          customer: {
+            ...customer,
+            ...{ orders: { nodes: orders } }
+          }
+        }
+      }
+
       dispatch(actionObject(LOGIN_USER, { login: {login: newLogin} }));
     }
+
+    if (tmpSessionToken) {
+      const tmpOrders = await getOrdersQuery(tmpSessionToken)
+      dispatch(actionObject(SET_TMP_BUY, { tmpOrders }));
+    }
+
     dispatch(actionObject(REQUEST_LOADER, false))
   } catch (error) {
     dispatch(actionObject(REQUEST_LOADER, false))

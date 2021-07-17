@@ -1,2 +1,3 @@
 export const GET_TMP_SESSION = 'GET_TMP_SESSION'
+export const SET_TMP_BUY = 'SET_TMP_BUY'
 export const RESET_GUEST_STORE = 'RESET_GUEST_STORE'
