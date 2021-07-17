@@ -28,9 +28,6 @@ const WebRow = ({ items }) => {
             const element = item?.product?.node
             const totalPrice = element?.price ? element?.price : getVariableTotalPrice(item?.quantity, item?.total)
 
-            console.log('AITEEEM', item)
-            console.log('ELEMEEEEN', element)
-
             return (
               <div className={styles._row} key={index}>
                 <div className={styles._closeParent} onClick={() => deleteItem(item)}>

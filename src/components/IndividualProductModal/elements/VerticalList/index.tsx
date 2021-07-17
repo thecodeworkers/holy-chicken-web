@@ -13,8 +13,6 @@ const VerticalList = ({ attributes, category }) => {
   const variations = currentProduct?.variations?.nodes ?? []
   const options = attributes?.nodes[0].options ?? []
 
-  console.log('VARIATIONS', variations)
-
   const compareAttributes = () => {
     let currentItem
 

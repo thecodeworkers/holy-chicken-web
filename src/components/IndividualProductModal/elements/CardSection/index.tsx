@@ -15,8 +15,6 @@ const CardSection = ({ attributes }) => {
 
   const dispatch = useDispatch();
 
-  console.log('EXTRAAAAS', extras[0])
-
   return (
     <>
       {
