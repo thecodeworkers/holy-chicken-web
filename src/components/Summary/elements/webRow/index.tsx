@@ -40,7 +40,16 @@ const WebRow = ({ items }) => {
                     </div>
                     <div>
                       <p className={styles._rowTitle}>{element?.name}</p>
-                      <div className={styles._rowText} dangerouslySetInnerHTML={createMarkup(element?.description)}></div>
+                      <div className={styles._rowText} dangerouslySetInnerHTML={createMarkup(element?.description)}>
+
+                      </div>
+                      {
+                        item?.variation &&
+                        item?.variation?.attributes.map((attributes, index) => {
+                          return <p className={styles._rowText} key={index}>{`${attributes.label}: ${attributes?.value}`}</p>
+                        })
+                      }
+
                     </div>
                   </div>
                 </div>

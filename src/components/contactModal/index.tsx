@@ -1,39 +1,48 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { ModalFrame, Button, Tooltip} from '@components'
 import { Phone, Mail, Insta, Twitter, WhatsApp, Location, PaperClip } from '@images/icons'
+import { useDispatch } from 'react-redux'
+import { setShowModal, setToast } from '@store/actions'
 import { useSelector } from 'react-redux'
 import FormikConfig from './formik'
 
 const ModalContact = () => {
-  const [isActive, setActive] = useState(1)
-  const [fileName, setFileName] = useState('')
 
-  const formik = FormikConfig()
+  const dispatch = useDispatch()
+  const [type, setType] = useState('cliente')
+  const formik = FormikConfig(dispatch, type)
+  const [isActive, setActive] = useState(1)
+
   const { errors, touched } = formik
+
+  const { resource: { general: { general } }, contact } = useSelector((state: any) => state)
   const [showTooltip, setShowTooltip] = useState(false)
-  const { resource: { general: { general } } } = useSelector((state: any) => state)
-  let timeout
 
   const activeLink = (props) => {
     setActive(props)
+    if(props == 1) setType('cliente')
+    if(props == 2) setType('proveedor')
+    if(props == 3) setType('personal')
   }
 
   const tooltipTimer = () => {
     setShowTooltip(true)
-
-    //  timeout = setTimeout(() => {
-    //    setShowTooltip(false)
-    // }, 8000);
   }
 
+  useEffect(() => {
+    if(contact?.contact) {
+      formik.resetForm()
+      dispatch(setShowModal({ contactModal: false }))
+    }
+  }, [contact])
+
   return (
-    <ModalFrame>
+    <ModalFrame >
       <div className={styles._main}>
         <div className={styles._leftSection}>
           <div className={styles._closeParent}>
             <p className={styles._title}>Contáctanos</p>
-
           </div>
 
           <div className={`${styles._itemParent} ${styles._marginBottom}`}>
@@ -220,7 +229,7 @@ const ModalContact = () => {
                 </div>
 
                 <div className={styles._sendBtn}>
-                  <Button color='#000' text='Enviar' textColor='#FFF' type='submit' />
+                  <Button color='#000' text='Enviar' textColor='#FFF' type='submit' flag />
                 </div>
               </div>
             </div>

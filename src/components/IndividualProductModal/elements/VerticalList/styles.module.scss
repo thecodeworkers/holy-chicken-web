@@ -41,8 +41,50 @@
   margin-top: 1rem;
 }
 
-@include responsive(lg) {
+._chooseOneParent {
+  display: flex;
+  align-items: center;
+  margin-left: 4rem;
+
+  & p {
+    margin-left: 0.3rem;
+    font-family: $montserratRegular;
+    font-size: $montserratRegular12;
+  }
+}
+
+._titleParent {
+  display: flex;
+  align-items: center;
+}
+
+._image {
+  width: 85px;
+  object-fit: contain;
+  margin-left: 0.5rem;
+}
+
+@include responsive(md) {
   ._listParent {
     margin-bottom: 2rem;
+  }
+
+  ._imgParent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(3.125rem, 6.25rem);
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  ._image {
+    height: 60px;
+    width: 100%;
+    object-fit: contain;
+    margin-left: 0;
+  }
+
+  ._chooseOneParent {
+    margin-left: 2rem;
   }
 }

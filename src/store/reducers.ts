@@ -5,10 +5,12 @@ import resource from './resource/reducer'
 import intermitence from './intermitence/reducer'
 import auth from './auth/reducer'
 import toast from './toast/reducer'
+import contact from './contact/reducer'
 import cart from './cart/reducer'
 import product from './product/reducer'
 import paymentStep from './paymentStep/reducer'
 import scrollReference from './scrollReference/reducer'
+import variableProduct from './variableProduct/reducer'
 import guest from './guest/reducer'
 
 const reducers = combineReducers({
@@ -18,10 +20,12 @@ const reducers = combineReducers({
   intermitence,
   auth,
   toast,
+  contact,
   cart,
   product,
   paymentStep,
   scrollReference,
+  variableProduct,
   guest
 })
 

@@ -1,14 +1,16 @@
 import { useFormik } from 'formik'
 import { emailRegex, passwordRegex, onlyLettersRegex, phoneRegex } from '@utils/regex'
 import * as Yup from 'yup'
+import { sendContactForm } from '@store/actions'
 
-const formikConfig = () => (useFormik({
+const formikConfig = (dispatch, type) => (useFormik({
   initialValues: {
     name: '',
     lastname: '',
     phone: '',
     email: '',
-    message: ''
+    message: '',
+    file: ''
   },
 
   validationSchema: Yup.object({
@@ -28,10 +30,12 @@ const formikConfig = () => (useFormik({
       .matches(emailRegex),
 
     message: Yup.string()
+      .max(500)
   }),
 
   onSubmit: values => {
-    console.log(JSON.stringify(values))
+    const completeForm = { type, ...values }
+    dispatch(sendContactForm(completeForm))
   }
 }))
 

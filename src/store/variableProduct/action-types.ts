@@ -1,0 +1,1 @@
+export const VARIABLE_PRODUCT = 'VARIABLE_PRODUCT'

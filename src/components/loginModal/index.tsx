@@ -16,8 +16,6 @@ const LoginModal = () => {
 
   const showPassword = () => setShow(show => !show)
 
-  let timeout
-
   const closeModal = (event) => {
     const { target } = event
     if (target.id == 'background') {
@@ -32,8 +30,6 @@ const LoginModal = () => {
       dispatch(setShowModal({ loginModal: false }))
       formik.resetForm()
     }
-
-    return () => clearTimeout(timeout)
 
   }, [auth?.login])
 
