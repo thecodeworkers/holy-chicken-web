@@ -1,23 +1,28 @@
 import styles from './styles.module.scss'
 
-const Tooltip = ({ top = '0px', bottom = '0px', right = '0px', left = '0px', show, paddinHorizontal }) => {
+const Tooltip = ({ top = '0px', bottom = '0px', right = '0px', left = '0px', show, paddinHorizontal, advice = false }) => {
   return (
     <>
-    <div className={show ? '_parent' : '_hidden'}>
+      <div className={show ? '_parent' : '_hidden'}>
 
-      <div>
-      <p className={styles._text}>
-        La contraseña debe contener al menos</p>
-        <p className={styles._text}> 8 caracteres, 1 letra mayúscula,1 número,</p>
-        <p className={styles._text}> 1 letra minúscula </p>
+        {!advice ?
+          <div>
 
+            <p className={styles._text}>
+              La contraseña debe contener al menos</p>
+            <p className={styles._text}> 8 caracteres, 1 letra mayúscula,1 número,</p>
+            <p className={styles._text}> 1 letra minúscula </p>
+
+          </div>
+          : <div>
+          <p className={styles._text}>
+          Si quieres contactarnos escribe a infoholychicken@gmail.com</p>
+          </div>
+        }
+        <div className={!advice ? styles._arrowDown : styles._arrowDownRight}></div>
       </div>
 
-
-      <div className={styles._arrowDown}></div>
-    </div>
-
-    <style jsx>{`
+      <style jsx>{`
       ._parent {
         background-color: #118AC6;
         padding: 1rem ${paddinHorizontal}rem;

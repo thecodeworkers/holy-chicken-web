@@ -12,7 +12,7 @@
 }
 
 ._modal {
-  padding: 3rem 2.2rem;
+  padding: 3rem;
   box-sizing: border-box;
   width: 600px;
   max-width: 600px;
@@ -20,6 +20,11 @@
 
 ._input {
   @include generalInput($alto);
+  font-size: $montserratBold16;
+}
+
+._inputError {
+  @include generalInput($red);
   font-size: $montserratBold16;
 }
 
@@ -60,5 +65,12 @@
   ._background {
     @include blurBackgroundResponsive();
     height: 100%;
+  }
+
+  ._modal {
+    margin-top: 3.75rem;
+    align-self: center;
+    padding: 1.8rem;
+    width: 90%;
   }
 }

@@ -1,16 +1,46 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { Button } from '@components'
+import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { setShowModal, setProductsNumber, setCartProducts } from '@store/actions'
 import { ClothSection, VerticalList, VerticalListWithImage, CardSection } from './elements'
+import { createMarkup } from '@utils'
 
-const IndividualProduct = ({ type = 'colorsizes' }) => {
-
+const IndividualProduct = () => {
   const dispatch = useDispatch()
-  const [number, setNumber] = useState(0)
+  const {
+    intermitence: { individualProductModal },
+    cart: { currentProduct },
+    product, variableProduct
+   } = useSelector((state: any) => state)
 
-  const { intermitence: { individualProductModal } } = useSelector((state: any) => state)
+   const hot = currentProduct?.spicy?.isSpicy
+
+  const allAddons = [
+    ...product.addons,
+    ...product.blessingAddons,
+    ...product.sauceAddons
+  ]
+
+  const totalPrice = () => {
+    const totalAddons = allAddons.reduce((previous, next) => previous + next.price, 0)
+    let totalPrice = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
+
+    if (totalPrice) {
+      totalPrice = totalPrice.split('$')
+      totalPrice = parseFloat(totalPrice[1])
+      totalPrice += totalAddons
+
+      const { blessing, sauce } = product
+
+      totalPrice += blessing != 'N/A' ? 0.5 : 0
+      totalPrice += sauce != 'N/A' ? 0.5 : 0
+
+      return `$${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
+    }
+
+    return ''
+  }
 
   const closeModal = (event, flag = false) => {
     const { target } = event
@@ -19,29 +49,51 @@ const IndividualProduct = ({ type = 'colorsizes' }) => {
     }
   }
 
-  const aumented = () => setNumber(number => ++number)
+  const featuresType = (type, attributes) => {
 
-  const decrement = () => {
-    if (number >= 1) setNumber(number => --number)
-  }
+    const attributesLength =  attributes?.nodes?.length
 
-  const featuresType = (type) => {
     switch (type) {
-      case 'list':
-        return <VerticalList />
+      case 'temptations':
+      case 'bebidas':
+        return <VerticalList attributes={attributes} category={type}/>
 
-      case 'card':
-        return <CardSection />
+      case 'holy-sanduches':
+      case 'holy-tenders':
+        return <CardSection attributes={attributes} />
 
-      case 'list-image':
-        return <VerticalListWithImage />
-
-      case 'colorsizes':
-        return <ClothSection size={true}/>
+      case 'merch':
+        return <ClothSection size={attributesLength == 2 ? true : false} attributes={attributes} />
 
       default:
-        break;
+        return <div></div>
     }
+  }
+
+  const setProductstoCart = () => {
+
+    const productVariable = variableProduct?.currentVariableProduct
+    let correctProduct = currentProduct
+
+    if (!!currentProduct?.variations) {
+      const { freeFresh, freeSauce, blessing, sauce } = product
+
+      const attributes = [
+        { value: freeFresh },
+        { value: freeSauce },
+        { value: blessing },
+        { value: sauce }
+      ]
+
+      const filterCriteria = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(attributes)
+      const result = currentProduct?.variations?.nodes.find(filterCriteria)
+
+      if (result) correctProduct = result
+    }
+
+    if(productVariable) correctProduct = productVariable
+
+    dispatch(setCartProducts(correctProduct, allAddons))
   }
 
   return (
@@ -56,32 +108,30 @@ const IndividualProduct = ({ type = 'colorsizes' }) => {
 
             <div className={styles._titleParent} >
               <div>
-                <p className={styles._title}>NOT SOY HOLY</p>
-              </div>
-              <div className={styles._numberParent}>
-                <div className={styles._circle} onClick={decrement}>
-                  <p >-</p>
-                </div>
-                <input type='text' value={number} readOnly className={styles._input}></input>
-                <div className={styles._circle} onClick={aumented}>
-                  <p >+</p>
-                </div>
+                <p className={styles._title}>{currentProduct?.name}</p>
               </div>
             </div>
 
-            <p className={styles._subtitle}>Para los mal portados, 210 gramos de pollo crispy marinado con picante entre pan brioche</p>
+            <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description) }></div>
 
             {
-              type == 'card' ?
+              currentProduct?.productCategories?.nodes[0]?.slug == 'holy-sanduches' ?
                 (<div className={styles._imgParent}>
-                  <img src='images/resources/burguer.png' className={styles._img}></img>
+                      {
+                    hot && (<div className={styles._icon}>
+                      <img src='images/icons/chilipepper.svg' alt='icono de producto picante' width='100%'></img>
+                    </div>)
+                  }
+
+                  <img src={currentProduct?.image?.mediaItemUrl ?? 'images/resources/burguer.png'} className={styles._img}></img>
+
                 </div>) : (<div className={styles._bigImgParent}>
-                  <img src='images/resources/shirt.png' className={styles._bigImg}></img>
+                  <img src={currentProduct?.image?.mediaItemUrl ?? 'images/resources/shirt.png'} className={styles._bigImg}></img>
                 </div>)
             }
 
             {
-              type == 'card' && (<div className={styles._inputParent}>
+              currentProduct?.productCategories?.nodes[0]?.slug == 'holy-sanduches' && (<div className={styles._inputParent}>
                 <label>Nota</label>
                 <input
                   type='text'
@@ -93,17 +143,17 @@ const IndividualProduct = ({ type = 'colorsizes' }) => {
 
           </div>
           <div className={styles._rightSide}>
-            {featuresType(type)}
+            {featuresType(currentProduct?.productCategories?.nodes[0]?.slug, currentProduct?.attributes)}
           </div>
         </div>
 
         <div className={styles._totalParent}>
           <div className={styles._btnParent}>
-            <Button text='Agregar' color='#000' textColor='#FFF' />
+            <Button text='Agregar' color='#000' textColor='#FFF' method={setProductstoCart} flag/>
           </div>
 
           <div>
-            <p>$1,000.00</p>
+            <p>{totalPrice()}</p>
           </div>
         </div>
       </div>

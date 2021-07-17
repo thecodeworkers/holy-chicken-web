@@ -23,54 +23,71 @@ p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+select{
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #ddd;
+  -webkit-appearance: none;
+  background-position-x: 98%;
+  background-size: 1rem;
+}
+
 ._generalCard {
   background-color: $white;
   border-radius: 2.375rem;
 }
 
+._right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+._left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
 @font-face {
   font-family: 'Blacker-Text-Heavy-trial';
-  src: url('../fonts/Blacker-Text-Heavy-trial.ttf');
+  src: url('/fonts/Blacker-Text-Heavy-trial.ttf');
 }
 
 @font-face {
   font-family: 'Blacker-Text-Bold-trial';
-  src: url('../fonts/Blacker-Text-Bold-trial.ttf');
+  src: url('/fonts/Blacker-Text-Bold-trial.ttf');
 }
 
 @font-face {
   font-family: 'Montserrat-Black';
-  src: url('../fonts/Montserrat-Black.ttf');
+  src: url('/fonts/Montserrat-Black.ttf');
 }
 @font-face {
   font-family: 'Montserrat-Bold';
-  src: url('../fonts/Montserrat-Bold.ttf');
+  src: url('/fonts/Montserrat-Bold.ttf');
 }
 @font-face {
   font-family: 'Montserrat-ExtraBold';
-  src: url('../fonts/Montserrat-ExtraBold.ttf');
+  src: url('/fonts/Montserrat-ExtraBold.ttf');
 }
 @font-face {
   font-family: 'Montserrat-ExtraLight';
-  src: url('../fonts/Montserrat-ExtraLight.ttf');
+  src: url('/fonts/Montserrat-ExtraLight.ttf');
 }
 @font-face {
   font-family: 'Montserrat-Light';
-  src: url('../fonts/Montserrat-Light.ttf');
+  src: url('/fonts/Montserrat-Light.ttf');
 }
 @font-face {
   font-family: 'Montserrat-Medium';
-  src: url('../fonts/Montserrat-Medium.ttf');
+  src: url('/fonts/Montserrat-Medium.ttf');
 }
 @font-face {
   font-family: 'Montserrat-Regular';
-  src: url('../fonts/Montserrat-Regular.ttf');
+  src: url('/fonts/Montserrat-Regular.ttf');
 }
 @font-face {
   font-family: 'Montserrat-SemiBold';
-  src: url('../fonts/Montserrat-SemiBold.ttf');
+  src: url('/fonts/Montserrat-SemiBold.ttf');
 }
 @font-face {
   font-family: 'Montserrat-Thin';
-  src: url('../fonts/Montserrat-Thin.ttf');
+  src: url('/fonts/Montserrat-Thin.ttf');
 }

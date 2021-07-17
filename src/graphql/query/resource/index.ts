@@ -1,25 +1,33 @@
 import { GraphQlClient, normalized, normalizedArray } from '@utils'
+import attributesQuery from './attributes'
+import countries from './countries'
 import generalQuery from './generalPage'
-import outstanding from './outstanding'
+import paymentMethods from './paymentMethods'
 import productsQuery from './products'
+import productsCategoriesQuery from './productsCategories'
 const resource = async () => {
 
   const query = `
     query Resources {
       ${generalQuery}
-      ${outstanding}
       ${productsQuery()}
+      ${productsCategoriesQuery}
+      ${attributesQuery}
+      ${paymentMethods}
+      ${countries}
     }
   `
 
   const data: any = await GraphQlClient(query)
 
-  const resources = {
+  return {
     general: normalized(data?.generalPage),
-    outstanding: normalizedArray(data?.outstanding.nodes),
-    products: normalizedArray(data?.products.nodes),
+    products: normalizedArray(data?.products?.nodes),
+    productsCategories: normalizedArray(data?.productCategories?.nodes),
+    attributes: normalizedArray(data?.attributes?.nodes),
+    paymentMethods: normalizedArray(data?.paymentGateways?.nodes),
+    countries: normalizedArray(data?.countries?.nodes)
   }
-  return resources
 }
 
 export default resource

@@ -34,6 +34,25 @@ generalPage:page(id: "${generalId}") {
         slug
       }
     }
+    addresses {
+      local
+      address
+    }
+    navigation {
+      askNow
+      createAccount
+      login
+      logout
+      myOrders
+      newClient
+    }
+    cart {
+      confirm
+      emptyCart
+      estimateTotal
+      myask
+      promotion
+    }
   }
 }
 `

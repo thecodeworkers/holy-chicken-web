@@ -1,26 +1,23 @@
 import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { ModalFrame, Button } from '@components'
+import { ModalFrame, Button, Tooltip} from '@components'
 import { Phone, Mail, Insta, Twitter, WhatsApp, Location, PaperClip } from '@images/icons'
 import { useDispatch } from 'react-redux'
 import { setShowModal, setToast } from '@store/actions'
 import { useSelector } from 'react-redux'
 import FormikConfig from './formik'
-import { getPageFiles } from 'next/dist/next-server/server/get-page-files'
 
 const ModalContact = () => {
 
   const dispatch = useDispatch()
   const [type, setType] = useState('cliente')
-  const changeStatus = () => setStatus(true)
-  const formik = FormikConfig(dispatch, type, changeStatus)
+  const formik = FormikConfig(dispatch, type)
   const [isActive, setActive] = useState(1)
-  const [fileName, setFileName] = useState('')
-  const [status, setStatus] = useState(false)
 
   const { errors, touched } = formik
 
   const { resource: { general: { general } }, contact } = useSelector((state: any) => state)
+  const [showTooltip, setShowTooltip] = useState(false)
 
   const activeLink = (props) => {
     setActive(props)
@@ -29,19 +26,16 @@ const ModalContact = () => {
     if(props == 3) setType('personal')
   }
 
-  const getFile = (event) => setFileName(event.target.files[0].name);
+  const tooltipTimer = () => {
+    setShowTooltip(true)
+  }
 
   useEffect(() => {
-    if(contact?.contact && status) {
-      dispatch(setToast('check', 'Su información ha sido enviada', 1))
-      dispatch(setShowModal({ contactModal: false }))
-      setStatus(false)
+    if(contact?.contact) {
       formik.resetForm()
+      dispatch(setShowModal({ contactModal: false }))
     }
-
-    if(!contact?.contact && status)  dispatch(setToast('error', 'Error al enviar su informacion', 1))
-
-  }, [contact?.contact])
+  }, [contact])
 
   return (
     <ModalFrame >
@@ -57,8 +51,8 @@ const ModalContact = () => {
             </div>
             <div>
               <p>Teléfono</p>
-              <a className={styles._link} href = "tel:+58 412-2485668">
-              +58 412-2485668
+              <a className={styles._link} href="tel:+58 412-2485668">
+                +58 412-2485668
               </a>
             </div>
           </div>
@@ -69,8 +63,8 @@ const ModalContact = () => {
             </div>
             <div>
               <p>Email</p>
-              <a className={styles._link} href = "mailto:infoholychicken@gmail.com">
-              infoholychicken@gmail.com
+              <a className={styles._link} href="mailto:infoholychicken@gmail.com">
+                infoholychicken@gmail.com
               </a>
             </div>
           </div>
@@ -84,15 +78,15 @@ const ModalContact = () => {
               <div className={styles._textParent}>
                 <p>Las Mercedes</p>
                 <p>Calle París de Las Mercedes,
-            entre Calle Nueva York y Calle Caron</p>
+                  entre Calle Nueva York y Calle Caron</p>
               </div>
 
               <div className={styles._textParent}>
                 <p>El Hatillo</p>
                 <p>Calle Bolívar del pueblo de El Hatillo.
-                A una cuadra de la Plaza Bolívar.
-                Quinta Nuti.
-            </p>
+                  A una cuadra de la Plaza Bolívar.
+                  Quinta Nuti.
+                </p>
               </div>
 
               <div className={styles._textParent}>
@@ -100,7 +94,7 @@ const ModalContact = () => {
                 <p>
                   Av. Principal de La Castellana,
                   Sector La Castellana.
-            </p>
+                </p>
               </div>
             </div>
           </div>
@@ -154,7 +148,6 @@ const ModalContact = () => {
                         placeholder='Nombre'
                         type='text'
                         name='name'
-                        id='name'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.name}
@@ -169,7 +162,6 @@ const ModalContact = () => {
                         placeholder='Apellido'
                         type='text'
                         name='lastname'
-                        id='lastname'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.lastname}
@@ -221,24 +213,14 @@ const ModalContact = () => {
                     className={styles._textArea}
                     placeholder='Escriba su mensaje aqui...'
                   >
-
                   </textarea>
 
-                  <div className={styles._paperClipParent}>
-                  <p className ={styles._fileName}>{fileName}</p>
-                    <label htmlFor="file-input" className={styles._filePointer}>
+                  <div className={styles._paperClipParent} onClick={tooltipTimer}>
+
+                    <label className={styles._filePointer}>
+                    <Tooltip paddinHorizontal={5} top='-75px' left={'-125px'}  advice={true} show={showTooltip} />
                       <PaperClip color='#000' />
                     </label>
-                    <input
-                    id="file-input"
-                    type="file"
-                    // name='file'
-                    // onChange={formik.handleChange}
-                    onChange={(event) => getFile(event)}
-                    // onBlur={formik.handleBlur}
-                    // value={formik.values.file}
-                    accept={'application/pdf, application/msword, image/*'}
-                    className={styles._file} />
                   </div>
                 </div>
 

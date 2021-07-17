@@ -1,3 +1,5 @@
+
+
 @import '../../../public/styles/index.scss';
 
 ._background {
@@ -5,7 +7,7 @@
 }
 
 ._modal {
-  padding: 3rem 2.5rem;
+  padding: 2.5rem;
   box-sizing: border-box;
   width: 1100px;
 }
@@ -24,7 +26,7 @@
   width: 55%;
   padding: 0 3rem;
   box-sizing: border-box;
-  height: 22.5rem;
+  height: 24.5rem;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -47,9 +49,18 @@
 }
 
 ._title {
-  font-family: $montserratBold;
+  font-family: $montserratExtraBold;
   font-size: $blackerTextHeavy40;
 }
+._icon {
+  $size: 16px;
+  position: absolute;
+  right: 105px;
+  top: 8%;
+  width: $size;
+  height: $size;
+}
+
 
 ._titleParent {
   display: flex;
@@ -101,12 +112,13 @@
 
 ._imgParent {
   margin: 0.6rem 0;
+  position: relative;
 }
 
 ._img {
-  width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: contain;
+  margin-left: 4rem;
 }
 
 ._bigImgParent {
@@ -241,6 +253,7 @@
 
 ._comebackParent {
   cursor: pointer;
+  display: inline-block;
 }
 
 
@@ -262,10 +275,9 @@
 
     &::-webkit-scrollbar {
       display: none;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
-
-    -ms-overflow-style: none;
-    scrollbar-width: none;
   }
 
   ._leftSide, ._rightSide {
@@ -291,6 +303,7 @@
 
   ._title {
     margin-bottom: 0.6rem;
+
   }
 
   ._numberParent {
@@ -304,6 +317,10 @@
 
   ._imgParent {
     margin: 1rem 0;
+  }
+  ._img{
+    width: 100%;
+    margin-left: 0;
   }
 
   ._bigImg {
@@ -319,6 +336,7 @@
     }
   }
 
-
+  ._icon{
+    right: 0px;
+  }
 }
-

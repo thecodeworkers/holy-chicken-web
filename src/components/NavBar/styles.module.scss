@@ -75,9 +75,31 @@
 ._iconParent {
   margin-left: 2rem;
   cursor: pointer;
+  position: relative;
 
   &:nth-child(3) {
     position: relative;
+  }
+}
+
+._numberParent {
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  background-color: $black;
+  top: -0.4rem;
+  right: -0.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0.4rem;
+
+  & p {
+    color: $white;
+    font-family: $montserratBold;
+    font-size: $montserratRegular12;
   }
 }
 
@@ -132,9 +154,17 @@
   cursor: pointer;
 }
 
-
 ._responsive {
   display: none;
+}
+
+._myOrders {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-position: under;
+  }
 }
 
 @include responsive(lg) {
@@ -145,6 +175,5 @@
 
   ._main {
     display: none;
-  }
-
+   }
 }

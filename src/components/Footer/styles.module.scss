@@ -64,8 +64,8 @@
 }
 
 ._link{
-  font-family: $montserratMedium;
-  font-size: $montserratMedium14;
+  font-family: $montserratRegular;
+  font-size: $montserratRegular12;
   color: $white;
   cursor: pointer;
 }
@@ -110,7 +110,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: -2rem;
+  margin-left: -1.1rem;
 }
 
 ._icon{

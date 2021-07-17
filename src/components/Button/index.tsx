@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styles from './styles.module.scss'
 import { useSelector } from 'react-redux';
 
@@ -9,13 +8,13 @@ const Button = ({ color, textColor, method = null, text, height = '2.5rem', type
 
   return (
     <>
-    <button className='_button' onClick={method ?? null} type={type}>
+      <button className='_button' onClick={method ?? null} type={type}>
         {
           requestLoader && flag ?
-          <div className={styles._loader}></div> : text
+            <div className={styles._loader}></div> : text
         }
-    </button>
-    <style jsx>{`
+      </button>
+      <style jsx>{`
       ._button {
         background-color: ${color};
         border: 1px solid ${color};
@@ -24,15 +23,21 @@ const Button = ({ color, textColor, method = null, text, height = '2.5rem', type
         border-radius: 1.25rem;
         cursor: pointer;
         font-family: Montserrat-Bold;
-        font-size: 0.9rem;
+
         width: 100%;
         height: ${height};
         display: flex;
         justify-content: center;
         align-items: center;
       }
+
+      @media(max-width: 768px) {
+        ._button {
+          font-size: 0.8rem;
+        }
+      }
     `}
-    </style>
+      </style>
     </>
   )
 }

@@ -1,0 +1,225 @@
+@import '../../../public/styles/index.scss';
+
+._superParent {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+._parent {
+  margin-top: 8.5rem;
+  height: auto;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 7vh;
+  overflow-y: hidden;
+}
+
+._bs{
+  font-size: $montserratLight10;
+  font-family: $montserratMedium;
+}
+
+._layout {
+  display: flex;
+  height: 100%;
+  padding-top: 2rem;
+  box-sizing: border-box;
+}
+
+._childOne {
+  width: 55%;
+  overflow-y: auto;
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    width: 0.438rem;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $black;
+    border-radius: 0.625rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: none;
+  }
+}
+
+._childOneCenter {
+  width: 55%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::-webkit-scrollbar {
+    width: 0.438rem;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $black;
+    border-radius: 0.625rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: none;
+  }
+}
+
+._childTwo {
+  width: 45%;
+}
+
+._subtitle {
+  font-family: $montserratRegular;
+  font-size: $montserratRegular16;
+
+}
+
+._title {
+  font-family: $blackerTextHeavy;
+  font-size: $blackerTextHeavy40;
+}
+
+._card {
+  box-shadow: 2px 4px 10px $mercury;
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+._inputParent {
+  width: 100%;
+
+  & label {
+    padding-left: 0.7rem;
+    font-family: $montserratRegular;
+    font-size: $montserratRegular16;
+  }
+}
+
+._input {
+  @include generalInput($alto);
+}
+
+._inputRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+._btnParent {
+  margin-top: 0.5rem;
+  width: 11rem;
+  margin-left: 1rem
+}
+
+._estimatedTotal {
+  display: flex;
+  margin: 1rem 0.7rem;
+  justify-content: space-between;
+
+  & p:first-child {
+    font-family: $blackerTextHeavy;
+    font-size: $montserratRegular16;
+  }
+
+  & p:last-child {
+    font-family: $montserratRegular;
+    font-size: $montserratRegular16;
+  }
+}
+
+._totalParent {
+  display: flex;
+  margin: 2rem 0.7rem 1rem 0.7rem;
+  justify-content: space-between;
+
+  & p:first-child {
+    font-family: $blackerTextHeavy;
+    font-size: $montserratRegular16;
+  }
+
+  & p:last-child {
+    font-family: $montserratBold;
+    font-size: $montserratRegular16;
+  }
+}
+
+._emptyCart {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+
+  & p {
+    font-family: $montserratRegular;
+    font-size: $montserratRegular18;
+    color: $gray;
+  }
+}
+
+._webRowParent {
+  display: block;
+}
+
+._responsiveRowParent {
+  display: none;
+}
+
+
+@include responsive(lg) {
+  ._layout {
+    flex-flow: column nowrap;
+  }
+
+  ._childOne, ._childTwo {
+    width: 100%;
+  }
+
+  ._childOneCenter {
+    width: 100%;
+  }
+
+  ._parent {
+    overflow: auto;
+    margin-top: 7rem;
+  }
+
+  ._superParent {
+    height: auto;
+  }
+
+  ._img {
+    display: none;
+  }
+
+  ._card {
+    width: 95%;
+    margin-bottom: 1rem;
+    z-index: 999;
+  }
+
+  ._webRowParent {
+    display: none;
+  }
+
+  ._responsiveRowParent {
+    display: block;
+  }
+}
+

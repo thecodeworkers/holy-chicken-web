@@ -8,6 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@badrap/bar-of-progress": "^0.1.2",
+    "@stripe/react-stripe-js": "^1.4.1",
+    "@stripe/stripe-js": "^1.16.0",
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "antd": "^4.15.5",
     "axios": "^0.21.1",
     "formik": "^2.2.8",
@@ -20,6 +24,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "sass": "^1.32.12",
+    "stripe": "^8.161.0",
     "uuid": "^8.3.2",
     "yup": "^0.32.9"
   },

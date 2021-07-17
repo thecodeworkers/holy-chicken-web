@@ -5,16 +5,18 @@ import { ChickenLogo } from '@images/resources'
 import { ResponsiveMenu, Button } from '@components'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import { setShowModal, setLoader, logoutUser, setToast } from '@store/actions'
+import { setShowModal, logoutUser, setToast, resetModals } from '@store/actions'
 import { useSelector } from 'react-redux'
 
 
 const NavbarResponsive = () => {
 
   const [show, setShow] = useState(0)
+  const [showCart, setShowCart] = useState(false)
   const [showPanel, setShowPanel] = useState(false)
 
-  const { auth } = useSelector((state: any) => state)
+  const { auth, cart, resource: { general = {} } } = useSelector((state: any) => state)
+  const { navigation: contentNavigation = {} } = general?.general || {}
   const { isAuth } = auth
 
   const dispatch = useDispatch()
@@ -28,21 +30,44 @@ const NavbarResponsive = () => {
 
   const resetShow = () => setShow(0)
 
-  const navigation = (route: string, loader = true) => {
+  const navigation = (route: string) => {
     if (route != router.pathname) {
-      if (loader) dispatch(setLoader(true))
       router.push(route)
+      dispatch(resetModals())
     }
   }
 
   const openLoginModal = () => {
-    !isAuth ? dispatch(setShowModal({ loginModal: true })) : setShowPanel(true)
+    setShowPanel(showPanel => !showPanel)
+  }
+
+
+  const openModal = (name) => {
+    setShowPanel(showPanel => !showPanel)
+    dispatch(resetModals())
+    dispatch(setShowModal({ [name]: true }))
   }
 
   const logout = () => {
-    dispatch(logoutUser())
+
+    if (isAuth) {
+      dispatch(logoutUser())
+      setShowPanel(false)
+      dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
+      return
+    }
+
+    dispatch(setShowModal({ loginModal: true }))
     setShowPanel(false)
-    dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
+  }
+
+  const showedCart = (showCart) => {
+
+    setShowCart(showCart => !showCart)
+
+    if (showCart) return dispatch(setShowModal({ cartModal: false }))
+
+    if (!showCart) return dispatch(setShowModal({ cartModal: true }))
   }
 
   return (
@@ -58,21 +83,31 @@ const NavbarResponsive = () => {
             </div>
           </div>
           <div className={styles._rightSection}>
-            <div onClick={() => navigation('/shop')}>
-              <Cart color='#000' />
+            <div className={styles._iconsList}>
+              <div className={styles._iconParent} onClick={() => showedCart(showCart)}>
+                <Cart color='#000' />
+                {
+                  cart?.number > 0 && (<div className={styles._numberParent}>
+                    <p>{cart?.number}</p>
+                  </div>)
+                }
+
+              </div>
+              <div onClick={openLoginModal}>
+                <Profile color='#000' />
+              </div>
             </div>
-            <div onClick={openLoginModal}>
-              <Profile color='#000' />
-            </div>
+
           </div>
         </div>
       </nav>
 
       <div className={showPanel ? styles._panel : styles._hidden}>
         <div className={styles._buttonBlueParent} onClick={logout} >
-          <Button color='#118AC6' text='Cerrar sesión' textColor='#fff' ></Button>
+          <Button color='#118AC6' text={isAuth ? contentNavigation?.logout : contentNavigation?.login} textColor='#fff'></Button>
         </div>
-        <p className={styles._myOrders}>Mis órdenes</p >
+        <p className={styles._myOrders}>{contentNavigation?.newClient} <a onClick={() => openModal('registerModal')}>{contentNavigation?.createAccount}</a></p>
+        <p className={styles._myOrders} onClick={() => navigation('/history')} >{contentNavigation?.myOrders}</p >
       </div>
 
       <ResponsiveMenu show={show} method={resetShow} />

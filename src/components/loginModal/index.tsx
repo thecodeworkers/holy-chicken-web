@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { Button, Tooltip } from '@components'
+import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal, resetModals, setToast } from '@store/actions'
 import FormikConfig from './formik'
@@ -8,33 +8,28 @@ import FormikConfig from './formik'
 const LoginModal = () => {
 
   const dispatch = useDispatch()
-  const changeStatus = () => setStatus(true)
-  const formik = FormikConfig(dispatch, changeStatus)
-  const [status, setStatus] = useState(false)
+  const formik = FormikConfig(dispatch)
+
   const { intermitence: { loginModal }, auth } = useSelector((state: any) => state)
   const [show, setShow] = useState(false)
   const { errors, touched } = formik
+
   const showPassword = () => setShow(show => !show)
 
   const closeModal = (event) => {
     const { target } = event
-    if(target.id == 'background') {
+    if (target.id == 'background') {
       dispatch(setShowModal({ loginModal: false }))
       formik.resetForm()
       dispatch(setToast('', '', 0))
-      setStatus(false)
     }
   }
 
   useEffect(() => {
-    if(auth?.login?.login && status) {
-      dispatch(setToast('check', 'Usuario autenticado exitosamente', 1))
+    if (auth?.login?.login) {
       dispatch(setShowModal({ loginModal: false }))
-      setStatus(false)
       formik.resetForm()
     }
-
-    if(!auth?.login?.login && status) dispatch(setToast('error', 'Error al autenticar usuario', 1))
 
   }, [auth?.login])
 
@@ -42,7 +37,6 @@ const LoginModal = () => {
     dispatch(resetModals())
     dispatch(setShowModal({ [name]: true }))
   }
-
 
   return (
     <div className={`${loginModal ? styles._background : styles._hidden} ${styles._flex}`} onClick={closeModal} id='background'>
@@ -74,7 +68,7 @@ const LoginModal = () => {
               className={errors.password && touched.password ? styles._inputError : styles._input} />
 
             <div className={styles._imageParent} onClick={showPassword}>
-            <img src={!show ? 'images/icons/show-password.svg' : 'images/icons/hide-password.svg'}  width='18px' height='18px' />
+              <img src={!show ? 'images/icons/show-password.svg' : 'images/icons/hide-password.svg'} width='18px' height='18px' />
             </div>
           </div>
 
@@ -83,11 +77,11 @@ const LoginModal = () => {
               color='#000'
               text='Ingresar'
               textColor='#FFF'
-              type='submit' flag={true}/>
+              type='submit' flag />
           </div>
         </form>
 
-        <p className={styles._blackLink}  onClick={() => openModal('locationModal')}>Comprar sin registrarse</p>
+        <p className={styles._blackLink} onClick={() => openModal('locationModal')}>Comprar sin registrarse</p>
         <p className={styles._grayLink}>¿Nuevo cliente? <a onClick={() => openModal('registerModal')}>Crear Cuenta</a></p>
         <p className={styles._grayLink}>¿Olvidaste tu contraseña? <a onClick={() => openModal('forgotPasswordModal')}>Recuperar Contraseña</a></p>
       </div>

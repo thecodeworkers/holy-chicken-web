@@ -6,13 +6,19 @@
   width: 100%;
   padding: 1.5rem;
   box-sizing: border-box;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 21.875rem;
+  position: relative;
 
   & h3 {
-    font-family: $blackerTextHeavy;
+    font-family: $montserratExtraBold;
     margin-top: 7%;
     color: $mineShaft;
-    font-size: $blackerTextHeavy20;
+    font-size: $montserratExtraBold18;
+    align-self: flex-start;
   }
 
   & p {
@@ -20,7 +26,13 @@
     font-family: $montserratRegular;
     font-size: $montserratRegular12;
     margin: 4% 0;
+    align-self: flex-start;
   }
+}
+._textContainer{
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 ._sectionParent {
@@ -28,11 +40,13 @@
   align-items: center;
   justify-content: space-between;
   margin-top: 9%;
+  width: 100%;
 
   & p {
     font-family: $montserratBold;
     font-size: $montserratBold16;
     color: $mineShaft;
+
   }
 }
 
@@ -55,4 +69,25 @@ height: 100%;
   ._btnParent {
     width: 4.925rem;
   }
+  ._parent{
+    padding: 1rem;
+    min-height: 20.875rem;
+
+
+    & h3{
+      font-size: 0.875rem;
+    }
+  }
+  ._sectionParent{
+    margin-top: 3%;
+  }
+}
+
+._icon {
+  $size: 16px;
+  position: absolute;
+  right: 8%;
+  top: 8%;
+  width: $size;
+  height: $size;
 }

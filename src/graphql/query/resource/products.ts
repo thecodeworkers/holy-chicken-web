@@ -5,10 +5,17 @@ products(first: 10000000) {
     id
     description
     slug
+    databaseId
+    totalSales
     ... on SimpleProduct {
       id
       name
       price
+      stockStatus
+      stockQuantity
+      spicy {
+        isSpicy
+      }
       attributes {
       nodes {
         id
@@ -35,6 +42,10 @@ products(first: 10000000) {
       id
       name
       price
+      databaseId
+      spicy {
+        isSpicy
+      }
       attributes {
       nodes {
         id
@@ -56,11 +67,34 @@ products(first: 10000000) {
           productCategoryId
         }
       }
+      variations(first: 300) {
+        nodes {
+          id
+          databaseId
+          name
+          description
+          price(format: RAW)
+          stockQuantity
+          stockStatus
+          attributes {
+            nodes {
+              value
+            }
+          }
+          image {
+            mediaItemUrl
+          }
+        }
+      }
     }
     ... on ExternalProduct {
- id
+      id
       name
       price
+      databaseId
+      spicy {
+        isSpicy
+      }
       attributes {
       nodes {
         id

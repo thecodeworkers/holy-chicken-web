@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import { wrapper } from '@store'
 import { getResources } from '@store/actions'
 import { useDispatch } from 'react-redux'
-import { setShowModal, resetModals, setLoader, logoutUser, setToast } from '@store/actions'
+import { setShowModal, resetModals, logoutUser, setToast } from '@store/actions'
 
 const ResponsiveMenu = ({ show = 0, method }) => {
 
@@ -23,16 +23,16 @@ const ResponsiveMenu = ({ show = 0, method }) => {
     if (show === 2) return styles._mainOut
   }
 
-  const navigation = (route: string, loader = true) => {
-    if(route == '/contact') {
+  const navigation = (route: string) => {
+    if (route == '/contact') {
       dispatch(resetModals())
       dispatch(setShowModal({ contactModal: true }))
       method()
       return
     }
     if (route != router.pathname) {
-      if (loader) dispatch(setLoader(true))
       router.push(route)
+      dispatch(resetModals())
       method()
     }
   }
@@ -48,7 +48,7 @@ const ResponsiveMenu = ({ show = 0, method }) => {
   }
 
   const sessionHandler = () => {
-    if(!isAuth) return openModal('loginModal')
+    if (!isAuth) return openModal('loginModal')
     dispatch(logoutUser())
     method()
     dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
@@ -59,10 +59,10 @@ const ResponsiveMenu = ({ show = 0, method }) => {
       <div className={styles._content}>
         <div>
           {
-            general?.header?.mainNavigation.map((item, index) => {
+            general?.header?.mainNavigation?.map((item, index) => {
               return (
                 <div className={styles._list} key={index}>
-                  <p className={activeLink(item?.link)} onClick={() => navigation(item?.link)}>{item.title}</p>
+                  <p className={activeLink(item?.link)} onClick={() => navigation(item?.link)}>{item?.title}</p>
                 </div>
               )
             }

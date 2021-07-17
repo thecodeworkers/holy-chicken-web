@@ -1,57 +1,116 @@
 import styles from './styles.module.scss'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setVariableProduct } from '@store/actions'
 
-const ClothSection = ({ size = true }) => (
-  <div>
-    <p className={styles._littleTitle}>DISEÑOS</p>
-    <div className={styles._circlesParent}>
-      <div className={styles._circleOne}></div>
-      <div className={styles._circleTwo}></div>
-      <div className={styles._circleThree}></div>
-    </div>
+const ClothSection = ({ size = true, attributes }) => {
 
+  const attributesLength = attributes?.nodes?.length
 
-    {
-      size && (
-        <div className={styles._sizesParent}>
-        <div className={styles._row}>
-          <div className={styles._checkParent}>
-            <input type='radio' className={styles._radioBtn} defaultChecked={false}></input>
-            <p>XS</p>
-          </div>
-        </div>
+  const dispatch = useDispatch()
 
-        <div className={styles._row}>
-          <div className={styles._checkParent}>
-            <input type='radio' className={styles._radioBtn} defaultChecked={false}></input>
-            <p>S</p>
-          </div>
-        </div>
+  const [ currentSize, setCurrentSize ] = useState('l')
+  const [ currentColor, setCurrentColor ] = useState('black')
 
-        <div className={styles._row}>
-          <div className={styles._checkParent}>
-            <input type='radio' className={styles._radioBtn} defaultChecked={true}></input>
-            <p>M</p>
-          </div>
-        </div>
+  const { cart: { currentProduct } } = useSelector((state: any) => state)
 
-        <div className={styles._row}>
-          <div className={styles._checkParent}>
-            <input type='radio' className={styles._radioBtn} defaultChecked={false}></input>
-            <p>L</p>
-          </div>
-        </div>
+  const variations = currentProduct?.variations?.nodes ?? []
 
-        <div className={styles._row}>
-          <div className={styles._checkParent}>
-            <input type='radio' className={styles._radioBtn} defaultChecked={false}></input>
-            <p>XL</p>
-          </div>
-        </div>
-      </div>
-      )
+  const compareValues = () => {
+    let selectedProduct
+
+    variations.forEach(product => {
+      const valueOne = product?.attributes?.nodes[0].value
+      const valueTwo = product?.attributes?.nodes[1].value
+
+      if(valueOne == currentSize.toUpperCase() && valueTwo == currentColor) selectedProduct = product
+    })
+
+    return selectedProduct
+  }
+
+  const compareValue = () => {
+    let selectedProduct
+
+    variations.forEach(product => {
+      const value = product?.attributes?.nodes[0].value
+      if(value == currentColor) selectedProduct = product
+    })
+
+    return selectedProduct
+  }
+
+  useEffect(() => {
+    if(attributesLength == 1) {
+      const value = compareValue()
+      if(value) dispatch(setVariableProduct({ currentVariableProduct: value }))
     }
 
-  </div>
-)
+    if(attributesLength == 2) {
+      const value = compareValues()
+      if(value) dispatch(setVariableProduct({ currentVariableProduct: value }))
+    }
+
+    return () =>  { dispatch(setVariableProduct({ currentVariableProduct: null })) }
+  },  [currentSize, currentColor])
+
+  return (
+    <div>
+      <div className={styles._titleParent}>
+        <p className={styles._littleTitle}>DISEÑOS</p>
+
+        {
+          attributes?.nodes.length && (<div className={styles._chooseOneParent}>
+            <img src='images/icons/alarm.svg' width='13px' className={styles._icon}></img>
+            <p>Debe seleccionar uno</p>
+          </div>)
+        }
+      </div>
+
+      <div className={styles._circlesParent} >
+        {
+          attributes?.nodes[attributesLength == 2 ? 1 : 0]?.options.length &&
+          attributes?.nodes[attributesLength == 2 ? 1 : 0]?.options.map((res, index) => {
+            return (
+              <div className={res == currentColor ? styles._circleSelected : styles._circleThree}
+                  style={{
+                    backgroundColor: res,
+                    border: res == 'white' ? '1px solid #808080' : 'none'
+                  }}
+                  key={index}
+                  onClick={() => setCurrentColor(res)}>
+              </div>
+              )
+          })
+        }
+      </div>
+
+      {
+        size && (
+          <div className={styles._sizesParent}>
+            {
+              attributes?.nodes[0]?.options.length &&
+              attributes?.nodes[0]?.options.map((res, index) => {
+                return (
+                  <div className={styles._row} key={index} onClick={() => setCurrentSize(res)} >
+                    <div className={styles._checkParent}>
+                      <input
+                        type='radio'
+                        className={styles._radioBtn}
+                        readOnly
+                        checked={currentSize == res ? true : false}></input>
+                      <p>{res.toUpperCase()}</p>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+        )
+      }
+    </div>
+  )
+
+}
 
 export default ClothSection
