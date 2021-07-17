@@ -1,3 +1,5 @@
+
+
 @import '../../../public/styles/index.scss';
 
 ._background {
@@ -47,9 +49,18 @@
 }
 
 ._title {
-  font-family: $blackerTextHeavy;
+  font-family: $montserratExtraBold;
   font-size: $blackerTextHeavy40;
 }
+._icon {
+  $size: 16px;
+  position: absolute;
+  right: 105px;
+  top: 8%;
+  width: $size;
+  height: $size;
+}
+
 
 ._titleParent {
   display: flex;
@@ -101,12 +112,13 @@
 
 ._imgParent {
   margin: 0.6rem 0;
+  position: relative;
 }
 
 ._img {
   height: 220px;
   object-fit: contain;
-  margin-left: 3rem;
+  margin-left: 4rem;
 }
 
 ._bigImgParent {
@@ -241,6 +253,7 @@
 
 ._comebackParent {
   cursor: pointer;
+  display: inline-block;
 }
 
 
@@ -323,6 +336,7 @@
     }
   }
 
-
+  ._icon{
+    right: 0px;
+  }
 }
-
