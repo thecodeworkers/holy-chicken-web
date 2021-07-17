@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: holychicken-dev-web
+  namespace: holychicken
+  labels:
+    app: holychicken-dev-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: holychicken-dev-web
+  template:
+    metadata:
+      labels:
+        app: holychicken-dev-web
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+        - name: holychicken-dev-web
+          imagePullPolicy: Always
+          image: registry.thecodeworkers.com/holychicken-dev-web:latest
+          ports:
+            - name: http-port
+              containerPort: 3000

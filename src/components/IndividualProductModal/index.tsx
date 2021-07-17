@@ -14,6 +14,8 @@ const IndividualProduct = () => {
     product, variableProduct
    } = useSelector((state: any) => state)
 
+   const hot = currentProduct?.spicy?.isSpicy
+
   const allAddons = [
     ...product.addons,
     ...product.blessingAddons,
@@ -115,7 +117,14 @@ const IndividualProduct = () => {
             {
               currentProduct?.productCategories?.nodes[0]?.slug == 'holy-sanduches' ?
                 (<div className={styles._imgParent}>
+                      {
+                    hot && (<div className={styles._icon}>
+                      <img src='images/icons/chilipepper.svg' alt='icono de producto picante' width='100%'></img>
+                    </div>)
+                  }
+
                   <img src={currentProduct?.image?.mediaItemUrl ?? 'images/resources/burguer.png'} className={styles._img}></img>
+
                 </div>) : (<div className={styles._bigImgParent}>
                   <img src={currentProduct?.image?.mediaItemUrl ?? 'images/resources/shirt.png'} className={styles._bigImg}></img>
                 </div>)
