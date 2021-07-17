@@ -6,10 +6,15 @@ import { setShowModal, setProductsNumber, setCartProducts } from '@store/actions
 import { ClothSection, VerticalList, VerticalListWithImage, CardSection } from './elements'
 import { createMarkup } from '@utils'
 
-const IndividualProduct = ({ type = 'list' }) => {
+const IndividualProduct = () => {
   const dispatch = useDispatch()
-  const { intermitence: { individualProductModal }, cart: { currentProduct }, product } = useSelector((state: any) => state)
-  const hot = currentProduct?.spicy?.isSpicy
+  const {
+    intermitence: { individualProductModal },
+    cart: { currentProduct },
+    product, variableProduct
+   } = useSelector((state: any) => state)
+
+   const hot = currentProduct?.spicy?.isSpicy
 
   const allAddons = [
     ...product.addons,
@@ -45,18 +50,20 @@ const IndividualProduct = ({ type = 'list' }) => {
   }
 
   const featuresType = (type, attributes) => {
+
+    const attributesLength =  attributes?.nodes?.length
+
     switch (type) {
       case 'temptations':
-        return <VerticalList />
+      case 'bebidas':
+        return <VerticalList attributes={attributes} category={type}/>
 
       case 'holy-sanduches':
+      case 'holy-tenders':
         return <CardSection attributes={attributes} />
 
-      case 'bebidas':
-        return <VerticalListWithImage attributes={attributes}  />
-
       case 'merch':
-        return <ClothSection size={true} attributes={attributes} />
+        return <ClothSection size={attributesLength == 2 ? true : false} attributes={attributes} />
 
       default:
         return <div></div>
@@ -64,6 +71,8 @@ const IndividualProduct = ({ type = 'list' }) => {
   }
 
   const setProductstoCart = () => {
+
+    const productVariable = variableProduct?.currentVariableProduct
     let correctProduct = currentProduct
 
     if (!!currentProduct?.variations) {
@@ -82,6 +91,8 @@ const IndividualProduct = ({ type = 'list' }) => {
       if (result) correctProduct = result
     }
 
+    if(productVariable) correctProduct = productVariable
+
     dispatch(setCartProducts(correctProduct, allAddons))
   }
 
@@ -99,7 +110,6 @@ const IndividualProduct = ({ type = 'list' }) => {
               <div>
                 <p className={styles._title}>{currentProduct?.name}</p>
               </div>
-              {/* <CountProduct key={null}/> */}
             </div>
 
             <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description) }></div>

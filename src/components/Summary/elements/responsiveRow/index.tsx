@@ -37,6 +37,13 @@ const ResponsiveRow = ({ items }) => {
                   <p className={styles._rowTitle}>{element?.name}</p>
                   <div className={styles._rowText} dangerouslySetInnerHTML={createMarkup(element?.description)}></div>
 
+                    {
+                        item?.variation &&
+                        item?.variation?.attributes.map((attributes, index) => {
+                          return <p className={styles._rowText} key={index}>{`${attributes.label}: ${attributes?.value}`}</p>
+                        })
+                      }
+
                   <div className={styles._priceParent}>
                     <div className={styles._countParent}>
                       <CountProduct productKey={item?.key} stock={element?.stockQuantity} quantity={item?.quantity} />

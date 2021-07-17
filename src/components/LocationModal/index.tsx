@@ -14,7 +14,6 @@ const LocationModal = () => {
 
   const closeModal = (event) => {
     const { target } = event
-    // if (target.id == 'location-modal') dispatch(setShowModal({ locationModal: false }))
   }
 
   const getShipping = (label) => {
@@ -34,7 +33,6 @@ const LocationModal = () => {
     const shipping = getShipping('Pickup')
     if (shipping) dispatch(updateShippingMethod(shipping.id))
   }
-
 
 
   return (

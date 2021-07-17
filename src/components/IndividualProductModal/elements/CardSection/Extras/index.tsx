@@ -12,6 +12,8 @@ const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSele
     sauceAddons
   } = useSelector((state: any) => state.product)
 
+  const state = useSelector((state: any) => state.product)
+
   const dispatch = useDispatch();
 
   return (

@@ -9,6 +9,7 @@ import cart from './cart/reducer'
 import product from './product/reducer'
 import paymentStep from './paymentStep/reducer'
 import scrollReference from './scrollReference/reducer'
+import variableProduct from './variableProduct/reducer'
 import guest from './guest/reducer'
 
 const reducers = combineReducers({
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   product,
   paymentStep,
   scrollReference,
+  variableProduct,
   guest
 })
 

@@ -74,7 +74,8 @@ const CardSection = ({ attributes }) => {
           </div>
         ))
       }
-      <Extras extras={extras} />
+
+      { extras[0] && <Extras extras={extras} /> }
     </>
   )
 }
