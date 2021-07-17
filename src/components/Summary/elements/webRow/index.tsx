@@ -28,6 +28,9 @@ const WebRow = ({ items }) => {
             const element = item?.product?.node
             const totalPrice = element?.price ? element?.price : getVariableTotalPrice(item?.quantity, item?.total)
 
+            console.log('AITEEEM', item)
+            console.log('ELEMEEEEN', element)
+
             return (
               <div className={styles._row} key={index}>
                 <div className={styles._closeParent} onClick={() => deleteItem(item)}>
@@ -40,7 +43,16 @@ const WebRow = ({ items }) => {
                     </div>
                     <div>
                       <p className={styles._rowTitle}>{element?.name}</p>
-                      <div className={styles._rowText} dangerouslySetInnerHTML={createMarkup(element?.description)}></div>
+                      <div className={styles._rowText} dangerouslySetInnerHTML={createMarkup(element?.description)}>
+
+                      </div>
+                      {
+                        item?.variation &&
+                        item?.variation?.attributes.map((attributes, index) => {
+                          return <p className={styles._rowText} key={index}>{`${attributes.label}: ${attributes?.value}`}</p>
+                        })
+                      }
+
                     </div>
                   </div>
                 </div>

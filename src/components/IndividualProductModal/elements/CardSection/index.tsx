@@ -15,6 +15,8 @@ const CardSection = ({ attributes }) => {
 
   const dispatch = useDispatch();
 
+  console.log('EXTRAAAAS', extras[0])
+
   return (
     <>
       {
@@ -74,7 +76,8 @@ const CardSection = ({ attributes }) => {
           </div>
         ))
       }
-      <Extras extras={extras} />
+
+      { extras[0] && <Extras extras={extras} /> }
     </>
   )
 }

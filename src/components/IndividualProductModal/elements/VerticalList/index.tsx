@@ -13,6 +13,8 @@ const VerticalList = ({ attributes, category }) => {
   const variations = currentProduct?.variations?.nodes ?? []
   const options = attributes?.nodes[0].options ?? []
 
+  console.log('VARIATIONS', variations)
+
   const compareAttributes = () => {
     let currentItem
 
@@ -43,38 +45,47 @@ const VerticalList = ({ attributes, category }) => {
       {
         attributes?.nodes?.length &&
         <div className={styles._titleParent}>
-        <p className={styles._littleTitle}>{category == 'bebidas' ? 'MARCA' : 'TEMPTATION' }</p>
+          <p className={styles._littleTitle}>{category == 'bebidas' ? 'MARCA' : 'TEMPTATION'}</p>
 
-        {
-          attributes?.nodes.length && (<div className={styles._chooseOneParent}>
-            <img src='images/icons/alarm.svg' width='13px' className={styles._icon}></img>
-            <p>Debe seleccionar uno</p>
-          </div>)
-        }
+          {
+            attributes?.nodes.length && (<div className={styles._chooseOneParent}>
+              <img src='images/icons/alarm.svg' width='13px' className={styles._icon}></img>
+              <p>Debe seleccionar uno</p>
+            </div>)
+          }
 
-      </div>
+        </div>
       }
 
-      <div className={styles._listParent}>
+      <div className={category != 'bebidas' ? styles._listParent : styles._imgParent}>
         {
           options.length ?
-          options?.map((res: any, index: number) => {
-            return (
-              <div className={styles._column} key={index}>
-                <div className={styles._checkParent}>
-                  <input
-                    type='radio'
-                    className={styles._radioBtn}
-                    readOnly
-                    checked={currentAttribute == res ? true : false}
-                    onClick={() => setCurrentAtribute(res)}
-                  >
-                  </input>
-                  <p>{res}</p>
+            options?.map((res: any, index: number) => {
+
+              const element = variations[index]
+
+              return (
+                <div className={styles._column} key={index}>
+                  <div className={styles._checkParent}>
+                    <input
+                      type='radio'
+                      className={styles._radioBtn}
+                      readOnly
+                      checked={currentAttribute == res ? true : false}
+                      onClick={() => setCurrentAtribute(res)}
+                    >
+                    </input>
+
+                    {
+                      category != 'bebidas'
+                        ? <p>{res}</p>
+                        : <img className={styles._image} src={element?.image?.mediaItemUrl} ></img>
+                    }
+
+                  </div>
                 </div>
-              </div>
-            )
-          }) : <div></div>
+              )
+            }) : <div></div>
         }
 
       </div>

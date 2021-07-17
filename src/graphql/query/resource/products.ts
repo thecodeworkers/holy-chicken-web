@@ -72,6 +72,7 @@ products(first: 10000000) {
           id
           databaseId
           name
+          description
           price(format: RAW)
           stockQuantity
           stockStatus

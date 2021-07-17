@@ -57,6 +57,7 @@ const IndividualProduct = () => {
         return <VerticalList attributes={attributes} category={type}/>
 
       case 'holy-sanduches':
+      case 'holy-tenders':
         return <CardSection attributes={attributes} />
 
       case 'merch':
