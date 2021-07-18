@@ -39,10 +39,10 @@ const History = ({ data }) => {
   const [currentOrder, setCurrentOrder] = useState('')
 
   const ordersArray = auth?.login?.login?.customer?.orders?.nodes
-                        ? auth?.login?.login?.customer?.orders?.nodes
-                        : tmpOrders?.orders?.nodes
-                        ? tmpOrders?.orders?.nodes
-                        : []
+    ? auth?.login?.login?.customer?.orders?.nodes
+    : tmpOrders?.orders?.nodes
+      ? tmpOrders?.orders?.nodes
+      : []
 
   const user = auth?.login?.login
 
@@ -89,9 +89,9 @@ const History = ({ data }) => {
     if (match) setCurrentOrder(match)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     updateOrders()
-  },[])
+  }, [])
 
   const updateOrders = () => dispatch(updateUserData())
 
@@ -122,15 +122,30 @@ const History = ({ data }) => {
               </ul>
             </div>
 
-            <div className={styles._orderParent}>
-              <p>Orden</p>
-              <input
-                onChange={changeOrderInput}
-                className={styles._input}
-                value={orderInput}
-              >
-              </input>
+            <div className={styles._orderRefreshParent}>
+              <div className={styles._orderParent}>
+                <p>Orden</p>
+                <input
+                  onChange={changeOrderInput}
+                  className={styles._input}
+                  value={orderInput}
+                >
+                </input>
+              </div>
+
+              <div className={styles._refreshImgParent}>
+              <img
+                src="/images/icons/refresh.png"
+                alt=""
+                width={20}
+                height={20}
+                onClick={() => updateOrders()}
+              />
+              </div>
+
+
             </div>
+
           </div>
 
           <div className={styles._lineParent}>
@@ -184,13 +199,7 @@ const History = ({ data }) => {
 
           <div className={styles._btnParent}>
             <Button color='#000' textColor='#FFF' text='Órdenes Abiertas' method={showModal} flag />
-            <img
-              src="/images/icons/refresh.png"
-              alt=""
-              width={20}
-              height={20}
-              onClick={() => updateOrders()}
-            />
+
           </div>
         </div>
 
@@ -205,12 +214,12 @@ const History = ({ data }) => {
                 readOnly={auth?.isAuth ? false : true}
                 value={searchValue}
                 onChange={search}
+
               />
               <div className={styles._imageParent} >
                 <Search color={'#000000'} />
               </div>
             </div>
-
             {
               auth?.isAuth ?
                 (<div className={styles._table}>
@@ -252,7 +261,7 @@ const History = ({ data }) => {
                             </div>
 
                             <div>
-                              <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={() => showOrderModal( { ...product, total })} />
+                              <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={() => showOrderModal({ ...product, total })} />
                             </div>
                           </div>
                         )

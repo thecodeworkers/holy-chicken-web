@@ -55,6 +55,9 @@
 
 ._card{
   width: 14.5rem;
+  transition:all 0.4s;
+  cursor: pointer;
+
   &:hover {
     transform: scale(1.03) translateX(5px) translateY(-10px);
     transition:all 0.4s;

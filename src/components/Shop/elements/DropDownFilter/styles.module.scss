@@ -1,8 +1,7 @@
 @import '@styles/index.scss';
 
 ._dropDown {
-  border-top-left-radius: 1.25rem;
-  border-top-right-radius: 1.25rem;
+  border-radius: 1.25rem;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -17,11 +16,12 @@
 
 ._drop {
   background-color: $pampas;
-  border-bottom-left-radius: 1.25rem;
-  border-bottom-right-radius: 1.25rem;
   position: absolute;
+  border-radius: 1.25rem;
   width: 100%;
-  top: 30px;
+  top: 0;
+  z-index: -1;
+  padding-top: 2rem;
 }
 
 ._dropDownContent {
@@ -101,6 +101,6 @@
   }
 
   ._drop {
-    padding-top: 0.5rem;
+    padding-top: 2.1rem;
   }
 }

@@ -182,8 +182,8 @@ display: none;
   margin-bottom: 1rem;
 }
 ._filterButtonContainer{
-  border-top-left-radius: 1.25rem;
-  border-top-right-radius: 1.25rem;
+  border-radius: 1.25rem;
+  // border-top-right-radius: 1.25rem;
   padding: 0 0.8rem;
   cursor: pointer;
   display: flex;
