@@ -43,7 +43,7 @@
   justify-content: flex-end;
   align-items: center;
   margin-top: 1rem;
-  padding: 3rem 2.5rem;
+  padding: 2rem 1.5rem;
   border-bottom-left-radius:  2.375rem;
   border-bottom-right-radius:  2.375rem;
   background-color: $pampas;
@@ -57,13 +57,14 @@
 }
 
 ._parentTitle{
-  font-size: $blackerTextHeavy22;
+  font-size: $blackerTextHeavy18;
   font-family: $blackerTextHeavy;
   color: $mineShaft;
+  width: 100%;
 }
 
 ._parentTotal{
-  font-size: $montserratBold22;
+  font-size: $blackerTextHeavy18;
   font-family: $montserratBold;
   color: $mineShaft;
 }
@@ -85,7 +86,7 @@
 
 ._header{
   text-align: center;
-  padding: 3rem 2.5rem;
+  padding: 1.5rem 1.5rem;
 }
 
 ._title{
@@ -130,7 +131,7 @@
 
 ._body{
   overflow-y: scroll;
-  padding: 0 2.5rem;
+  padding: 0 1.5rem;
 
   &::-webkit-scrollbar {
     width: 10px;

@@ -148,6 +148,7 @@ color: $mineShaft;
   flex-direction: column;
   justify-content: space-between;
   align-content: center;
+  width: 35%;
 }
 
 ._radioContainer{
@@ -233,6 +234,7 @@ color: $mineShaft;
   }
   ._deliveryType{
     margin-bottom: 0.6rem;
+    width: unset;
   }
   ._quarterWidth{
     width: 100%;

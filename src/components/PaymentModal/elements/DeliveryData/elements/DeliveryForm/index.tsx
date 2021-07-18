@@ -98,9 +98,9 @@ const DeliveryForm = () => {
 
           <div className={styles._quarterWidth}>
             <div className={`${styles._inputParent} ${styles._separation}`}>
-              <label>Telefono</label>
+              <label>Teléfono</label>
               <input
-                placeholder='Telefono'
+                placeholder='Teléfono'
                 type='text'
                 name='phone'
                 onChange={deliveryform.handleChange}
@@ -144,7 +144,7 @@ const DeliveryForm = () => {
 
           <div className={styles._quarterWidth}>
             <div className={`${styles._inputParent} ${styles._separation}`}>
-              <label>Pais</label>
+              <label>País</label>
               <select name="country"
                 placeholder='Seleccione el país'
                 onChange={(event) => setDefaults(event.currentTarget.value)}
@@ -179,9 +179,9 @@ const DeliveryForm = () => {
         <div className={styles._inputRow}>
           <div className={styles._quarterWidth} >
             <div className={styles._inputParent}>
-              <label>Codigo Postal</label>
+              <label>Código postal</label>
               <input
-                placeholder='Codigo Postal'
+                placeholder='Código postal'
                 type='text'
                 name='zipcode'
                 onChange={deliveryform.handleChange}

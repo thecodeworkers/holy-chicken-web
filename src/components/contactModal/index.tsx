@@ -218,7 +218,7 @@ const ModalContact = () => {
                   <div className={styles._paperClipParent} onClick={tooltipTimer}>
 
                     <label className={styles._filePointer}>
-                    <Tooltip paddinHorizontal={5} top='-75px' left={'-125px'}  advice={true} show={showTooltip} />
+                    <Tooltip paddinHorizontal={5.5} top='-75px' left={'-140px'}  advice={true} show={showTooltip} />
                       <PaperClip color='#000' />
                     </label>
                   </div>

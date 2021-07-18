@@ -91,7 +91,7 @@ const UserData = () => {
           <div className={styles._inputRow}>
             <div className={styles._fullContainer}>
               <div className={styles._inputParent}>
-                <label>Telefono</label>
+                <label>Teléfono</label>
                 <input
                   name='phone'
                   onChange={formik.handleChange}
