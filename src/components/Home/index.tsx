@@ -27,7 +27,7 @@ const Home = ({ content, data, resource }) => {
 
   const outstandingRef = useCallback((node) => {
     scrollingReference(node, 'outstanding')
-  }, [homeReference?.catering])
+  }, [homeReference?.outstanding])
 
   const cateringRef = useCallback((node) => {
     scrollingReference(node, 'catering')
