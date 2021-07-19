@@ -111,7 +111,11 @@
   min-width: 8rem;
   position: absolute;
   top: 170%;
-  left: -75%;
+  left: -175%;
+
+  & p {
+    text-align: center;
+  }
 }
 
 ._circles {

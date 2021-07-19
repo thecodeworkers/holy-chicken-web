@@ -26,6 +26,8 @@
 ._priceParent {
   display: flex;
   align-items: center;
+  margin-right: 1.2rem;
+  box-sizing: border-box;
 
   & p {
     font-family: $montserratRegular;
@@ -162,6 +164,7 @@
 
   ._priceParentReponsive {
     width: 100%;
+    margin-right: 0;
 
     & p {
       font-family: $montserratRegular;

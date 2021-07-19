@@ -142,8 +142,6 @@ const History = ({ data }) => {
                 onClick={() => updateOrders()}
               />
               </div>
-
-
             </div>
 
           </div>
