@@ -8,7 +8,6 @@ import { setCurrentProduct, setShowModal } from '@store/actions'
 const FirstBanner = ({ data, content, resource, reference }) => {
 
   const { outstanding } = resource
-
   const router = useRouter()
   const [currentIndex, setcurrentIndex] = useState(1);
   const [newArray, setNewArray] = useState(data)
@@ -36,7 +35,7 @@ const FirstBanner = ({ data, content, resource, reference }) => {
     if (auto) {
       interval = setTimeout(() => {
         determinateCurrent()
-      }, 4000);
+      }, 10000);
 
       return;
     }

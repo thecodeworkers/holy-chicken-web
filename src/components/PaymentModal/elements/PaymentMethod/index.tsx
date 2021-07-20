@@ -40,7 +40,7 @@ const PaymentMethod = () => {
     <>
       { /* <Elements stripe={stripe}> */}
       <div className={styles._titleParent}>
-        <p className={styles._title}>Forma de entrega</p>
+        <p className={styles._title}>Formas de pago</p>
       </div>
       <div className={styles._rightMain}>
         <div className={styles._firstRow}>

@@ -53,10 +53,13 @@ const Home = ({ content, data, resource }) => {
       <IndividualProductModal />
       <CartModal />
       {content ? (<>
-        <FirstBanner data={content?.firstBanner} content={content?.outstanding} resource={resource}  reference={outstandingRef}/>
+        <FirstBanner data={content?.firstBanner}
+        content={content?.outstanding}
+        resource={resource}
+        reference={outstandingRef}/>
         {/* <SocialSwipe /> */}
         <Catering publicity={content?.secondBanner} reference={cateringRef} />
-        <SecondBanner data={content?.thirdBanner} reference ={locationRef}/>
+        <SecondBanner data={content?.thirdBanner} reference ={locationRef}  contact={data}/>
         <ThirdBanner data={content?.fourthBanner} />
       </>
       ) : null}

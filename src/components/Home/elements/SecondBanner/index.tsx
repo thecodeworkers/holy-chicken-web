@@ -3,10 +3,10 @@ import { Button } from '@components'
 import { useDispatch } from 'react-redux'
 import { setShowModal } from '@store/actions'
 
-const SecondBanner = ({ data, reference }) => {
+const SecondBanner = ({ data, reference, contact }) => {
 
   const dispatch = useDispatch()
-  const locations = data?.locations
+  const locations = contact?.addresses
   const times = data?.schedules?.times
 
   const openModal = () => {
@@ -20,15 +20,16 @@ const SecondBanner = ({ data, reference }) => {
       <p className={styles._blackSubtitle}>{data?.subtitle}</p>
 
       <div className={styles._addressContainer}>
+
         <div className={styles._address}>
 
           {
             locations.map((item, index) => {
               return (
                 <div className={styles._locate} key={index}>
-                  <p className={styles._title}>{item?.title}</p>
+                  <p className={styles._title}>{item?.local}</p>
 
-                  <p className={styles._subtitle}>{item?.address}</p>
+                <p className={styles._subtitle}>{item?.address}</p>
                 </div>
 
               )
@@ -36,18 +37,34 @@ const SecondBanner = ({ data, reference }) => {
             )}
 
         </div>
+
+        <div className={styles._address}>
+         <p className={styles._title}>Telefono</p>
+          {
+            locations.map((item, index) => {
+              console.log(item);
+
+              return (
+
+                <div className={styles._phones}>
+                  <a className={styles._link} href={`tel:${item.phone}`}>
+                    <p className={styles._subtitle}>{item?.phone}</p>
+                  </a>
+                </div>
+
+              )
+            }
+            )}
+            </div>
+
+
         <div className={styles._address}>
           <p className={styles._title}>{data?.email?.title}</p>
           <a className={styles._link} href={`mailto:${data?.email?.content}`}>
             <p className={styles._subtitle}>{data?.email?.content}</p>
           </a>
         </div>
-        <div className={styles._address}>
-          <p className={styles._title}>{data?.phone?.title}</p>
-          <a className={styles._link} href={`tel:${data?.phone?.content}`}>
-            <p className={styles._subtitle}>{data?.phone?.content}</p>
-          </a>
-        </div>
+
         <div className={styles._address}>
           <p className={styles._title}>{data?.schedules?.title}</p>
           {

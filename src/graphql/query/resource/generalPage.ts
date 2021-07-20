@@ -37,6 +37,7 @@ generalPage:page(id: "${generalId}") {
     addresses {
       local
       address
+      phone
     }
     navigation {
       askNow

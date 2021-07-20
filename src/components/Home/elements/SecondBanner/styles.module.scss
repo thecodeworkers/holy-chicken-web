@@ -38,6 +38,16 @@
 
 }
 
+._phones{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+
+}
+
+
 ._locate{
   width: 80%;
   margin-bottom: 1rem;
