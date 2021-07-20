@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
-import { ModalFrame, Button, Tooltip} from '@components'
+import { ModalFrame, Button, Tooltip } from '@components'
 import { Phone, Mail, Insta, Twitter, WhatsApp, Location, PaperClip } from '@images/icons'
 import { useDispatch } from 'react-redux'
 import { setShowModal, setToast } from '@store/actions'
@@ -24,9 +24,9 @@ const ModalContact = () => {
 
   const activeLink = (props) => {
     setActive(props)
-    if(props == 1) setType('cliente')
-    if(props == 2) setType('proveedor')
-    if(props == 3) setType('personal')
+    if (props == 1) setType('cliente')
+    if (props == 2) setType('proveedor')
+    if (props == 3) setType('personal')
   }
 
   const tooltipTimer = () => {
@@ -34,7 +34,7 @@ const ModalContact = () => {
   }
 
   useEffect(() => {
-    if(contact?.contact) {
+    if (contact?.contact) {
       formik.resetForm()
       dispatch(setShowModal({ contactModal: false }))
     }
@@ -65,23 +65,23 @@ const ModalContact = () => {
               <Location color='#000' />
             </div>
             <div className={styles._textColumn}>
-            {
-            locations?.map((item, index) => {
-              return (
+              {
+                locations?.map((item, index) => {
+                  return (
 
-              <div className={styles._textParent} key={index}>
-               <p className={styles._textBold}>{item?.local}</p>
-               <a className={styles._link} href={`tel:${item.phone}`}>
-               <span>{item?.phone}</span>
-               </a>
-               <p>{item?.address}</p>
+                    <div className={styles._textParent} key={index}>
+                      <p className={styles._textBold}>{item?.local}</p>
+                      <a className={styles._link} href={`tel:${item.phone}`}>
+                        <span>{item?.phone}</span>
+                      </a>
+                      <p>{item?.address}</p>
 
-              </div>
+                    </div>
 
-              )
-            }
-            )}
-              </div>
+                  )
+                }
+                )}
+            </div>
           </div>
 
           <div className={styles._socialMediaParent}>
@@ -203,7 +203,7 @@ const ModalContact = () => {
                   <div className={styles._paperClipParent} onClick={tooltipTimer}>
 
                     <label className={styles._filePointer}>
-                    <Tooltip paddinHorizontal={5.5} top='-75px' left={'-140px'}  advice={true} show={showTooltip} />
+                      <Tooltip paddinHorizontal={5.5} top='-75px' left={'-140px'} advice={true} show={showTooltip} />
                       <PaperClip color='#000' />
                     </label>
                   </div>

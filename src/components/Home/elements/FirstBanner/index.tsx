@@ -87,7 +87,7 @@ const FirstBanner = ({ data, content, resource, reference }) => {
           })
 
           }
-          <div className={styles._stepperContainer} ref={reference}>
+          <div className={styles._stepperContainer}  ref={reference}>
             <div className={styles._stepper}>
               <Stepper currentStep={currentIndex + 1} length={newArray?.length} onPress={index => changeImage(index, styles._show, false)} />
 

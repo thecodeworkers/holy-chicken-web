@@ -46,13 +46,11 @@ const SecondBanner = ({ data, reference, contact }) => {
             locations?.map((item, index) => {
 
               return (
-
                 <div className={styles._phones} key={index}>
                   <a className={styles._link} href={`tel:${item.phone}`}>
                     <p className={styles._subtitle}>{item?.phone}</p>
                   </a>
                 </div>
-
               )
             }
             )}
