@@ -20,6 +20,25 @@
   width: 100%;
   margin: 0 auto;
   overflow-y: scroll;
+  height: 17.5rem;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $black;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $black;
+  }
+
 }
 
 ._inputParent {
@@ -203,6 +222,14 @@ color: $mineShaft;
   margin-top: 0.5rem;
 }
 
+@include responsive(lg) {
+  ._rightMain {
+    width: 100%;
+    overflow-y: auto;
+    height: auto;
+  }
+}
+
 @include responsive(md) {
   ._titleParent{
     margin-bottom: 1rem;
@@ -223,7 +250,7 @@ color: $mineShaft;
   ._rightMain {
     width: 100%;
     overflow-y: scroll;
-    max-height: 310px;
+    height: auto;
   }
   ._buttonContainer{
     bottom: 0;

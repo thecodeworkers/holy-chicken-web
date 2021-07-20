@@ -39,11 +39,14 @@ const Footer = ({ data, content }) => {
       }))
     }
   }
+
   const clickOption = (route, reference = null, key = '') => {
-
-
     navigation(route, reference, key)
-    // onPress()
+  }
+
+  const scrollToTopOrNavigate = () => {
+    if(router.pathname == '/') return window.scrollTo({ top: 0, behavior: 'smooth' });
+    router.push('/')
   }
 
   return content ? (
@@ -52,7 +55,7 @@ const Footer = ({ data, content }) => {
         <div className={styles._footer}>
 
           <div className={styles._content}>
-            <div className={styles._logoMain} onClick={() => clickOption('/', 'outstanding', 'homeReference')} >
+            <div className={styles._logoMain} onClick={scrollToTopOrNavigate} >
               <ChickenLogo color='#fff' />
             </div>
             <div className={styles._textContainer}>

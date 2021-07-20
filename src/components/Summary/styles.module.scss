@@ -37,7 +37,7 @@
     width: 0.438rem;
   }
 
-  & ::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-track {
     background: none;
   }
 
@@ -47,7 +47,7 @@
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: none;
+    background: $black;
   }
 }
 
