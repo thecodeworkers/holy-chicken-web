@@ -10,10 +10,11 @@ import { Elements } from '@stripe/react-stripe-js'
 
 const PaymentMethod = () => {
   /* const stripe = getStripe() */
-  const { resource: { paymentMethods }, paymentStep: { payment_data } } = useSelector((state: any) => state)
+  const { resource: { paymentMethods, general : {general} }, paymentStep: { payment_data } } = useSelector((state: any) => state)
 
   const [paymentSelected, setPaymentSelected] = useState('')
   const dispatch = useDispatch()
+  const email = general?.email
 
   const buildTexts = (data) => {
     return data?.description?.split('/')
@@ -100,8 +101,8 @@ const PaymentMethod = () => {
               </div>
               <div>
                 <p>Email</p>
-                <a className={styles._link} href="mailto:infoholychicken@gmail.com">
-                  infoholychicken@gmail.com
+                <a className={styles._link} href={`mailto:${email}`}>
+                 {email}
                 </a>
               </div>
             </div>

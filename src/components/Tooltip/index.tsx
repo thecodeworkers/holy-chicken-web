@@ -1,6 +1,12 @@
 import styles from './styles.module.scss'
+import { useSelector } from 'react-redux'
 
 const Tooltip = ({ top = '0px', bottom = '0px', right = '0px', left = '0px', show, paddinHorizontal, advice = false }) => {
+
+  const { resource: { general: {general} } } = useSelector((state: any) => state)
+
+  const email = general?.email
+
   return (
     <>
       <div className={show ? '_parent' : '_hidden'}>
@@ -17,7 +23,7 @@ const Tooltip = ({ top = '0px', bottom = '0px', right = '0px', left = '0px', sho
           : <div>
           <p className={styles._textAdvice}>
           Si quieres contactarnos escribe a </p>
-          <p className={styles._textAdvice}> infoholychicken@gmail.com</p>
+          <p className={styles._textAdvice}> {email}</p>
           </div>
         }
         <div className={!advice ? styles._arrowDown : styles._arrowDownRight}></div>

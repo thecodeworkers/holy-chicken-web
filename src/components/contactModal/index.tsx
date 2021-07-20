@@ -18,6 +18,8 @@ const ModalContact = () => {
 
   const { resource: { general: { general } }, contact } = useSelector((state: any) => state)
   const [showTooltip, setShowTooltip] = useState(false)
+  const locations = general?.addresses
+  const email = general?.email
 
   const activeLink = (props) => {
     setActive(props)
@@ -47,24 +49,12 @@ const ModalContact = () => {
 
           <div className={`${styles._itemParent} ${styles._marginBottom}`}>
             <div className={styles._iconParent}>
-              <Phone />
-            </div>
-            <div>
-              <p>Teléfono</p>
-              <a className={styles._link} href="tel:+58 412-2485668">
-                +58 412-2485668
-              </a>
-            </div>
-          </div>
-
-          <div className={`${styles._itemParent} ${styles._marginBottom}`}>
-            <div className={styles._iconParent}>
               <Mail color='#000' />
             </div>
             <div>
               <p>Email</p>
-              <a className={styles._link} href="mailto:infoholychicken@gmail.com">
-                infoholychicken@gmail.com
+              <a className={styles._link} href={`mailto:${email}`}>
+                {email}
               </a>
             </div>
           </div>
@@ -73,30 +63,24 @@ const ModalContact = () => {
             <div className={styles._iconParent}>
               <Location color='#000' />
             </div>
-
             <div className={styles._textColumn}>
-              <div className={styles._textParent}>
-                <p>Las Mercedes</p>
-                <p>Calle París de Las Mercedes,
-                  entre Calle Nueva York y Calle Caron</p>
+            {
+            locations.map((item, index) => {
+              return (
+
+              <div className={styles._textParent} key={index}>
+               <p className={styles._textBold}>{item?.local}</p>
+               <a className={styles._link} href={`tel:${item.phone}`}>
+               <span>{item?.phone}</span>
+               </a>
+               <p>{item?.address}</p>
+
               </div>
 
-              <div className={styles._textParent}>
-                <p>El Hatillo</p>
-                <p>Calle Bolívar del pueblo de El Hatillo.
-                  A una cuadra de la Plaza Bolívar.
-                  Quinta Nuti.
-                </p>
+              )
+            }
+            )}
               </div>
-
-              <div className={styles._textParent}>
-                <p>La Castellana</p>
-                <p>
-                  Av. Principal de La Castellana,
-                  Sector La Castellana.
-                </p>
-              </div>
-            </div>
           </div>
 
           <div className={styles._socialMediaParent}>

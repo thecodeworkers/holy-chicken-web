@@ -27,8 +27,6 @@ const OrderModal = ({ show, method, data }) => {
             data.nodes.map((item, index) => {
 
               const { product } = item
-
-              console.log('IREEWER', item)
               return (
                 <div className={styles._row} key={index}>
                   <div className={styles._columnOne}>

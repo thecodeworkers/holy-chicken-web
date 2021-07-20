@@ -54,6 +54,7 @@ generalPage:page(id: "${generalId}") {
       myask
       promotion
     }
+    email
   }
 }
 `

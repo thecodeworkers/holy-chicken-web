@@ -46,18 +46,6 @@ const home = `
           link
           title
         }
-        email {
-          title
-          content
-        }
-        locations {
-          title
-          address
-        }
-        phone {
-          title
-          content
-        }
         schedules {
           times {
             day

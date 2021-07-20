@@ -8,6 +8,8 @@ const SecondBanner = ({ data, reference, contact }) => {
   const dispatch = useDispatch()
   const locations = contact?.addresses
   const times = data?.schedules?.times
+  const email = contact?.email
+
 
   const openModal = () => {
     return dispatch(setShowModal({ contactModal: true }))
@@ -42,7 +44,6 @@ const SecondBanner = ({ data, reference, contact }) => {
          <p className={styles._title}>Telefono</p>
           {
             locations.map((item, index) => {
-              console.log(item);
 
               return (
 
@@ -59,9 +60,9 @@ const SecondBanner = ({ data, reference, contact }) => {
 
 
         <div className={styles._address}>
-          <p className={styles._title}>{data?.email?.title}</p>
-          <a className={styles._link} href={`mailto:${data?.email?.content}`}>
-            <p className={styles._subtitle}>{data?.email?.content}</p>
+          <p className={styles._title}>Email</p>
+          <a className={styles._link} href={`mailto:${email}`}>
+            <p className={styles._subtitle}>{email}</p>
           </a>
         </div>
 
