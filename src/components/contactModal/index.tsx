@@ -65,7 +65,7 @@ const ModalContact = () => {
             </div>
             <div className={styles._textColumn}>
             {
-            locations.map((item, index) => {
+            locations?.map((item, index) => {
               return (
 
               <div className={styles._textParent} key={index}>
