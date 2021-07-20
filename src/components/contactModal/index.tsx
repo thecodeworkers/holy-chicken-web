@@ -19,6 +19,7 @@ const ModalContact = () => {
   const { resource: { general: { general } }, contact } = useSelector((state: any) => state)
   const [showTooltip, setShowTooltip] = useState(false)
   const locations = general?.addresses
+
   const email = general?.email
 
   const activeLink = (props) => {
