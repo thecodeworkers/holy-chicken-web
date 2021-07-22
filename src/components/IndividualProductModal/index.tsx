@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal, setProductsNumber, setCartProducts } from '@store/actions'
-import { ClothSection, VerticalList, VerticalListWithImage, CardSection } from './elements'
+import { ClothSection, VerticalList, VerticalListWithImage, CardSection, TenderSection } from './elements'
 import { createMarkup } from '@utils'
 
 const IndividualProduct = () => {
@@ -59,8 +59,10 @@ const IndividualProduct = () => {
         return <VerticalList attributes={attributes} category={type}/>
 
       case 'holy-sanduches':
-      case 'holy-tenders':
         return <CardSection attributes={attributes} />
+
+      case 'holy-tenders':
+        return <TenderSection attributes={attributes} />
 
       case 'merch':
         return <ClothSection size={attributesLength == 2 ? true : false} attributes={attributes} />
