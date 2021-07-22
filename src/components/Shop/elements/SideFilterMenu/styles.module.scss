@@ -76,7 +76,7 @@
   position: fixed;
   height: 100%;
   width: 100%;
-  top: 30px;
+  top: 0px;
   left: 0px;
   z-index: 997;
   display: flex;
@@ -92,6 +92,7 @@
 ._mainIn {
   @include menu;
   animation: menu-in 0.5s linear forwards;
+  top: 30px;
 }
 
 ._mainOut{
