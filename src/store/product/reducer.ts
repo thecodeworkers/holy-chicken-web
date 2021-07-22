@@ -11,6 +11,7 @@ const initialState = {
   sauceAddons: []
 }
 
+
 const productReducer = (state = initialState, { type, payload }: AnyAction) => {
   switch (type) {
     case SET_SELECTION:

@@ -26,7 +26,7 @@ const reducers = combineReducers({
   paymentStep,
   scrollReference,
   variableProduct,
-  guest
+  guest,
 })
 
 export default reducers
