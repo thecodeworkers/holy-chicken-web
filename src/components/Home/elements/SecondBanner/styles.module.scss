@@ -41,9 +41,8 @@
 ._phones{
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   height: 100%;
-  margin-top: 1rem;
 }
 
 
@@ -72,6 +71,21 @@
   margin-bottom: 1rem;
 }
 
+._phoneTitle{
+  font-size: $montserratSemiBold16;
+  font-family: $montserratSemiBold;
+  color: $black;
+  margin-bottom: 1rem;
+}
+
+._phoneSubtitle{
+  font-size: $montserratRegular14;
+  font-family: $montserratRegular;
+  color: $black;
+  margin-bottom: 1rem;
+
+}
+
 ._buttonContainer{
   display: flex;
   justify-content: center;
@@ -80,6 +94,15 @@
 
 ._link{
   text-decoration: underline;
+  a.nostyle:link {
+    text-decoration: inherit;
+    color: inherit;
+}
+}
+
+._linkTop{
+  text-decoration: underline;
+  margin-top: 1.5rem;
   a.nostyle:link {
     text-decoration: inherit;
     color: inherit;
@@ -120,6 +143,18 @@
   }
   ._blackSubtitle{
     font-size: 1rem;
+  }
+  ._phoneTitle{
+    margin-bottom: 1rem;
+  }
+  ._phoneSubtitle{
+    margin-bottom: 1rem;
+  }
+  ._locate{
+    margin-bottom: 0;
+  }
+  ._linkTop{
+    margin-top: 0;
   }
 }
 
