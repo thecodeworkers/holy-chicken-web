@@ -133,7 +133,7 @@ export const updateUserData: any = () => async (dispatch, getState) => {
         ...{
           customer: {
             ...customer,
-            ...{ orders: { nodes: orders } }
+            ...{ orders: { nodes: { product: orders } } }
           }
         }
       }

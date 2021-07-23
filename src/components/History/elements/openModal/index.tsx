@@ -12,6 +12,9 @@ const statusMessage = {
 }
 
 const OpenModal = ({ show, method, data }) => {
+
+  console.log(data)
+
   const orders = data.filter(order => {
     const status = order.status.toLowerCase()
     return status == 'pending' || status == 'processing'
@@ -30,6 +33,7 @@ const OpenModal = ({ show, method, data }) => {
 
         <div className={styles._ordersParent}>
         {
+          orders.length ?
           orders.map((item, index) => {
             return (
               <div className={styles._itemParent} key={index}>
@@ -64,7 +68,7 @@ const OpenModal = ({ show, method, data }) => {
                 </div>
               </div>
             )
-          })
+          }) : <p className={styles._text}>No existen ordenes abiertas</p>
         }
         </div>
 

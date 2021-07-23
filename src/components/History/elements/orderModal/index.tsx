@@ -25,8 +25,6 @@ const OrderModal = ({ show, method, data }) => {
           {
             data?.nodes?.length &&
             data.nodes.map((item, index) => {
-
-              const { product } = item
               return (
                 <div className={styles._row} key={index}>
                   <div className={styles._columnOne}>
