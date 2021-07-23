@@ -82,7 +82,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column
-
 }
 
 ._mainStatic {
@@ -93,6 +92,7 @@
 ._mainIn {
   @include menu;
   animation: menu-in 0.5s linear forwards;
+  top: 30px;
 }
 
 ._mainOut{

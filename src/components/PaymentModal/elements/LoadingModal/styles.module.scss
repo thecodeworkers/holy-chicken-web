@@ -148,3 +148,13 @@ $elements: (
   width: 120px;
 
 }
+
+
+
+@include responsive(md) {
+
+  ._loadingModal{
+    width: 90%;
+  }
+}
+

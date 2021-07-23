@@ -209,13 +209,26 @@
 
   ._background{
     width: 100%;
+    height: 100%;
   }
  ._modal{
-   height: 100vh;
+   height: 100%;
    width: 100%;
+   justify-content: flex-start;
+
  }
  ._header{
    text-align: left;
+   padding-top: 5rem;
+
+ }
+ ._body{
+  height: 100%;
+ }
+
+ ._totalParent{
+   padding: 2rem 1.5rem 3.5rem 1.5rem;
+   flex-grow: 1;
  }
 
 }
