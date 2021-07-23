@@ -12,8 +12,6 @@ const TenderSection = ({ attributes }) => {
   const toppings = attributes?.nodes[0]?.options ?? []
 
   const extras = attributes?.nodes[1]?.options ?? []
-
-
   return (
     <>
       <>

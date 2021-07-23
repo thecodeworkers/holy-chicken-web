@@ -11,8 +11,9 @@ const IndividualProduct = () => {
   const {
     intermitence: { individualProductModal },
     cart: { currentProduct },
-    product, variableProduct
+    product, variableProduct, tenderProduct
    } = useSelector((state: any) => state)
+
 
    const hot = currentProduct?.spicy?.isSpicy
 
@@ -23,7 +24,9 @@ const IndividualProduct = () => {
   ]
 
   const totalPrice = () => {
-    const totalAddons = allAddons.reduce((previous, next) => previous + next.price, 0)
+    let totalAddons = allAddons.reduce((previous, next) => previous + next.price, 0)
+
+    // if(true) totalAddons = tenderProduct?.tenderExtras.reduce((previous, next) => previous + next.price, 0)
     let totalPrice = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
 
     if (totalPrice) {
