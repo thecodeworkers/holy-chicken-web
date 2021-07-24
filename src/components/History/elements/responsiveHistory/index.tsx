@@ -9,10 +9,10 @@ const ResponsiveHistory = ({ modalMethod }) => {
 
   const { auth, guest: { tmpOrders } } = useSelector((state: any) => state)
 
-  const ordersArray = auth?.login?.login?.customer?.orders?.nodes
-                        ? auth?.login?.login?.customer?.orders?.nodes
-                        : tmpOrders?.orders?.nodes
-                        ? tmpOrders?.orders?.nodes
+  const ordersArray = auth?.login?.login?.customer?.orders?.nodes?.product
+                        ? auth?.login?.login?.customer?.orders?.nodes?.product
+                        : tmpOrders?.orders?.nodes?.product
+                        ? tmpOrders?.orders?.nodes?.product
                         : []
 
   const [showData, setShowData] = useState(false)
@@ -22,11 +22,17 @@ const ResponsiveHistory = ({ modalMethod }) => {
   const changeStatus = () => setShowData(showData => !showData)
 
   const search = (event) => {
+
     const value = event.target.value
+
+    if(!value.length) setHistoryCopy(ordersArray)
     setSearchValue(value)
-    const valueLower = value.toLowerCase()
-    const result = ordersArray.filter(((item: any) => item.orderNumber.toLowerCase().includes(valueLower)))
-    setHistoryCopy(result)
+
+    console.log(ordersArray)
+    // const valueLower = value.toLowerCase()
+    // const result = ordersArray.filter(((item: any) => item.orderNumber.toLowerCase().includes(valueLower)))
+
+    // setHistoryCopy(result)
   }
 
   useEffect(() => {
@@ -50,14 +56,14 @@ const ResponsiveHistory = ({ modalMethod }) => {
 
       </div>
 
-      <div className={auth?.isAuth ? styles._fieldParent : styles._fieldParentOpacity}>
+      <div className={auth?.isAuth && ordersArray.length ? styles._fieldParent : styles._fieldParentOpacity}>
         <input
           placeholder='Escribe el número de orden'
           name='search'
           className={styles._searchInput}
           onChange={search}
           value={searchValue}
-          readOnly={auth?.isAuth ? false : true }
+          readOnly={auth?.isAuth && ordersArray.length ? false : true }
         />
         <div className={styles._imageParent} >
           <Search color={'#000000'} />
@@ -67,7 +73,9 @@ const ResponsiveHistory = ({ modalMethod }) => {
       {
         auth?.isAuth ?
           <div className={styles._table}>
-            <div className={styles._row}>
+            {
+              showData &&
+              <div className={styles._row}>
               <div>
                 <p className={styles._headerText}>Orden</p>
               </div>
@@ -84,6 +92,8 @@ const ResponsiveHistory = ({ modalMethod }) => {
                 <p className={styles._headerText}>Tu carrito</p>
               </div>
             </div>
+
+            }
 
             {
               showData && historyCopy.length ?
@@ -106,9 +116,9 @@ const ResponsiveHistory = ({ modalMethod }) => {
                       </div>
                     </div>
                   )
-                }) : (<div className={styles._textParent}>
-                  <p>No existen registros</p>
-                </div>)
+                }) : ( <div className={styles._textParent}>
+                   { showData && <p>No existen registros</p> }
+                </div> )
             }
           </div> : (
           <div className={styles._textParent}>

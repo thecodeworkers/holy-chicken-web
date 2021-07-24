@@ -29,6 +29,8 @@ export const loginUser = (body: any) => async (dispatch) => {
     dispatch(actionObject(REQUEST_LOADER, true))
     const result = await loginMutation(body)
 
+    console.log('ENTER LOGIN', result)
+
     if (result.message) throw new Error(result.message)
 
     dispatch(actionObject(LOGIN_USER, { login: result, isAuth: result?.login ? true : false }))

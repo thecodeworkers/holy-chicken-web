@@ -8,7 +8,13 @@ const OrderModal = ({ show, method, data }) => {
 
   const findPrice = (id) => {
     const product = products.find(element => element.id == id)
-    const price = product ? product?.price : '$0.00'
+    let price = product? product?.price : '$0.00'
+
+    if(price.includes('-')) {
+      const splitPrice = price.split('-')
+      price = splitPrice[0].trim()
+    }
+
     return price
   }
 
@@ -30,17 +36,16 @@ const OrderModal = ({ show, method, data }) => {
               return (
                 <div className={styles._row} key={index}>
                   <div className={styles._columnOne}>
-                    <img src={item?.image?.mediaItemUrl} width='75px'></img>
+                    <img src={product?.image?.mediaItemUrl} width='75px'></img>
                   </div>
 
                   <div className={styles._columnTwo}>
-                    <p>{item?.name}</p>
-                    <div dangerouslySetInnerHTML={createMarkup(item?.description)}></div>
-
+                    <p>{product?.name}</p>
+                    <div dangerouslySetInnerHTML={createMarkup(product?.description)}></div>
                   </div>
 
                   <div className={styles._columnThree}>
-                    <p>{findPrice(item?.id)}</p>
+                    <p>{findPrice(product?.id)}</p>
                   </div>
                 </div>
               )
