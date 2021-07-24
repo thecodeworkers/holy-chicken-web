@@ -198,14 +198,15 @@ align-content: center;
 ._parentTitle{
  margin-top: 0.5rem;
 }
+._stepData{
+  display: none;
+}
+
 }
 @include responsive(md) {
 
   ._main{
     height: 100%;
   }
- ._stepData{
-   display: none;
- }
 
 }

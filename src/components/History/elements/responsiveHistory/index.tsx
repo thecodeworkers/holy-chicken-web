@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { Search } from '@images/icons'
 import { Button } from '@components'
 import { useSelector } from 'react-redux'
-
+import { parseHour, parseDate } from '../../functions'
 
 const ResponsiveHistory = ({ modalMethod }) => {
 
@@ -22,7 +22,9 @@ const ResponsiveHistory = ({ modalMethod }) => {
   const changeStatus = () => setShowData(showData => !showData)
 
   const search = (event) => {
+
     const value = event.target.value
+    if(!value.length) setHistoryCopy(ordersArray)
     setSearchValue(value)
     const valueLower = value.toLowerCase()
     const result = ordersArray.filter(((item: any) => item.orderNumber.toLowerCase().includes(valueLower)))
@@ -50,14 +52,14 @@ const ResponsiveHistory = ({ modalMethod }) => {
 
       </div>
 
-      <div className={auth?.isAuth ? styles._fieldParent : styles._fieldParentOpacity}>
+      <div className={auth?.isAuth && ordersArray.length ? styles._fieldParent : styles._fieldParentOpacity}>
         <input
           placeholder='Escribe el número de orden'
           name='search'
           className={styles._searchInput}
           onChange={search}
           value={searchValue}
-          readOnly={auth?.isAuth ? false : true }
+          readOnly={auth?.isAuth && ordersArray.length ? false : true }
         />
         <div className={styles._imageParent} >
           <Search color={'#000000'} />
@@ -67,7 +69,9 @@ const ResponsiveHistory = ({ modalMethod }) => {
       {
         auth?.isAuth ?
           <div className={styles._table}>
-            <div className={styles._row}>
+            {
+              showData &&
+              <div className={styles._row}>
               <div>
                 <p className={styles._headerText}>Orden</p>
               </div>
@@ -84,31 +88,34 @@ const ResponsiveHistory = ({ modalMethod }) => {
                 <p className={styles._headerText}>Tu carrito</p>
               </div>
             </div>
+            }
 
             {
               showData && historyCopy.length ?
                 historyCopy.map((item, index) => {
+
+                  const product = item?.lineItems
                   return (
                     <div className={styles._row} key={index}>
                       <div>
-                        <p>{item.number}</p>
+                        <p>{item?.orderNumber}</p>
                       </div>
 
                       <div>
-                        <p>{item.date}</p>
+                        <p>{parseDate(item?.date)}</p>
                       </div>
                       <div>
-                        <p>{item.hour}</p>
+                        <p>{parseHour(item?.date)}</p>
                       </div>
 
                       <div>
-                        <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={modalMethod} />
+                        <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={() => modalMethod(product)} />
                       </div>
                     </div>
                   )
-                }) : (<div className={styles._textParent}>
-                  <p>No existen registros</p>
-                </div>)
+                }) : ( <div className={styles._textParent}>
+                   { showData && <p>No existen registros</p> }
+                </div> )
             }
           </div> : (
           <div className={styles._textParent}>

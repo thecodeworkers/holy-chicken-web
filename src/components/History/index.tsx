@@ -38,8 +38,8 @@ const History = ({ data }) => {
   const [orderInput, setOrderInput] = useState('')
   const [currentOrder, setCurrentOrder] = useState<any>({})
 
-  const ordersArray = auth?.login?.login?.customer?.orders?.nodes?.product
-    ? auth?.login?.login?.customer?.orders?.nodes?.product
+  const ordersArray = auth?.login?.login?.customer?.orders?.nodes
+    ? auth?.login?.login?.customer?.orders?.nodes
     : tmpOrders?.orders?.nodes?.product
       ? tmpOrders?.orders?.nodes?.product
       : []
@@ -52,6 +52,8 @@ const History = ({ data }) => {
   const showModal = () => setShow(show => !show)
 
   const showOrderModal = (product) => {
+
+    console.log('ENTER HERE!', product)
     setShowOrder(showOrder => !showOrder)
     if (product) setCurrentProduct(product)
   }
@@ -75,7 +77,7 @@ const History = ({ data }) => {
       const newOrdersArray = filterOrders()
 
       setHistoryCopy(newOrdersArray)
-      setOrderInput(`${ordersArray[0].orderNumber}`)
+      setOrderInput(`#${ordersArray[0].orderNumber}`)
       setCurrentOrder(ordersArray[0])
       return
     }
@@ -88,7 +90,6 @@ const History = ({ data }) => {
     setOrderInput(value)
     const match = ordersArray.find(element => element.orderNumber == value)
 
-    console.log(ordersArray)
     if (match) setCurrentOrder(match)
   }
 
@@ -132,6 +133,7 @@ const History = ({ data }) => {
                   onChange={changeOrderInput}
                   className={styles._input}
                   value={orderInput}
+                  readOnly={true}
                 >
                 </input>
               </div>
@@ -164,8 +166,6 @@ const History = ({ data }) => {
                     circles.map((res, index) => {
                       const itemIndex = index + 1
                       let trustedCurrentStep = trackStatus[currentOrder?.trackOrder?.step || 'processing'];
-
-                      console.log(trustedCurrentStep)
 
                       if (currentOrder?.metaData) {
                         const metadata = currentOrder?.metaData

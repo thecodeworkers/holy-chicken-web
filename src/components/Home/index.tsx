@@ -10,7 +10,7 @@ import Head from 'next/head'
 
 const Home = ({ content, data, resource }) => {
 
-  const { scrollReference: { homeReference } } = useSelector((state: any) => state)
+  const { scrollReference: { homeReference }, guest: { tmpSessionToken } } = useSelector((state: any) => state)
 
   const dispatch = useDispatch()
   const router = useRouter()
@@ -22,7 +22,7 @@ const Home = ({ content, data, resource }) => {
       dispatch(setStringKey(passwordKey))
     }
 
-    dispatch(getTmpSession())
+    if (!tmpSessionToken) dispatch(getTmpSession())
   }, [])
 
   const outstandingRef = useCallback((node) => {
@@ -38,8 +38,8 @@ const Home = ({ content, data, resource }) => {
   }, [homeReference?.location])
 
   const scrollingReference = (node, state, offset = 0) => {
-    if(homeReference?.current == state) {
-      if(node) scrollTo(node, offset)
+    if (homeReference?.current == state) {
+      if (node) scrollTo(node, offset)
     }
   }
 
@@ -54,12 +54,12 @@ const Home = ({ content, data, resource }) => {
       <CartModal />
       {content ? (<>
         <FirstBanner data={content?.firstBanner}
-        content={content?.outstanding}
-        resource={resource}
-        reference={outstandingRef}/>
+          content={content?.outstanding}
+          resource={resource}
+          reference={outstandingRef} />
         {/* <SocialSwipe /> */}
         <Catering publicity={content?.secondBanner} reference={cateringRef} />
-        <SecondBanner data={content?.thirdBanner} reference ={locationRef}  contact={data}/>
+        <SecondBanner data={content?.thirdBanner} reference={locationRef} contact={data} />
         <ThirdBanner data={content?.fourthBanner} />
       </>
       ) : null}
