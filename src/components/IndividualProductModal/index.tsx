@@ -81,13 +81,11 @@ const IndividualProduct = () => {
     const attributess = [
       { value: freeSauce },
     ]
-
-    // currentProduct?.variations?.nodes
      const filterCriterias = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(attributess)
      const result = currentProduct?.variations?.nodes.find(filterCriterias)
     console.log(result);
 
-     dispatch(setVariableProduct({ currentVariableProduct: result }))
+     dispatch(setCartProducts(result, allAddons))
     }
 
     if (!!currentProduct?.variations) {
