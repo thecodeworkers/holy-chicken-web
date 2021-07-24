@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal, setProductsNumber, setCartProducts } from '@store/actions'
+import { setShowModal, setProductsNumber, setCartProducts, setVariableProduct } from '@store/actions'
 import { ClothSection, VerticalList, VerticalListWithImage, CardSection } from './elements'
 import { createMarkup } from '@utils'
 
@@ -75,9 +75,22 @@ const IndividualProduct = () => {
     const productVariable = variableProduct?.currentVariableProduct
     let correctProduct = currentProduct
 
-    if (!!currentProduct?.variations) {
-      const { freeFresh, freeSauce, blessing, sauce } = product
 
+    if(correctProduct?.name == 'Holy Donut'){
+    const {freeSauce} = product
+    const attributess = [
+      { value: freeSauce },
+    ]
+     const filterCriterias = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(attributess)
+     const result = currentProduct?.variations?.nodes.find(filterCriterias)
+    console.log(result);
+
+     dispatch(setCartProducts(result, allAddons))
+    }
+
+    if (!!currentProduct?.variations) {
+
+      const { freeFresh, freeSauce, blessing, sauce } = product
       const attributes = [
         { value: freeFresh },
         { value: freeSauce },
@@ -86,10 +99,14 @@ const IndividualProduct = () => {
       ]
 
       const filterCriteria = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(attributes)
+
       const result = currentProduct?.variations?.nodes.find(filterCriteria)
 
+
       if (result) correctProduct = result
+
     }
+
 
     if(productVariable) correctProduct = productVariable
 

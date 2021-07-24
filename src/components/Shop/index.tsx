@@ -5,18 +5,19 @@ import Footer from '../Footer'
 import { FirstBanner } from './elements'
 import ForgotPasswordModal from '../ForgotPasswordModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal } from '@store/actions'
+import { getTmpSession, setShowModal } from '@store/actions'
 import { scrollTo } from '@utils/common'
 
 const Shop = ({ content, data, filters, backup, storeData }) => {
 
   const dispatch = useDispatch()
 
-  const { intermitence, paymentStep: { delivery_data } } = useSelector((state: any) => state)
+  const { intermitence, paymentStep: { delivery_data }, guest: { tmpSessionToken } } = useSelector((state: any) => state)
 
   useEffect(() => {
     const location = delivery_data?.location
     if (intermitence?.showLocationModal && !location) dispatch(setShowModal({ locationModal: true }))
+    if(!tmpSessionToken) dispatch(getTmpSession())
   }, [])
 
   const { scrollReference: { shopReference } } = useSelector((state: any) => state)
@@ -27,8 +28,8 @@ const Shop = ({ content, data, filters, backup, storeData }) => {
 
 
   const scrollingReference = (node, state) => {
-    if(shopReference?.current == state) {
-      if(node) scrollTo(node)
+    if (shopReference?.current == state) {
+      if (node) scrollTo(node)
     }
   }
 
