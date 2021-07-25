@@ -1,20 +1,16 @@
-import { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styles from './styles.module.scss'
-import { Button, CountProduct } from '@components'
+import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal, setProductsNumber, setCartProducts } from '@store/actions'
-import { ClothSection, VerticalList, VerticalListWithImage, CardSection } from './elements'
+import { setShowModal, setCartProducts, setSelection } from '@store/actions'
+import { ClothSection, VerticalList, CardSection } from './elements'
 import { createMarkup } from '@utils'
 
 const IndividualProduct = () => {
   const dispatch = useDispatch()
-  const {
-    intermitence: { individualProductModal },
-    cart: { currentProduct },
-    product, variableProduct
-   } = useSelector((state: any) => state)
+  const { intermitence: { individualProductModal }, cart: { currentProduct }, product, variableProduct } = useSelector((state: any) => state)
 
-   const hot = currentProduct?.spicy?.isSpicy
+  const hot = currentProduct?.spicy?.isSpicy
 
   const allAddons = [
     ...product.addons,
@@ -24,19 +20,17 @@ const IndividualProduct = () => {
 
   const totalPrice = () => {
     const totalAddons = allAddons.reduce((previous, next) => previous + next.price, 0)
-    let totalPrice = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
-
-    if (totalPrice) {
-      totalPrice = totalPrice.split('$')
-      totalPrice = parseFloat(totalPrice[1])
-      totalPrice += totalAddons
+    let totalP = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
+    if (totalP) {
+      totalP = totalP.split('$')
+      totalP = parseFloat(totalP[1])
+      totalP += totalAddons
 
       const { blessing, sauce } = product
+      totalP += blessing != 'N/A' ? 0.5 : 0
+      totalP += sauce != 'N/A' ? 0.5 : 0
 
-      totalPrice += blessing != 'N/A' ? 0.5 : 0
-      totalPrice += sauce != 'N/A' ? 0.5 : 0
-
-      return `$${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
+      return `$${totalP.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
     }
 
     return ''
@@ -51,12 +45,12 @@ const IndividualProduct = () => {
 
   const featuresType = (type, attributes) => {
 
-    const attributesLength =  attributes?.nodes?.length
+    const attributesLength = attributes?.nodes?.length
 
     switch (type) {
       case 'temptations':
       case 'bebidas':
-        return <VerticalList attributes={attributes} category={type}/>
+        return <VerticalList attributes={attributes} category={type} />
 
       case 'holy-sanduches':
       case 'holy-tenders':
@@ -85,16 +79,21 @@ const IndividualProduct = () => {
         { value: sauce }
       ]
 
-      const filterCriteria = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(attributes)
+      const selectedAttributes = attributes.slice(0, currentProduct?.attributes?.nodes?.length)
+      const filterCriteria = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(selectedAttributes)
       const result = currentProduct?.variations?.nodes.find(filterCriteria)
 
       if (result) correctProduct = result
     }
 
-    if(productVariable) correctProduct = productVariable
+    if (productVariable) correctProduct = productVariable
 
     dispatch(setCartProducts(correctProduct, allAddons))
   }
+
+  useEffect(() => {
+    dispatch(setSelection({ sauce: 'N/A', blessing: 'N/A' }))
+  }, [currentProduct])
 
   return (
     <div className={individualProductModal ? styles._background : styles._hidden} onClick={closeModal} id='individual-product'>
@@ -112,12 +111,12 @@ const IndividualProduct = () => {
               </div>
             </div>
 
-            <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description) }></div>
+            <div className={styles._subtitle} dangerouslySetInnerHTML={createMarkup(currentProduct?.description)}></div>
 
             {
               currentProduct?.productCategories?.nodes[0]?.slug == 'holy-sanduches' ?
                 (<div className={styles._imgParent}>
-                      {
+                  {
                     hot && (<div className={styles._icon}>
                       <img src='images/icons/chilipepper.svg' alt='icono de producto picante' width='100%'></img>
                     </div>)
@@ -149,7 +148,7 @@ const IndividualProduct = () => {
 
         <div className={styles._totalParent}>
           <div className={styles._btnParent}>
-            <Button text='Agregar' color='#000' textColor='#FFF' method={setProductstoCart} flag/>
+            <Button text='Agregar' color='#000' textColor='#FFF' method={setProductstoCart} flag />
           </div>
 
           <div>
