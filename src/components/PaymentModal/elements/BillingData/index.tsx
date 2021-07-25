@@ -178,7 +178,7 @@ const BillingData = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.city}
-                    className={errors.zipcode && touched.zipcode ? styles._inputError : styles._input} />
+                    className={errors.city && touched.city ? styles._inputError : styles._input} />
                 </div>
               </div>
             </div>
