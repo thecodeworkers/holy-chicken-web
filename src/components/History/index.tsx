@@ -56,6 +56,8 @@ const History = ({ data }) => {
     if (product) setCurrentProduct(product)
   }
 
+  const updateOrders = () => dispatch(updateUserData())
+
   const changeStep = (step, label) => {
     setCurrentStep(step)
     setLabel(label)
@@ -91,9 +93,7 @@ const History = ({ data }) => {
 
   useEffect(() => {
     updateOrders()
-  }, [])
-
-  const updateOrders = () => dispatch(updateUserData())
+  }, [auth?.login?.login?.customer?.databaseId])
 
   const filterOrders = () => {
     const newOrdersArray = ordersArray.filter(order => {
@@ -134,13 +134,13 @@ const History = ({ data }) => {
               </div>
 
               <div className={styles._refreshImgParent}>
-              <img
-                src="/images/icons/refresh.png"
-                alt=""
-                width={20}
-                height={20}
-                onClick={() => updateOrders()}
-              />
+                <img
+                  src="/images/icons/refresh.png"
+                  alt=""
+                  width={20}
+                  height={20}
+                  onClick={() => updateOrders()}
+                />
               </div>
             </div>
 

@@ -102,7 +102,6 @@ export const updateUserData: any = () => async (dispatch, getState) => {
     const customer = auth?.login?.login?.customer
 
     dispatch(actionObject(REQUEST_LOADER, true))
-
     if (customer) {
       let orders = await WooCommerceClient('orders?per_page=100')
       orders = filter(orders, customer.databaseId, 'customer_id')
@@ -138,7 +137,7 @@ export const updateUserData: any = () => async (dispatch, getState) => {
         }
       }
 
-      dispatch(actionObject(LOGIN_USER, { login: {login: newLogin} }));
+      dispatch(actionObject(LOGIN_USER, { login: { login: newLogin } }));
     }
 
     if (tmpSessionToken) {

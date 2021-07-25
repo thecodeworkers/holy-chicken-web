@@ -3,14 +3,7 @@ import { createMarkup } from '@utils'
 import { useSelector } from 'react-redux'
 
 const OrderModal = ({ show, method, data }) => {
-
   const { resource: { products } } = useSelector((state: any) => state)
-
-  const findPrice = (id) => {
-    const product = products.find(element => element.id == id)
-    const price = product ? product?.price : '$0.00'
-    return price
-  }
 
   return (
     <div className={show ? styles._background : styles._hidden}>
@@ -25,8 +18,7 @@ const OrderModal = ({ show, method, data }) => {
           {
             data?.nodes?.length &&
             data.nodes.map((item, index) => {
-
-              const { product } = item
+              console.log(item)
               return (
                 <div className={styles._row} key={index}>
                   <div className={styles._columnOne}>
@@ -40,7 +32,7 @@ const OrderModal = ({ show, method, data }) => {
                   </div>
 
                   <div className={styles._columnThree}>
-                    <p>{findPrice(item?.id)}</p>
+                    <p>${item?.total}</p>
                   </div>
                 </div>
               )
@@ -51,7 +43,7 @@ const OrderModal = ({ show, method, data }) => {
         <div className={styles._footer}>
           <div className={styles._footerParent}>
             <p>Total estimado</p>
-            <p>{data?.total}</p>
+            <p>${data?.total}</p>
           </div>
         </div>
       </div>
