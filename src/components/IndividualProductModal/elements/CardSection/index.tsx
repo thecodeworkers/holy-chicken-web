@@ -2,12 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSelection } from '@store/actions';
 import styles from './styles.module.scss'
 import Extras from './Extras'
+import { useEffect } from 'react';
 
 const CardSection = ({ attributes }) => {
-  const {
-    freeFresh,
-    freeSauce
-  } = useSelector((state: any) => state.product)
+  const { freeFresh, freeSauce } = useSelector((state: any) => state.product)
 
   const nodes = attributes?.nodes || [];
   const toopings = [nodes[0], nodes[1]];
@@ -15,6 +13,10 @@ const CardSection = ({ attributes }) => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (toopings[0]) dispatch(setSelection({ freeFresh: toopings[0]?.options[0] }))
+    if (toopings[1]) dispatch(setSelection({ freeSauce: toopings[1]?.options[0] }))
+  }, [attributes])
   return (
     <>
       {
@@ -34,7 +36,7 @@ const CardSection = ({ attributes }) => {
                             value={option}
                             checked={freeFresh === option}
                             onChange={(event) => dispatch(setSelection({ freeFresh: event.target.value }))}
-                            ></input>
+                          />
                           <p>{option}</p>
                         </div>
 
@@ -58,7 +60,7 @@ const CardSection = ({ attributes }) => {
                             value={option}
                             checked={freeSauce === option}
                             onChange={(event) => dispatch(setSelection({ freeSauce: event.target.value }))}
-                            ></input>
+                          ></input>
                           <p>{option}</p>
                         </div>
 
@@ -75,7 +77,7 @@ const CardSection = ({ attributes }) => {
         ))
       }
 
-      { extras[0] && <Extras extras={extras} /> }
+      {extras[0] && <Extras extras={extras} />}
     </>
   )
 }

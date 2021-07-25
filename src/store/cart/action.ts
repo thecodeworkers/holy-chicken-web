@@ -102,9 +102,10 @@ export const updateQuantity: any = (product: any, type: any) => async (dispatch,
   try {
     const { auth, cart: { cartProducts }, guest } = await getState()
     const sessionToken = auth?.login?.login?.customer?.sessionToken || guest.tmpSessionToken
-
+    console.log(product)
     if (sessionToken) {
       const filtered = filter(cartProducts?.contents?.nodes, product, 'key')
+      console.log(filtered)
       const quantity = (type === 'add') ? filtered[0]?.quantity + 1 : filtered[0]?.quantity - 1;
       const max = filtered[0]?.product?.node?.stockQuantity
       const min = 0
