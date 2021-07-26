@@ -244,7 +244,6 @@ const History = ({ data }) => {
                       historyCopy.map((item, index) => {
                         const product = item?.lineItems
                         const total = item.total
-
                         return (
                           <div className={styles._row} key={index}>
                             <div>
