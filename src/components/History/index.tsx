@@ -52,8 +52,6 @@ const History = ({ data }) => {
   const showModal = () => setShow(show => !show)
 
   const showOrderModal = (product) => {
-
-    console.log('ENTER HERE!', product)
     setShowOrder(showOrder => !showOrder)
     if (product) setCurrentProduct(product)
   }
@@ -89,13 +87,17 @@ const History = ({ data }) => {
     const value = event.target.value
     setOrderInput(value)
     const match = ordersArray.find(element => element.orderNumber == value)
-
     if (match) setCurrentOrder(match)
   }
 
   useEffect(() => {
     updateOrders()
   }, [])
+
+  useEffect(() => {
+    console.log('CAMBIO AUTH!')
+  }, [auth])
+
 
   const updateOrders = () => dispatch(updateUserData())
 
@@ -107,6 +109,13 @@ const History = ({ data }) => {
 
     return newOrdersArray
   }
+
+  const setOrder = (item) => {
+    setOrderInput(item?.orderNumber)
+    setCurrentOrder(item)
+  }
+
+
 
   return (
     <>
@@ -165,14 +174,11 @@ const History = ({ data }) => {
                   {
                     circles.map((res, index) => {
                       const itemIndex = index + 1
-                      let trustedCurrentStep = trackStatus[currentOrder?.trackOrder?.step || 'processing'];
+                      let trustedCurrentStep = trackStatus[currentOrder?.trackOrder?.step || 'processing']
 
                       if (currentOrder?.metaData) {
                         const metadata = currentOrder?.metaData
                         const step = metadata.find(_ => _.key == 'step')
-
-                        console.log(currentOrder)
-
                         trustedCurrentStep = trackStatus[step?.value || 'processing']
                       }
 
@@ -292,7 +298,7 @@ const History = ({ data }) => {
       </div>
 
       <Footer data={data?.footer} content={data?.socialNetworks} />
-      <OpenModal show={show} method={showModal} data={ordersArray} />
+      <OpenModal show={show} method={showModal} data={ordersArray} setCurrentOrder={setOrder} currentOrder={currentOrder}/>
       <OrderModal show={showOrder} method={showOrderModal} data={currentProduct} />
     </>
   )

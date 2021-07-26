@@ -107,6 +107,8 @@ export const updateUserData: any = () => async (dispatch, getState) => {
 
     if (customer) {
       let orders = await WooCommerceClient('orders?per_page=100')
+
+      console.log(orders)
       orders = filter(orders, customer.databaseId, 'customer_id')
 
       orders = orders.map((order, index) => {
@@ -135,12 +137,12 @@ export const updateUserData: any = () => async (dispatch, getState) => {
         ...{
           customer: {
             ...customer,
-            ...{ orders: { nodes: { product: orders } } }
+            ...{ orders: { nodes: orders } }
           }
         }
       }
 
-      dispatch(actionObject(LOGIN_USER, { login: {login: newLogin} }));
+      dispatch(actionObject(LOGIN_USER, { login: { login: newLogin } }));
     }
 
     if (tmpSessionToken) {

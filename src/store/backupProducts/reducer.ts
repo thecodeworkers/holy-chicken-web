@@ -10,9 +10,6 @@ const backupProductsReducer = (state = initialState, { type, payload }: AnyActio
     case BACKUP_PRODUCTS:
       return { ...state, ...payload }
 
-    // case RESET_REDUCER:
-    //   return initialState
-
     default:
       return state
   }

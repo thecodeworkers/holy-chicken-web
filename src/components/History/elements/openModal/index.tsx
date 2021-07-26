@@ -11,9 +11,7 @@ const statusMessage = {
   failed: 'Fallida'
 }
 
-const OpenModal = ({ show, method, data }) => {
-
-  console.log(data)
+const OpenModal = ({ show, method, data, setCurrentOrder, currentOrder }) => {
 
   const orders = data.filter(order => {
     const status = order.status.toLowerCase()
@@ -38,9 +36,11 @@ const OpenModal = ({ show, method, data }) => {
             return (
               <div className={styles._itemParent} key={index}>
                 <input
-                  type='checkbox'
+                  type='radio'
                   className={styles._radioBtn}
-                  defaultChecked={false}
+                  readOnly
+                  checked={item?.orderNumber == currentOrder?.orderNumber ? true : false}
+                  onChange={() => setCurrentOrder(item)}
                 />
 
                 <div className={styles._column}>
