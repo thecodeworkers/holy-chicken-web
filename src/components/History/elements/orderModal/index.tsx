@@ -32,8 +32,6 @@ const OrderModal = ({ show, method, data }) => {
           {
             data?.nodes?.length ?
             data.nodes.map((item, index) => {
-              console.log(item)
-
               const { product } = item
               return (
                 <div className={styles._row} key={index}>
@@ -42,8 +40,8 @@ const OrderModal = ({ show, method, data }) => {
                   </div>
 
                   <div className={styles._columnTwo}>
-                    <p>{product?.name}</p>
-                    <div dangerouslySetInnerHTML={createMarkup(product?.description)}></div>
+                    <p>{item?.name}</p>
+                    <div dangerouslySetInnerHTML={createMarkup(item?.description)}></div>
                   </div>
 
                   <div className={styles._columnThree}>
