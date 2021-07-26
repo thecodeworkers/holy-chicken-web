@@ -18,6 +18,7 @@ const OpenModal = ({ show, method, data, setCurrentOrder, currentOrder }) => {
     return status == 'pending' || status == 'processing'
   })
 
+
   return (
     <div className={ show ? styles._background : styles._hidden}>
       <div className={`_generalCard ${styles._card}`}>
@@ -62,7 +63,7 @@ const OpenModal = ({ show, method, data, setCurrentOrder, currentOrder }) => {
 
                     <div className={styles._row}>
                       <p className={styles._bold}>Status</p>
-                      <p>{statusMessage[item.status]}</p>
+                      <p>{statusMessage[item.status.toLowerCase()]}</p>
                     </div>
                   </div>
                 </div>

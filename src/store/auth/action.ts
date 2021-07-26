@@ -104,22 +104,18 @@ export const updateUserData: any = () => async (dispatch, getState) => {
     const customer = auth?.login?.login?.customer
 
     dispatch(actionObject(REQUEST_LOADER, true))
-
     if (customer) {
+      const oldOrders = customer.orders.nodes
       let orders = await WooCommerceClient('orders?per_page=100')
 
       console.log(orders)
       orders = filter(orders, customer.databaseId, 'customer_id')
-
       orders = orders.map((order, index) => {
         order = setCamelCaseKey(order)
         order.orderNumber = order.number
         order.date = order.dateCreated
 
-        if (customer?.orders?.nodes) {
-          const oldOrders = customer.orders.nodes
-          order.trackOrder = oldOrders[index].trackOrder
-        }
+        if (customer?.orders?.nodes) if (oldOrders[index]) order.trackOrder = oldOrders[index].trackOrder
 
         order.lineItems = {
           nodes: order.lineItems.map(item => {

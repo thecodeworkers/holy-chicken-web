@@ -32,9 +32,9 @@ const OrderModal = ({ show, method, data }) => {
           {
             data?.nodes?.length ?
             data.nodes.map((item, index) => {
+              console.log(item)
 
-              const { product, variation } = item
-
+              const { product } = item
               return (
                 <div className={styles._row} key={index}>
                   <div className={styles._columnOne}>
@@ -47,7 +47,7 @@ const OrderModal = ({ show, method, data }) => {
                   </div>
 
                   <div className={styles._columnThree}>
-                    <p>{variation ? variation?.price : findPrice(product?.id)}</p>
+                    <p>${item?.total}</p>
                   </div>
                 </div>
               )
@@ -58,7 +58,7 @@ const OrderModal = ({ show, method, data }) => {
         <div className={styles._footer}>
           <div className={styles._footerParent}>
             <p>Total estimado</p>
-            <p>{data?.total}</p>
+            <p>${data?.total}</p>
           </div>
         </div>
       </div>

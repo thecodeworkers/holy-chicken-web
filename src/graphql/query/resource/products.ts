@@ -43,6 +43,7 @@ products(first: 10000000) {
       name
       price
       databaseId
+      stockQuantity
       spicy {
         isSpicy
       }
