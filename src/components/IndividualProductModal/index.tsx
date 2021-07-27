@@ -77,7 +77,6 @@ const IndividualProduct = () => {
     ]
      const filterCriterias = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(attributess)
      const result = currentProduct?.variations?.nodes.find(filterCriterias)
-    console.log(result);
 
      dispatch(setCartProducts(result, allAddons))
     }

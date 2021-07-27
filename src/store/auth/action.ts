@@ -29,8 +29,6 @@ export const loginUser = (body: any) => async (dispatch) => {
     dispatch(actionObject(REQUEST_LOADER, true))
     const result = await loginMutation(body)
 
-    console.log('ENTER LOGIN', result)
-
     if (result.message) throw new Error(result.message)
 
     dispatch(actionObject(LOGIN_USER, { login: result, isAuth: result?.login ? true : false }))
@@ -108,7 +106,6 @@ export const updateUserData: any = () => async (dispatch, getState) => {
       const oldOrders = customer.orders.nodes
       let orders = await WooCommerceClient('orders?per_page=100')
 
-      console.log(orders)
       orders = filter(orders, customer.databaseId, 'customer_id')
       orders = orders.map((order, index) => {
         order = setCamelCaseKey(order)
