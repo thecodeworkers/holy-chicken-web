@@ -5,16 +5,18 @@ import generalQuery from './generalPage'
 import paymentMethods from './paymentMethods'
 import productsQuery from './products'
 import productsCategoriesQuery from './productsCategories'
-const resource = async () => {
+const resource = async (page) => {
 
   const query = `
     query Resources {
       ${generalQuery}
-      ${productsQuery()}
-      ${productsCategoriesQuery}
-      ${attributesQuery}
       ${paymentMethods}
       ${countries}
+      ${(page === 'storePage' || page === 'homePage') ? `
+      ${attributesQuery}
+      ${productsQuery()}
+      ${productsCategoriesQuery}
+      ` : ''}
     }
   `
 

@@ -15,7 +15,7 @@ export const getResources: any = (consult: string = '') => async (dispatch, getS
     dispatch(actionObject(GET_PAGES, data))
   }
 
-  const resource = await resources()
+  const resource = await resources(consult)
   const allCountries = await WooCommerceClient('data/countries')
   resource['outstanding'] = orderBy(resource.products, 'totalSales', 'asc').slice(0, 3)
   resource['shop'] = resource.products
