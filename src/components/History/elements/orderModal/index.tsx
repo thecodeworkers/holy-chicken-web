@@ -4,21 +4,6 @@ import { useSelector } from 'react-redux'
 
 const OrderModal = ({ show, method, data }) => {
 
-  const { backupProduct: { backup }} = useSelector((state: any) => state)
-
-  const findPrice = (id) => {
-    const product = backup.find(element => element.id == id)
-
-    let price = product ? product?.price : '$0.00'
-
-    if(price.includes('-')) {
-      const splitPrice = price.split('-')
-      price = splitPrice[0].trim()
-    }
-
-    return price
-  }
-
   return (
     <div className={show ? styles._background : styles._hidden}>
       <div className={`_generalCard ${styles._card}`}>
@@ -32,11 +17,11 @@ const OrderModal = ({ show, method, data }) => {
           {
             data?.nodes?.length ?
             data.nodes.map((item, index) => {
-              const { product } = item
+
               return (
                 <div className={styles._row} key={index}>
                   <div className={styles._columnOne}>
-                    <img src={product?.image?.mediaItemUrl} width='75px'></img>
+                    <img src={item?.image?.mediaItemUrl} width='75px'></img>
                   </div>
 
                   <div className={styles._columnTwo}>

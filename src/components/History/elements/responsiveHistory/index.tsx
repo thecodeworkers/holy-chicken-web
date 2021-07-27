@@ -95,6 +95,7 @@ const ResponsiveHistory = ({ modalMethod }) => {
                 historyCopy.map((item, index) => {
 
                   const product = item?.lineItems
+                  const total = item.total
                   return (
                     <div className={styles._row} key={index}>
                       <div>
@@ -109,7 +110,7 @@ const ResponsiveHistory = ({ modalMethod }) => {
                       </div>
 
                       <div>
-                        <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={() => modalMethod(product)} />
+                        <Button color='#000' textColor='#FFF' text='pedidos' height='2rem' method={() => modalMethod({ ...product, total })} />
                       </div>
                     </div>
                   )

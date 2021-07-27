@@ -6,13 +6,12 @@ import paymentMethods from './paymentMethods'
 import productsQuery from './products'
 import productsCategoriesQuery from './productsCategories'
 const resource = async (page) => {
-
   const query = `
     query Resources {
       ${generalQuery}
       ${paymentMethods}
       ${countries}
-      ${(page === 'storePage' || page === 'homePage') ? `
+      ${(page === 'storePage' || page === 'homePage' || page === '') ? `
       ${attributesQuery}
       ${productsQuery()}
       ${productsCategoriesQuery}

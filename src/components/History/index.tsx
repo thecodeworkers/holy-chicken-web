@@ -110,6 +110,18 @@ const History = ({ data }) => {
     setCurrentOrder(item)
   }
 
+  const returnLabel = () => {
+    let trustedCurrentStep = trackStatus[currentOrder?.trackOrder?.step || 'processing']
+
+    if (currentOrder?.metaData) {
+      const metadata = currentOrder?.metaData
+      const step = metadata.find(_ => _.key == 'step')
+      trustedCurrentStep = trackStatus[step?.value || 'processing']
+    }
+
+    const match = circles.find(item => item.value == trustedCurrentStep)
+    if(trustedCurrentStep == match.value) return match?.label
+  }
 
   return (
     <>
@@ -159,7 +171,7 @@ const History = ({ data }) => {
               <Chiken id='chicken-one' />
             </div>
 
-            <p className={styles._chickenLabel}>{label}</p>
+            <p className={styles._chickenLabel}>{returnLabel() ?? 'processing'}</p>
 
             <div className={styles._line}>
 
@@ -179,7 +191,6 @@ const History = ({ data }) => {
                       return (
                         <div key={index}>
                           <div className={itemIndex == trustedCurrentStep ? styles._circleSelected : styles._circle} onClick={() => {
-                            // changeStep(itemIndex, res.label)
                           }}>
 
                             <div className={styles._labelParent}>
@@ -251,7 +262,6 @@ const History = ({ data }) => {
                       historyCopy.map((item, index) => {
                         const product = item?.lineItems
                         const total = item.total
-
                         return (
                           <div className={styles._row} key={index}>
                             <div>
