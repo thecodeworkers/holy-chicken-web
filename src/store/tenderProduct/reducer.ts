@@ -17,7 +17,7 @@ const tenerProductReducer = (state = initialState, { type, payload }: AnyAction)
       return {
         ...state,
         freeSauce: 'Salsa de la casa',
-        currentExtras: 'N/A',
+        currentExtra: 'N/A',
         tenderExtras: [],
       }
 

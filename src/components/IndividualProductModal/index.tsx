@@ -26,7 +26,7 @@ const IndividualProduct = () => {
   const totalPrice = () => {
     let totalAddons = allAddons.reduce((previous, next) => previous + next.price, 0)
 
-    // if(true) totalAddons = tenderProduct?.tenderExtras.reduce((previous, next) => previous + next.price, 0)
+    if(currentProduct?.slug == "not-so-holy-tenders") totalAddons = tenderProduct?.tenderExtras.reduce((previous, next) => previous + next.price, 0)
     let totalPrice = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
 
     if (totalPrice) {
@@ -83,13 +83,13 @@ const IndividualProduct = () => {
     if (!!currentProduct?.variations) {
       const { freeFresh, freeSauce, blessing, sauce } = product
 
-      const attributes = [
+      let attributes = [
         { value: freeFresh },
         { value: freeSauce },
         { value: blessing },
         { value: sauce }
       ]
-
+      
       const filterCriteria = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(attributes)
       const result = currentProduct?.variations?.nodes.find(filterCriteria)
 

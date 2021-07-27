@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTenderExtras, setTenderSelection } from '@store/actions';
+import { setExtras, setTenderExtras, setTenderSelection } from '@store/actions';
 import Counter from '../Counter'
 import styles from './styles.module.scss'
 
@@ -31,9 +31,12 @@ const CheckBoxes = ({ option, index, currentSelection, setCurrentSelection }) =>
               setCurrentSelection(currentSelection)
             }
 
+            console.log(currentValue, currentExtra, isChecked, 'CURRENT VALUE')
+
             if (currentExtra == 'N/A' && isChecked) {
               dispatch(setTenderSelection({ currentExtra: currentValue }))
-
+              return
+            }
 
               if (currentExtra != 'N/A' && !isChecked) {
                 if (!tenderExtras.length) {
@@ -41,8 +44,21 @@ const CheckBoxes = ({ option, index, currentSelection, setCurrentSelection }) =>
                   return
                 }
 
+                const index = tenderExtras.findIndex((addon: any) => addon.extra == currentValue)
+
+                console.log(index, currentValue)
+                if (index > -1) tenderExtras.splice(index, 1)
+                dispatch(setTenderExtras({ tenderExtras }))
+
+                return
               }
-            }
+
+              if (currentExtra != 'N/A' && isChecked) {
+                tenderExtras.push({ extra: currentValue, price: 0.5 })
+                dispatch(setTenderExtras({ tenderExtras }))
+
+                return ;
+              }
           }}
         ></input>
         <p>{option}</p>
@@ -55,7 +71,6 @@ const Extras = ({ extras }) => {
   const [currentSelection, setCurrentSelection] = useState([])
   const { tenderExtras } = useSelector((state: any) => state.tenderProduct)
   const dispatch = useDispatch()
-
 
   return (
     <div className={styles._cardParent}>
