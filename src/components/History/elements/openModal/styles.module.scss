@@ -103,6 +103,13 @@
   }
 }
 
+._text {
+  font-family: $montserratRegular;
+  font-size: $montserratRegular18;
+  text-align: center;
+}
+
+
 @include responsive(lg) {
   ._background {
     @include blurBackgroundResponsive();

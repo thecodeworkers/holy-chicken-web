@@ -50,6 +50,9 @@ const loginMutation = async ({ email, password, sessionToken }) => {
             }
             lineItems {
               nodes {
+                variation {
+                  price
+                }
                 product {
                   name
                   id
