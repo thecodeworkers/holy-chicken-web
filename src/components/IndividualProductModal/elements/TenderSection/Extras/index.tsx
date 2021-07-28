@@ -127,12 +127,8 @@ const Extras = ({ extras }) => {
 
       </div>
       <div className={styles._responsiveParent}>
-        {
-          extras.map((node, nodeIndex) => (
-            <div key={nodeIndex}>
-              <p className={styles._littleTitle}>{node?.name}</p>
-              {
-                node?.options?.map((option, index) => (
+      {
+                extras?.map((option, index) => (
                   <div key={index} className={styles._responsiveRow}>
                     {
                       option != 'N/A' ? (
@@ -146,22 +142,22 @@ const Extras = ({ extras }) => {
 
                           <div className={styles._newParent}>
                             <div className={styles._column}>
-                              {/* <Counter
+                              <Counter
                                 stock={30}
-                                active={currentSelection.some(_ => (_.nodeIndex == nodeIndex && _.index == index))}
+                                active={currentSelection.some(_ => _.index == index)}
                                 changeNumber={(action) => {
                                   if (action == 'add') {
-                                    addons.push({ extra: option, price: 0.5 })
-                                    dispatch(setExtras(addons))
+                                    tenderExtras.push({ extra: option, price: 0.5 })
+                                    dispatch(setTenderExtras(tenderExtras))
                                   }
 
                                   if (action == 'remove') {
-                                    const index = addons.findIndex((addon: any) => addon.extra == option)
-                                    if (index > -1) addons.splice(index, 1)
-                                    dispatch(setExtras(addons))
+                                    const index = tenderExtras.findIndex((addon: any) => addon.extra == option)
+                                    if (index > -1) tenderExtras.splice(index, 1)
+                                    dispatch(setTenderExtras(tenderExtras))
                                   }
                                 }}
-                              /> */}
+                              />
                             </div>
 
                             <div className={styles._column}>
@@ -176,9 +172,6 @@ const Extras = ({ extras }) => {
                   </div>
                 ))
               }
-            </div>
-          ))
-        }
       </div>
     </div>
   )
