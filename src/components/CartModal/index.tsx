@@ -36,13 +36,6 @@ const CartModal = () => {
     dispatch(setToast('warning', 'Su carrito esta vacio', 1))
   }
 
-  const getVariableTotalPrice = (quantity, total) => {
-    let price = total.split('$')[1]
-    price = parseFloat(price) / quantity
-
-    return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
-  }
-
   return (
     <div className={cartModal ? styles._background : styles._hidden} onClick={closeModal} id={'modal'}>
       <div className={styles._modal} >
@@ -57,8 +50,6 @@ const CartModal = () => {
               <p className={styles._description}>{contentCart.emptyCart}</p> :
               nodes.map((item, index) => {
                 const dataItem = item?.product?.node
-                const totalPrice = dataItem?.price ? dataItem?.price : getVariableTotalPrice(item?.quantity, item?.total)
-
                 return (
                   <div key={index} className={styles._productContainer}>
                     <div className={styles._close} onClick={() => deleteItem(item)}>
@@ -74,7 +65,7 @@ const CartModal = () => {
 
                       <div className={styles._quantityContainer}>
                         <CountProduct productKey={item?.key} stock={dataItem?.stockQuantity} quantity={item?.quantity} />
-                        <p className={styles._number}>{totalPrice}</p>
+                        <p className={styles._number}>{item?.total}</p>
                       </div>
                     </div>
                   </div>

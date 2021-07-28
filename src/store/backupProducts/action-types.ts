@@ -1,0 +1,1 @@
+export const BACKUP_PRODUCTS = 'BACKUP_PRODUCTS'

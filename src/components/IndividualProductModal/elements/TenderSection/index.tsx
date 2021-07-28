@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setTenderSelection } from '@store/actions';
+import { setTenderSelection, setVariableProduct } from '@store/actions';
 import styles from './styles.module.scss'
 import Extras from './Extras'
 
@@ -19,8 +19,6 @@ const TenderSection = ({ attributes }) => {
   const extras = attributes?.nodes[1]?.options ?? []
 
   useEffect(() => {
-    console.log(variations)
-    console.log(freeSauce, 'ITEM SELECTED')
 
     let selectedProduct
 
@@ -31,8 +29,9 @@ const TenderSection = ({ attributes }) => {
       if(valueOne == freeSauce && valueTwo == currentExtra) selectedProduct = product
     })
 
-    console.log(selectedProduct)
+    if(selectedProduct) dispatch(setVariableProduct({ currentVariableProduct: selectedProduct }))
 
+    return () =>  { dispatch(setVariableProduct({ currentVariableProduct: null })) }
 
   }, [freeSauce, currentExtra])
 

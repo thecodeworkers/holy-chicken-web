@@ -41,6 +41,12 @@ cart {
             stockQuantity
             description
           }
+          ... on VariableProduct {
+            stockQuantity
+            price
+            salePrice(format: RAW)
+            description
+          }
           attributes(first: 100000) {
             nodes {
               id
@@ -72,6 +78,7 @@ cart {
         node {
           price
           name
+          stockQuantity
         }
       }
     }

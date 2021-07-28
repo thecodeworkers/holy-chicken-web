@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setExtras, setTenderExtras, setTenderSelection } from '@store/actions';
 import Counter from '../Counter'
@@ -7,7 +7,11 @@ import styles from './styles.module.scss'
 const CheckBoxes = ({ option, index, currentSelection, setCurrentSelection }) => {
 
   const { currentExtra, tenderExtras } = useSelector((state: any) => state.tenderProduct)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+
+  // useEffect(() => {
+  //   if(!tenderExtras.length)  dispatch(setTenderSelection({ currentExtra: 'N/A' }))
+  // }, [tenderExtras])
 
   return (
     <div className={styles._column}>
@@ -31,34 +35,31 @@ const CheckBoxes = ({ option, index, currentSelection, setCurrentSelection }) =>
               setCurrentSelection(currentSelection)
             }
 
-            console.log(currentValue, currentExtra, isChecked, 'CURRENT VALUE')
-
             if (currentExtra == 'N/A' && isChecked) {
               dispatch(setTenderSelection({ currentExtra: currentValue }))
               return
             }
 
-              if (currentExtra != 'N/A' && !isChecked) {
-                if (!tenderExtras.length) {
-                  dispatch(setTenderSelection({ currentExtra: 'N/A' }))
-                  return
-                }
+            if (currentExtra != 'N/A' && !isChecked) {
+              const index = tenderExtras.findIndex((addon: any) => addon.extra == currentValue)
+              if (index > -1) tenderExtras.splice(index, 1)
+              dispatch(setTenderExtras({ tenderExtras }))
 
-                const index = tenderExtras.findIndex((addon: any) => addon.extra == currentValue)
-
-                console.log(index, currentValue)
-                if (index > -1) tenderExtras.splice(index, 1)
-                dispatch(setTenderExtras({ tenderExtras }))
-
+              if (!tenderExtras.length) {
+                dispatch(setTenderSelection({ currentExtra: 'N/A' }))
                 return
               }
 
-              if (currentExtra != 'N/A' && isChecked) {
-                tenderExtras.push({ extra: currentValue, price: 0.5 })
-                dispatch(setTenderExtras({ tenderExtras }))
+              return
+            }
 
-                return ;
-              }
+            if (currentExtra != 'N/A' && isChecked) {
+
+              tenderExtras.push({ extra: currentValue, price: 0.5 })
+              dispatch(setTenderExtras({ tenderExtras }))
+              return
+            }
+
           }}
         ></input>
         <p>{option}</p>
