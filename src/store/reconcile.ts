@@ -53,11 +53,6 @@ const reconcile = (state, payload) => {
         trueState = { ...trueState, intermitence }
         break
 
-      case 'backupProduct':
-        const backupProduct = state[key]
-        trueState = { ...trueState, backupProduct }
-        break
-
       default:
         break
     }

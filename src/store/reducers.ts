@@ -12,6 +12,7 @@ import paymentStep from './paymentStep/reducer'
 import scrollReference from './scrollReference/reducer'
 import variableProduct from './variableProduct/reducer'
 import guest from './guest/reducer'
+import tenderProduct from './tenderProduct/reducer'
 import backupProduct from './backupProducts/reducer'
 
 const reducers = combineReducers({
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   scrollReference,
   variableProduct,
   guest,
+  tenderProduct,
   backupProduct
 })
 
