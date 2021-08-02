@@ -3,12 +3,12 @@ import styles from './styles.module.scss'
 import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal, setCartProducts, setSelection } from '@store/actions'
-import { ClothSection, VerticalList, CardSection, TenderSection} from './elements'
+import { ClothSection, VerticalList, CardSection } from './elements'
 import { createMarkup } from '@utils'
 
 const IndividualProduct = () => {
   const dispatch = useDispatch()
-  const { intermitence: { individualProductModal }, cart: { currentProduct }, product, variableProduct, tenderProduct } = useSelector((state: any) => state)
+  const { intermitence: { individualProductModal }, cart: { currentProduct }, product, variableProduct } = useSelector((state: any) => state)
 
   const hot = currentProduct?.spicy?.isSpicy
 
@@ -19,21 +19,16 @@ const IndividualProduct = () => {
   ]
 
   const totalPrice = () => {
-    let totalAddons = allAddons.reduce((previous, next) => previous + next.price, 0)
-    if (currentProduct?.slug == "not-so-holy-tenders") totalAddons = tenderProduct?.tenderExtras.reduce((previous, next) => previous + next.price, 0)
+    const totalAddons = allAddons.reduce((previous, next) => previous + next.price, 0)
     let totalP = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
     if (totalP) {
       totalP = totalP.split('$')
       totalP = parseFloat(totalP[1])
       totalP += totalAddons
 
-      if(currentProduct?.slug == "not-so-holy-tenders") {
-        totalP += tenderProduct?.currentExtra != 'N/A' ? 0.5 : 0
-      } else {
-        const { blessing, sauce } = product
-        totalP += blessing != 'N/A' ? 0.5 : 0
-        totalP += sauce != 'N/A' ? 0.5 : 0
-      }
+      const { blessing, sauce } = product
+      totalP += blessing != 'N/A' ? 0.5 : 0
+      totalP += sauce != 'N/A' ? 0.5 : 0
 
       return `$${totalP.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
     }
@@ -58,10 +53,8 @@ const IndividualProduct = () => {
         return <VerticalList attributes={attributes} category={type} />
 
       case 'holy-sanduches':
-        return <CardSection attributes={attributes} />
-
       case 'holy-tenders':
-        return <TenderSection attributes={attributes} />
+        return <CardSection attributes={attributes} />
 
       case 'merch':
         return <ClothSection size={attributesLength == 2 ? true : false} attributes={attributes} />
@@ -76,28 +69,9 @@ const IndividualProduct = () => {
     const productVariable = variableProduct?.currentVariableProduct
     let correctProduct = currentProduct
 
-    if (currentProduct?.slug == "not-so-holy-tenders") {
-      if (productVariable) {
-        correctProduct = productVariable
-        dispatch(setCartProducts(correctProduct, tenderProduct?.tenderExtras))
-        return
-      }
-    }
-
-    if(correctProduct?.name == 'Holy Donut'){
-    const {freeSauce} = product
-    const attributess = [
-      { value: freeSauce },
-    ]
-     const filterCriterias = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(attributess)
-     const result = currentProduct?.variations?.nodes.find(filterCriterias)
-
-     dispatch(setCartProducts(result, allAddons))
-    }
-
     if (!!currentProduct?.variations) {
-
       const { freeFresh, freeSauce, blessing, sauce } = product
+
       const attributes = [
         { value: freeFresh },
         { value: freeSauce },
@@ -120,7 +94,6 @@ const IndividualProduct = () => {
   useEffect(() => {
     dispatch(setSelection({ sauce: 'N/A', blessing: 'N/A', addons: [], blessingAddons: [], sauceAddons: [] }))
   }, [individualProductModal])
-
 
   return (
     <div className={individualProductModal ? styles._background : styles._hidden} onClick={closeModal} id='individual-product'>
