@@ -105,6 +105,7 @@ export const updateUserData: any = () => async (dispatch, getState) => {
     if (customer) {
       const oldOrders = customer.orders.nodes
       let orders = await WooCommerceClient('orders?per_page=100')
+
       orders = filter(orders, customer.databaseId, 'customer_id')
       orders = orders.map((order, index) => {
         order = setCamelCaseKey(order)

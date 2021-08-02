@@ -7,6 +7,8 @@ import { setStep } from '@store/paymentStep/action'
 import { getDollarEquivalent } from '@utils/dolarClient'
 import getStripe from '@utils/getStripe'
 import checkoutMutation from '@graphql/mutation/checkout'
+import { RESET_STORE } from '@store/product/action-types'
+import { RESET_TENDER_STORE } from '@store/tenderProduct/action-types'
 
 
 export const setCurrentProduct = (data: any) => actionObject(CURRENT_PRODUCT, data)
@@ -63,6 +65,9 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
       dispatch(setToast('check', 'Producto agregado al carrito ', 1))
       dispatch(setShowModal({ individualProductModal: false }))
       dispatch(setShowModal({ cartModal: true }))
+      dispatch(actionObject(RESET_STORE))
+      dispatch(actionObject(RESET_TENDER_STORE))
+
     }
 
     if (!sessionToken) {

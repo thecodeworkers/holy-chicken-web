@@ -3,7 +3,6 @@ import { createMarkup } from '@utils'
 import { useSelector } from 'react-redux'
 
 const OrderModal = ({ show, method, data }) => {
-  const { resource: { products } } = useSelector((state: any) => state)
 
   return (
     <div className={show ? styles._background : styles._hidden}>
@@ -16,8 +15,9 @@ const OrderModal = ({ show, method, data }) => {
 
         <div className={styles._products}>
           {
-            data?.nodes?.length &&
+            data?.nodes?.length ?
             data.nodes.map((item, index) => {
+
               return (
                 <div className={styles._row} key={index}>
                   <div className={styles._columnOne}>
@@ -27,7 +27,6 @@ const OrderModal = ({ show, method, data }) => {
                   <div className={styles._columnTwo}>
                     <p>{item?.name}</p>
                     <div dangerouslySetInnerHTML={createMarkup(item?.description)}></div>
-
                   </div>
 
                   <div className={styles._columnThree}>
@@ -35,7 +34,7 @@ const OrderModal = ({ show, method, data }) => {
                   </div>
                 </div>
               )
-            })
+            }) : <p className={styles._text}>No existen ordenes pendientes</p>
           }
         </div>
 

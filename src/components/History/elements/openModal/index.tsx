@@ -11,7 +11,8 @@ const statusMessage = {
   failed: 'Fallida'
 }
 
-const OpenModal = ({ show, method, data }) => {
+const OpenModal = ({ show, method, data, setCurrentOrder, currentOrder }) => {
+
   const orders = data.filter(order => {
     const status = order.status.toLowerCase()
     return status == 'pending' || status == 'processing'
@@ -31,13 +32,16 @@ const OpenModal = ({ show, method, data }) => {
 
         <div className={styles._ordersParent}>
         {
+          orders.length ?
           orders.map((item, index) => {
             return (
               <div className={styles._itemParent} key={index}>
                 <input
-                  type='checkbox'
+                  type='radio'
                   className={styles._radioBtn}
-                  defaultChecked={false}
+                  readOnly
+                  checked={item?.orderNumber == currentOrder?.orderNumber ? true : false}
+                  onChange={() => setCurrentOrder(item)}
                 />
 
                 <div className={styles._column}>
@@ -65,7 +69,7 @@ const OpenModal = ({ show, method, data }) => {
                 </div>
               </div>
             )
-          })
+          }) : <p className={styles._text}>No existen ordenes abiertas</p>
         }
         </div>
 

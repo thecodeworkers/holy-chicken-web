@@ -10,17 +10,17 @@ import { updateUserData } from '@store/actions'
 import { parseDate, parseHour } from './functions'
 
 const circles = [
-  { label: 'Por entregar', value: 1 },
-  { label: 'Orden en vía', value: 2 },
-  { label: 'Confirmando pago', value: 3 },
+  { label: 'Confirmando pago', value: 1 },
+  { label: 'Por entregar', value: 2 },
+  { label: 'Orden en vía', value: 3},
   { label: 'Orden Entregada', value: 4 }
 ]
 
 const trackStatus = {
-  making: 1,
-  forShipping: 1,
-  delivered: 2,
-  processing: 3,
+  making: 2,
+  forShipping: 2,
+  delivered: 3,
+  processing: 1,
   received: 4
 }
 
@@ -36,12 +36,12 @@ const History = ({ data }) => {
   const [historyCopy, setHistoryCopy] = useState([])
   const [searchValue, setSearchValue] = useState('')
   const [orderInput, setOrderInput] = useState('')
-  const [currentOrder, setCurrentOrder] = useState('')
+  const [currentOrder, setCurrentOrder] = useState<any>({})
 
   const ordersArray = auth?.login?.login?.customer?.orders?.nodes
     ? auth?.login?.login?.customer?.orders?.nodes
-    : tmpOrders?.orders?.nodes
-      ? tmpOrders?.orders?.nodes
+    : tmpOrders?.orders?.nodes?.product
+      ? tmpOrders?.orders?.nodes?.product
       : []
 
   const user = auth?.login?.login
@@ -78,10 +78,11 @@ const History = ({ data }) => {
 
       setHistoryCopy(newOrdersArray)
       setOrderInput(`#${ordersArray[0].orderNumber}`)
+      setCurrentOrder(ordersArray[0])
       return
     }
 
-    setOrderInput('#000')
+    setOrderInput('000')
   }, [ordersArray])
 
   const changeOrderInput = (event) => {
@@ -102,6 +103,24 @@ const History = ({ data }) => {
     })
 
     return newOrdersArray
+  }
+
+  const setOrder = (item) => {
+    setOrderInput(item?.orderNumber)
+    setCurrentOrder(item)
+  }
+
+  const returnLabel = () => {
+    let trustedCurrentStep = trackStatus[currentOrder?.trackOrder?.step || 'processing']
+
+    if (currentOrder?.metaData) {
+      const metadata = currentOrder?.metaData
+      const step = metadata.find(_ => _.key == 'step')
+      trustedCurrentStep = trackStatus[step?.value || 'processing']
+    }
+
+    const match = circles.find(item => item.value == trustedCurrentStep)
+    if(trustedCurrentStep == match.value) return match?.label
   }
 
   return (
@@ -129,6 +148,7 @@ const History = ({ data }) => {
                   onChange={changeOrderInput}
                   className={styles._input}
                   value={orderInput}
+                  readOnly={true}
                 >
                 </input>
               </div>
@@ -151,7 +171,7 @@ const History = ({ data }) => {
               <Chiken id='chicken-one' />
             </div>
 
-            <p className={styles._chickenLabel}>{label}</p>
+            <p className={styles._chickenLabel}>{returnLabel() ?? 'processing'}</p>
 
             <div className={styles._line}>
 
@@ -160,19 +180,17 @@ const History = ({ data }) => {
                   {
                     circles.map((res, index) => {
                       const itemIndex = index + 1
-                      let trustedCurrentStep = trackStatus[ordersArray[0]?.trackOrder?.step || 'making'];
+                      let trustedCurrentStep = trackStatus[currentOrder?.trackOrder?.step || 'processing']
 
-                      if (ordersArray[0]?.metaData) {
-                        const metadata = ordersArray[0]?.metaData
+                      if (currentOrder?.metaData) {
+                        const metadata = currentOrder?.metaData
                         const step = metadata.find(_ => _.key == 'step')
-
-                        trustedCurrentStep = trackStatus[step?.value || 'making']
+                        trustedCurrentStep = trackStatus[step?.value || 'processing']
                       }
 
                       return (
                         <div key={index}>
                           <div className={itemIndex == trustedCurrentStep ? styles._circleSelected : styles._circle} onClick={() => {
-                            // changeStep(itemIndex, res.label)
                           }}>
 
                             <div className={styles._labelParent}>
@@ -284,7 +302,7 @@ const History = ({ data }) => {
       </div>
 
       <Footer data={data?.footer} content={data?.socialNetworks} />
-      <OpenModal show={show} method={showModal} data={ordersArray} />
+      <OpenModal show={show} method={showModal} data={ordersArray} setCurrentOrder={setOrder} currentOrder={currentOrder}/>
       <OrderModal show={showOrder} method={showOrderModal} data={currentProduct} />
     </>
   )
