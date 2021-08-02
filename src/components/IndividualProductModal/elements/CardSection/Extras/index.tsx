@@ -4,7 +4,7 @@ import { setExtras, setSelection, setSpecials } from '@store/actions';
 import Counter from '../Counter'
 import styles from './styles.module.scss'
 
-const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSelection, reboot }) => {
+const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSelection, reboot = false }) => {
 
   const { blessing, sauce, blessingAddons, sauceAddons } = useSelector((state: any) => state.product)
   const dispatch = useDispatch()
