@@ -1,10 +1,10 @@
 import styles from './styles.module.scss'
-import { createMarkup } from '@utils'
+import { createMarkup, getProductPrice } from '@utils'
 import { CountProduct } from '@components'
 import { removeCartItem } from '@store/actions'
 import { useDispatch } from 'react-redux'
 
-const ResponsiveRow = ({ items }) => {
+const ResponsiveRow = ({ items, fees }) => {
 
   const dispatch = useDispatch()
 
@@ -29,18 +29,18 @@ const ResponsiveRow = ({ items }) => {
                   <p className={styles._rowTitle}>{element?.name}</p>
                   <div className={styles._rowText} dangerouslySetInnerHTML={createMarkup(element?.description)}></div>
 
-                    {
-                        item?.variation &&
-                        item?.variation?.attributes.map((attributes, index) => {
-                          return <p className={styles._rowText} key={index}>{`${attributes.label}: ${attributes?.value}`}</p>
-                        })
-                      }
+                  {
+                    item?.variation &&
+                    item?.variation?.attributes.map((attributes, index) => {
+                      return <p className={styles._rowText} key={index}>{`${attributes.label}: ${attributes?.value}`}</p>
+                    })
+                  }
 
                   <div className={styles._priceParent}>
                     <div className={styles._countParent}>
                       <CountProduct productKey={item?.key} stock={element?.stockQuantity} quantity={item?.quantity} />
                     </div>
-                    <p className={styles._price}>{item?.total}</p>
+                    <p className={styles._price}>{getProductPrice(fees, item?.total, item?.key)}</p>
                   </div>
                 </div>
               </div>

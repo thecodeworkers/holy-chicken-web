@@ -12,7 +12,7 @@ export const paginate = (items: Array<any>, page_number: number = 1, page_size: 
 
 export const scrolling = (reference) => {
 
-  if(reference) {
+  if (reference) {
     const target = reference.current;
     window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
   }
@@ -117,15 +117,6 @@ export const productFilter = (nodes: Array<any>, comparison, key) => {
   return (comparison.categories.length) ? nodes.filter(nodeFilter) : nodes
 }
 
-// export const formatWooCommerceAmount = (amount: string): number => {
-//   if (amount) {
-//     amount = amount.replaceAll(',', '')
-//     amount = amount.replaceAll('$', '')
-//     return Number(amount)
-//   }
-//   return 0
-// }
-
 export const setCamelCaseKey = (obj) => {
   const newObj = {}
   for (let key in obj) {
@@ -134,4 +125,29 @@ export const setCamelCaseKey = (obj) => {
     newObj[newKey] = obj[key]
   }
   return newObj
+}
+
+export const formatFee = (fee) => {
+  let items = fee.split('-')
+  items = items.reduce((back, next) => {
+    let newItem = next.split('/')
+    newItem = newItem.map(value => {
+      if (value.includes(':')) return value.split(':')
+      return value
+    })
+    const productKey = newItem.shift()
+    back[productKey] = newItem
+    return back
+  }, {})
+  return items
+}
+
+export const getProductPrice = (fees, value, key) => {
+  if (key in fees) {
+    let feePrice = 0
+    for (let dataFee of fees[key]) feePrice += Number(dataFee[1])
+    const newValue: number = formatWooCommerceAmount(value) + Number(feePrice)
+    return `$${newValue.toFixed(2)}`
+  }
+  return value
 }

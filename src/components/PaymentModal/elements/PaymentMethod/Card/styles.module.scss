@@ -2,14 +2,14 @@
 
 ._titleParent {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 0.5rem;
 }
 
 ._title {
   font-size: 1rem;
   font-family: $blackerTextHeavyBold;
-  text-align: center;
+  text-align: left;
 }
 
 ._rightMain {
@@ -28,6 +28,15 @@
     font-family: $montserratRegular;
     font-size: 0.8rem;
   }
+}
+
+._cardContainer{
+  border: solid 1px $alto;
+  padding: 0.5rem;
+  border-radius: 1.25rem;
+  margin-top: 0.5rem;
+  height: 1rem;
+  overflow: hidden;
 }
 
 ._itemParent {
@@ -117,9 +126,7 @@
 }
 
 ._buttonContainer {
-  position: absolute;
-  bottom: 2.5rem;
-  right: 2.5rem;
+  margin-top: 10px
 }
 
 ._btnParent {

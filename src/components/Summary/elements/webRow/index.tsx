@@ -1,10 +1,10 @@
 import styles from './styles.module.scss'
-import { createMarkup } from '@utils'
+import { createMarkup, getProductPrice } from '@utils'
 import { useDispatch } from 'react-redux'
 import { removeCartItem } from '@store/actions'
 import { CountProduct } from '@components'
 
-const WebRow = ({ items }) => {
+const WebRow = ({ items, fees }) => {
 
   const dispatch = useDispatch()
 
@@ -20,7 +20,7 @@ const WebRow = ({ items }) => {
           items.map((item, index) => {
             const element = item?.product?.node
             return (
-              <div className={styles._row} key={index}>
+              <div className={styles._row} key={item.key}>
                 <div className={styles._closeParent} onClick={() => deleteItem(item)}>
                   <img src='images/icons/close.svg' width='12px'></img>
                 </div>
@@ -36,9 +36,14 @@ const WebRow = ({ items }) => {
                       </div>
                       {
                         item?.variation &&
-                        item?.variation?.attributes.map((attributes, index) => {
-                          return <p className={styles._rowText} key={index}>{`${attributes.label}: ${attributes?.value}`}</p>
+                        item?.variation?.attributes.map((attributes, attIndex) => {
+                          return <p className={styles._rowText} key={attributes.label+attributes?.value + attIndex}>{`${attributes.label}: ${attributes?.value}`}</p>
                         })
+                      }
+                      {
+                        (fees) ? fees[item.key]?.map((dataFee,feeIndex) => {
+                          return <p className={styles._rowText} key={dataFee[0] + feeIndex}>{`Extra: ${dataFee[0]}`}</p>
+                        }) : null
                       }
 
                     </div>
@@ -50,7 +55,7 @@ const WebRow = ({ items }) => {
                   </div>
                 </div>
                 <div className={styles._columnThree}>
-                  <p className={styles._price}>{item?.total}</p>
+                  <p className={styles._price}>{getProductPrice(fees, item?.total, item?.key)}</p>
                 </div>
               </div>
             )

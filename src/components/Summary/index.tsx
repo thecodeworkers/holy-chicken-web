@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Navbar } from '@components'
 import styles from './styles.module.scss'
 import { CountProduct, Button, PaymentModal} from '@components'
-import { createMarkup } from '@utils'
+import { createMarkup, formatFee } from '@utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeCartItem, applyCoupon, setToast ,setShowModal } from '@store/actions'
 import { WebRow, ResponsiveRow } from './elements'
@@ -19,7 +19,7 @@ const Summary = ({ data, cartParam }) => {
   const subtotal = cartParam?.subtotal ?? '$0.00'
   const items = cartParam?.contents?.nodes ?? []
   const bs = cart?.cartProducts?.totalBs ?? "Bs.0,00"
-
+  const fees = (cart.cartProducts?.fees) ? formatFee(cart.cartProducts?.fees[0].name) : []
   useEffect(() => {
     if(cart?.coupon) setInput('')
   }, [cart?.coupon])
@@ -56,11 +56,11 @@ const Summary = ({ data, cartParam }) => {
             <div className={items.length ? styles._childOne : styles._childOneCenter}>
 
               <div className={styles._webRowParent}>
-                <WebRow items={items} />
+                <WebRow items={items} fees={fees} />
               </div>
 
               <div className={styles._responsiveRowParent}>
-                <ResponsiveRow items={items} />
+                <ResponsiveRow items={items} fees={fees} />
               </div>
 
             </div>

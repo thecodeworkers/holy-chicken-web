@@ -29,6 +29,7 @@ cart {
       key
       product {
         node {
+          databaseId
           name
           slug
           status
@@ -79,6 +80,7 @@ cart {
           price
           name
           stockQuantity
+          databaseId
         }
       }
     }

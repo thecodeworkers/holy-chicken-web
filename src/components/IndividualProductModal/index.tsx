@@ -79,7 +79,7 @@ const IndividualProduct = () => {
         { value: sauce }
       ]
 
-      const selectedAttributes = attributes.slice(0, currentProduct?.attributes?.nodes?.length)
+      const selectedAttributes = (attributes.length === currentProduct?.attributes?.nodes?.length) ? attributes : attributes.slice(0, currentProduct?.attributes?.nodes?.length)
       const filterCriteria = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(selectedAttributes)
       const result = currentProduct?.variations?.nodes.find(filterCriteria)
 
@@ -92,8 +92,8 @@ const IndividualProduct = () => {
   }
 
   useEffect(() => {
-    dispatch(setSelection({ sauce: 'N/A', blessing: 'N/A' }))
-  }, [currentProduct])
+    dispatch(setSelection({ sauce: 'N/A', blessing: 'N/A', addons: [], blessingAddons: [], sauceAddons: [] }))
+  }, [individualProductModal])
 
   return (
     <div className={individualProductModal ? styles._background : styles._hidden} onClick={closeModal} id='individual-product'>
