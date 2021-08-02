@@ -186,6 +186,7 @@ const Extras = ({ extras }) => {
                             nodeIndex={nodeIndex}
                             setCurrentSelection={setCurrentSelection}
                             currentSelection={currentSelection}
+                            reboot={individualProductModal}
                           />
 
                           <div className={styles._newParent}>
@@ -193,6 +194,7 @@ const Extras = ({ extras }) => {
                               <Counter
                                 stock={30}
                                 active={currentSelection.some(_ => (_.nodeIndex == nodeIndex && _.index == index))}
+                                reboot={individualProductModal}
                                 changeNumber={(action) => {
                                   if (action == 'add') {
                                     addons.push({ extra: option, price: 0.5 })
