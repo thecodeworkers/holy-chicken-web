@@ -118,7 +118,7 @@ const PaymentMethod = () => {
           <div className={styles._buttonContainer}>
             <div className={styles._btnParent}>
               <Button
-                disabled={(payment_data?.type?.toLowerCase() === 'Tarjeta de credito'.toLowerCase()) ? !payment_data?.form.cardValid :false}
+                disabled={(payment_data?.type?.toLowerCase() === 'Tarjeta de credito'.toLowerCase()) ? !payment_data?.form?.cardValid : false}
                 color='#000'
                 text='Ingresar'
                 textColor='#FFF'

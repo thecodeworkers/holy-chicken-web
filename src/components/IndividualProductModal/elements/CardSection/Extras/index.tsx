@@ -13,6 +13,7 @@ const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSele
   useEffect(() => {
     setChecked(false)
   }, [reboot])
+
   const onChangeData = (event) => {
     setChecked(!checked)
     const target = event.target

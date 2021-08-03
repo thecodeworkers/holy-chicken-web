@@ -54,7 +54,7 @@ const IndividualProduct = () => {
 
       case 'holy-sanduches':
       case 'holy-tenders':
-        return <CardSection attributes={attributes} />
+        return <CardSection attributes={attributes} type={type} />
 
       case 'merch':
         return <ClothSection size={attributesLength == 2 ? true : false} attributes={attributes} />
