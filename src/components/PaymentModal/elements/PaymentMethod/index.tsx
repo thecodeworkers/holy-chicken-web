@@ -45,7 +45,7 @@ const PaymentMethod = () => {
         </div>
         <div className={styles._rightMain}>
           <div className={styles._firstRow}>
-            <div className={styles._deliveryType}>
+            <div className={paymentSelected != 'Tarjeta de credito' ? styles._deliveryType :styles._tdcContainer }>
               <p className={styles._deliveryTitle}>Seleccione una opción</p>
               {
                 paymentMethods?.map((res, mapIndex) => {
@@ -81,6 +81,7 @@ const PaymentMethod = () => {
                 })
               }
             </div>
+            {paymentSelected != 'Tarjeta de credito' ?
             <div className={styles._messageContainer}>
               <p className={styles._paymentTitle}>Envíe el comprobante de pago al:</p>
               <div className={`${styles._itemParent} ${styles._marginBottom}`}>
@@ -114,6 +115,8 @@ const PaymentMethod = () => {
                 <p className={styles._advicesItem} >Debe verse legible el número de serie del billete.</p>
               </div>
             </div>
+            : null
+          }
           </div>
           <div className={styles._buttonContainer}>
             <div className={styles._btnParent}>
