@@ -56,7 +56,7 @@ const PaymentMethod = ({ data }) => {
   return data?.title?.toLowerCase() === 'tarjeta de credito' ? (
     <>
       <div className={styles._titleParent}>
-        <p className={styles._title}>Datos de tarjeta</p>
+        <p className={styles._tdcTitle}>Datos de tarjeta</p>
       </div>
       <form onSubmit={formik.handleSubmit}>
 
