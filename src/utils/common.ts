@@ -136,7 +136,7 @@ export const formatFee = (fee) => {
       return value
     })
     const productKey = newItem.shift()
-    back[productKey] = newItem
+    back[productKey] = (Array.isArray(back[productKey])) ? [...back[productKey], ...newItem] : newItem
     return back
   }, {})
   return items

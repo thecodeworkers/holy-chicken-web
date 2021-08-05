@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 
 const CardSection = ({ attributes, type }) => {
   const { freeFresh, freeSauce } = useSelector((state: any) => state.product)
-  console.log(type)
   const nodes = attributes?.nodes || []
   const toopings = (type === 'holy-tenders') ? [nodes[0]] : [nodes[0], nodes[1]]
   const extras = (type === 'holy-tenders') ? [nodes[1]] : [nodes[2], nodes[3]]

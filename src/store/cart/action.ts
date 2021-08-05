@@ -91,19 +91,22 @@ export const removeCartItem = (key) => async (dispatch, getState) => {
       if (cartProducts.fees[0].name.includes(key)) {
 
         const fees = cartProducts.fees[0].name.split('-')
-        const feeIndex = fees.findIndex((data) => data.includes(key))
+        const filtersFee = fees.filter((data) => data.includes(key))
 
-        let feeArray = fees[feeIndex].split('/')
-        feeArray.shift()
+        const newFee = fees.filter((data) => !data.includes(key))
+        let removeAmount = 0
 
-        const removeAmount = feeArray.reduce((back, next) => {
-          let feeData = next.split(':')
-          return back + Number(feeData[1])
-        }, 0)
+        for (let fee of filtersFee) {
+          let feeArray = fee.split('/')
+          feeArray.shift()
 
-        fees.splice(feeIndex, 1)
+          removeAmount = feeArray.reduce((back, next) => {
+            let feeData = next.split(':')
+            return back + Number(feeData[1])
+          }, removeAmount)
+        }
 
-        const extraString = fees.join('-')
+        const extraString = newFee.join('-')
         const extraAmount = cartProducts.fees[0].amount - removeAmount
         await addFee(extraString, extraAmount, sessionToken)
       }
@@ -136,6 +139,38 @@ export const updateQuantity: any = (product: any, type: any) => async (dispatch,
       const max = filtered[0]?.product?.node?.stockQuantity
       const min = 0
       if (quantity > min && quantity <= max) {
+
+
+        if (cartProducts.fees) {
+          if (cartProducts.fees[0].name.includes(filtered[0]?.key)) {
+
+            const fees: Array<any> = cartProducts.fees[0].name.split('-')
+            const feeIndex = fees.findIndex((data) => data.includes(filtered[0]?.key))
+
+            let feeArray = fees[feeIndex].split('/')
+            feeArray.shift()
+
+            const addAmount = feeArray.reduce((back, next) => {
+              let feeData = next.split(':')
+              return back + Number(feeData[1])
+            }, 0)
+            let extraString = ''
+            let extraAmount = 0
+
+            if (type === 'add') {
+              fees.push(fees[feeIndex])
+              extraString = fees.join('-')
+              extraAmount = cartProducts.fees[0].amount + addAmount
+            }
+
+            if (type !== 'add') {
+              fees.splice(feeIndex, 1)
+              extraString = fees.join('-')
+              extraAmount = cartProducts.fees[0].amount - addAmount
+            }
+            await addFee(extraString, extraAmount, sessionToken)
+          }
+        }
         const data: any = await updateItemQuantity(filtered[0]?.key, quantity, sessionToken)
 
         if (data.message) throw new Error(data.message);
