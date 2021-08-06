@@ -286,7 +286,7 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
         })
 
         if (error && paymentIntent?.status !== 'succeeded') throw new Error(error.code);
-        status = 'completed'
+        status = 'processing'
       }
 
       delivery_data['shippingMethod'] = cartProducts?.chosenShippingMethods
