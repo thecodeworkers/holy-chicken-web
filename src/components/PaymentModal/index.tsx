@@ -16,6 +16,10 @@ const PaymentModal = () => {
     dispatch(setStep({ loading: false, confirmProcess: false }))
   }, [])
 
+  useEffect(() => {
+    if (payment_data?.type?.toLowerCase() === 'tarjeta de credito' && payment_data?.form?.cardValid) dispatch(setStep({ payment_data: {}, step: 3 }))
+  }, [payment_data?.type])
+
   const newStep = (newData) => {
     switch (newData) {
       case 2:

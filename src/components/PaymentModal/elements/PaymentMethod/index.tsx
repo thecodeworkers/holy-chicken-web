@@ -45,7 +45,7 @@ const PaymentMethod = () => {
         </div>
         <div className={styles._rightMain}>
           <div className={styles._firstRow}>
-            <div className={paymentSelected != 'Tarjeta de credito' ? styles._deliveryType :styles._tdcContainer }>
+            <div className={paymentSelected.toLowerCase() != 'tarjeta de credito' ? styles._deliveryType :styles._tdcContainer }>
               <p className={styles._deliveryTitle}>Seleccione una opción</p>
               {
                 paymentMethods?.map((res, mapIndex) => {
