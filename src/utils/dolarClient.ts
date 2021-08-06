@@ -17,6 +17,6 @@ export default DolarClient
 
 export const getDollarEquivalent = async (price: number) => {
   const dollar = await DolarClient()
-  const dollarPrice = dollar?.USD?.promedio_real || 1
+  const dollarPrice = dollar?.USD?.promedio || 1
   return `Bs.${(price * dollarPrice).toLocaleString('ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 }

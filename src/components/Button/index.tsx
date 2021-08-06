@@ -1,14 +1,14 @@
 import styles from './styles.module.scss'
 import { useSelector } from 'react-redux';
 
-const Button = ({ color, textColor, method = null, text, height = '2.5rem', type = 'button', flag = false }: any) => {
+const Button = ({ color, textColor, method = null, text, height = '2.5rem', type = 'button', flag = false, disabled = false }: any) => {
 
   const { loader } = useSelector((state: any) => state)
   const { requestLoader } = loader
 
   return (
     <>
-      <button className='_button' onClick={method ?? null} type={type}>
+      <button disabled={disabled} className='_button' onClick={method ?? null} type={type}>
         {
           requestLoader && flag ?
             <div className={styles._loader}></div> : text

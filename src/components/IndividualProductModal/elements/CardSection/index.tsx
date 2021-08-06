@@ -4,12 +4,11 @@ import styles from './styles.module.scss'
 import Extras from './Extras'
 import { useEffect } from 'react';
 
-const CardSection = ({ attributes }) => {
+const CardSection = ({ attributes, type }) => {
   const { freeFresh, freeSauce } = useSelector((state: any) => state.product)
-
-  const nodes = attributes?.nodes || [];
-  const toopings = [nodes[0], nodes[1]];
-  const extras = [nodes[2], nodes[3]];
+  const nodes = attributes?.nodes || []
+  const toopings = (type === 'holy-tenders') ? [nodes[0]] : [nodes[0], nodes[1]]
+  const extras = (type === 'holy-tenders') ? [nodes[1]] : [nodes[2], nodes[3]]
   const dispatch = useDispatch();
 
   useEffect(() => {

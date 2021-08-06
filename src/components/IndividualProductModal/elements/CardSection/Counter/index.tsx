@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 
 const Counter = ({
   stock = 0,
   changeNumber = null,
-  active = false
+  active = false,
+  reboot = false,
 }) => {
+
   const [productNumber, setProductNumber] = useState(1)
 
+  useEffect(() => {
+    setProductNumber(1)
+  }, [reboot])
   const aumented = () => {
     if (!active) return
 

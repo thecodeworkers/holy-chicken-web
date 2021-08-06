@@ -1,4 +1,4 @@
-import { actionObject, fetchPostJSON, filter, formatWooCommerceAmount, WooCommerceClient } from '@utils'
+import { actionObject, fetchPostJSON, filter, formatFee, formatWooCommerceAmount, WooCommerceClient } from '@utils'
 import { CURRENT_PRODUCT, PRODUCTS_NUMBER, CART_PRODUCTS, GET_CART, APPLY_COUPON, CART_ORDER, RESET_CART_STORE } from './action-types'
 import { addItemToCartMutation, getCartQuery, removeFromCartMutation, updateItemQuantity, applyCouponMutation, updateShippingMethodMutation, addFee } from '@graphql'
 import { REQUEST_LOADER } from '../loader/actions-types'
@@ -41,19 +41,19 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
         let extraAmount = 0
         const reduceData = (prev, next) => {
           extraAmount += next.price
-          return prev + `/${next.extra}`
+          return prev + `/${next.extra}:${next.price}`
         }
 
-        let extraString = `${addCartItems?.added[0]?.key}/`+ databaseId + extras?.reduce(reduceData, '')
+        let extraString = `${addCartItems?.added[0]?.key}` + extras?.reduce(reduceData, '')
 
-        if (addCartItems?.cart?.fee) {
-          extraString = `${addCartItems?.cart?.fee[0].name}-${extraString}`
-          extraAmount = extraAmount + addCartItems?.cart?.fee[0].amount
+        if (addCartItems?.cart?.fees) {
+          extraString = `${addCartItems?.cart?.fees[0].name}-${extraString}`
+          extraAmount = extraAmount + addCartItems?.cart?.fees[0].amount
         }
 
         const feeResult = await addFee(extraString, extraAmount, sessionToken)
-        if (feeResult?.message || !feeResult) throw new Error("bad add extra")
 
+        if (feeResult?.message || !feeResult) throw new Error("bad add extra")
         addCartItems = feeResult?.addFee
       }
 
@@ -84,8 +84,34 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
 export const removeCartItem = (key) => async (dispatch, getState) => {
 
   try {
-    const { auth, guest } = await getState()
+    const { auth, guest, cart: { cartProducts } } = await getState()
     const sessionToken = auth?.login?.login?.customer?.sessionToken || guest.tmpSessionToken
+
+    if (cartProducts.fees) {
+      if (cartProducts.fees[0].name.includes(key)) {
+
+        const fees = cartProducts.fees[0].name.split('-')
+        const filtersFee = fees.filter((data) => data.includes(key))
+
+        const newFee = fees.filter((data) => !data.includes(key))
+        let removeAmount = 0
+
+        for (let fee of filtersFee) {
+          let feeArray = fee.split('/')
+          feeArray.shift()
+
+          removeAmount = feeArray.reduce((back, next) => {
+            let feeData = next.split(':')
+            return back + Number(feeData[1])
+          }, removeAmount)
+        }
+
+        const extraString = newFee.join('-')
+        const extraAmount = cartProducts.fees[0].amount - removeAmount
+        await addFee(extraString, extraAmount, sessionToken)
+      }
+    }
+
     const result = await removeFromCartMutation(key, sessionToken)
 
     const { removeItemsFromCart } = result
@@ -113,6 +139,38 @@ export const updateQuantity: any = (product: any, type: any) => async (dispatch,
       const max = filtered[0]?.product?.node?.stockQuantity
       const min = 0
       if (quantity > min && quantity <= max) {
+
+
+        if (cartProducts.fees) {
+          if (cartProducts.fees[0].name.includes(filtered[0]?.key)) {
+
+            const fees: Array<any> = cartProducts.fees[0].name.split('-')
+            const feeIndex = fees.findIndex((data) => data.includes(filtered[0]?.key))
+
+            let feeArray = fees[feeIndex].split('/')
+            feeArray.shift()
+
+            const addAmount = feeArray.reduce((back, next) => {
+              let feeData = next.split(':')
+              return back + Number(feeData[1])
+            }, 0)
+            let extraString = ''
+            let extraAmount = 0
+
+            if (type === 'add') {
+              fees.push(fees[feeIndex])
+              extraString = fees.join('-')
+              extraAmount = cartProducts.fees[0].amount + addAmount
+            }
+
+            if (type !== 'add') {
+              fees.splice(feeIndex, 1)
+              extraString = fees.join('-')
+              extraAmount = cartProducts.fees[0].amount - addAmount
+            }
+            await addFee(extraString, extraAmount, sessionToken)
+          }
+        }
         const data: any = await updateItemQuantity(filtered[0]?.key, quantity, sessionToken)
 
         if (data.message) throw new Error(data.message);
@@ -197,6 +255,23 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
 
       const databaseId = auth?.login?.login?.customer?.databaseId
 
+      if (cartProducts?.fees) {
+        const fees = formatFee(cartProducts?.fees[0].name)
+        let notes = ''
+        for (let fee in fees) {
+          const product = cartProducts?.contents?.nodes?.find((data) => data.key === fee)
+          if (product) {
+            const database = (product?.variation) ? product?.variation.node?.databaseId : product?.product?.node?.databaseId
+            notes += `${product?.product?.node?.name + ' ' + database} -`
+            for (let feeData of fees[fee]) {
+              notes += ` Extra: ${feeData[0]} `
+            }
+            notes += '/'
+          }
+        }
+        await addFee(notes, cartProducts?.fees[0].amount, sessionToken)
+      }
+
       let status = 'pending'
 
       if (payment_data.type?.toLowerCase() === 'tarjeta de credito') {
@@ -207,10 +282,11 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
         const stripe = await getStripe()
 
         const { paymentIntent, error } = await stripe.confirmCardPayment(response.client_secret, {
-          payment_method: payment_data?.payment?.card,
+          payment_method: payment_data?.form?.card,
         })
 
         if (error && paymentIntent?.status !== 'succeeded') throw new Error(error.code);
+        status = 'processing'
       }
 
       delivery_data['shippingMethod'] = cartProducts?.chosenShippingMethods
@@ -220,7 +296,7 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
       if (data.message) throw new Error(data.message);
 
       await WooCommerceClient(`orders/${data?.order?.orderNumber}`, 'PUT', { customer_id: databaseId, status: status })
-
+      await addFee('.', 0, sessionToken)
       dispatch(getCart())
 
       dispatch(actionObject(CART_ORDER, { order: data?.order }))

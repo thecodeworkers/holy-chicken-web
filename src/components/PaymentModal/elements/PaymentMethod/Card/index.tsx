@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import FormikConfig from './formik'
 import { Button } from '@components'
 import { CardElement, useElements } from '@stripe/react-stripe-js';
-import { setLoader, setStep } from '@store/actions'
+import { setLoader, setStep, setToast } from '@store/actions'
 import getStripe from '@utils/getStripe'
 import { cardOptions } from './options'
 
@@ -36,13 +36,15 @@ const PaymentMethod = ({ data }) => {
 
         if (error) throw new Error(error.message);
 
-        dispatch(setStep({ payment_data: { ...payment_data, form: { ...formik.values, card: paymentMethod.id } } }))
+        dispatch(setStep({ payment_data: { ...payment_data, form: { ...formik.values, card: paymentMethod.id, cardValid: true } } }))
+        dispatch(setToast('check', 'Tarjeta Agregada con Exito', 1))
         dispatch(setLoader(false))
         setDisabled(!disabled)
         return
       }
       setDisabled(!disabled)
     } catch (error) {
+      dispatch(setToast('error', 'Tarjeta Fallida', 1))
       dispatch(setLoader(false))
       setDisabled(!disabled)
     }
@@ -54,7 +56,7 @@ const PaymentMethod = ({ data }) => {
   return data?.title?.toLowerCase() === 'tarjeta de credito' ? (
     <>
       <div className={styles._titleParent}>
-        <p className={styles._title}>Datos de tarjeta</p>
+        <p className={styles._tdcTitle}>Datos de tarjeta</p>
       </div>
       <form onSubmit={formik.handleSubmit}>
 

@@ -8,7 +8,7 @@ const VerticalList = ({ attributes, category }) => {
   const dispatch = useDispatch()
   const [currentAttribute, setCurrentAtribute] = useState(attributes?.nodes[0].options[0])
 
-  const { cart: { currentProduct } } = useSelector((state: any) => state)
+  const { cart: { currentProduct }, intermitence: { individualProductModal } } = useSelector((state: any) => state)
 
   const variations = currentProduct?.variations?.nodes ?? []
   const options = attributes?.nodes[0].options ?? []
@@ -36,7 +36,7 @@ const VerticalList = ({ attributes, category }) => {
 
   useEffect(() => {
     setCurrentAtribute(attributes?.nodes[0].options[0])
-  }, [attributes])
+  }, [individualProductModal])
 
   return (
     <div>

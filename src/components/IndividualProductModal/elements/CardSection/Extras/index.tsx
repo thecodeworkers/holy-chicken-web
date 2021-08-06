@@ -1,14 +1,21 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setExtras, setSelection, setSpecials } from '@store/actions';
 import Counter from '../Counter'
 import styles from './styles.module.scss'
 
-const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSelection }) => {
+const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSelection, reboot = false }) => {
 
   const { blessing, sauce, blessingAddons, sauceAddons } = useSelector((state: any) => state.product)
   const dispatch = useDispatch()
+  const [checked, setChecked] = useState(false)
+
+  useEffect(() => {
+    setChecked(false)
+  }, [reboot])
+
   const onChangeData = (event) => {
+    setChecked(!checked)
     const target = event.target
     const isChecked = target.checked
     const currentValue = target.value
@@ -81,7 +88,7 @@ const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSele
   return (
     <div className={styles._column}>
       <div className={styles._checkParent}>
-        <input type='checkbox' className={styles._radioBtn} value={option} onChange={onChangeData} />
+        <input type='checkbox' className={styles._radioBtn} checked={checked} value={option} onChange={onChangeData} />
         <p>{option}</p>
       </div>
     </div>
@@ -90,9 +97,13 @@ const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSele
 
 const Extras = ({ extras }) => {
   const [currentSelection, setCurrentSelection] = useState([])
-  const { addons } = useSelector((state: any) => state.product)
+  const { product: { addons }, intermitence: { individualProductModal } } = useSelector((state: any) => state)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    setCurrentSelection([])
+  }, [individualProductModal])
 
   return (
     <div className={styles._cardParent}>
@@ -118,11 +129,13 @@ const Extras = ({ extras }) => {
                               nodeIndex={nodeIndex}
                               setCurrentSelection={setCurrentSelection}
                               currentSelection={currentSelection}
+                              reboot={individualProductModal}
                             />
                             <div className={styles._column}>
                               <Counter
                                 stock={30}
                                 active={currentSelection.some(_ => (_.nodeIndex == nodeIndex && _.index == index))}
+                                reboot={individualProductModal}
                                 changeNumber={(action) => {
                                   if (action == 'add') {
                                     addons.push({ extra: option, price: 0.5 })
@@ -174,6 +187,7 @@ const Extras = ({ extras }) => {
                             nodeIndex={nodeIndex}
                             setCurrentSelection={setCurrentSelection}
                             currentSelection={currentSelection}
+                            reboot={individualProductModal}
                           />
 
                           <div className={styles._newParent}>
@@ -181,6 +195,7 @@ const Extras = ({ extras }) => {
                               <Counter
                                 stock={30}
                                 active={currentSelection.some(_ => (_.nodeIndex == nodeIndex && _.index == index))}
+                                reboot={individualProductModal}
                                 changeNumber={(action) => {
                                   if (action == 'add') {
                                     addons.push({ extra: option, price: 0.5 })

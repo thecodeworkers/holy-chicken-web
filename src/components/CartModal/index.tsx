@@ -2,7 +2,7 @@ import styles from './styles.module.scss'
 import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal, removeCartItem, setToast } from '@store/actions'
-import { createMarkup } from '@utils'
+import { createMarkup, formatFee, formatWooCommerceAmount, getProductPrice } from '@utils'
 import { useRouter } from 'next/router'
 
 const CartModal = () => {
@@ -21,6 +21,7 @@ const CartModal = () => {
 
   const nodes = cart?.cartProducts?.contents?.nodes ?? []
   const total = cart?.cartProducts?.total ?? "$0.00"
+  const fees = (cart.cartProducts?.fees) ? formatFee(cart.cartProducts?.fees[0].name) : []
 
   const deleteItem = (dataItem: any) => {
     const { key } = dataItem
@@ -65,7 +66,7 @@ const CartModal = () => {
 
                       <div className={styles._quantityContainer}>
                         <CountProduct productKey={item?.key} stock={dataItem?.stockQuantity} quantity={item?.quantity} />
-                        <p className={styles._number}>{item?.total}</p>
+                        <p className={styles._number}>{getProductPrice(fees, item?.total, item?.key)}</p>
                       </div>
                     </div>
                   </div>
