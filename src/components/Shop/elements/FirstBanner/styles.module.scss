@@ -76,7 +76,7 @@
 }
 
 ._card{
-  width: 14.5rem;
+  width: 100%;
   margin: 1.5rem 0;
   transition:all 0.4s;
   cursor: pointer;
@@ -284,13 +284,13 @@ width: 100%;
   height: 2.5rem;
 }
 ._card{
-  width: 10.50rem;
-  margin: 0.5rem 0.5rem;
+  width: calc(100% - 1rem);
+  margin: 0.5rem
 }
 
 ._cardDisabled{
-  width: 10.50rem;
-  margin: 0.5rem 0.5rem;
+  width: calc(100% -0.5rem);
+  margin: 0.5rem;
   opacity: 0.5;
 }
 
