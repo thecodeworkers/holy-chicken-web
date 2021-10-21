@@ -12,11 +12,11 @@ const Shop = ({ content, data, filters, backup, storeData }) => {
 
   const dispatch = useDispatch()
 
-  const { intermitence, paymentStep: { delivery_data }, guest: { tmpSessionToken } } = useSelector((state: any) => state)
+  const { paymentStep: { delivery_data }, guest: { tmpSessionToken } } = useSelector((state: any) => state)
 
   useEffect(() => {
     const location = delivery_data?.location
-    if (intermitence?.showLocationModal && !location) dispatch(setShowModal({ locationModal: true }))
+    if (!location) dispatch(setShowModal({ locationModal: true }))
     if(!tmpSessionToken) dispatch(getTmpSession())
   }, [])
 

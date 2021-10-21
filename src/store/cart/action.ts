@@ -298,7 +298,7 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
       await WooCommerceClient(`orders/${data?.order?.orderNumber}`, 'PUT', { customer_id: databaseId, status: status })
       await addFee('.', 0, sessionToken)
       dispatch(getCart())
-
+      dispatch(setStep({ delivery_data: { ...delivery_data, location: null } }))
       dispatch(actionObject(CART_ORDER, { order: data?.order }))
       dispatch(setToast('check', 'Orden Procesada con exito', 1))
     }

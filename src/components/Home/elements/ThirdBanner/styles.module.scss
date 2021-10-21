@@ -8,65 +8,28 @@
   width: 85%;
   margin: auto;
   flex-direction: column;
-  margin: 2.5rem auto
+  margin: 2.5rem auto;
 }
 
-._blackTitle{
-  font-family: $blackerTextHeavyBold;
-  font-size: $blackerTextHeavyBold60;
-  color: $black;
-
+._imageContainer,
+._imageResponsiveContainer {
+  width: 100%;
+  height: auto;
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
 
-._appsContainer{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;
-  margin: 1rem auto;
-}
-
-._image{
-  width: 70%;
-  cursor: pointer;
-}
-._linkcontainer{
-  display: flex;
-  justify-content: center;
+._imageResponsiveContainer {
+  display: none;
 }
 
 @include responsive(md) {
-._blackTitle{
-  font-size: 2rem;
-}
-
-._appsContainer{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr,) !important;
-  width: 100%;
-
+  ._imageResponsiveContainer {
+    display: block;
   }
-
-  ._locate{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
-
-
+  ._imageContainer {
+    display: none;
   }
-  ._image{
-    width: 60%;
-  }
-  ._content{
-    margin: 1rem auto;
-  }
-
-  ._linkContainer{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-
-  }
-
 }

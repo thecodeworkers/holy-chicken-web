@@ -4,22 +4,11 @@ const ThirdBanner = ({ data }) => {
 
   return (
     <div className={styles._content}>
-
-      <p className={styles._blackTitle}>{data?.title}</p>
-
-      <div className={styles._appsContainer}>
-        {
-          data.commerces.map((item, index) => {
-            return (
-              <div className={styles._locate} key={index}>
-                <a href={item?.link} target='_blank' className={styles._linkContainer}>
-                  <img src={item?.image?.mediaItemUrl} className={styles._image} />
-                </a>
-              </div>
-            )
-          }
-          )
-        }
+      <div className={styles._imageContainer}>
+        <img src={data?.publicBanner?.mediaItemUrl} alt={data?.publicBanner?.slug} />
+      </div>
+      <div className={styles._imageResponsiveContainer}>
+        <img src={data?.publicBannerResponsive?.mediaItemUrl} alt={data?.publicBannerResponsive?.slug} />
       </div>
     </div>
   )
