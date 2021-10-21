@@ -14,13 +14,13 @@ const home = `
         }
       }
       fourthBanner {
-        title
-        commerces {
-          link
-          image {
-            mediaItemUrl
-            slug
-          }
+        publicBanner {
+          mediaItemUrl
+          slug
+        }
+        publicBannerResponsive {
+          mediaItemUrl
+          slug
         }
       }
       outstanding {
