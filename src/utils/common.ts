@@ -151,3 +151,29 @@ export const getProductPrice = (fees, value, key) => {
   }
   return value
 }
+
+export const removeandCountDuplicates = (items, fees) => {
+    let newArray = []
+    items.forEach((item: any) => {
+      const selectedArray = fees[item?.key]
+      selectedArray.forEach((res: any) => {
+        newArray.push(res[0])
+      })
+    })
+
+    const counts = {}
+    newArray.forEach((element) => {
+			counts[element] = (counts[element] || 0) + 1;
+		})
+
+    const uniqueItems = newArray.filter((item, index) => {
+      return newArray.indexOf(item) === index;
+    })
+
+    const definitiveArray = uniqueItems.map(res => {
+      const index = uniqueItems.indexOf(counts[res])
+      return uniqueItems[index] = `${res} x${counts[res]}`
+    })
+
+    return definitiveArray
+  }

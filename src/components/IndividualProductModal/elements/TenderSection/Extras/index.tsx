@@ -9,10 +9,6 @@ const CheckBoxes = ({ option, index, currentSelection, setCurrentSelection }) =>
   const { currentExtra, tenderExtras } = useSelector((state: any) => state.tenderProduct)
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   if(!tenderExtras.length)  dispatch(setTenderSelection({ currentExtra: 'N/A' }))
-  // }, [tenderExtras])
-
   return (
     <div className={styles._column}>
       <div className={styles._checkParent}>

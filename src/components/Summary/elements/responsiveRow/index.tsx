@@ -3,6 +3,7 @@ import { createMarkup, getProductPrice } from '@utils'
 import { CountProduct } from '@components'
 import { removeCartItem } from '@store/actions'
 import { useDispatch } from 'react-redux'
+import { removeandCountDuplicates } from '@utils/common'
 
 const ResponsiveRow = ({ items, fees }) => {
 
@@ -34,6 +35,12 @@ const ResponsiveRow = ({ items, fees }) => {
                     item?.variation?.attributes.map((attributes, index) => {
                       return <p className={styles._rowText} key={index}>{`${attributes.label}: ${attributes?.value}`}</p>
                     })
+                  }
+
+                  {
+                    (fees && fees[item?.key].length) ? removeandCountDuplicates(items, fees).map((dataFee, feeIndex) => {
+                      return <p className={styles._rowText} key={dataFee[0] + feeIndex}>{`Extra: ${dataFee}`}</p>
+                    }) : null
                   }
 
                   <div className={styles._priceParent}>

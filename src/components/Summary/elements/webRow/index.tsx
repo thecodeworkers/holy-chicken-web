@@ -3,6 +3,7 @@ import { createMarkup, getProductPrice } from '@utils'
 import { useDispatch } from 'react-redux'
 import { removeCartItem } from '@store/actions'
 import { CountProduct } from '@components'
+import { removeandCountDuplicates } from '@utils/common'
 
 const WebRow = ({ items, fees }) => {
 
@@ -17,7 +18,7 @@ const WebRow = ({ items, fees }) => {
     <div>
       {
         items.length ?
-          items.map((item, index) => {
+          items.map((item: any) => {
             const element = item?.product?.node
             return (
               <div className={styles._row} key={item.key}>
@@ -35,14 +36,15 @@ const WebRow = ({ items, fees }) => {
 
                       </div>
                       {
+
                         item?.variation &&
                         item?.variation?.attributes.map((attributes, attIndex) => {
-                          return <p className={styles._rowText} key={attributes.label+attributes?.value + attIndex}>{`${attributes.label}: ${attributes?.value}`}</p>
+                          return <p className={styles._rowText} key={attributes.label + attributes?.value + attIndex}>{`${attributes.label}: ${attributes?.value}`}</p>
                         })
                       }
                       {
-                        (fees) ? fees[item.key]?.map((dataFee,feeIndex) => {
-                          return <p className={styles._rowText} key={dataFee[0] + feeIndex}>{`Extra: ${dataFee[0]}`}</p>
+                        (fees && fees[item?.key].length) ? removeandCountDuplicates(items, fees).map((dataFee, feeIndex) => {
+                          return <p className={styles._rowText} key={dataFee[0] + feeIndex}>{`Extra: ${dataFee}`}</p>
                         }) : null
                       }
 
