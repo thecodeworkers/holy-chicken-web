@@ -2,7 +2,7 @@ import styles from './styles.module.scss'
 import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal, removeCartItem, setToast } from '@store/actions'
-import { createMarkup, formatFee, formatWooCommerceAmount, getProductPrice } from '@utils'
+import { createMarkup, formatFee, getProductPrice } from '@utils'
 import { useRouter } from 'next/router'
 
 const CartModal = () => {

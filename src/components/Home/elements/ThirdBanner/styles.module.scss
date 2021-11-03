@@ -1,14 +1,13 @@
 @import '@styles/index.scss';
 
 ._content {
-  height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 85%;
+  width: 100%;
   margin: auto;
   flex-direction: column;
-  margin: 2.5rem auto;
+  margin: 2.5rem auto 0 auto;
 }
 
 ._imageContainer,
