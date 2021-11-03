@@ -15,4 +15,4 @@ const ChickenLogo = ({ id }) => (
 
 )
 
-export default ChickenLogo
+export default memo(ChickenLogo)
