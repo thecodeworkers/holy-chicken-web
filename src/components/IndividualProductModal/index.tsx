@@ -4,7 +4,7 @@ import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal, setCartProducts, setSelection } from '@store/actions'
 import { ClothSection, VerticalList, CardSection } from './elements'
-import { createMarkup } from '@utils'
+import { createMarkup, formatWooCommerceAmount, getVariation } from '@utils'
 
 const IndividualProduct = () => {
   const dispatch = useDispatch()
@@ -19,17 +19,38 @@ const IndividualProduct = () => {
   ]
 
   const totalPrice = () => {
+
+    const { freeFresh, freeSauce, blessing, sauce } = product
+
+    const amount = currentProduct?.attributes?.nodes?.length
+    const selectedAttributes = []
+    for (let i = 0; i < amount; i++) {
+      switch (i) {
+        case 0:
+          selectedAttributes[i] = { value: freeFresh }
+          break;
+        case 1:
+          selectedAttributes[i] = amount <= 2 ? { value: blessing } : { value: freeSauce }
+          break;
+        case 2:
+          selectedAttributes[i] = { value: blessing }
+          break;
+        case 3:
+          selectedAttributes[i] = { value: sauce }
+          break;
+        default:
+          break;
+      }
+    }
+
+    const result = getVariation(currentProduct, selectedAttributes)
     const totalAddons = allAddons.reduce((previous, next) => previous + next.price, 0)
-    let totalP = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
+
+    let totalP = currentProduct?.price?.includes('-') ? formatWooCommerceAmount(currentProduct?.price?.split('-')[0]) : formatWooCommerceAmount(currentProduct?.price)
+    totalP = result ? formatWooCommerceAmount(result?.regularPrice) : totalP
+
     if (totalP) {
-      totalP = totalP.split('$')
-      totalP = parseFloat(totalP[1])
       totalP += totalAddons
-
-      const { blessing, sauce } = product
-      totalP += blessing != 'N/A' ? 0.5 : 0
-      totalP += sauce != 'N/A' ? 0.5 : 0
-
       return `$${totalP.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
     }
 
@@ -72,22 +93,32 @@ const IndividualProduct = () => {
     if (!!currentProduct?.variations) {
       const { freeFresh, freeSauce, blessing, sauce } = product
 
-      const attributes = [
-        { value: freeFresh },
-        { value: freeSauce },
-        { value: blessing },
-        { value: sauce }
-      ]
-
-      const selectedAttributes = (attributes.length === currentProduct?.attributes?.nodes?.length) ? attributes : attributes.slice(0, currentProduct?.attributes?.nodes?.length)
-      const filterCriteria = (product) => JSON.stringify(product?.attributes?.nodes) === JSON.stringify(selectedAttributes)
-      const result = currentProduct?.variations?.nodes.find(filterCriteria)
+      const amount = currentProduct?.attributes?.nodes?.length
+      const selectedAttributes = []
+      for (let i = 0; i < amount; i++) {
+        switch (i) {
+          case 0:
+            selectedAttributes[i] = { value: freeFresh }
+            break;
+          case 1:
+            selectedAttributes[i] = amount <= 2 ? { value: blessing } : { value: freeSauce }
+            break;
+          case 2:
+            selectedAttributes[i] = { value: blessing }
+            break;
+          case 3:
+            selectedAttributes[i] = { value: sauce }
+            break;
+          default:
+            break;
+        }
+      }
+      const result = getVariation(currentProduct, selectedAttributes)
 
       if (result) correctProduct = result
     }
 
     if (productVariable) correctProduct = productVariable
-
     dispatch(setCartProducts(correctProduct, allAddons))
   }
 

@@ -11,7 +11,7 @@ const VerticalList = ({ attributes, category }) => {
   const { cart: { currentProduct }, intermitence: { individualProductModal } } = useSelector((state: any) => state)
 
   const variations = currentProduct?.variations?.nodes ?? []
-  const options = attributes?.nodes[0].options ?? []
+  const options = attributes?.nodes[0]?.terms?.nodes ?? []
 
   const compareAttributes = () => {
     let currentItem
@@ -69,14 +69,17 @@ const VerticalList = ({ attributes, category }) => {
                       type='radio'
                       className={styles._radioBtn}
                       readOnly
-                      checked={currentAttribute == res ? true : false}
-                      onClick={() => setCurrentAtribute(res)}
+                      checked={currentAttribute == res.name ? true : false}
+                      onClick={() => setCurrentAtribute(res.name)}
                     >
                     </input>
 
                     {
                       category != 'bebidas'
-                        ? <p>{res}</p>
+                        ? (<>
+                          <p>{res.name}</p>
+                          {element?.image?.mediaItemUrl && <img className={styles._image} src={element?.image?.mediaItemUrl} ></img>}
+                        </>)
                         : <img className={styles._image} src={element?.image?.mediaItemUrl} ></img>
                     }
 

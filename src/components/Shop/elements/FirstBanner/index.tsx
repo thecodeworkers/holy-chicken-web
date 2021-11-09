@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { GeneralCard, IndividualProductModal } from '@components'
 import { useRouter } from 'next/router'
 import { Search, Filter } from '@images/icons';
-import { paginate } from '@utils'
+import { orderBy, paginate } from '@utils'
 import { Pagination } from '@components'
 import DropDownFilter from '../DropDownFilter';
 import SideFilter from '../SideFilter';
@@ -11,7 +11,7 @@ import SideFilterMenu from '../SideFilterMenu';
 import { useDispatch } from 'react-redux'
 import { searchProducts, setShowModal, setCurrentProduct, resetStore } from '@store/actions'
 
-const FirstBanner = ({ content, backup, reference, data }: any) => {
+const FirstBanner = ({ content, backup: products, reference, data }: any) => {
 
   const dispatch = useDispatch()
   const router = useRouter()
@@ -44,6 +44,8 @@ const FirstBanner = ({ content, backup, reference, data }: any) => {
     dispatch(setCurrentProduct({ currentProduct: item }))
     dispatch(resetStore())
   }
+
+  const backup = orderBy(products, 'order', 'asc', 'spicy')
 
   return (
     <>
@@ -101,6 +103,7 @@ const FirstBanner = ({ content, backup, reference, data }: any) => {
                   <div className={styles._cardContainer}>
                     {
                       paginate(backup, page, perPage).map((item, index) => {
+
                         return (
                           <div
                             className={item?.stockStatus == 'OUT_OF_STOCK' ? styles._cardDisabled : styles._card}

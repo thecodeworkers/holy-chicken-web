@@ -7,13 +7,12 @@ import { useEffect } from 'react';
 const CardSection = ({ attributes, type }) => {
   const { freeFresh, freeSauce } = useSelector((state: any) => state.product)
   const nodes = attributes?.nodes || []
-  const toopings = (type === 'holy-tenders') ? [nodes[0]] : [nodes[0], nodes[1]]
-  const extras = (type === 'holy-tenders') ? [nodes[1]] : [nodes[2], nodes[3]]
+  const toopings = (nodes.length <= 2) ? [nodes[0]] : [nodes[0], nodes[1]]
+  const extras = (nodes.length <= 2) ? [nodes[1]] : [nodes[2], nodes[3]]
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (toopings[0]) dispatch(setSelection({ freeFresh: toopings[0]?.options[0] }))
-    if (toopings[1]) dispatch(setSelection({ freeSauce: toopings[1]?.options[0] }))
+    dispatch(setSelection({ freeFresh: 'N/A', freeSauce: 'N/A', blessing: 'N/A', sauce: 'N/A' }))
   }, [attributes])
   return (
     <>
@@ -26,17 +25,17 @@ const CardSection = ({ attributes, type }) => {
                 <>
                   <p className={styles._littleTitle}>{node?.name}</p>
                   {
-                    node?.options.map((option, index) => (
+                    node?.terms?.nodes?.map((option, index) => (
                       <div key={index} className={styles._row}>
                         <div className={styles._checkParent}>
                           <input
                             type='radio'
                             className={styles._radioBtn}
-                            value={option}
-                            checked={freeFresh === option}
+                            value={option.name}
+                            checked={freeFresh === option.name}
                             onChange={(event) => dispatch(setSelection({ freeFresh: event.target.value }))}
                           />
-                          <p>{option}</p>
+                          <p>{option.name}</p>
                         </div>
 
                         <div className={styles._priceParent}>
@@ -50,17 +49,17 @@ const CardSection = ({ attributes, type }) => {
               ) : (<>
                 <p className={styles._littleTitle}>{node?.name}</p>
                 {
-                  node?.options.map((option, index) => (
+                  node?.terms?.nodes?.map((option, index) => (
                     <div key={index} className={styles._row}>
                       <div className={styles._checkParent}>
                         <input
                           type='radio'
                           className={styles._radioBtn}
-                          value={option}
-                          checked={freeSauce === option}
+                          value={option.name}
+                          checked={freeSauce === option.name}
                           onChange={(event) => dispatch(setSelection({ freeSauce: event.target.value }))}
                         ></input>
-                        <p>{option}</p>
+                        <p>{option.name}</p>
                       </div>
 
                       <div className={styles._priceParent}>

@@ -2,8 +2,8 @@ import { AnyAction } from 'redux'
 import { RESET_STORE, SET_EXTRAS, SET_SELECTION, SET_SPECIALS } from './action-types'
 
 const initialState = {
-  freeFresh: 'Veggies',
-  freeSauce: 'Salsa de la casa',
+  freeFresh: 'N/A',
+  freeSauce: 'N/A',
   blessing: 'N/A',
   sauce: 'N/A',
   addons: [],
@@ -23,8 +23,8 @@ const productReducer = (state = initialState, { type, payload }: AnyAction) => {
     case RESET_STORE:
       return {
         ...state,
-        freeFresh: 'Veggies',
-        freeSauce: 'Salsa de la casa',
+        freeFresh: 'N/A',
+        freeSauce: 'N/A',
         blessing: 'N/A',
         sauce: 'N/A',
         addons: [],
