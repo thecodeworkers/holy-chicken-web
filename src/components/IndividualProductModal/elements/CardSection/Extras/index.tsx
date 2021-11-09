@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setExtras, setSelection, setSpecials } from '@store/actions';
 import Counter from '../Counter'
 import styles from './styles.module.scss'
+import { formatWooCommerceAmount, getVariation } from '@utils';
 
-const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSelection, reboot = false }) => {
+const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSelection, reboot = false, price = 0.5 }) => {
 
   const { blessing, sauce, blessingAddons, sauceAddons } = useSelector((state: any) => state.product)
   const dispatch = useDispatch()
@@ -50,7 +51,7 @@ const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSele
       }
 
       if (blessing != 'N/A' && isChecked) {
-        blessingAddons.push({ extra: currentValue, price: 0.5 })
+        blessingAddons.push({ extra: currentValue, price: price })
         dispatch(setSpecials({ blessingAddons }))
 
         return;
@@ -77,7 +78,7 @@ const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSele
       }
 
       if (sauce != 'N/A' && isChecked) {
-        sauceAddons.push({ extra: currentValue, price: 0.5 })
+        sauceAddons.push({ extra: currentValue, price: price })
         dispatch(setSpecials({ sauceAddons }))
 
         return;
@@ -97,13 +98,14 @@ const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSele
 
 const Extras = ({ extras }) => {
   const [currentSelection, setCurrentSelection] = useState([])
-  const { product: { addons }, intermitence: { individualProductModal } } = useSelector((state: any) => state)
+  const { product: { addons }, intermitence: { individualProductModal }, cart: { currentProduct } } = useSelector((state: any) => state)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     setCurrentSelection([])
   }, [individualProductModal])
+
 
   return (
     <div className={styles._cardParent}>
@@ -117,19 +119,34 @@ const Extras = ({ extras }) => {
             <div key={nodeIndex}>
               <p className={styles._littleTitleCard}>{node?.name}</p>
               {
-                node?.options?.map((option, index) => {
+                node?.terms?.nodes?.map((option, index) => {
+                  const amount = currentProduct.attributes?.nodes?.length
+                  const selectedAttributes = []
+
+                  for (let i = 0; i < amount; i++) {
+                    selectedAttributes[i] = { value: 'N/A' }
+                  }
+                  const diferential = amount <= 3 ? 1 : 2
+                  selectedAttributes[nodeIndex + diferential] = { value: option.name }
+
+                  const result = getVariation(currentProduct, selectedAttributes)
+
+                  let totalP = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
+                  const price = formatWooCommerceAmount(result?.regularPrice) - formatWooCommerceAmount(totalP)
+
                   return (
                     <div key={index} className={styles._row}>
                       {
-                        option != 'N/A' ? (
+                        option.name != 'N/A' ? (
                           <>
                             <CheckBoxes
-                              option={option}
+                              option={option.name}
                               index={index}
                               nodeIndex={nodeIndex}
                               setCurrentSelection={setCurrentSelection}
                               currentSelection={currentSelection}
                               reboot={individualProductModal}
+                              price={price}
                             />
                             <div className={styles._column}>
                               <Counter
@@ -138,12 +155,12 @@ const Extras = ({ extras }) => {
                                 reboot={individualProductModal}
                                 changeNumber={(action) => {
                                   if (action == 'add') {
-                                    addons.push({ extra: option, price: 0.5 })
+                                    addons.push({ extra: option.name, price: price })
                                     dispatch(setExtras(addons))
                                   }
 
                                   if (action == 'remove') {
-                                    const index = addons.findIndex((addon: any) => addon.extra == option)
+                                    const index = addons.findIndex((addon: any) => addon.extra == option.name)
                                     if (index > -1) addons.splice(index, 1)
                                     dispatch(setExtras(addons))
                                   }
@@ -153,7 +170,7 @@ const Extras = ({ extras }) => {
 
                             <div className={styles._column}>
                               <div className={styles._priceParent}>
-                                <p>$0.50</p>
+                                <p>{result ? `$${price}` : '$0.50'}</p>
                               </div>
                             </div>
                           </>
@@ -176,52 +193,69 @@ const Extras = ({ extras }) => {
             <div key={nodeIndex}>
               <p className={styles._littleTitle}>{node?.name}</p>
               {
-                node?.options?.map((option, index) => (
-                  <div key={index} className={styles._responsiveRow}>
-                    {
-                      option != 'N/A' ? (
-                        <>
-                          <CheckBoxes
-                            option={option}
-                            index={index}
-                            nodeIndex={nodeIndex}
-                            setCurrentSelection={setCurrentSelection}
-                            currentSelection={currentSelection}
-                            reboot={individualProductModal}
-                          />
+                node?.terms?.nodes?.map((option, index) => {
+                  const amount = currentProduct.attributes?.nodes?.length
+                  const selectedAttributes = []
 
-                          <div className={styles._newParent}>
-                            <div className={styles._column}>
-                              <Counter
-                                stock={30}
-                                active={currentSelection.some(_ => (_.nodeIndex == nodeIndex && _.index == index))}
-                                reboot={individualProductModal}
-                                changeNumber={(action) => {
-                                  if (action == 'add') {
-                                    addons.push({ extra: option, price: 0.5 })
-                                    dispatch(setExtras(addons))
-                                  }
+                  for (let i = 0; i < amount; i++) {
+                    selectedAttributes[i] = { value: 'N/A' }
+                  }
+                  const diferential = amount <= 3 ? 1 : 2
+                  selectedAttributes[nodeIndex + diferential] = { value: option.name }
 
-                                  if (action == 'remove') {
-                                    const index = addons.findIndex((addon: any) => addon.extra == option)
-                                    if (index > -1) addons.splice(index, 1)
-                                    dispatch(setExtras(addons))
-                                  }
-                                }}
-                              />
-                            </div>
+                  const result = getVariation(currentProduct, selectedAttributes)
 
-                            <div className={styles._column}>
-                              <div className={styles._priceParentReponsive}>
-                                <p>$0.50</p>
+                  let totalP = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
+                  const price = formatWooCommerceAmount(result?.regularPrice) - formatWooCommerceAmount(totalP)
+
+                  return (
+                    <div key={index} className={styles._responsiveRow}>
+                      {
+                        option.name != 'N/A' ? (
+                          <>
+                            <CheckBoxes
+                              option={option.name}
+                              index={index}
+                              nodeIndex={nodeIndex}
+                              setCurrentSelection={setCurrentSelection}
+                              currentSelection={currentSelection}
+                              reboot={individualProductModal}
+                              price={price}
+                            />
+
+                            <div className={styles._newParent}>
+                              <div className={styles._column}>
+                                <Counter
+                                  stock={30}
+                                  active={currentSelection.some(_ => (_.nodeIndex == nodeIndex && _.index == index))}
+                                  reboot={individualProductModal}
+                                  changeNumber={(action) => {
+                                    if (action == 'add') {
+                                      addons.push({ extra: option.name, price: price })
+                                      dispatch(setExtras(addons))
+                                    }
+
+                                    if (action == 'remove') {
+                                      const index = addons.findIndex((addon: any) => addon.extra == option.name)
+                                      if (index > -1) addons.splice(index, 1)
+                                      dispatch(setExtras(addons))
+                                    }
+                                  }}
+                                />
+                              </div>
+
+                              <div className={styles._column}>
+                                <div className={styles._priceParentReponsive}>
+                                  <p>{result ? `$${price}` : '$0.50'}</p>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </>
-                      ) : null
-                    }
-                  </div>
-                ))
+                          </>
+                        ) : null
+                      }
+                    </div>
+                  )
+                })
               }
             </div>
           ))

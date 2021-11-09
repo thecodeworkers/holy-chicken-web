@@ -12,7 +12,6 @@ const resource = async (page) => {
       ${paymentMethods}
       ${countries}
       ${(page === 'storePage' || page === 'homePage' || page === '') ? `
-      ${attributesQuery}
       ${productsQuery()}
       ${productsCategoriesQuery}
       ` : ''}
@@ -25,7 +24,6 @@ const resource = async (page) => {
     general: normalized(data?.generalPage),
     products: normalizedArray(data?.products?.nodes),
     productsCategories: normalizedArray(data?.productCategories?.nodes),
-    attributes: normalizedArray(data?.attributes?.nodes),
     paymentMethods: normalizedArray(data?.paymentGateways?.nodes),
     countries: normalizedArray(data?.countries?.nodes)
   }

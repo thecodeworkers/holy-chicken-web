@@ -15,6 +15,7 @@ products(first: 10000000) {
       stockQuantity
       spicy {
         isSpicy
+        order
       }
       attributes {
       nodes {
@@ -46,14 +47,21 @@ products(first: 10000000) {
       stockQuantity
       spicy {
         isSpicy
+        order
       }
-      attributes {
-      nodes {
-        id
-        label
-        name
-        options
-       }
+      attributes:globalAttributes {
+        nodes {
+          id
+          label
+          name
+          options
+          terms {
+            nodes {
+              name
+              id
+            }
+          }
+        }
       }
       image {
         mediaItemUrl
@@ -68,13 +76,14 @@ products(first: 10000000) {
           productCategoryId
         }
       }
-      variations(first: 300) {
+      variations(first: 1000) {
         nodes {
           id
           databaseId
           name
           description
           price(format: RAW)
+          regularPrice
           stockQuantity
           stockStatus
           attributes {
