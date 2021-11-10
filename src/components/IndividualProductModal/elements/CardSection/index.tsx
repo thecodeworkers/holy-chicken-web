@@ -7,8 +7,8 @@ import { useEffect } from 'react';
 const CardSection = ({ attributes, type }) => {
   const { freeFresh, freeSauce } = useSelector((state: any) => state.product)
   const nodes = attributes?.nodes || []
-  const toopings = (nodes.length <= 2) ? [nodes[0]] : [nodes[0], nodes[1]]
-  const extras = (nodes.length <= 2) ? [nodes[1]] : [nodes[2], nodes[3]]
+  const toopings = (nodes.length <= 2) ? (nodes.length == 1) ? [] : [nodes[0]] : [nodes[0], nodes[1]]
+  const extras = (nodes.length <= 2) ? (nodes.length == 1) ? [nodes[0]] : [nodes[1]] : [nodes[2], nodes[3]]
   const dispatch = useDispatch();
 
   useEffect(() => {
