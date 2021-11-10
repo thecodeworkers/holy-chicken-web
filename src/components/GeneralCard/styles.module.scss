@@ -19,6 +19,7 @@
     color: $mineShaft;
     font-size: $montserratExtraBold18;
     align-self: flex-start;
+    height: 2.5rem;
   }
 
   & p {
@@ -29,10 +30,9 @@
     align-self: flex-start;
   }
 }
-._textContainer{
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
+._textContainer {
+  height: 5rem;
+  overflow: hidden;
 }
 
 ._sectionParent {
@@ -46,20 +46,19 @@
     font-family: $montserratBold;
     font-size: $montserratBold16;
     color: $mineShaft;
-
   }
 }
 
-._image{
+._image {
   width: 100%;
   height: 150px;
   object-fit: contain;
 }
 
-._imageParent{
-width: 100%;
-height: 100%;
- }
+._imageParent {
+  width: 100%;
+  height: 100%;
+}
 
 ._btnParent {
   width: 7.5rem;
@@ -69,16 +68,15 @@ height: 100%;
   ._btnParent {
     width: 4.925rem;
   }
-  ._parent{
+  ._parent {
     padding: 1rem;
     min-height: 20.875rem;
 
-
-    & h3{
+    & h3 {
       font-size: 0.875rem;
     }
   }
-  ._sectionParent{
+  ._sectionParent {
     margin-top: 3%;
   }
 }

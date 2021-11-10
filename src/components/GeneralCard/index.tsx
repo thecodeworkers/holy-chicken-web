@@ -15,7 +15,7 @@ const GeneralCard = ({
         <img src={image} className={styles._image}></img>
       </div>
       <h3> {name} </h3>
-      <div className={styles.textContainer} dangerouslySetInnerHTML={createMarkup(description)}></div>
+      <div className={styles._textContainer} dangerouslySetInnerHTML={createMarkup(description)}></div>
 
       <div className={styles._sectionParent}>
         <p>{price?.split('-')[0]}</p>
