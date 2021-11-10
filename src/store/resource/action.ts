@@ -1,5 +1,5 @@
 import { SET_RESOURCES, } from './action-types'
-import { actionObject, orderBy, productFilter, WooCommerceClient } from '../../utils'
+import { actionObject, orderBy, productFilter, WooCommerceClient, formatWooCommerceAmount } from '../../utils'
 import { pages, resources } from '../../graphql/query'
 import { GET_PAGES } from '@store/page/action-types'
 import { SEARCH_PRODUCTS, SET_FILTER, CLEAN_FILTER } from './action-types'
@@ -23,7 +23,8 @@ export const getResources: any = (consult: string = '') => async (dispatch, getS
   resource['allCountries'] = allCountries
   dispatch(getCart())
   dispatch(actionObject(SET_RESOURCES, { ...resource, productsCopy: resource?.products }))
-  if(resource?.products.length) dispatch(setBackupProducts(resource?.products))
+
+  if (resource?.products.length) dispatch(setBackupProducts(orderBy(resource?.products, 'order', 'asc', 'spicy')))
 }
 
 export const searchProducts: any = (data) => actionObject(SEARCH_PRODUCTS, data)
@@ -44,17 +45,21 @@ export const orderProducts: any = (value) => async (dispatch, getState) => {
 
   const { resource: { shop, filter } } = getState()
 
-  let data = shop
+  let data = shop.map((value, index) => {
+    let totalP = value?.price?.includes('-') ? formatWooCommerceAmount(value?.price?.split('-')[0]) : formatWooCommerceAmount(value?.price)
+    value.orderPrice = totalP
+    return value
+  })
 
   switch (value) {
     case 'outstanding':
       data = orderBy(data, 'totalSales', 'asc')
       break;
     case 'lowestCost':
-      data = orderBy(data, 'price', 'asc')
+      data = orderBy(data, 'orderPrice', 'asc')
       break;
     case 'highestCost':
-      data = orderBy(data, 'price', 'desc')
+      data = orderBy(data, 'orderPrice', 'desc')
       break;
   }
 
