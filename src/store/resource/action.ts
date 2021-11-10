@@ -23,7 +23,8 @@ export const getResources: any = (consult: string = '') => async (dispatch, getS
   resource['allCountries'] = allCountries
   dispatch(getCart())
   dispatch(actionObject(SET_RESOURCES, { ...resource, productsCopy: resource?.products }))
-  if(resource?.products.length) dispatch(setBackupProducts(resource?.products))
+
+  if (resource?.products.length) dispatch(setBackupProducts(orderBy(resource?.products, 'order', 'asc', 'spicy')))
 }
 
 export const searchProducts: any = (data) => actionObject(SEARCH_PRODUCTS, data)

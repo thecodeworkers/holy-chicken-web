@@ -11,7 +11,7 @@ import SideFilterMenu from '../SideFilterMenu';
 import { useDispatch } from 'react-redux'
 import { searchProducts, setShowModal, setCurrentProduct, resetStore } from '@store/actions'
 
-const FirstBanner = ({ content, backup: products, reference, data }: any) => {
+const FirstBanner = ({ content, backup, reference, data }: any) => {
 
   const dispatch = useDispatch()
   const router = useRouter()
@@ -44,8 +44,6 @@ const FirstBanner = ({ content, backup: products, reference, data }: any) => {
     dispatch(setCurrentProduct({ currentProduct: item }))
     dispatch(resetStore())
   }
-
-  const backup = orderBy(products, 'order', 'asc', 'spicy')
 
   return (
     <>
