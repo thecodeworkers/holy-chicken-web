@@ -126,7 +126,7 @@ const Extras = ({ extras }) => {
                   for (let i = 0; i < amount; i++) {
                     selectedAttributes[i] = { value: 'N/A' }
                   }
-                  const diferential = amount <= 3 ? 1 : 2
+                  const diferential = amount <= 3 ? amount == 1 ? 0 : 1 : 2
                   selectedAttributes[nodeIndex + diferential] = { value: option.name }
 
                   const result = getVariation(currentProduct, selectedAttributes)
@@ -170,7 +170,7 @@ const Extras = ({ extras }) => {
 
                             <div className={styles._column}>
                               <div className={styles._priceParent}>
-                                <p>{result ? `$${price}` : '$0.50'}</p>
+                                <p>{result ? `$${price.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : '$0.50'}</p>
                               </div>
                             </div>
                           </>
@@ -246,7 +246,7 @@ const Extras = ({ extras }) => {
 
                               <div className={styles._column}>
                                 <div className={styles._priceParentReponsive}>
-                                  <p>{result ? `$${price}` : '$0.50'}</p>
+                                  <p>{result ? `$${price.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : '$0.50'}</p>
                                 </div>
                               </div>
                             </div>

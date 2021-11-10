@@ -27,7 +27,7 @@ const IndividualProduct = () => {
     for (let i = 0; i < amount; i++) {
       switch (i) {
         case 0:
-          selectedAttributes[i] = { value: freeFresh }
+          selectedAttributes[i] = amount === 1 ? { value: blessing } : { value: freeFresh }
           break;
         case 1:
           selectedAttributes[i] = amount <= 2 ? { value: blessing } : { value: freeSauce }
