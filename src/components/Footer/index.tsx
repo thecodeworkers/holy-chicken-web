@@ -86,16 +86,7 @@ const Footer = ({ data, content }) => {
               </div>
             </div>
 
-            <div className={styles._socialContainer}>
-              <div className={styles._termsContainer}>
-                <div className={styles._termsleft}>
-                  <p className={styles._terms}>Política de privacidad  </p>
-                </div>
-                <div>
-                  <p className={styles._politics}> Términos y condiciones</p>
-                </div>
-              </div>
-
+            <div className={styles._socialContainerTop}>
               <div className={styles._socialMedia}>
                 <div className={styles._icon}>
                   <a href={content[0]?.link} target='_blank'>
@@ -112,6 +103,20 @@ const Footer = ({ data, content }) => {
                     <WhatsApp color={'#fff'} />
                   </a>
                 </div>
+              </div>
+            </div>
+            <div className={styles._socialContainer}>
+              <div className={styles._termsContainer}>
+                <div className={styles._termsleft}>
+                  <p className={styles._terms}>Política de privacidad  </p>
+                </div>
+                <div>
+                  <p className={styles._politics}> Términos y condiciones</p>
+                </div>
+              </div>
+
+              <div className={styles._socialMedia}>
+                <p className={styles._copy}>{data?.mainAddress}</p>
               </div>
 
               <div className={styles._copyContainer}>

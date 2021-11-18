@@ -79,8 +79,17 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-top: 1rem;
+}
+
+
+._socialContainerTop{
+  display: flex;
+  justify-content: center;
+  width: 100%;
   margin-top: 2rem;
 }
+
 
 ._termsContainer{
   display: flex;
@@ -119,7 +128,7 @@
 }
 
 ._icon{
-  margin-right: 1rem;
+  margin: 0 0.5rem;
 }
 
 ._copyContainer{

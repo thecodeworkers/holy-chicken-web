@@ -12,6 +12,7 @@ generalPage:page(id: "${generalId}") {
         mediaItemUrl
         slug
       }
+      mainAddress
       footerNavigation {
         link
         titulo
