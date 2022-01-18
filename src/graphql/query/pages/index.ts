@@ -1,7 +1,8 @@
-import { GraphQlClient, normalized } from '@utils'
+import { GraphQlClient, normalized, normalizedArray } from '@utils'
 import homePageQuery from './homePage'
 import aboutPageQuery from './aboutPage'
 import store from './storePage'
+import resourceQuery from '../resource'
 
 const pages = async (resource: any) => {
 
@@ -14,13 +15,22 @@ const pages = async (resource: any) => {
   const query = `
     query Page {
       ${resources[resource]}
+      ${resourceQuery(resource)}
     }
   `
 
 
-  const result: any = await GraphQlClient(query)
+  const data: any = await GraphQlClient(query)
 
-  return (result) ? 'nodes' in result[resource] ? normalized(result[resource].nodes) : normalized(result[resource]) : {}
+  return {
+    page: normalized((data) ? 'nodes' in data[resource] ? normalized(data[resource].nodes) : normalized(data[resource]) : {}),
+    general: normalized(data?.generalPage),
+    products: normalizedArray(data?.products?.nodes),
+    productsCategories: normalizedArray(data?.productCategories?.nodes),
+    paymentMethods: normalizedArray(data?.paymentGateways?.nodes),
+    countries: normalizedArray(data?.countries?.nodes)
+  }
+
 }
 
 export default pages

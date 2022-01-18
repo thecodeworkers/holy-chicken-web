@@ -17,6 +17,7 @@ const GraphQlClient = async (query, variables = {}, auth = null, wcAuth = null) 
     return response.data.data
 
   } catch (err) {
+    console.log(err)
     return null
   }
 }

@@ -10,18 +10,23 @@ export const getResources: any = (consult: string = '') => async (dispatch, getS
   const { page } = getState()
   let data = page
 
-  if (consult) {
-    const homePage = await pages(consult)
-    data[consult] = homePage
+  const { page: pageData, ...resource } = await pages(consult)
+
+  if (pageData) {
+
+    data[consult] = pageData
     dispatch(actionObject(GET_PAGES, data))
+
   }
 
-  const resource = await resources(consult)
   const allCountries = await WooCommerceClient('data/countries')
+
   resource['outstanding'] = orderBy(resource.products, 'totalSales', 'asc').slice(0, 3)
   resource['shop'] = resource.products
   resource['allCountries'] = allCountries
+
   dispatch(getCart())
+
   dispatch(actionObject(SET_RESOURCES, { ...resource, productsCopy: resource?.products }))
 
   if (resource?.products.length) dispatch(setBackupProducts(orderBy(resource?.products, 'order', 'asc', 'spicy')))
