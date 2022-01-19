@@ -126,7 +126,7 @@ const History = ({ data }) => {
   return (
     <>
       <Head>
-        <title>History</title>
+        <title>Holy Chicken - History</title>
       </Head>
       <Navbar data={data?.header} />
       <div className={styles._parent}>

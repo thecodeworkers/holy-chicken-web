@@ -5,9 +5,9 @@ import generalQuery from './generalPage'
 import paymentMethods from './paymentMethods'
 import productsQuery from './products'
 import productsCategoriesQuery from './productsCategories'
-const resource = async (page) => {
+
+const resource = (page) => {
   const query = `
-    query Resources {
       ${generalQuery}
       ${paymentMethods}
       ${countries}
@@ -15,18 +15,9 @@ const resource = async (page) => {
       ${productsQuery()}
       ${productsCategoriesQuery}
       ` : ''}
-    }
   `
 
-  const data: any = await GraphQlClient(query)
-
-  return {
-    general: normalized(data?.generalPage),
-    products: normalizedArray(data?.products?.nodes),
-    productsCategories: normalizedArray(data?.productCategories?.nodes),
-    paymentMethods: normalizedArray(data?.paymentGateways?.nodes),
-    countries: normalizedArray(data?.countries?.nodes)
-  }
+  return query
 }
 
 export default resource

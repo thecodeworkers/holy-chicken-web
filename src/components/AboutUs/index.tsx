@@ -9,7 +9,7 @@ const AboutUs = ({ content, data }) => {
   return (
     <div>
       <Head>
-        <title>Holy Chiken</title>
+        <title>Holy Chicken</title>
       </Head>
       <Navbar data={data?.header} />
       {content ? (<>
