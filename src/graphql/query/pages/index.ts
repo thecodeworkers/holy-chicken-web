@@ -14,16 +14,15 @@ const pages = async (resource: any) => {
 
   const query = `
     query Page {
-      ${resources[resource]}
+      ${(resource[resource]) ? resources[resource] : ''}
       ${resourceQuery(resource)}
     }
   `
 
-
   const data: any = await GraphQlClient(query)
 
   return {
-    page: normalized((data) ? 'nodes' in data[resource] ? normalized(data[resource].nodes) : normalized(data[resource]) : {}),
+    page: (data && data[resource]) ? 'nodes' in data[resource] ? normalized(data[resource].nodes) : normalized(data[resource]) : {},
     general: normalized(data?.generalPage),
     products: normalizedArray(data?.products?.nodes),
     productsCategories: normalizedArray(data?.productCategories?.nodes),

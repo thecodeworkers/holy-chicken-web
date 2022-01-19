@@ -30,8 +30,8 @@ const LocationModal = () => {
     if (router.pathname != '/shop') router.push('/shop')
     dispatch(setShowModal({ showLocationModal: false }))
     dispatch(setStep({ delivery_data: { ...delivery_data, location: value } }))
-    const shipping = getShipping('Pickup')
-    if (shipping) dispatch(updateShippingMethod(shipping.id))
+    /* const shipping = getShipping('Pickup')
+    if (shipping) dispatch(updateShippingMethod(shipping.id)) */
   }
 
 
