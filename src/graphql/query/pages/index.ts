@@ -14,7 +14,7 @@ const pages = async (resource: any) => {
 
   const query = `
     query Page {
-      ${(resource[resource]) ? resources[resource] : ''}
+      ${(resources[resource]) ? resources[resource] : ''}
       ${resourceQuery(resource)}
     }
   `
