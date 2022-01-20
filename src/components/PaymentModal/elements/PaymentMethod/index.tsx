@@ -66,7 +66,7 @@ const PaymentMethod = () => {
                             <>
                               <ul className={styles._list}>
                                 {
-                                  buildTexts(res).map((item: string, index: number) => {
+                                  buildTexts(res)?.map((item: string, index: number) => {
                                     return <li className={styles._listItem} key={index}>{item}</li>
                                   })
                                 }
