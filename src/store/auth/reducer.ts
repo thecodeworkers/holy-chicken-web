@@ -7,6 +7,7 @@ const initialState = {
   isAuth: null,
   emailSended: null,
   tmpEmail: '',
+  authTime: null
 }
 
 const authReducer = (state = initialState, { type, payload }: AnyAction) => {

@@ -70,9 +70,7 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
 
     }
 
-    if (!sessionToken) {
-      dispatch(setToast('warning', 'Por favor inicie sesión para continuar', 1))
-    }
+    if (!sessionToken) dispatch(setToast('warning', 'Por favor inicie sesión para continuar', 1))
 
   } catch (error) {
     dispatch(setToast('check', 'Error al agregar producto al carrito', 1))

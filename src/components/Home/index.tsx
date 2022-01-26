@@ -3,17 +3,26 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { FirstBanner, SecondBanner, SocialSwipe, ThirdBanner, Catering } from './elements'
 import { Navbar, IndividualProductModal, CartModal } from '@components'
-import { setStringKey, setShowModal, getTmpSession } from '@store/actions'
+import { setStringKey, setShowModal, getTmpSession, resetAuth } from '@store/actions'
 import { scrollTo } from '@utils/common'
 import Footer from '../Footer'
 import Head from 'next/head'
 
 const Home = ({ content, data, resource }) => {
 
-  const { scrollReference: { homeReference }, guest: { tmpSessionToken } } = useSelector((state: any) => state)
+  const { scrollReference: { homeReference }, guest: { tmpSessionToken, timeGuest }, auth: { login, authTime } } = useSelector((state: any) => state)
 
   const dispatch = useDispatch()
   const router = useRouter()
+
+  const checkData = () => {
+    const compTime = login?.login?.customer?.sessionToken ? authTime : timeGuest
+    if (compTime) {
+      const time = new Date().getTime()
+      const seconds = (time - compTime) / 1000
+      if (seconds > 43200) dispatch(resetAuth())
+    }
+  }
 
   useEffect(() => {
     const passwordKey = router?.query?.key
@@ -23,7 +32,12 @@ const Home = ({ content, data, resource }) => {
     }
 
     if (!tmpSessionToken) dispatch(getTmpSession())
+
   }, [])
+
+  useEffect(() => {
+    checkData()
+  }, [tmpSessionToken, login?.login?.customer?.sessionToken])
 
   const outstandingRef = useCallback((node) => {
     scrollingReference(node, 'outstanding')

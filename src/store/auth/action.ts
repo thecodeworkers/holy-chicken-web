@@ -3,7 +3,7 @@ import { actionObject, filter, setCamelCaseKey, WooCommerceClient } from '@utils
 import { REGISTER_USER, LOGIN_USER, RESTORE_PASSWORD_EMAIL, LOGOUT_USER, RESTORE_PASSWORD, GET_TMP_SESSION } from './action-types'
 import { REQUEST_LOADER } from '@store/loader/actions-types'
 import { setToast } from '@store/toast/action'
-import { resetGuestStore } from '../guest/action'
+import { getTmpSession, resetGuestStore } from '../guest/action'
 import { SET_TMP_BUY } from '../guest/action-types'
 import { resetCartStore } from '../cart/action'
 
@@ -30,8 +30,8 @@ export const loginUser = (body: any) => async (dispatch) => {
     const result = await loginMutation(body)
 
     if (result.message) throw new Error(result.message)
-
-    dispatch(actionObject(LOGIN_USER, { login: result, isAuth: result?.login ? true : false }))
+    const timeSetted = new Date().getTime()
+    dispatch(actionObject(LOGIN_USER, { login: result, isAuth: result?.login ? true : false, authTime: timeSetted }))
     dispatch(dispatch(setToast('check', 'Usuario autenticado exitosamente', 1)))
     dispatch(resetGuestStore())
     dispatch(resetCartStore())
@@ -42,6 +42,13 @@ export const loginUser = (body: any) => async (dispatch) => {
   finally {
     dispatch(actionObject(REQUEST_LOADER, false))
   }
+}
+
+export const resetAuth = () => async (dispatch) => {
+  dispatch(actionObject(LOGOUT_USER))
+  dispatch(resetGuestStore())
+  dispatch(resetCartStore())
+  dispatch(getTmpSession())
 }
 
 export const logoutUser = () => async (dispatch) => {
