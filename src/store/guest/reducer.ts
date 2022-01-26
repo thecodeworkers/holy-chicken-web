@@ -3,6 +3,7 @@ import { GET_TMP_SESSION, RESET_GUEST_STORE, SET_TMP_BUY } from './action-types'
 
 const initialState = {
   tmpSessionToken: '',
+  timeGuest: null,
   tmpOrders: []
 }
 
