@@ -6,7 +6,6 @@ export const getTmpSession = () => async (dispatch) => {
   const response = await getTmpSessionToken();
   const tmpSessionToken = response?.sessionToken || ''
   const timeSetted = new Date().getTime()
-  console.log(timeSetted, 'getTmpSessions')
   return dispatch(actionObject(GET_TMP_SESSION, { tmpSessionToken, timeGuest: timeSetted }))
 }
 
