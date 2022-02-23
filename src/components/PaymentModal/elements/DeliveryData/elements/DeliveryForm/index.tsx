@@ -200,15 +200,15 @@ const DeliveryForm = () => {
                 onBlur={deliveryform.handleBlur}
                 value={deliveryform.values.municipality}
                 className={errors.municipality && touched.municipality ? styles._inputError : styles._inputSelect}>
-                {regions?.length ? regions.map((region, index) =>
-                  <option key={index} value={region?.key}>{region?.name}  &nbsp;  ${getShipping(region?.key).cost}</option>
+                {regions?.length ? regions.filter((region: any) => region?.key?.includes(delivery_data?.selectedLocation)).map((region, index) =>
+                  <option key={index} value={region?.key}>{region?.name}  &nbsp;  ${getShipping(region?.key)?.cost}</option>
                 ) : <option>No Disponible</option>}
               </select>
             </div>
           </div>
 
           <div className={styles._quarterWidth} >
-            </div>
+          </div>
         </div>
 
         <div className={styles._buttonContainer}>

@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { Logo } from '@images/resources'
 import { Cart, Profile, Search } from '@images/icons'
@@ -15,8 +15,7 @@ const NavBar = ({ data }) => {
 
   const router = useRouter()
   const [show, setShow] = useState(false)
-  const [showCart, setShowCart] = useState(false)
-  const { auth, cart, resource: { general = {} } } = useSelector((state: any) => state)
+  const { auth, cart, resource: { general = {} }, intermitence: { cartModal } } = useSelector((state: any) => state)
   const { navigation: contentNavigation = {} } = general?.general || {}
 
   const { isAuth } = auth
@@ -53,13 +52,12 @@ const NavBar = ({ data }) => {
     dispatch(setToast('', `¡Hasta luego, ${auth?.login?.login?.user?.firstName}!`, 1))
   }
 
-  const showedCart = (showCart) => {
+  const showedCart = () => {
     dispatch(resetModals())
-    setShowCart(showCart => !showCart)
 
-    if (showCart) return dispatch(setShowModal({ cartModal: false }))
+    if (cartModal) return dispatch(setShowModal({ cartModal: false }))
 
-    if (!showCart) return dispatch(setShowModal({ cartModal: true }))
+    if (!cartModal) return dispatch(setShowModal({ cartModal: true }))
   }
 
   return (
@@ -92,7 +90,7 @@ const NavBar = ({ data }) => {
                 <Button color='#FD8C2E' text={contentNavigation?.askNow} textColor='#fff'></Button>
               </div>
 
-              <div className={styles._iconParent} onClick={() => showedCart(showCart)}>
+              <div className={styles._iconParent} onClick={() => showedCart()}>
                 <Cart color='#000' />
                 {
                   number > 0 && (<div className={styles._numberParent}>
