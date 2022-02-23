@@ -93,13 +93,14 @@
     text-overflow: ellipsis;
   }
 }
+
 ._checkParent {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
   margin-top: 1rem;
   margin-left: 0.5rem;
-
+  cursor: pointer;
   & p {
     font-family: $montserratRegular;
     margin-left: 0.7rem;
