@@ -29,16 +29,17 @@ export const getResources: any = (consult: string = '') => async (dispatch, getS
     data[consult] = homePage
     dispatch(actionObject(GET_PAGES, data))
   }
-
   const resource = await resources(consult)
+  const orderProducts = orderProductsInit(resource?.products)
+
   const allCountries = await WooCommerceClient('data/countries')
-  resource['outstanding'] = orderBy(resource.products, 'totalSales', 'asc').slice(0, 3)
-  resource['shop'] = resource.products
+  resource['outstanding'] = orderBy(orderProducts, 'totalSales', 'asc').slice(0, 3)
+  resource['shop'] = orderProducts
   resource['allCountries'] = allCountries
   dispatch(getCart())
-  dispatch(actionObject(SET_RESOURCES, { ...resource, productsCopy: resource?.products }))
+  dispatch(actionObject(SET_RESOURCES, { ...resource, productsCopy: orderProducts }))
 
-  if (resource?.products.length) dispatch(setBackupProducts(orderProductsInit(resource?.products)))
+  if (resource?.products.length) dispatch(setBackupProducts(orderProducts))
 }
 
 export const searchProducts: any = (data) => actionObject(SEARCH_PRODUCTS, data)
