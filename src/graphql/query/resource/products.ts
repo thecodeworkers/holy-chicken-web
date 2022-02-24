@@ -7,6 +7,7 @@ products(first: 10000000) {
     slug
     databaseId
     totalSales
+    sku
     ... on SimpleProduct {
       id
       name

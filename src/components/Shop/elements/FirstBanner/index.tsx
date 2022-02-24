@@ -20,6 +20,21 @@ const FirstBanner = ({ content, backup, reference, data }: any) => {
   const [show, setShow] = useState(0)
   const [searchValue, setSearchValue] = useState('')
 
+  const orderProducts = (products) => {
+    const productOrders = products.map((product) => {
+      const split = product.sku.split('-')
+      if (split[1]) {
+        const order = Number(split[1])
+        product.order = order
+      }
+      return product
+    })
+    const orderedProducts = orderBy(productOrders, 'order', 'asc')
+    return orderedProducts
+  }
+
+
+
   const navigation = (route: string) => {
     if (route != router.pathname) router.push(route)
   }
@@ -100,7 +115,7 @@ const FirstBanner = ({ content, backup, reference, data }: any) => {
                 backup?.length ?
                   <div className={styles._cardContainer}>
                     {
-                      paginate(backup, page, perPage).map((item, index) => {
+                      paginate(orderProducts(backup), page, perPage).map((item, index) => {
 
                         return (
                           <div
