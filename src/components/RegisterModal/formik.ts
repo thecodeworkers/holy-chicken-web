@@ -25,7 +25,7 @@ const formikConfig = (dispatch) => (useFormik({
     phone: Yup.string()
       .required()
       .min(7)
-      .max(12)
+      .max(15)
       .matches(phoneRegex),
 
     email: Yup.string()

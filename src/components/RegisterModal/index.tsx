@@ -93,7 +93,7 @@ const RegisterModal = () => {
             <label>Teléfono</label>
             <input
               type="text"
-              placeholder='+58 (000) 000 00 00'
+              placeholder='+580000000000'
               name='phone'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

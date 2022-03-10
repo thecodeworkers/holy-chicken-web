@@ -14,6 +14,7 @@ const SecondBanner = ({ data, reference, contact }) => {
   const openModal = () => {
     return dispatch(setShowModal({ contactModal: true }))
   }
+
   return (
     <div className={styles._content} ref={reference} >
 

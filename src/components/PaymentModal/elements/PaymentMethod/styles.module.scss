@@ -12,6 +12,7 @@
   text-align: center;
 }
 
+
 ._rightMain {
   display: flex;
   flex-direction: column;
@@ -271,6 +272,12 @@ padding: 0;
   align-content: flex-start;
 }
 
+._link{
+  p{
+    margin: 0.5rem 0;
+    font-weight: 100;
+  }
+}
 
 @include responsive(md) {
   ._titleParent{
