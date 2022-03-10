@@ -2,13 +2,14 @@ import { actionObject, fetchPostJSON, filter, formatFee, formatWooCommerceAmount
 import { CURRENT_PRODUCT, PRODUCTS_NUMBER, CART_PRODUCTS, GET_CART, APPLY_COUPON, CART_ORDER, RESET_CART_STORE } from './action-types'
 import { addItemToCartMutation, getCartQuery, removeFromCartMutation, updateItemQuantity, applyCouponMutation, updateShippingMethodMutation, addFee } from '@graphql'
 import { REQUEST_LOADER } from '../loader/actions-types'
-import { setToast, setShowModal } from '@store/actions'
+import { setToast, setShowModal, getTmpSession } from '@store/actions'
 import { setStep } from '@store/paymentStep/action'
 import { getDollarEquivalent } from '@utils/dolarClient'
 import getStripe from '@utils/getStripe'
 import checkoutMutation from '@graphql/mutation/checkout'
 import { RESET_STORE } from '@store/product/action-types'
 import { RESET_TENDER_STORE } from '@store/tenderProduct/action-types'
+import { LOGOUT_USER } from '@store/auth/action-types'
 
 
 export const setCurrentProduct = (data: any) => actionObject(CURRENT_PRODUCT, data)
@@ -75,7 +76,9 @@ export const setCartProducts = ({ databaseId, quantity = 1, }: any, extras = nul
     }
 
   } catch (error) {
-    dispatch(setToast('check', 'Error al agregar producto al carrito', 1))
+    dispatch(actionObject(LOGOUT_USER, {}))
+    dispatch(getTmpSession())
+    dispatch(setToast('error', 'Error al agregar producto al carrito', 1))
   } finally {
     dispatch(actionObject(REQUEST_LOADER, false))
   }
