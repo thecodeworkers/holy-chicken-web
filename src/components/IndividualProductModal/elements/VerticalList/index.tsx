@@ -64,25 +64,17 @@ const VerticalList = ({ attributes, category }) => {
 
               return (
                 <div className={styles._column} key={index}>
-                  <div className={styles._checkParent}>
+                  <div className={styles._checkParent} onClick={() => setCurrentAtribute(res.name)}>
                     <input
                       type='radio'
                       className={styles._radioBtn}
                       readOnly
                       checked={currentAttribute == res.name ? true : false}
-                      onClick={() => setCurrentAtribute(res.name)}
+
                     >
                     </input>
-
-                    {
-                      category != 'bebidas'
-                        ? (<>
-                          <p>{res.name}</p>
-                          {element?.image?.mediaItemUrl && <img className={styles._image} src={element?.image?.mediaItemUrl} ></img>}
-                        </>)
-                        : <img className={styles._image} src={element?.image?.mediaItemUrl} ></img>
-                    }
-
+                    <p>{res.name}</p>
+                    {element?.image?.mediaItemUrl && <img className={styles._image} src={element?.image?.mediaItemUrl} ></img>}
                   </div>
                 </div>
               )
