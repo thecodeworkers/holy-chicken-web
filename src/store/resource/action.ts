@@ -1,6 +1,6 @@
 import { SET_RESOURCES, } from './action-types'
 import { actionObject, orderBy, productFilter, WooCommerceClient, formatWooCommerceAmount } from '../../utils'
-import { pages, resources } from '../../graphql/query'
+import { pages } from '../../graphql/query'
 import { GET_PAGES } from '@store/page/action-types'
 import { SEARCH_PRODUCTS, SET_FILTER, CLEAN_FILTER } from './action-types'
 import { getCart } from '@store/cart/action'
@@ -32,16 +32,16 @@ export const getResources: any = (consult: string = '') => async (dispatch, getS
     dispatch(actionObject(GET_PAGES, data))
 
   }
-  const ress: any = await resources(consult)
+  
   const orderProducts = orderProductsInit(resource?.products)
 
   const allCountries = await WooCommerceClient('data/countries')
-  ress['outstanding'] = orderBy(orderProducts, 'totalSales', 'asc').slice(0, 3)
-  ress['shop'] = orderProducts
-  ress['allCountries'] = allCountries
+  resource['outstanding'] = orderBy(orderProducts, 'totalSales', 'asc').slice(0, 3)
+  resource['shop'] = orderProducts
+  resource['allCountries'] = allCountries
 
   dispatch(getCart())
-  dispatch(actionObject(SET_RESOURCES, { ...ress, productsCopy: orderProducts }))
+  dispatch(actionObject(SET_RESOURCES, { ...resource, productsCopy: orderProducts }))
 
   if (resource?.products.length) dispatch(setBackupProducts(orderProducts))
 }
