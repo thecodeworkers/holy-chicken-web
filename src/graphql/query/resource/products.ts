@@ -23,6 +23,7 @@ products(first: 10000000) {
         id
         label
         name
+
         options
        }
       }
@@ -56,6 +57,7 @@ products(first: 10000000) {
           label
           name
           options
+          slug
           terms {
             nodes {
               name
