@@ -4,7 +4,7 @@ import { GET_TMP_SESSION, RESET_GUEST_STORE, SET_TMP_BUY } from './action-types'
 
 export const getTmpSession = () => async (dispatch) => {
   const response = await getTmpSessionToken();
-  const tmpSessionToken = response?.sessionToken || ''
+  const tmpSessionToken = response?.customer?.sessionToken || response?.sessionToken || ''
   const timeSetted = new Date().getTime()
   return dispatch(actionObject(GET_TMP_SESSION, { tmpSessionToken, timeGuest: timeSetted }))
 }
