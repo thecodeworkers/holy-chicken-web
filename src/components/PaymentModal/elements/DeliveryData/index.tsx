@@ -8,7 +8,7 @@ import { setStep } from '@store/actions'
 
 const DeliveryData = () => {
 
-  const { paymentStep: { delivery_data } } = useSelector((state: any) => state)
+  const { paymentStep: { delivery_data }, cart: { cartProducts } } = useSelector((state: any) => state)
 
   const dispatch = useDispatch()
   const [shippingMethod, setShippingMethod] = useState('pickup')
@@ -32,8 +32,10 @@ const DeliveryData = () => {
   }
 
   useEffect(() => {
-    if (delivery_data?.type) setShippingMethod(delivery_data?.type)
-    if (!delivery_data?.type) dispatch(setStep({ delivery_data: { ...delivery_data, type: shippingMethod } }))
+    if (delivery_data?.type) {
+      setShippingMethod(delivery_data?.type)
+      dispatch(setStep({ delivery_data: { ...delivery_data, type: shippingMethod } }))
+    }
   }, [])
 
   return (
@@ -49,13 +51,13 @@ const DeliveryData = () => {
               <p className={styles._deliveryTitle}>Seleccione una opción</p>
               <div className={styles._radioContainer}>
 
-                <div className={styles._checkParent} >
+                <div className={styles._checkParent} onClick={() => { setDelivery('pickup') }} >
                   <input type='radio'
                     value='pickup'
                     name='shippingMethod'
                     className={styles._radioBtn}
                     checked={shippingMethod === 'pickup'}
-                    onChange={(check) => { setDelivery(check.currentTarget.value) }}>
+                    readOnly>
                   </input>
                   <p className={styles._radioTitle}>Pick Up</p>
                 </div>
@@ -64,15 +66,14 @@ const DeliveryData = () => {
 
                 <PickupForm /> : null}
 
-              <div className={styles._radioContainer}>
-
+              <div className={styles._radioContainer} onClick={() => { setDelivery('delivery') }} >
                 <div className={styles._checkParent} >
                   <input type='radio'
                     name='shippingMethod'
                     value='delivery'
                     className={styles._radioBtn}
                     checked={shippingMethod === 'delivery'}
-                    onChange={(check) => { setDelivery(check.currentTarget.value) }}>
+                    readOnly>
                   </input>
                   <p className={styles._radioTitle}>Delivery</p>
                 </div>
@@ -113,7 +114,7 @@ const DeliveryData = () => {
           {shippingMethod === 'delivery' ?
             <DeliveryForm />
             :
-           null
+            null
           }
         </div>
       </div>

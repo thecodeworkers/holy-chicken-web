@@ -1,3 +1,4 @@
+import { LOGOUT_USER } from '@store/auth/action-types'
 import { AnyAction } from 'redux'
 import { GET_TMP_SESSION, RESET_GUEST_STORE, SET_TMP_BUY } from './action-types'
 
@@ -17,7 +18,8 @@ const reducer = (state = initialState, { type, payload }: AnyAction) => {
 
     case RESET_GUEST_STORE:
       return initialState
-
+    case LOGOUT_USER:
+      return initialState
     default:
       return state
   }

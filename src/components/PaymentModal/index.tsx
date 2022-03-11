@@ -71,8 +71,8 @@ const PaymentModal = () => {
 
             <div className={styles._leftBody}>
               <div className={styles._stepContainer}>
-                <div className={styles._checkParent}>
-                  <div onClick={() => newStep(1)} className={currentStep === 1 ? styles._radioBtnChecked : styles._radioBtn}></div>
+                <div className={styles._checkParent} onClick={() => newStep(1)} >
+                  <div className={currentStep === 1 ? styles._radioBtnChecked : styles._radioBtn}></div>
                   <p>Tus Datos</p>
                 </div>
                 <div className={styles._stepData}>
@@ -87,8 +87,8 @@ const PaymentModal = () => {
               </div>
 
               <div>
-                <div className={styles._checkParent}>
-                  <div onClick={() => newStep(2)} className={currentStep === 2 ? styles._radioBtnChecked : styles._radioBtn}></div>
+                <div className={styles._checkParent} onClick={() => newStep(2)}>
+                  <div className={currentStep === 2 ? styles._radioBtnChecked : styles._radioBtn}></div>
                   <p>Formas de entrega</p>
                 </div>
                 <div className={styles._stepData}>
@@ -96,8 +96,8 @@ const PaymentModal = () => {
                 </div>
               </div>
               <div>
-                <div className={styles._checkParent}>
-                  <div onClick={() => newStep(3)} className={currentStep === 3 ? styles._radioBtnChecked : styles._radioBtn}></div>
+                <div className={styles._checkParent} onClick={() => newStep(3)}>
+                  <div className={currentStep === 3 ? styles._radioBtnChecked : styles._radioBtn}></div>
                   <p>Formas de pago</p>
                 </div>
                 <div className={styles._stepData}>
@@ -105,8 +105,8 @@ const PaymentModal = () => {
                 </div>
               </div>
               <div>
-                <div className={styles._checkParent}>
-                  <div onClick={() => newStep(4)} className={currentStep === 4 ? styles._radioBtnChecked : styles._radioBtn}></div>
+                <div className={styles._checkParent} onClick={() => newStep(4)}>
+                  <div className={currentStep === 4 ? styles._radioBtnChecked : styles._radioBtn}></div>
                   <p>Facturación</p>
                 </div>
 

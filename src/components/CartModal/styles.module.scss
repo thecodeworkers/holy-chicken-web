@@ -21,7 +21,14 @@
   justify-content: space-between;
   align-content: center;
   background-color: $white;
-  border-radius:  2.375rem;
+  border-radius: 2.375rem;
+}
+
+._titleHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 ._cardParent {
@@ -32,7 +39,7 @@
   box-sizing: border-box;
 }
 
-._bs{
+._bs {
   font-size: $montserratLight10;
   font-family: $montserratMedium;
 }
@@ -44,32 +51,32 @@
   align-items: center;
   margin-top: 1rem;
   padding: 2rem 1.5rem;
-  border-bottom-left-radius:  2.375rem;
-  border-bottom-right-radius:  2.375rem;
+  border-bottom-left-radius: 2.375rem;
+  border-bottom-right-radius: 2.375rem;
   background-color: $pampas;
 }
 
-._parentContainer{
+._parentContainer {
   display: flex;
   justify-content: space-between;
   width: 100%;
   align-content: center;
 }
 
-._parentTitle{
+._parentTitle {
   font-size: $blackerTextHeavy18;
   font-family: $blackerTextHeavy;
   color: $mineShaft;
   width: 100%;
 }
 
-._parentTotal{
+._parentTotal {
   font-size: $blackerTextHeavy18;
   font-family: $montserratBold;
   color: $mineShaft;
 }
 
-._number{
+._number {
   font-size: $montserratBold20;
   font-family: $montserratBold;
   color: $mineShaft;
@@ -84,31 +91,33 @@
   display: none;
 }
 
-._header{
+._header {
   text-align: center;
   padding: 1.5rem 1.5rem;
 }
 
-._title{
+._title {
   font-family: $blackerTextHeavyBold;
   font-size: $blackerTextHeavy40;
-  margin-bottom: 1rem;
 }
-
-._subtitle{
+._arrowExit {
+  display: none;
+  cursor: pointer;
+}
+._subtitle {
   font-size: $montserratRegular16;
   font-family: $montserratRegular;
   margin-bottom: 1rem;
 }
 
-._description{
+._description {
   font-size: $montserratRegular16;
   font-family: $montserratRegular;
   margin-bottom: 1rem;
   text-align: center;
 }
 
-._producItemContainer{
+._producItemContainer {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -116,20 +125,20 @@
   width: 100%;
 }
 
-._productContainer{
+._productContainer {
   display: flex;
   margin-bottom: 2.5rem;
   margin-top: 1.5rem;
   width: 100%;
 }
 
-._close{
+._close {
   margin-top: -1rem;
   margin-right: 1rem;
   cursor: pointer;
 }
 
-._body{
+._body {
   overflow-y: scroll;
   padding: 0 1.5rem;
 
@@ -149,10 +158,9 @@
   &::-webkit-scrollbar-thumb:hover {
     background: none;
   }
-
 }
 
-._quantityContainer{
+._quantityContainer {
   display: flex;
   justify-content: space-between;
   align-content: center;
@@ -190,14 +198,14 @@
   margin: 0 0.4rem;
   font-weight: 500;
 }
-._productItemTitle{
+._productItemTitle {
   font-size: $montserratExtraBold16;
   font-family: $montserratBold;
   color: $mineShaft;
   margin-bottom: 0.5rem;
 }
 
-._productItemSubtitle{
+._productItemSubtitle {
   font-size: $montserratRegular12;
   font-family: $montserratRegular;
   color: $black;
@@ -206,29 +214,28 @@
 }
 
 @include responsive(md) {
-
-  ._background{
+  ._arrowExit {
+    display: block;
+  }
+  ._background {
     width: 100%;
     height: 100%;
   }
- ._modal{
-   height: 100%;
-   width: 100%;
-   justify-content: flex-start;
+  ._modal {
+    height: 100%;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  ._header {
+    text-align: left;
+    padding-top: 5rem;
+  }
+  ._body {
+    height: 100%;
+  }
 
- }
- ._header{
-   text-align: left;
-   padding-top: 5rem;
-
- }
- ._body{
-  height: 100%;
- }
-
- ._totalParent{
-   padding: 2rem 1.5rem 3.5rem 1.5rem;
-   flex-grow: 1;
- }
-
+  ._totalParent {
+    padding: 2rem 1.5rem 3.5rem 1.5rem;
+    flex-grow: 1;
+  }
 }

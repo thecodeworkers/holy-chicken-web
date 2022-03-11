@@ -128,9 +128,7 @@ const Extras = ({ extras }) => {
                   }
                   const diferential = amount <= 3 ? amount == 1 ? 0 : 1 : 2
                   selectedAttributes[nodeIndex + diferential] = { value: option.name }
-
                   const result = getVariation(currentProduct, selectedAttributes)
-
                   let totalP = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
                   const price = formatWooCommerceAmount(result?.regularPrice) - formatWooCommerceAmount(totalP)
 

@@ -9,7 +9,7 @@
 ._checkParent {
   display: flex;
   align-items: center;
-
+  cursor: pointer;
   & p {
     font-family: $montserratRegular;
     margin-left: 0.7rem;

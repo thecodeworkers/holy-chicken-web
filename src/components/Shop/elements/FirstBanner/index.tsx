@@ -89,7 +89,7 @@ const FirstBanner = ({ content, backup, reference, data }: any) => {
                 </div>
                 <div className={styles._filter}>
                   <div className={styles._filterButtonContainer} onClick={deployMenu} >
-                    <p className={styles._filterTitle}>Filtro</p>
+                    <p className={styles._filterTitle}>Menu</p>
                     <Filter color={'#000000'} />
                   </div>
                   <DropDownFilter />

@@ -1,9 +1,10 @@
 import styles from './styles.module.scss'
 import { Button, CountProduct } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal, removeCartItem, setToast } from '@store/actions'
+import { setShowModal, removeCartItem, setToast, resetModals } from '@store/actions'
 import { createMarkup, formatFee, getProductPrice } from '@utils'
 import { useRouter } from 'next/router'
+import { LeftArrow } from '@images/icons'
 
 const CartModal = () => {
   const router = useRouter()
@@ -37,11 +38,23 @@ const CartModal = () => {
     dispatch(setToast('warning', 'Su carrito esta vacio', 1))
   }
 
+  const showedCart = (showCart) => {
+    dispatch(resetModals())
+    if (cartModal) return dispatch(setShowModal({ cartModal: false }))
+    if (!cartModal) return dispatch(setShowModal({ cartModal: true }))
+  }
+
   return (
     <div className={cartModal ? styles._background : styles._hidden} onClick={closeModal} id={'modal'}>
       <div className={styles._modal} >
         <div className={styles._header}>
-          <p className={styles._title}>{contentCart.myask}</p>
+          <div className={styles._titleHeader}>
+            <p className={styles._title}>{contentCart.myask}</p>
+            <div className={styles._arrowExit} onClick={showedCart}>
+              <LeftArrow color={'black'} id="left" />
+            </div>
+          </div>
+
           <p className={styles._subtitle}>{contentCart.promotion}</p>
         </div>
         <div className={styles._body}>

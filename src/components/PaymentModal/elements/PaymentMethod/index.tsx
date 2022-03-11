@@ -20,7 +20,7 @@ const PaymentMethod = () => {
     return data?.description?.split('/')
   }
 
-  const selectedMethod = (e, item, id) => {
+  const selectedMethod = (item, id) => {
     setPaymentSelected(item)
     dispatch(setStep({ payment_data: { ...payment_data, ...{ type: item, paymentMethod: id, valid: true } } }))
   }
@@ -45,19 +45,19 @@ const PaymentMethod = () => {
         </div>
         <div className={styles._rightMain}>
           <div className={styles._firstRow}>
-            <div className={paymentSelected.toLowerCase() != 'tarjeta de credito' ? styles._deliveryType :styles._tdcContainer }>
+            <div className={paymentSelected.toLowerCase() != 'tarjeta de credito' ? styles._deliveryType : styles._tdcContainer}>
               <p className={styles._deliveryTitle}>Seleccione una opción</p>
               {
                 paymentMethods?.map((res, mapIndex) => {
                   return (
                     <div className={styles._radioContainer} key={mapIndex} >
-                      <div className={styles._checkParent} >
+                      <div className={styles._checkParent} onClick={() => selectedMethod(res.title, res.id)} >
                         <input type='radio'
                           value={res.name}
                           name='paymentMethod'
                           className={styles._radioBtn}
                           checked={paymentSelected === res.title}
-                          onChange={(e) => selectedMethod(e, res.title, res.id)}>
+                        >
                         </input>
                         <div className={styles._addressDescription}>
 
@@ -82,41 +82,57 @@ const PaymentMethod = () => {
               }
             </div>
             {paymentSelected != 'Tarjeta de credito' ?
-            <div className={styles._messageContainer}>
-              <p className={styles._paymentTitle}>Envíe el comprobante de pago al:</p>
-              <div className={`${styles._itemParent} ${styles._marginBottom}`}>
-                <div className={styles._iconParent}>
-                  <Phone />
+              <div className={styles._messageContainer}>
+                <p className={styles._paymentTitle}>Envíe el comprobante de pago al:</p>
+                <div className={`${styles._itemParent} ${styles._marginBottom}`}>
+                  <div className={styles._iconParent}>
+                    <Phone />
+                  </div>
+                  <div>
+                    <p>Teléfono</p>
+                    <a className={styles._link} href="tel:+584122485668">
+                      <p>Las Mercedes: +58 412-2485668</p>
+                    </a>
+                    <a className={styles._link} href="tel:+584241271442">
+                      <p>La Castellana: +58 424-1271442</p>
+                    </a>
+                    <a className={styles._link} href="tel:+584123696259">
+                      <p>El Hatillo: +58 412-3696259</p>
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <p>Teléfono</p>
-                  <a className={styles._link} href="tel:+58 412-2485668">
-                    +58 412-2485668
-                  </a>
-                </div>
-              </div>
 
-              <div className={`${styles._itemParent} ${styles._marginBottom}`}>
-                <div className={styles._iconParent}>
-                  <Mail color='#000' />
+                <div className={`${styles._itemParent} ${styles._marginBottom}`}>
+                  <div className={styles._iconParent}>
+                    <Mail color='#000' />
+                  </div>
+                  <div>
+                    <p>Email</p>
+
+                    <a className={styles._link} href={`mailto:holychickenlasmercedes@gmail.com`}>
+                      <p>Las Mercedes: holychickenlasmercedes@gmail.com</p>
+
+                    </a>
+                    <a className={styles._link} href={`mailto:holychickenlacastellana@gmail.com`}>
+                      <p>La Castellana: holychickenlacastellana@gmail.com</p>
+
+                    </a>
+                    <a className={styles._link} href={`mailto:holychickenelhatillo@gmail.com`}>
+                      <p>El Hatillo: holychickenelhatillo@gmail.com</p>
+
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <p>Email</p>
-                  <a className={styles._link} href={`mailto:${email}`}>
-                    {email}
-                  </a>
+                <div className={styles._advices}>
+                  <p className={styles._advicesItem} >No olvide colocar, según la forma de pago lo siguiente:</p>
+                  <p className={styles._advicesItemBold}>- Pago móvil, transferencia o Zelle:</p>
+                  <p className={styles._advicesItem} >Debe verse legible el número de confirmación y banco.</p>
+                  <p className={styles._advicesItemBold}>- Efectivo:</p>
+                  <p className={styles._advicesItem} >Debe verse legible el número de serie del billete.</p>
                 </div>
               </div>
-              <div className={styles._advices}>
-                <p className={styles._advicesItem} >No olvide colocar, según la forma de pago lo siguiente:</p>
-                <p className={styles._advicesItemBold}>- Pago móvil, transferencia o Zelle:</p>
-                <p className={styles._advicesItem} >Debe verse legible el número de confirmación y banco.</p>
-                <p className={styles._advicesItemBold}>- Efectivo:</p>
-                <p className={styles._advicesItem} >Debe verse legible el número de serie del billete.</p>
-              </div>
-            </div>
-            : null
-          }
+              : null
+            }
           </div>
           <div className={styles._buttonContainer}>
             <div className={styles._btnParent}>

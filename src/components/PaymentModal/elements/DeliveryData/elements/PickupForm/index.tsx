@@ -50,12 +50,12 @@ const PickupForm = () => {
             general?.addresses.map((item, index) => {
               return (
                 <div className={styles._radioContainer} key={index}>
-                  <div className={styles._checkParent} >
+                  <div className={styles._checkParent} onClick={() => { setLocation(item.local) }} >
                     <input type='checkbox'
                       value={item.local}
                       checked={pickupMethod === item.local}
                       className={styles._radioBtn}
-                      onChange={(check) => { setLocation(check.currentTarget.value) }}
+                      readOnly
                     >
                     </input>
                     <div className={styles._addressDescription}>

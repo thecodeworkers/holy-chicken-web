@@ -12,6 +12,7 @@
   text-align: center;
 }
 
+
 ._rightMain {
   display: flex;
   flex-direction: column;
@@ -147,7 +148,7 @@ margin-left: 1.5rem;
 ._checkParent {
   display: flex;
   align-items: flex-start;
-
+  cursor: pointer;
 }
 
 ._radioBtn {
@@ -271,6 +272,12 @@ padding: 0;
   align-content: flex-start;
 }
 
+._link{
+  p{
+    margin: 0.5rem 0;
+    font-weight: 100;
+  }
+}
 
 @include responsive(md) {
   ._titleParent{
