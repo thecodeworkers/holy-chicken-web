@@ -2,45 +2,29 @@ import React, { useEffect } from 'react'
 import styles from './styles.module.scss'
 import { Button } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowModal, setCartProducts, setSelection } from '@store/actions'
+import { setShowModal, setCartProducts, setSelection, setSpecials } from '@store/actions'
 import { ClothSection, VerticalList, CardSection } from './elements'
 import { createMarkup, formatWooCommerceAmount, getVariation } from '@utils'
 
 const IndividualProduct = () => {
   const dispatch = useDispatch()
-  const { intermitence: { individualProductModal }, cart: { currentProduct }, product, variableProduct } = useSelector((state: any) => state)
+  const { intermitence: { individualProductModal }, cart: { currentProduct }, product: { addons, attributes }, variableProduct } = useSelector((state: any) => state)
 
   const hot = currentProduct?.spicy?.isSpicy
 
-  const allAddons = [
-    ...product.addons,
-    ...product.blessingAddons,
-    ...product.sauceAddons
-  ]
+  const allAddons = Object.keys(addons).reduce((prev, next) => {
+    prev = [...prev, ...addons[next]]
+    return prev
+  }, [])
 
   const totalPrice = () => {
 
-    const { freeFresh, freeSauce, blessing, sauce } = product
 
-    const amount = currentProduct?.attributes?.nodes?.length
     const selectedAttributes = []
-    for (let i = 0; i < amount; i++) {
-      switch (i) {
-        case 0:
-          selectedAttributes[i] = amount === 1 ? { value: blessing } : { value: freeFresh }
-          break;
-        case 1:
-          selectedAttributes[i] = amount <= 2 ? { value: blessing } : { value: freeSauce }
-          break;
-        case 2:
-          selectedAttributes[i] = { value: blessing }
-          break;
-        case 3:
-          selectedAttributes[i] = { value: sauce }
-          break;
-        default:
-          break;
-      }
+    const productAttributes = currentProduct?.attributes?.nodes || []
+
+    for (const attr of productAttributes) {
+      selectedAttributes.push({ value: attributes[attr.slug] })
     }
 
     const result = getVariation(currentProduct, selectedAttributes)
@@ -75,7 +59,7 @@ const IndividualProduct = () => {
 
       case 'holy-sanduches':
       case 'holy-tenders':
-        return <CardSection attributes={attributes} type={type} />
+        return <CardSection attributes={attributes} />
 
       case 'merch':
         return <ClothSection size={attributesLength == 2 ? true : false} attributes={attributes} />
@@ -87,43 +71,39 @@ const IndividualProduct = () => {
 
   const setProductstoCart = () => {
 
-    const productVariable = variableProduct?.currentVariableProduct
+    const productVariable = variableProduct.currentVariableProduct
     let correctProduct = currentProduct
+    const attrs = currentProduct?.attributes?.nodes
 
     if (!!currentProduct?.variations) {
-      const { freeFresh, freeSauce, blessing, sauce } = product
-
-      const amount = currentProduct?.attributes?.nodes?.length
       const selectedAttributes = []
-      for (let i = 0; i < amount; i++) {
-        switch (i) {
-          case 0:
-            selectedAttributes[i] = { value: freeFresh }
-            break;
-          case 1:
-            selectedAttributes[i] = amount <= 2 ? { value: blessing } : { value: freeSauce }
-            break;
-          case 2:
-            selectedAttributes[i] = { value: blessing }
-            break;
-          case 3:
-            selectedAttributes[i] = { value: sauce }
-            break;
-          default:
-            break;
-        }
+
+      for (const attr of attrs) {
+        selectedAttributes.push({ value: attributes[attr?.slug] })
       }
+
       const result = getVariation(currentProduct, selectedAttributes)
 
       if (result) correctProduct = result
     }
 
     if (productVariable) correctProduct = productVariable
+    console.log(correctProduct)
     dispatch(setCartProducts(correctProduct, allAddons))
   }
 
+
+
   useEffect(() => {
-    dispatch(setSelection({ sauce: 'N/A', blessing: 'N/A', addons: [], blessingAddons: [], sauceAddons: [] }))
+    const attrs = {}
+    const nodes = currentProduct?.attributes?.nodes || []
+
+    for (const attr of nodes) {
+      attrs[attr.slug] = 'N/A'
+    }
+
+    dispatch(setSelection(attrs))
+    dispatch(setSpecials({ addons: {} }))
   }, [individualProductModal])
 
   return (
