@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Navbar } from '@components'
 import styles from './styles.module.scss'
-import { CountProduct, Button, PaymentModal} from '@components'
-import { createMarkup, formatFee } from '@utils'
+import { Button, PaymentModal } from '@components'
+import { formatFee } from '@utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeCartItem, applyCoupon, setToast ,setShowModal } from '@store/actions'
+import { applyCoupon, setToast, setShowModal } from '@store/actions'
 import { WebRow, ResponsiveRow } from './elements'
 
 const Summary = ({ data, cartParam }) => {
@@ -21,7 +21,7 @@ const Summary = ({ data, cartParam }) => {
   const bs = cart?.cartProducts?.totalBs ?? "Bs.0,00"
   const fees = (cart.cartProducts?.fees) ? formatFee(cart.cartProducts?.fees[0].name) : []
   useEffect(() => {
-    if(cart?.coupon) setInput('')
+    if (cart?.coupon) setInput('')
   }, [cart?.coupon])
 
   const couponInput = (event) => {
@@ -30,7 +30,7 @@ const Summary = ({ data, cartParam }) => {
   }
 
   const sendCoupon = () => {
-    if(input.length) return dispatch(applyCoupon(input))
+    if (input.length) return dispatch(applyCoupon(input?.toLowerCase()))
     dispatch(setToast('warning', 'Por favor escriba un código de cupón', 1))
   }
 
