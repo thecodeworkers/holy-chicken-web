@@ -5,9 +5,9 @@ import Counter from '../Counter'
 import styles from './styles.module.scss'
 import { formatWooCommerceAmount, getVariation } from '@utils';
 
-const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSelection, reboot = false, price = 0.5 }) => {
+const CheckBoxes = ({ option, reboot = false, index, price = 0 }) => {
 
-  const { blessing, sauce, blessingAddons, sauceAddons } = useSelector((state: any) => state.product)
+  const { attributes, addons = {} } = useSelector((state: any) => state.product)
   const dispatch = useDispatch()
   const [checked, setChecked] = useState(false)
 
@@ -17,72 +17,39 @@ const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSele
 
   const onChangeData = (event) => {
     setChecked(!checked)
+
     const target = event.target
     const isChecked = target.checked
     const currentValue = target.value
 
-    const currentIndex = currentSelection.findIndex(_ => (_.nodeIndex == nodeIndex && _.index == index))
+    const addonTarget = addons[index] || []
 
-    if (currentIndex > -1) {
-      currentSelection.splice(currentIndex, 1)
-      setCurrentSelection(currentSelection)
-    } else {
-      currentSelection.push({ nodeIndex, index })
-      setCurrentSelection(currentSelection)
+    if (attributes[index] == 'N/A' && isChecked) {
+      dispatch(setSelection({ ...attributes, [index]: currentValue }))
+      return
     }
 
-    if (nodeIndex == 0) {
-      if (blessing == 'N/A' && isChecked) {
-        dispatch(setSelection({ blessing: currentValue }))
+    if (attributes[index] != 'N/A' && !isChecked) {
+      if (!addonTarget.length) {
+        dispatch(setSelection({ ...attributes, [index]: 'N/A' }))
         return
       }
 
-      if (blessing != 'N/A' && !isChecked) {
-        if (!blessingAddons.length) {
-          dispatch(setSelection({ blessing: 'N/A' }))
-          return
-        }
-
-        const index = blessingAddons.findIndex((addon: any) => addon.extra == currentValue)
-        if (index > -1) blessingAddons.splice(index, 1)
-        dispatch(setSpecials({ blessingAddons }))
-
-        return
+      const indexAdd = addonTarget.findIndex((addon: any) => addon.extra == currentValue)
+      if (indexAdd > -1) {
+        addonTarget.splice(indexAdd, 1)
+        addons[index] = addonTarget
+        dispatch(setSpecials({ addons }))
       }
 
-      if (blessing != 'N/A' && isChecked) {
-        blessingAddons.push({ extra: currentValue, price: price })
-        dispatch(setSpecials({ blessingAddons }))
-
-        return;
-      }
+      return
     }
 
-    if (nodeIndex == 1) {
-      if (sauce == 'N/A' && isChecked) {
-        dispatch(setSelection({ sauce: currentValue }))
-        return
-      }
-
-      if (sauce != 'N/A' && !isChecked) {
-        if (!sauceAddons.length) {
-          dispatch(setSelection({ sauce: 'N/A' }))
-          return
-        }
-
-        const index = sauceAddons.findIndex((addon: any) => addon.extra == currentValue)
-        if (index > -1) sauceAddons.splice(index, 1)
-        dispatch(setSpecials({ sauceAddons }))
-
-        return
-      }
-
-      if (sauce != 'N/A' && isChecked) {
-        sauceAddons.push({ extra: currentValue, price: price })
-        dispatch(setSpecials({ sauceAddons }))
-
-        return;
-      }
+    if (attributes[index] != 'N/A' && isChecked) {
+      addonTarget.push({ extra: currentValue, price: price })
+      addons[index] = addonTarget
+      dispatch(setSpecials({ addons }))
+      return;
     }
   }
 
@@ -98,7 +65,7 @@ const CheckBoxes = ({ option, index, nodeIndex, currentSelection, setCurrentSele
 
 const Extras = ({ extras }) => {
   const [currentSelection, setCurrentSelection] = useState([])
-  const { product: { addons }, intermitence: { individualProductModal }, cart: { currentProduct } } = useSelector((state: any) => state)
+  const { product: { addons, attributes }, intermitence: { individualProductModal }, cart: { currentProduct } } = useSelector((state: any) => state)
 
   const dispatch = useDispatch()
 
@@ -120,14 +87,16 @@ const Extras = ({ extras }) => {
               <p className={styles._littleTitleCard}>{node?.name}</p>
               {
                 node?.terms?.nodes?.map((option, index) => {
-                  const amount = currentProduct.attributes?.nodes?.length
-                  const selectedAttributes = []
 
-                  for (let i = 0; i < amount; i++) {
-                    selectedAttributes[i] = { value: 'N/A' }
+                  const selectedAttributes = []
+                  let count = 0
+
+                  for (const key in attributes) {
+                    selectedAttributes[count] = { value: 'N/A' }
+                    if (key === node?.slug) selectedAttributes[count] = { value: option.name }
+                    count++
                   }
-                  const diferential = amount <= 3 ? amount == 1 ? 0 : 1 : 2
-                  selectedAttributes[nodeIndex + diferential] = { value: option.name }
+
                   const result = getVariation(currentProduct, selectedAttributes)
                   let totalP = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
                   const price = formatWooCommerceAmount(result?.regularPrice) - formatWooCommerceAmount(totalP)
@@ -139,27 +108,28 @@ const Extras = ({ extras }) => {
                           <>
                             <CheckBoxes
                               option={option.name}
-                              index={index}
-                              nodeIndex={nodeIndex}
-                              setCurrentSelection={setCurrentSelection}
-                              currentSelection={currentSelection}
+                              index={node?.slug}
                               reboot={individualProductModal}
                               price={price}
                             />
                             <div className={styles._column}>
                               <Counter
                                 stock={30}
-                                active={currentSelection.some(_ => (_.nodeIndex == nodeIndex && _.index == index))}
+                                active={attributes[node.slug] === option.name || addons[node.slug]?.find((addon) => addon.extra === option.name)}
                                 reboot={individualProductModal}
                                 changeNumber={(action) => {
+                                  const addonsType = addons[node?.slug] || []
                                   if (action == 'add') {
-                                    addons.push({ extra: option.name, price: price })
+
+                                    addonsType.push({ extra: option.name, price: price })
+                                    addons[node?.slug] = addonsType
                                     dispatch(setExtras(addons))
                                   }
 
                                   if (action == 'remove') {
-                                    const index = addons.findIndex((addon: any) => addon.extra == option.name)
-                                    if (index > -1) addons.splice(index, 1)
+                                    const index = addonsType.findIndex((addon: any) => addon.extra == option.name)
+                                    if (index > -1) addonsType.splice(index, 1)
+                                    addons[node?.slug] = addonsType
                                     dispatch(setExtras(addons))
                                   }
                                 }}
@@ -192,17 +162,16 @@ const Extras = ({ extras }) => {
               <p className={styles._littleTitle}>{node?.name}</p>
               {
                 node?.terms?.nodes?.map((option, index) => {
-                  const amount = currentProduct.attributes?.nodes?.length
                   const selectedAttributes = []
+                  let count = 0
 
-                  for (let i = 0; i < amount; i++) {
-                    selectedAttributes[i] = { value: 'N/A' }
+                  for (const key in attributes) {
+                    selectedAttributes[count] = { value: 'N/A' }
+                    if (key === node?.slug) selectedAttributes[count] = { value: option.name }
+                    count++
                   }
-                  const diferential = amount <= 3 ? 1 : 2
-                  selectedAttributes[nodeIndex + diferential] = { value: option.name }
 
                   const result = getVariation(currentProduct, selectedAttributes)
-
                   let totalP = currentProduct?.price?.includes('-') ? `${currentProduct?.price?.split('-')[0]}` : currentProduct?.price
                   const price = formatWooCommerceAmount(result?.regularPrice) - formatWooCommerceAmount(totalP)
 
@@ -213,10 +182,7 @@ const Extras = ({ extras }) => {
                           <>
                             <CheckBoxes
                               option={option.name}
-                              index={index}
-                              nodeIndex={nodeIndex}
-                              setCurrentSelection={setCurrentSelection}
-                              currentSelection={currentSelection}
+                              index={node?.slug}
                               reboot={individualProductModal}
                               price={price}
                             />
@@ -229,13 +195,13 @@ const Extras = ({ extras }) => {
                                   reboot={individualProductModal}
                                   changeNumber={(action) => {
                                     if (action == 'add') {
-                                      addons.push({ extra: option.name, price: price })
+                                      addons[node?.slug].push({ extra: option.name, price: price })
                                       dispatch(setExtras(addons))
                                     }
 
                                     if (action == 'remove') {
-                                      const index = addons.findIndex((addon: any) => addon.extra == option.name)
-                                      if (index > -1) addons.splice(index, 1)
+                                      const index = addons[node?.slug].findIndex((addon: any) => addon.extra == option.name)
+                                      if (index > -1) addons[node?.slug].splice(index, 1)
                                       dispatch(setExtras(addons))
                                     }
                                   }}

@@ -12,7 +12,7 @@ import { parseDate, parseHour } from './functions'
 const circles = [
   { label: 'Confirmando pago', value: 1 },
   { label: 'Por entregar', value: 2 },
-  { label: 'Orden en vía', value: 3},
+  { label: 'Orden en vía', value: 3 },
   { label: 'Orden Entregada', value: 4 }
 ]
 
@@ -120,7 +120,7 @@ const History = ({ data }) => {
     }
 
     const match = circles.find(item => item.value == trustedCurrentStep)
-    if(trustedCurrentStep == match.value) return match?.label
+    if (trustedCurrentStep == match.value) return match?.label
   }
 
   return (
@@ -187,7 +187,6 @@ const History = ({ data }) => {
                         const step = metadata.find(_ => _.key == 'step')
                         trustedCurrentStep = trackStatus[step?.value || 'processing']
                       }
-
                       return (
                         <div key={index}>
                           <div className={itemIndex == trustedCurrentStep ? styles._circleSelected : styles._circle} onClick={() => {
@@ -302,7 +301,7 @@ const History = ({ data }) => {
       </div>
 
       <Footer data={data?.footer} content={data?.socialNetworks} />
-      <OpenModal show={show} method={showModal} data={ordersArray} setCurrentOrder={setOrder} currentOrder={currentOrder}/>
+      <OpenModal show={show} method={showModal} data={ordersArray} setCurrentOrder={setOrder} currentOrder={currentOrder} />
       <OrderModal show={showOrder} method={showOrderModal} data={currentProduct} />
     </>
   )
