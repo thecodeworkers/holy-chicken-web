@@ -14,7 +14,8 @@ function TimeActiveMiddleware(props) {
     }
   ]
   const date=new Date()
-  const [day,hour,minute]=[date.getDay(),date.getHours(),date.getMinutes()]
+  //const [day,hour,minute]=[date.getDay(),date.getHours(),date.getMinutes()]
+  const [day,hour,minute]=[3,15,14]
   const activeDays=[
     {
       startHour:11,
@@ -61,20 +62,21 @@ function TimeActiveMiddleware(props) {
   ]
   useEffect(() => {
     if(day!=1){
-      if(hour>=activeDays[day].startHour&&hour<=activeDays[day].endHour){
-        if(minute>=activeDays[day].startMinute&&minute<=activeDays[day].endMinute){
+      if(hour>activeDays[day].startHour&&hour<activeDays[day].endHour){
+        setActive(true)
+      }else if(hour==activeDays[day].startHour){
+        if(minute>=activeDays[day].startMinute){
           setActive(true)
-        }else if(minute<activeDays[day].startMinute&&minute>activeDays[day].endMinute){
-          setActive(false)
         }
-      }else if(hour<activeDays[day].startHour||hour>activeDays[day].endHour){
-        setActive(false)
+      }else if(hour==activeDays[day].endHour){
+        if(minute<activeDays[day].endMinute){
+          setActive(true)
+        }
       }
     }else if(day==1){
       setActive(false)
     }
   }, [])
-
 
   return(
     active?
