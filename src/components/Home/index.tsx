@@ -50,8 +50,8 @@ const Home = ({ content, data, resource }) => {
       </Head>
 
       <Navbar data={data?.header} />
-      <IndividualProductModal />
-      <CartModal />
+      <IndividualProductModal/>
+      <CartModal/>
       {content ? (<>
         <FirstBanner data={content?.firstBanner}
           content={content?.outstanding}
