@@ -14,8 +14,7 @@ function TimeActiveMiddleware(props) {
     }
   ]
   const date=new Date()
-  //const [day,hour,minute]=[date.getDay(),date.getHours(),date.getMinutes()]
-  const [day,hour,minute]=[3,15,14]
+  const [day,hour,minute]=[date.getDay(),date.getHours(),date.getMinutes()]
   const activeDays=[
     {
       startHour:11,
