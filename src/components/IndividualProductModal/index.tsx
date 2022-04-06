@@ -8,7 +8,7 @@ import { createMarkup, formatWooCommerceAmount, getVariation } from '@utils'
 
 const IndividualProduct = () => {
   const dispatch = useDispatch()
-  const { intermitence: { individualProductModal }, cart: { currentProduct }, product: { addons, attributes }, variableProduct } = useSelector((state: any) => state)
+  const { intermitence: { individualProductModal }, cart: { currentProduct }, product: { addons, attributes }, variableProduct, auth, guest } = useSelector((state: any) => state)
 
   const hot = currentProduct?.spicy?.isSpicy
 
@@ -16,6 +16,8 @@ const IndividualProduct = () => {
     prev = [...prev, ...addons[next]]
     return prev
   }, [])
+
+
 
   const totalPrice = () => {
 
@@ -89,6 +91,8 @@ const IndividualProduct = () => {
 
     if (productVariable) correctProduct = productVariable
     console.log(correctProduct)
+    console.log(auth)
+    console.log(guest)
     dispatch(setCartProducts(correctProduct, allAddons))
   }
 
