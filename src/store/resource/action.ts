@@ -66,6 +66,8 @@ export const orderProducts: any = (value) => async (dispatch, getState) => {
     return value
   })
 
+  data = orderProductsInit(data)
+
   switch (value) {
     case 'outstanding':
       data = orderBy(data, 'totalSales', 'asc')
