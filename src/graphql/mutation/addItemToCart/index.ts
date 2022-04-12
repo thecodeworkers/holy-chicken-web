@@ -4,8 +4,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 const addItemToCartMutation = async (product, quantity, jwtToken, sessionToken) => {
 
-  console.log(sessionToken)
-  console.log(jwtToken)
   const mutation = `
   mutation addCartItem {
     addCartItems(input: {

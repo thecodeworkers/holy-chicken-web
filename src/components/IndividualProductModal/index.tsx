@@ -90,9 +90,6 @@ const IndividualProduct = () => {
     }
 
     if (productVariable) correctProduct = productVariable
-    console.log(correctProduct)
-    console.log(auth)
-    console.log(guest)
     dispatch(setCartProducts(correctProduct, allAddons))
   }
 
