@@ -63,33 +63,18 @@ const FirstBanner = ({ data, content, resource, reference }) => {
             const currentClass = index + 1;
             return (
               <div className={newArray[index].className} id={currentClass.toString()} key={index}>
-                <div className={`_banner${index}`}>
-                  <style jsx>{`
-                  ._banner${index} {
-                    background-image: url(${newArray[index]?.image?.mediaItemUrl});
-                    height: 450px;
-                    width: 85vw;
-                    background-size:cover
-                  }
-                  @media(max-width: 576px) {
-                    ._banner${index} {
-                      background-image: url(${newArray[index]?.responsiveImage?.mediaItemUrl});
-                      height: 250px;
-                      width: 85vw;
-                      background-repeat: no-repeat;
-                      background-size:100% 100%
-                    }
-                  }
-                `}</style>
+                <div className={styles._banner}>
+                  <img className={styles._img} src={newArray[index]?.image?.mediaItemUrl} />
+                  <img className={styles._imgResponsive} src={newArray[index]?.responsiveImage?.mediaItemUrl} />
                 </div>
               </div>
             )
           })
 
-          }
-          <div className={styles._stepperContainer}  ref={reference}>
-            <div className={styles._stepper}>
-              <Stepper currentStep={currentIndex + 1} length={newArray?.length} onPress={index => changeImage(index, styles._show, false)} />
+        }
+        <div className={styles._stepperContainer} ref={reference}>
+          <div className={styles._stepper}>
+            <Stepper currentStep={currentIndex + 1} length={newArray?.length} onPress={index => changeImage(index, styles._show, false)} />
 
           </div>
         </div>

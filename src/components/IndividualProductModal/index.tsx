@@ -53,22 +53,29 @@ const IndividualProduct = () => {
   const featuresType = (type, attributes) => {
 
     const attributesLength = attributes?.nodes?.length
+    if (type) {
+      const separateType = type.split('-')
+      separateType.splice(separateType.length - 1, 1)
+      const newType = separateType.join('-')
 
-    switch (type) {
-      case 'temptations':
-      case 'bebidas':
-        return <VerticalList attributes={attributes} category={type} />
+      switch (newType) {
+        case 'temptations':
+        case 'bebidas':
+          return <VerticalList attributes={attributes} category={type} />
 
-      case 'holy-sanduches':
-      case 'holy-tenders':
-        return <CardSection attributes={attributes} />
+        case 'holy-sanduches':
+        case 'holy-tenders':
+          return <CardSection attributes={attributes} />
 
-      case 'merch':
-        return <ClothSection size={attributesLength == 2 ? true : false} attributes={attributes} />
+        case 'merch':
+          return <ClothSection size={attributesLength == 2 ? true : false} attributes={attributes} />
 
-      default:
-        return <div></div>
+        default:
+          return <div></div>
+      }
     }
+
+    return <div></div>
   }
 
   const setProductstoCart = () => {
@@ -98,10 +105,11 @@ const IndividualProduct = () => {
   useEffect(() => {
     const attrs = {}
     const nodes = currentProduct?.attributes?.nodes || []
+    const extras = nodes.filter((top) => top?.name?.toLowerCase().includes('extra'))
+    const toopings = nodes.filter((top) => !top?.name?.toLowerCase().includes('extra'))
 
-    for (const attr of nodes) {
-      attrs[attr.slug] = 'N/A'
-    }
+    for (const topping of toopings) attrs[topping.slug] = topping.terms?.nodes[topping.terms?.nodes?.length - 1].name
+    for (const attr of extras) attrs[attr.slug] = 'N/A'
 
     dispatch(setSelection(attrs))
     dispatch(setSpecials({ addons: {} }))

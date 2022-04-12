@@ -27,11 +27,22 @@ const SideFilter = ({ show = 0, method }) => {
     dispatch(setProductFilter(data))
   }
 
+  const orderCategories = (categoryA, categoryB) => {
+    const catA = categoryA.slug.split('-')
+
+    const numberA = Number(catA[catA.length - 1])
+    const catB = categoryB.slug.split('-')
+
+    const numberB = Number(catB[catB.length - 1])
+
+    return numberA - numberB
+  }
+
   return (
     <div className={assignClass()}>
       <div className={styles._container}>
         {
-          productsCategories.map((item, index) => {
+          productsCategories.sort(orderCategories).map((item, index) => {
             return (
               <div className={styles._row} key={index}>
                 <p className={styles._littleTitle}>{item.name}</p>
