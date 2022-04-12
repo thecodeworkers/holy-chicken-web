@@ -12,14 +12,14 @@ function TimeActiveMiddleware(props:any) {
   const [times,horario]=[general.openCloseTime.times,general.openCloseTime.horario.tiempos]
   useEffect(() => {
     if(day!=1){
-      if(hour>times[day].startHour&&hour<times[day].endHour){
+      if(hour>times[day].horaApertura.split(':')[0]&&hour<times[day].horaCierre.split(':')[0]){
         setActive(true)
-      }else if(hour==times[day].startHour){
-        if(minute>=times[day].startMinute){
+      }else if(hour==times[day].horaApertura.split(':')[0]){
+        if(minute>=times[day].horaApertura.split(':')[1]){
           setActive(true)
         }
-      }else if(hour==times[day].endHour){
-        if(minute<times[day].endMinute){
+      }else if(hour==times[day].horaCierre.split(':')[0]){
+        if(minute<times[day].horaCierre.split(':')[1]){
           setActive(true)
         }
       }
