@@ -1,74 +1,25 @@
+import { wrapper } from '@store'
+import { getResources } from '@store/actions'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import styles from './styles.module.scss'
 
-function TimeActiveMiddleware(props) {
+function TimeActiveMiddleware(props:any) {
   const [active, setActive] = useState(false)
-  const times=[
-    {
-      "day": "Martes - Miercoles y Domingos",
-      "hour": "11:30 am - 8:50 pm"
-    },
-    {
-      "day": "Jueves a Sabado",
-      "hour": "11:30 am - 10:50 pm"
-    }
-  ]
+  const { resource: { general: { general } } } = useSelector((state: any) => state)
   const date=new Date()
   const [day,hour,minute]=[date.getDay(),date.getHours(),date.getMinutes()]
-  const activeDays=[
-    {
-      startHour:11,
-      startMinute:30,
-      endHour:20,
-      endMinute:50
-    },
-    {
-      startHour:11,
-      startMinute:30,
-      endHour:20,
-      endMinute:50
-    },
-    {
-      startHour:11,
-      startMinute:30,
-      endHour:20,
-      endMinute:50
-    },
-    {
-      startHour:11,
-      startMinute:30,
-      endHour:20,
-      endMinute:50
-    },
-    {
-      startHour:11,
-      startMinute:30,
-      endHour:22,
-      endMinute:50
-    },
-    {
-      startHour:11,
-      startMinute:30,
-      endHour:22,
-      endMinute:50
-    },
-    {
-      startHour:11,
-      startMinute:30,
-      endHour:22,
-      endMinute:50
-    },
-  ]
+  const [times,horario]=[general.openCloseTime.times,general.openCloseTime.horario.tiempos]
   useEffect(() => {
     if(day!=1){
-      if(hour>activeDays[day].startHour&&hour<activeDays[day].endHour){
+      if(hour>times[day].startHour&&hour<times[day].endHour){
         setActive(true)
-      }else if(hour==activeDays[day].startHour){
-        if(minute>=activeDays[day].startMinute){
+      }else if(hour==times[day].startHour){
+        if(minute>=times[day].startMinute){
           setActive(true)
         }
-      }else if(hour==activeDays[day].endHour){
-        if(minute<activeDays[day].endMinute){
+      }else if(hour==times[day].endHour){
+        if(minute<times[day].endMinute){
           setActive(true)
         }
       }
@@ -87,15 +38,17 @@ function TimeActiveMiddleware(props) {
         </div>
         <div className="_scheduleContent">
           {
-            times.map((item, index) => {
+            horario.map((item, index) => {
               return (
                 <div className={styles._times} key={index}>
-                  <p className={styles._subtitle}>{item?.day}</p>
-                  <p className={styles._subtitle}>{item?.hour}</p>
+                  <p className={styles._subtitle}>{item?.dias}</p>
+
+                  <p className={styles._subtitle}>{item?.horas}</p>
                 </div>
+
               )
-            })
-          }
+            }
+            )}
         </div>
 
       </div>

@@ -48,6 +48,18 @@ generalPage:page(id: "${generalId}") {
       myOrders
       newClient
     }
+    openCloseTime {
+      times {
+        horaApertura
+        horaCierre
+      }
+      horario {
+        tiempos {
+          dias
+          horas
+        }
+      }
+    }
     cart {
       confirm
       emptyCart
