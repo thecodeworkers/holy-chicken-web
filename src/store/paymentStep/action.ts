@@ -1,4 +1,5 @@
-import { SETSTEP } from './actions-types'
+import { actionObject } from '@utils'
+import { SAVE_DELIVERY, SETSTEP } from './actions-types'
 
 
 export const setStep = (step: any) => {
@@ -7,3 +8,5 @@ export const setStep = (step: any) => {
     payload: step
   }
 }
+
+export const saveDelivery = (payload) => actionObject(SAVE_DELIVERY, payload)

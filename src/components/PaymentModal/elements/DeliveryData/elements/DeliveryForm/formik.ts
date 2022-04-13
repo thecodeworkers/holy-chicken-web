@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import { onlyLettersRegex, onlyNumbersRegex, phoneRegex } from '@utils/regex'
 import * as Yup from 'yup'
-import { setStep } from '@store/actions'
+import { saveDelivery, setStep } from '@store/actions'
 
 
 const deliveryConfig = (dispatch, delivery_data) => (useFormik({
@@ -32,6 +32,7 @@ const deliveryConfig = (dispatch, delivery_data) => (useFormik({
 
   onSubmit: values => {
     dispatch(setStep({ delivery_data: { ...delivery_data, form: values, valid: true }, step: 3 }))
+    dispatch(saveDelivery({form: values}))
   }
 }))
 
