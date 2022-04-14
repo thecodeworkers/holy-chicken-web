@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styles from './styles.module.scss'
-import { Button } from '@components'
+import { Button, TimeActiveMiddleware } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal, setCartProducts, setSelection, setSpecials } from '@store/actions'
 import { ClothSection, VerticalList, CardSection } from './elements'
@@ -121,8 +121,8 @@ const IndividualProduct = () => {
         <div className={styles._comebackParent} onClick={(event) => closeModal(event, true)}>
           <img src='images/icons/circle-arrow.svg' width='25px' height='25px'></img>
         </div>
-
-        <div className={styles._centerBody}>
+        <TimeActiveMiddleware>
+          <div className={styles._centerBody}>
           <div className={styles._leftSide}>
 
             <div className={styles._titleParent} >
@@ -175,6 +175,8 @@ const IndividualProduct = () => {
             <p>{totalPrice()}</p>
           </div>
         </div>
+        </TimeActiveMiddleware>
+
       </div>
     </div>
   )

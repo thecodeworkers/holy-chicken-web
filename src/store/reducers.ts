@@ -30,7 +30,7 @@ const reducers = combineReducers({
   variableProduct,
   guest,
   tenderProduct,
-  backupProduct
+  backupProduct,
 })
 
 export default reducers

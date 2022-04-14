@@ -1,5 +1,5 @@
 import styles from './styles.module.scss'
-import { Button, CountProduct } from '@components'
+import { Button, CountProduct, TimeActiveMiddleware } from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { setShowModal, removeCartItem, setToast, resetModals } from '@store/actions'
 import { createMarkup, formatFee, getProductPrice } from '@utils'
@@ -57,7 +57,8 @@ const CartModal = () => {
 
           <p className={styles._subtitle}>{contentCart.promotion}</p>
         </div>
-        <div className={styles._body}>
+        <TimeActiveMiddleware>
+          <div className={styles._body}>
 
           {
             !nodes.length ?
@@ -97,6 +98,8 @@ const CartModal = () => {
             <Button text={contentCart.confirm} color='#000' textColor='#FFF' method={() => navigate('summary')} />
           </div>
         </div>
+        </TimeActiveMiddleware>
+
       </div>
     </div>
   )
