@@ -2,7 +2,7 @@ import { FC } from 'react'
 import styles from './styles.module.scss'
 import { StepperProps } from './type'
 
-const Stepper: FC<StepperProps> = ({ length = 3, currentStep, onPress }) => (
+const Stepper: FC<StepperProps> = ({ length = 0, currentStep, onPress }) => (
   <div className={styles._stepper}>
     {
       Array.from(Array(length).keys()).map((index) => {
