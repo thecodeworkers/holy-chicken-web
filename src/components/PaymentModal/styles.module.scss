@@ -3,7 +3,7 @@
 ._main {
   width: 100%;
   height: calc(100vh - 5rem);
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 996;
   position: fixed;
   bottom: 0px;
@@ -14,15 +14,15 @@
   backdrop-filter: blur(14px);
 }
 
-._bs{
+._bs {
   font-size: $montserratLight10;
   font-family: $montserratMedium;
 }
-._modal{
+._modal {
   display: inline-flex;
   max-width: 75rem;
   border-radius: 2.375rem;
-  background-color:$white;
+  background-color: $white;
   height: 85vh;
   width: 85%;
 }
@@ -54,7 +54,6 @@
   }
 }
 
-
 ._rightSection {
   padding: 2.5rem;
   margin: 0 auto;
@@ -72,8 +71,7 @@
   cursor: pointer;
 }
 
-
-._stepData{
+._stepData {
   background-color: $timberWolf;
   border-radius: 10px;
   width: 100%;
@@ -82,8 +80,6 @@
   display: flex;
   justify-content: flex-start;
   align-content: center;
-
-
 
   & p {
     font-family: $montserratRegular;
@@ -140,74 +136,97 @@
   cursor: pointer;
 }
 
-._leftBody{
+._leftBody {
   height: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 4rem;
 }
 
-._totalParent{
-display: flex;
-justify-content: space-between;
-align-content: center;
-
+._totalParent {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
 }
 
-._parentTitle{
+._parentTitle {
   font-size: $montserratBold24;
   font-family: $montserratBold;
   color: $mineShaft;
 }
 
-@include responsive(lg) {
+._errorContainer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
 
-  ._main{
+._errorTitle {
+  font-family: $blackerTextHeavyBold;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+._errorBody {
+  font-family: $montserratRegular;
+  font-size: $montserratRegular16;
+  margin: 0.5rem 0rem;
+}
+
+._buttonError {
+  margin-top: 2rem;
+  width: 300px;
+}
+
+@include responsive(lg) {
+  ._main {
     height: calc(100vh - 4rem);
   }
 
-._modal{
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-  height: 80vh;
-  margin-top: 3.75rem;
-}
-._leftSection{
-  width: 100%;
-  padding: 2.5rem 2rem;
-  background-color: $pampas;
-  height: 35vh;
-}
-._checkParent{
-  margin-left: 0;
-}
-._rightSection{
- background-color: white;
- padding: 2.5rem 2rem;
- margin: 0;
- width: unset
-}
-._leftBody{
-  margin-top: 1rem;
-}
-
-._checkParent{
- margin-top: 0.5rem;
- margin-bottom: 0.5rem;
-}
-._parentTitle{
- margin-top: 0.5rem;
-}
-._stepData{
-  display: none;
-}
-
-}
-@include responsive(md) {
-
-  ._main{
-    height: 100%;
+  ._modal {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 80vh;
+    margin-top: 3.75rem;
+  }
+  ._leftSection {
+    width: 100%;
+    padding: 2.5rem 2rem;
+    background-color: $pampas;
+    height: 35vh;
+  }
+  ._checkParent {
+    margin-left: 0;
+  }
+  ._rightSection {
+    background-color: white;
+    padding: 2.5rem 2rem;
+    margin: 0;
+    width: unset;
+  }
+  ._leftBody {
+    margin-top: 1rem;
   }
 
+  ._checkParent {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  ._parentTitle {
+    margin-top: 0.5rem;
+  }
+  ._stepData {
+    display: none;
+  }
+}
+
+@include responsive(md) {
+  ._main {
+    height: 100%;
+  }
 }
