@@ -47,7 +47,6 @@ const makeStore: any = ({ isServer }) => {
   const persistConfig = {
     key: 'holyChickenRoot',
     storage,
-    whitelist: ['paymentStep'],
     blacklist: [
       'page',
       'toast',

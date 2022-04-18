@@ -8,14 +8,14 @@ import { updateShippingMethod } from '@store/actions'
 
 const DeliveryForm = () => {
 
-  const { resource: { countries }, paymentStep: { delivery_data }, cart: { cartProducts } } = useSelector((state: any) => state)
+  const { resource: { countries }, paymentStep: { delivery_data, forms }, cart: { cartProducts } } = useSelector((state: any) => state)
   console.log(delivery_data/* .form.address_1 */)
   const dispatch = useDispatch()
-  const deliveryform = deliveryConfig(dispatch, delivery_data)
+  const deliveryform = deliveryConfig(dispatch, delivery_data, forms)
   const [cities, setCities] = useState([])
   const [regions, setRegions] = useState([])
   const { errors, touched } = deliveryform
-  const data=[{
+  const data = [{
     name: "juan ",
     lastname: "perez",
     phone: "4245879632",
@@ -25,7 +25,7 @@ const DeliveryForm = () => {
     country: "VE",
     city: "Caracas",
     municipality: "Chacao"
-  },{
+  }, {
     name: "juan ",
     lastname: "perez",
     phone: "4245879632",
@@ -85,8 +85,8 @@ const DeliveryForm = () => {
   return (
     <div className={styles._addressSelectContent}>
       {
-        data.map((item,index)=>{
-          return(
+        data.map((item, index) => {
+          return (
             <button type="submit" className={styles._addressItem}>
               {item.address_1},{item.address_2}
             </button>
