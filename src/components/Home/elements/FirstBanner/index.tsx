@@ -22,25 +22,27 @@ const FirstBanner = ({ data, content, resource, reference }) => {
   }, [currentIndex])
 
   const changeImage = (index, stylus, auto = true) => {
-    newArray.map((res, mapIndex) => { newArray[mapIndex].className = styles._hidden })
-    newArray[index].className = stylus
+    if (newArray?.length) {
+      newArray.map((res, mapIndex) => { newArray[mapIndex].className = styles._hidden })
+      if (newArray[index]) newArray[index].className = stylus
 
-    setNewArray([...newArray])
+      setNewArray([...newArray])
 
-    const determinateCurrent = () => {
-      if (currentIndex < newArray.length - 1) return setcurrentIndex(currentIndex + 1)
-      else setcurrentIndex(0)
+      const determinateCurrent = () => {
+        if (currentIndex < newArray.length - 1) return setcurrentIndex(currentIndex + 1)
+        else setcurrentIndex(0)
+      }
+
+      if (auto) {
+        interval = setTimeout(() => {
+          determinateCurrent()
+        }, 10000);
+
+        return;
+      }
+
+      determinateCurrent()
     }
-
-    if (auto) {
-      interval = setTimeout(() => {
-        determinateCurrent()
-      }, 10000);
-
-      return;
-    }
-
-    determinateCurrent()
   }
 
   const navigation = (route: string) => {
@@ -59,7 +61,7 @@ const FirstBanner = ({ data, content, resource, reference }) => {
     <div className={styles._content}>
       <div className={styles._main} >
         {
-          Array.from(Array(newArray?.length).keys()).map((index) => {
+          !!newArray?.length && Array.from(Array(newArray?.length).keys()).map((index) => {
             const currentClass = index + 1;
             return (
               <div className={newArray[index].className} id={currentClass.toString()} key={index}>

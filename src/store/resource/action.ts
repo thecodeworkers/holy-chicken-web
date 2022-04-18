@@ -32,7 +32,7 @@ export const getResources: any = (consult: string = '') => async (dispatch, getS
     dispatch(actionObject(GET_PAGES, data))
 
   }
-  
+
   const orderProducts = orderProductsInit(resource?.products)
 
   const allCountries = await WooCommerceClient('data/countries')
@@ -52,7 +52,8 @@ export const setProductFilter: any = (values) => async (dispatch, getState) => {
   try {
 
     const { resource: { products } } = getState()
-    dispatch(actionObject(SET_FILTER, { filter: values, shop: productFilter(products, values, 'slug') }))
+    dispatch(actionObject(SET_FILTER, { filter: values, shop: orderProductsInit(productFilter(products, values, 'slug')) }))
+
 
   } catch (error) {
     return error
