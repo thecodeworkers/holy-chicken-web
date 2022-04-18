@@ -21,20 +21,17 @@ const IndividualProduct = () => {
 
   const totalPrice = () => {
 
-
     const selectedAttributes = []
-    const productAttributes = currentProduct?.attributes?.nodes || []
+    const product = variableProduct.currentVariableProduct || currentProduct
+    const productAttributes = product?.attributes?.nodes || []
 
     for (const attr of productAttributes) {
       selectedAttributes.push({ value: attributes[attr.slug] })
     }
-
     const result = getVariation(currentProduct, selectedAttributes)
     const totalAddons = allAddons.reduce((previous, next) => previous + next.price, 0)
-
-    let totalP = currentProduct?.price?.includes('-') ? formatWooCommerceAmount(currentProduct?.price?.split('-')[0]) : formatWooCommerceAmount(currentProduct?.price)
+    let totalP = product?.price?.includes('-') ? formatWooCommerceAmount(product?.price?.split('-')[0]) : formatWooCommerceAmount(product?.price || product?.regularPrice)
     totalP = result ? formatWooCommerceAmount(result?.regularPrice) : totalP
-
     if (totalP) {
       totalP += totalAddons
       return `$${totalP.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
