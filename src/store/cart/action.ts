@@ -280,7 +280,7 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
       if (payment_data.type?.toLowerCase() === 'tarjeta de credito') {
         const response = await fetchPostJSON('/api/payment-intent', { amount: formatWooCommerceAmount(cartProducts?.total), currency: 'USD', description: 'TESTING' })
 
-        if (response.statusCode === 500) throw new Error('error');
+        if (response.statusCode === 500) throw new Error('Stripe: Error Payment Intent');
 
         const stripe = await getStripe()
 
@@ -288,7 +288,7 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
           payment_method: payment_data?.form?.card,
         })
 
-        if (error && paymentIntent?.status !== 'succeeded') throw new Error(error.code);
+        if (error && paymentIntent?.status !== 'succeeded') throw new Error(`Stripe: ${error.code}`);
         status = 'processing'
       }
 
@@ -296,7 +296,7 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
 
       const data: any = await checkoutMutation(billing_data, delivery_data, payment_data, user_data, sessionToken)
 
-      if (data.message) throw new Error(data.message);
+      if (data.message) throw new Error(`Checkout Error: ${data.message}`);
 
       await WooCommerceClient(`orders/${data?.order?.orderNumber}`, 'PUT', { customer_id: databaseId, status: status })
       await addFee('.', 0, sessionToken)
@@ -310,6 +310,7 @@ export const checkoutOrder: any = () => async (dispatch, getState) => {
     dispatch(actionObject(REQUEST_LOADER, false))
   } catch (error) {
     dispatch(actionObject(REQUEST_LOADER, false))
+    dispatch(setStep({ loading: false, confirmProcess: false, error: error.message }))
     dispatch(setToast('error', 'Error al procesar orden', 1))
   }
 }

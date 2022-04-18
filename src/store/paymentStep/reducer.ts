@@ -16,6 +16,7 @@ const initialState = {
   step: 1,
   loading: false,
   confirmProcess: false,
+  error: false,
 }
 
 const setPaymentStepReducer = (state = initialState, { type, payload }: AnyAction) => {
