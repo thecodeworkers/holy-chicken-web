@@ -1,8 +1,8 @@
-import { SAVE_DELIVERY, SETSTEP } from './actions-types'
+import { SETSTEP } from './actions-types'
 import { AnyAction } from 'redux'
 import { LOGIN_USER, LOGOUT_USER } from '@store/auth/action-types'
 
-const initialState = {
+const initialState = [{
   user_data: {},
   delivery_data: {
     date: '',
@@ -17,12 +17,10 @@ const initialState = {
   forms: [],
   loading: false,
   confirmProcess: false,
-}
+}]
 
 const setPaymentStepReducer = (state = initialState, { type, payload }: AnyAction) => {
   switch (type) {
-    case SAVE_DELIVERY:
-      return { ...state, ...payload }
     case SETSTEP:
       return { ...state, ...payload }
     case LOGIN_USER:

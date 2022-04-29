@@ -33,7 +33,6 @@ const deliveryConfig = (dispatch, delivery_data, forms) => (useFormik({
   onSubmit: values => {
     dispatch(setStep({ delivery_data: { ...delivery_data, form: values, valid: true }, step: 3 }))
     forms.push(values)
-    dispatch(saveDelivery({ forms: forms }))
   }
 }))
 

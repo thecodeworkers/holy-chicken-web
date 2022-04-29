@@ -4,38 +4,20 @@ import { useSelector, useDispatch } from 'react-redux'
 import deliveryConfig from './formik'
 import { Button } from '@components'
 import { filter } from '@utils'
-import { updateShippingMethod } from '@store/actions'
+import { saveDelivery, updateShippingMethod } from '@store/actions'
 
 const DeliveryForm = () => {
 
   const { resource: { countries }, paymentStep: { delivery_data, forms }, cart: { cartProducts } } = useSelector((state: any) => state)
-  console.log(delivery_data/* .form.address_1 */)
+  const state=useSelector((state: any) => state.delivery)
   const dispatch = useDispatch()
   const deliveryform = deliveryConfig(dispatch, delivery_data, forms)
   const [cities, setCities] = useState([])
   const [regions, setRegions] = useState([])
+  const [formActive, setFormActive] = useState(true)
   const { errors, touched } = deliveryform
-  const data = [{
-    name: "juan ",
-    lastname: "perez",
-    phone: "4245879632",
-    address_1: "mi casa",
-    address_2: "alado de la vecina",
-    zipcode: "1221",
-    country: "VE",
-    city: "Caracas",
-    municipality: "Chacao"
-  }, {
-    name: "juan ",
-    lastname: "perez",
-    phone: "4245879632",
-    address_1: "mi casa",
-    address_2: "alado de la vecina",
-    zipcode: "1221",
-    country: "VE",
-    city: "Caracas",
-    municipality: "Chacao"
-  }]
+  const data = state
+  console.log(deliveryform.values)
 
   const setDefaults = (value) => {
     deliveryform.setFieldValue('country', value)
@@ -77,6 +59,15 @@ const DeliveryForm = () => {
     dispatch(updateShippingMethod(shipping))
   }
 
+  const setSaveData=(data)=>{
+    for (let key in data) {
+      deliveryform.setFieldValue(key, data[key])
+    }
+  }
+  const saveData=(data)=>{
+    dispatch(saveDelivery(data))
+  }
+
   useEffect(() => {
     setDefaults('VE')
     setDefaultForm()
@@ -84,19 +75,18 @@ const DeliveryForm = () => {
 
   return (
     <div className={styles._addressSelectContent}>
+      <form onSubmit={deliveryform.handleSubmit}>
       {
-        data.map((item, index) => {
+        delivery_data.form&&formActive?
+        data?.map((item, index) => {
           return (
-            <button type="submit" className={styles._addressItem}>
-              {item.address_1},{item.address_2}
-            </button>
+              <button  onClick={()=>setSaveData(item)} className={styles._addressItem}>
+                {item.address_1},{item.address_2}
+              </button>
+
           )
 
-        })
-      }
-      <button className={styles._addAddress}>+</button>
-      <form onSubmit={deliveryform.handleSubmit}>
-        <div className={styles._rightMain}>
+        }):<div className={styles._rightMain}>
           <div className={styles._firstRow}>
           </div>
           <div className={styles._inputRow}>
@@ -245,15 +235,18 @@ const DeliveryForm = () => {
 
           <div className={styles._buttonContainer}>
             <div className={styles._btnParent}>
-              <Button
-                color='#000'
-                text='Ingresar'
-                textColor='#FFF'
-                type={'submit'} flag />
+                <button onClick={()=>saveData(deliveryform.values)} className={styles._addAddress}>Ingresar</button>
             </div>
           </div>
         </div>
+      }
       </form>
+      <div className={styles._btnAdd}>
+        <button className={styles._addAddress} onClick={()=>setFormActive(!formActive)}>
+          {formActive?'+':'<'}
+        </button>
+      </div>
+
     </div>
 
 
