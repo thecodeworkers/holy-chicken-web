@@ -81,7 +81,7 @@ const DeliveryForm = () => {
         data?.map((item, index) => {
           return (
               <button  onClick={()=>setSaveData(item)} className={styles._addressItem}>
-                {item.address_1},{item.address_2}
+                {item.name}, {item.address_1}, {item.address_2}, {item.phone}
               </button>
 
           )
