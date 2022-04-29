@@ -9,14 +9,13 @@ import { saveDelivery, updateShippingMethod } from '@store/actions'
 const DeliveryForm = () => {
 
   const { resource: { countries }, paymentStep: { delivery_data, forms }, cart: { cartProducts } } = useSelector((state: any) => state)
-  const state=useSelector((state: any) => state.delivery)
+  const addressData=useSelector((state: any) => state.delivery)
   const dispatch = useDispatch()
   const deliveryform = deliveryConfig(dispatch, delivery_data, forms)
   const [cities, setCities] = useState([])
   const [regions, setRegions] = useState([])
   const [formActive, setFormActive] = useState(true)
   const { errors, touched } = deliveryform
-  const data = state
   console.log(deliveryform.values)
 
   const setDefaults = (value) => {
@@ -78,7 +77,7 @@ const DeliveryForm = () => {
       <form onSubmit={deliveryform.handleSubmit}>
       {
         delivery_data.form&&formActive?
-        data?.map((item, index) => {
+        addressData?.map((item, index) => {
           return (
               <button  onClick={()=>setSaveData(item)} className={styles._addressItem}>
                 {item.name}, {item.address_1}, {item.address_2}, {item.phone}
