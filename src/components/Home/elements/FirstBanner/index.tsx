@@ -22,25 +22,28 @@ const FirstBanner = ({ data, content, resource, reference }) => {
   }, [currentIndex])
 
   const changeImage = (index, stylus, auto = true) => {
-    newArray.map((res, mapIndex) => { newArray[mapIndex].className = styles._hidden })
-    newArray[index].className = stylus
+    if (newArray?.length) {
 
-    setNewArray([...newArray])
+      newArray.map((res, mapIndex) => { newArray[mapIndex].className = styles._hidden })
+      if (newArray[index]) newArray[index].className = stylus
 
-    const determinateCurrent = () => {
-      if (currentIndex < newArray.length - 1) return setcurrentIndex(currentIndex + 1)
-      else setcurrentIndex(0)
+      setNewArray([...newArray])
+
+      const determinateCurrent = () => {
+        if (currentIndex < newArray.length - 1) return setcurrentIndex(currentIndex + 1)
+        else setcurrentIndex(0)
+      }
+
+      if (auto) {
+        interval = setTimeout(() => {
+          determinateCurrent()
+        }, 10000);
+
+        return;
+      }
+
+      determinateCurrent()
     }
-
-    if (auto) {
-      interval = setTimeout(() => {
-        determinateCurrent()
-      }, 10000);
-
-      return;
-    }
-
-    determinateCurrent()
   }
 
   const navigation = (route: string) => {
@@ -59,37 +62,22 @@ const FirstBanner = ({ data, content, resource, reference }) => {
     <div className={styles._content}>
       <div className={styles._main} >
         {
-          Array.from(Array(newArray?.length).keys()).map((index) => {
+          !!newArray?.length && Array.from(Array(newArray?.length).keys()).map((index) => {
             const currentClass = index + 1;
             return (
               <div className={newArray[index].className} id={currentClass.toString()} key={index}>
-                <div className={`_banner${index}`}>
-                  <style jsx>{`
-                  ._banner${index} {
-                    background-image: url(${newArray[index]?.image?.mediaItemUrl});
-                    height: 450px;
-                    width: 85vw;
-                    background-size:cover
-                  }
-                  @media(max-width: 576px) {
-                    ._banner${index} {
-                      background-image: url(${newArray[index]?.responsiveImage?.mediaItemUrl});
-                      height: 250px;
-                      width: 85vw;
-                      background-repeat: no-repeat;
-                      background-size:100% 100%
-                    }
-                  }
-                `}</style>
+                <div className={styles._banner}>
+                  <img className={styles._img} src={newArray[index]?.image?.mediaItemUrl} />
+                  <img className={styles._imgResponsive} src={newArray[index]?.responsiveImage?.mediaItemUrl} />
                 </div>
               </div>
             )
           })
 
-          }
-          <div className={styles._stepperContainer}  ref={reference}>
-            <div className={styles._stepper}>
-              <Stepper currentStep={currentIndex + 1} length={newArray?.length} onPress={index => changeImage(index, styles._show, false)} />
+        }
+        <div className={styles._stepperContainer} ref={reference}>
+          <div className={styles._stepper}>
+            <Stepper currentStep={currentIndex + 1} length={newArray?.length} onPress={index => changeImage(index, styles._show, false)} />
 
           </div>
         </div>

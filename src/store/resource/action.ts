@@ -48,7 +48,7 @@ export const setProductFilter: any = (values) => async (dispatch, getState) => {
   try {
 
     const { resource: { products } } = getState()
-    dispatch(actionObject(SET_FILTER, { filter: values, shop: productFilter(products, values, 'slug') }))
+    dispatch(actionObject(SET_FILTER, { filter: values, shop: orderProductsInit(productFilter(products, values, 'slug')) }))
 
   } catch (error) {
     return error
@@ -65,6 +65,8 @@ export const orderProducts: any = (value) => async (dispatch, getState) => {
     value.orderPrice = totalP
     return value
   })
+
+  data = orderProductsInit(data)
 
   switch (value) {
     case 'outstanding':

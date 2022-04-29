@@ -21,7 +21,6 @@ const Home = ({ content, data, resource }) => {
       dispatch(setShowModal({ changePasswordModal: true }))
       dispatch(setStringKey(passwordKey))
     }
-
     if (!tmpSessionToken) dispatch(getTmpSession())
   }, [])
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './styles.module.scss'
 import { GeneralCard, IndividualProductModal } from '@components'
 import { useRouter } from 'next/router'
@@ -44,6 +44,10 @@ const FirstBanner = ({ content, backup, reference, data }: any) => {
     dispatch(setCurrentProduct({ currentProduct: item }))
     dispatch(resetStore())
   }
+
+  useEffect(() => {
+    setPage(1)
+  }, [backup?.length])
 
   return (
     <>

@@ -35,7 +35,7 @@ const checkoutMutation = async (billing, delivery, paymentMethod, user, sessionT
         state: ""
       },`: ''
     }
-      customerNote: "${user?.name} ${user?.lastname}, Teléfono: ${user?.phone}, CI ${user?.identification}, Correo: ${user?.email}, Sede seleccionada: ${location}",
+      customerNote: "${user?.name} ${user?.lastname}, Teléfono: ${user?.phone}, CI ${user?.identification}, Correo: ${user?.email}, Sede seleccionada: ${location}}",
       shipToDifferentAddress: true,
       shippingMethod: "${shippingMethod}"
     }) {
