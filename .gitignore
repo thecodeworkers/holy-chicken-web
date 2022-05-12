@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+#credentials
+/src/components/PaymentModal/DeliveryData/elements/Maps/credentials.ts

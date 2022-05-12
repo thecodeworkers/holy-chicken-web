@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import deliveryConfig from './formik'
-import { Button } from '@components'
 import { filter } from '@utils'
 import { saveDelivery, updateShippingMethod } from '@store/actions'
+import Maps from '../Maps'
+import credentials from '../Maps/credentials'
 
+const URL=`https://maps.googleapis.com/maps/api/js?v=3.exp&key=${credentials.mapsKey}`
 const DeliveryForm = () => {
 
   const { resource: { countries }, paymentStep: { delivery_data, forms }, cart: { cartProducts } } = useSelector((state: any) => state)
@@ -16,7 +18,6 @@ const DeliveryForm = () => {
   const [regions, setRegions] = useState([])
   const [formActive, setFormActive] = useState(true)
   const { errors, touched } = deliveryform
-  console.log(deliveryform.values)
 
   const setDefaults = (value) => {
     deliveryform.setFieldValue('country', value)
@@ -240,6 +241,12 @@ const DeliveryForm = () => {
         </div>
       }
       </form>
+      <Maps
+        containerElement={<div style={{height:'400px'}}/>}
+        mapElement={<div style={{height:'100%'}}/>}
+        googleMapURL={URL}
+        loadingElement={<p>Cargando...</p>}
+      />
       <div className={styles._btnAdd}>
         <button className={styles._addAddress} onClick={()=>setFormActive(!formActive)}>
           {formActive?'+':'<'}
