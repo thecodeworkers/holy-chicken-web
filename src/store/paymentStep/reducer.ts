@@ -14,10 +14,13 @@ const initialState = {
   payment_data: {},
   billing_data: {},
   step: 1,
+  forms: [],
   loading: false,
   confirmProcess: false,
+
   error: false,
 }
+
 
 const setPaymentStepReducer = (state = initialState, { type, payload }: AnyAction) => {
   switch (type) {

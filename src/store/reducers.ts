@@ -14,6 +14,7 @@ import variableProduct from './variableProduct/reducer'
 import guest from './guest/reducer'
 import tenderProduct from './tenderProduct/reducer'
 import backupProduct from './backupProducts/reducer'
+import delivery from './delivery/reducer'
 
 const reducers = combineReducers({
   loader,
@@ -31,6 +32,7 @@ const reducers = combineReducers({
   guest,
   tenderProduct,
   backupProduct,
+  delivery,
 })
 
 export default reducers
