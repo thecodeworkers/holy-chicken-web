@@ -22,7 +22,9 @@ const BillingData = () => {
   }
 
   const setDeliveryData = (erase = false) => {
-    for (let key in formik.values) formik.setFieldValue(key, (erase) ? '' : delivery_data?.form[key] || '')
+    if(delivery_data.form){
+      for (let key in formik.values) formik.setFieldValue(key, (erase) ? '' : delivery_data?.form[key] || '')
+    }
     if (erase) setDefaults('VE')
   }
 

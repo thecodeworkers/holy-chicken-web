@@ -6,6 +6,8 @@ import { filter } from '@utils'
 import { saveDelivery, updateShippingMethod } from '@store/actions'
 import Maps from '../Maps'
 import credentials from '../Maps/credentials'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faLocationDot} from '@fortawesome/free-solid-svg-icons'
 
 const URL=`https://maps.googleapis.com/maps/api/js?v=3.exp&key=${credentials.mapsKey}`
 const DeliveryForm = () => {
@@ -16,7 +18,8 @@ const DeliveryForm = () => {
   const deliveryform = deliveryConfig(dispatch, delivery_data, forms)
   const [cities, setCities] = useState([])
   const [regions, setRegions] = useState([])
-  const [formActive, setFormActive] = useState(true)
+  const [formActive, setFormActive] = useState(delivery_data.form?true:false)
+  const [mapActive, setMapActive] = useState(false)
   const { errors, touched } = deliveryform
 
   const setDefaults = (value) => {
@@ -77,7 +80,7 @@ const DeliveryForm = () => {
     <div className={styles._addressSelectContent}>
       <form onSubmit={deliveryform.handleSubmit}>
       {
-        delivery_data.form&&formActive?
+        formActive?
         addressData?.map((item, index) => {
           return (
               <button  onClick={()=>setSaveData(item)} className={styles._addressItem}>
@@ -235,22 +238,36 @@ const DeliveryForm = () => {
 
           <div className={styles._buttonContainer}>
             <div className={styles._btnParent}>
-                <button onClick={()=>saveData(deliveryform.values)} className={styles._addAddress}>Ingresar</button>
+                <button onClick={()=>saveData(deliveryform.values)} className={styles._addAddress}>Siguiente</button>
             </div>
           </div>
         </div>
       }
       </form>
-      <Maps
-        containerElement={<div style={{height:'400px'}}/>}
-        mapElement={<div style={{height:'100%'}}/>}
-        googleMapURL={URL}
-        loadingElement={<p>Cargando...</p>}
-      />
+      {mapActive?
+        <Maps
+          containerElement={<div style={{height:'400px'}}/>}
+          mapElement={<div style={{height:'100%'}}/>}
+          googleMapURL={URL}
+          loadingElement={<p>Cargando...</p>}
+          delivery_data={delivery_data}
+        />
+      :<div/>}
+
       <div className={styles._btnAdd}>
-        <button className={styles._addAddress} onClick={()=>setFormActive(!formActive)}>
+        <button className={styles._addAddress} onClick={()=>{
+            setFormActive(!formActive)
+            setMapActive(false)
+          }}>
           {formActive?'+':'<'}
         </button>
+        {!mapActive?<button className={styles._addAddress} onClick={()=>{
+            setMapActive(!mapActive)
+            setFormActive(true)
+          }}>
+          <FontAwesomeIcon icon={faLocationDot} />
+        </button>:<div/>}
+
       </div>
 
     </div>

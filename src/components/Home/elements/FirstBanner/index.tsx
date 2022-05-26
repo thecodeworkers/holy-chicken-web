@@ -23,7 +23,7 @@ const FirstBanner = ({ data, content, resource, reference }) => {
 
   const changeImage = (index, stylus, auto = true) => {
     newArray.map((res, mapIndex) => { newArray[mapIndex].className = styles._hidden })
-    newArray[index].className = stylus
+    //newArray[index].className = stylus
 
     setNewArray([...newArray])
 
