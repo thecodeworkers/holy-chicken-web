@@ -9,14 +9,14 @@ import { saveDelivery, updateShippingMethod } from '@store/actions'
 const DeliveryForm = () => {
 
   const { resource: { countries }, paymentStep: { delivery_data, forms }, cart: { cartProducts } } = useSelector((state: any) => state)
-  const addressData=useSelector((state: any) => state.delivery)
+  const addressData = useSelector((state: any) => state.delivery)
   const dispatch = useDispatch()
   const deliveryform = deliveryConfig(dispatch, delivery_data, forms)
   const [cities, setCities] = useState([])
   const [regions, setRegions] = useState([])
   const [formActive, setFormActive] = useState(true)
   const { errors, touched } = deliveryform
-  console.log(deliveryform.values)
+
 
   const setDefaults = (value) => {
     deliveryform.setFieldValue('country', value)
@@ -25,7 +25,16 @@ const DeliveryForm = () => {
     setCities(city || [])
     deliveryform.setFieldValue('city', city[0]?.name)
     const filterCities = filter(city, city?.name, 'name')
-    setRegions(filterCities[0].region?.content || [])
+
+    const data = cartProducts?.availableShippingMethods[0].rates?.filter((rate: any) => rate?.label.includes(delivery_data?.location))?.map((rate: any) => {
+      return {
+        value: rate?.label,
+        label: rate?.label.split('_')[1],
+        cost: rate?.cost
+      }
+    })
+
+    setRegions(data)
     deliveryform.setFieldValue('municipality', filterCities[0]?.region?.content[0]?.name)
     const shipping = getShipping(filterCities[0]?.region?.content[0]?.key)?.id
     dispatch(updateShippingMethod(shipping))
@@ -33,8 +42,6 @@ const DeliveryForm = () => {
 
   const setRegion = (value) => {
     deliveryform.setFieldValue('city', value)
-    const filterCities = filter(cities, value, 'name')
-    setRegions(filterCities[0].region?.content || [])
   }
 
   const setDefaultForm = () => {
@@ -58,12 +65,12 @@ const DeliveryForm = () => {
     dispatch(updateShippingMethod(shipping))
   }
 
-  const setSaveData=(data)=>{
+  const setSaveData = (data) => {
     for (let key in data) {
       deliveryform.setFieldValue(key, data[key])
     }
   }
-  const saveData=(data)=>{
+  const saveData = (data) => {
     dispatch(saveDelivery(data))
   }
 
@@ -75,17 +82,17 @@ const DeliveryForm = () => {
   return (
     <div className={styles._addressSelectContent}>
       <form onSubmit={deliveryform.handleSubmit}>
-      {
-        delivery_data.form&&formActive?
-        addressData?.map((item, index) => {
-          return (
-              <button  onClick={()=>setSaveData(item)} className={styles._addressItem}>
-                {item.name}, {item.address_1}, {item.address_2}, {item.phone}
-              </button>
+        {/* {
+          delivery_data.form && formActive ?
+            addressData?.map((item, index) => {
+              return (
+                <button onClick={() => setSaveData(item)} className={styles._addressItem}>
+                  {item.name}, {item.address_1}, {item.address_2}, {item.phone}
+                </button>
 
-          )
+              )
 
-        }):<div className={styles._rightMain}>
+            }) : */} <div className={styles._rightMain}>
           <div className={styles._firstRow}>
           </div>
           <div className={styles._inputRow}>
@@ -221,9 +228,9 @@ const DeliveryForm = () => {
                   onBlur={deliveryform.handleBlur}
                   value={deliveryform.values.municipality}
                   className={errors.municipality && touched.municipality ? styles._inputError : styles._inputSelect}>
-                  {regions?.length ? regions.filter((region: any) => region?.key?.includes(delivery_data?.selectedLocation)).map((region, index) =>
-                    <option key={index} value={region?.key}>{region?.name}  &nbsp;  ${getShipping(region?.key)?.cost}</option>
-                  ) : <option>No Disponible</option>}
+                  {regions?.length ? regions?.map((region: any) => {
+                    return <option value={region?.value}>{region?.label} {region?.cost}</option>
+                  }) : <option>No Disponible</option>}
                 </select>
               </div>
             </div>
@@ -234,15 +241,15 @@ const DeliveryForm = () => {
 
           <div className={styles._buttonContainer}>
             <div className={styles._btnParent}>
-                <button onClick={()=>saveData(deliveryform.values)} className={styles._addAddress}>Ingresar</button>
+              <button onClick={() => saveData(deliveryform.values)} className={styles._addAddress}>Ingresar</button>
             </div>
           </div>
         </div>
-      }
+        {/*         } */}
       </form>
       <div className={styles._btnAdd}>
-        <button className={styles._addAddress} onClick={()=>setFormActive(!formActive)}>
-          {formActive?'+':'<'}
+        <button className={styles._addAddress} onClick={() => setFormActive(!formActive)}>
+          {formActive ? '+' : '<'}
         </button>
       </div>
 
