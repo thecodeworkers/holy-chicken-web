@@ -2,7 +2,7 @@ import styles from './styles.module.scss'
 import { useSelector } from 'react-redux';
 
 const Button = ({ color, textColor, method = null, text, height = '2.5rem', type = 'button', flag = false, disabled = false }: any) => {
-  console.log(disabled,'but')
+
   const { loader } = useSelector((state: any) => state)
   const { requestLoader } = loader
 

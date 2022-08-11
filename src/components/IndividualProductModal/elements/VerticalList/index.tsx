@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setVariableProduct } from '@store/actions'
 
 const VerticalList = ({ attributes, category }) => {
-  console.log(attributes)
+
   const dispatch = useDispatch()
   const [currentAttribute, setCurrentAtribute] = useState(attributes?.nodes[0].options[0])
 

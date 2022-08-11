@@ -38,6 +38,7 @@ generalPage:page(id: "${generalId}") {
     addresses {
       local
       address
+      description
       phone
     }
     navigation {

@@ -31,8 +31,9 @@ const SecondBanner = ({ data, reference, contact }) => {
               return (
                 <div className={styles._locate} key={index}>
                   <p className={styles._title}>{item?.local}</p>
+                  <p className={styles._subtitle}>{item?.description}</p>
+                  <p className={styles._subtitle}>{item?.address}</p>
 
-                <p className={styles._subtitle}>{item?.address}</p>
                 </div>
 
               )
@@ -42,7 +43,7 @@ const SecondBanner = ({ data, reference, contact }) => {
         </div>
 
         <div className={styles._address}>
-         <p className={styles._phoneTitle}>Teléfonos</p>
+          <p className={styles._phoneTitle}>Teléfonos</p>
           {
             locations?.map((item, index) => {
 
@@ -55,7 +56,7 @@ const SecondBanner = ({ data, reference, contact }) => {
               )
             }
             )}
-            </div>
+        </div>
 
 
         <div className={styles._address}>

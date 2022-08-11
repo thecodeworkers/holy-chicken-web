@@ -57,7 +57,6 @@ const IndividualProduct = () => {
       const separateType = type.split('-')
       separateType.splice(separateType.length - 1, 1)
       const newType = separateType.join('-')
-
       switch (newType) {
         case 'temptations':
         case 'bebidas':
@@ -65,6 +64,7 @@ const IndividualProduct = () => {
 
         case 'holy-sanduches':
         case 'holy-tenders':
+        case 'holy-fresh':
           return <CardSection attributes={attributes} />
 
         case 'merch':
