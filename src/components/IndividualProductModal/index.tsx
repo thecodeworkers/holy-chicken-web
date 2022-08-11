@@ -114,7 +114,6 @@ const IndividualProduct = () => {
     dispatch(setSelection(attrs))
     dispatch(setSpecials({ addons: {} }))
   }, [individualProductModal])
-
   return (
     <div className={individualProductModal ? styles._background : styles._hidden} onClick={closeModal} id='individual-product'>
       <div className={`_generalCard ${styles._modal}`}>
@@ -168,7 +167,7 @@ const IndividualProduct = () => {
 
         <div className={styles._totalParent}>
           <div className={styles._btnParent}>
-            <Button text='Agregar' color='#000' textColor='#FFF' method={setProductstoCart} flag />
+            <Button text='Agregar' color='#000' disabled={!!!currentProduct?.stockQuantity} textColor='#FFF' method={setProductstoCart} flag />
           </div>
 
           <div>

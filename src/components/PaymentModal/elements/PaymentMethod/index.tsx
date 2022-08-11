@@ -91,10 +91,10 @@ const PaymentMethod = () => {
                   <div>
                     <p>Teléfono</p>
                     <a className={styles._link} href="tel:+584122485668">
-                      <p>Las Mercedes: +58 412-2485668</p>
+                      <p>Valle Arriba: +58 412-2485668</p>
                     </a>
-                    <a className={styles._link} href="tel:+584241271442">
-                      <p>La Castellana: +58 424-1271442</p>
+                    <a className={styles._link} href="tel:+584241950157">
+                      <p>Chacao: +58 424-1950157</p>
                     </a>
                     <a className={styles._link} href="tel:+584123696259">
                       <p>El Hatillo: +58 412-3696259</p>
@@ -110,11 +110,11 @@ const PaymentMethod = () => {
                     <p>Email</p>
 
                     <a className={styles._link} href={`mailto:holychickenlasmercedes@gmail.com`}>
-                      <p>Las Mercedes: holychickenlasmercedes@gmail.com</p>
+                      <p>Valle Arriba: holychickenvallearriba@gmail.com</p>
 
                     </a>
                     <a className={styles._link} href={`mailto:holychickenlacastellana@gmail.com`}>
-                      <p>La Castellana: holychickenlacastellana@gmail.com</p>
+                      <p>Chacao: holychickenchacao@gmail.com</p>
 
                     </a>
                     <a className={styles._link} href={`mailto:holychickenelhatillo@gmail.com`}>

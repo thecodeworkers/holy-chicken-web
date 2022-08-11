@@ -34,28 +34,30 @@ function TimeActiveMiddleware(props: any) {
 
   return (
     active ?
-      <div>{props.children}</div>
-      : <div className={styles._address}>
-        <div className="_titleContent">
-          <h1 className={styles._title}>Lo sentimos, no estamos dando servicio. Vuelva luego</h1>
-          <p className={styles._title}>{props.data?.schedules?.title}</p>
+      <>{props.children}</>
+      : (
+        <div className={styles._address}>
+          <div className="_titleContent">
+            <h1 className={styles._title}>Lo sentimos, no estamos dando servicio. Vuelva luego</h1>
+            <p className={styles._title}>{props.data?.schedules?.title}</p>
+          </div>
+          <div className="_scheduleContent">
+            {
+              horario?.map((item, index) => {
+                return (
+                  <div className={styles._times} key={index}>
+                    <p className={styles._subtitle}>{item?.dias}</p>
+
+                    <p className={styles._subtitle}>{item?.horas}</p>
+                  </div>
+
+                )
+              }
+              )}
+          </div>
+
         </div>
-        <div className="_scheduleContent">
-          {
-            horario?.map((item, index) => {
-              return (
-                <div className={styles._times} key={index}>
-                  <p className={styles._subtitle}>{item?.dias}</p>
-
-                  <p className={styles._subtitle}>{item?.horas}</p>
-                </div>
-
-              )
-            }
-            )}
-        </div>
-
-      </div>
+      )
 
   )
 }
