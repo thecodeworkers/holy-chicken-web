@@ -20,6 +20,7 @@ const LocationModal = () => {
     if (cartProducts?.availableShippingMethods) {
       const shippingMethods = cartProducts?.availableShippingMethods[0]?.rates || []
       const filterMethod = filter(shippingMethods, label, 'label')
+      console.log(filterMethod)
       if (filterMethod[0]) return filterMethod[0]
     }
     return ''

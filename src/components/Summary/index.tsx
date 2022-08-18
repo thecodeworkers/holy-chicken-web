@@ -10,9 +10,14 @@ import { WebRow, ResponsiveRow } from './elements'
 
 const Summary = ({ data, cartParam }) => {
 
-  const { cart } = useSelector((state: any) => state)
+  const { cart, paymentStep: { delivery_data } } = useSelector((state: any) => state)
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    const location = delivery_data?.location
+    if (!location) dispatch(setShowModal({ locationModal: true }))
+  }, [])
 
   const [input, setInput] = useState('')
   const total = cartParam?.total ?? '0.00$'
@@ -20,6 +25,7 @@ const Summary = ({ data, cartParam }) => {
   const items = cartParam?.contents?.nodes ?? []
   const bs = cart?.cartProducts?.totalBs ?? "Bs.0,00"
   const fees = (cart.cartProducts?.fees) ? formatFee(cart.cartProducts?.fees[0].name) : []
+
   useEffect(() => {
     if (cart?.coupon) setInput('')
   }, [cart?.coupon])
