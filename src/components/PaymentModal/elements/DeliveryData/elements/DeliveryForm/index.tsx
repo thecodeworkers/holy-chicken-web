@@ -17,6 +17,24 @@ const DeliveryForm = () => {
   const [formActive, setFormActive] = useState(true)
   const { errors, touched } = deliveryform
 
+  const setNewRegion = () => {
+    const data = cartProducts?.availableShippingMethods[0].rates?.filter((rate: any) => {
+      const location = delivery_data?.location === 'Chacao' ? 'La Castellana' : delivery_data?.location
+      return rate?.label.split('_')[0].includes(location)
+    })?.map((rate: any) => {
+      return {
+        value: rate?.label,
+        label: rate?.label.split('_')[1],
+        cost: rate?.cost
+      }
+    })
+
+    setRegions(data)
+  }
+
+  useEffect(() => {
+    setNewRegion()
+  }, [delivery_data?.location])
 
   const setDefaults = (value) => {
     deliveryform.setFieldValue('country', value)
@@ -26,15 +44,7 @@ const DeliveryForm = () => {
     deliveryform.setFieldValue('city', city[0]?.name)
     const filterCities = filter(city, city?.name, 'name')
 
-    const data = cartProducts?.availableShippingMethods[0].rates?.filter((rate: any) => rate?.label.includes(delivery_data?.location))?.map((rate: any) => {
-      return {
-        value: rate?.label,
-        label: rate?.label.split('_')[1],
-        cost: rate?.cost
-      }
-    })
-
-    setRegions(data)
+    setNewRegion()
     deliveryform.setFieldValue('municipality', filterCities[0]?.region?.content[0]?.name)
     const shipping = getShipping(filterCities[0]?.region?.content[0]?.key)?.id
     dispatch(updateShippingMethod(shipping))

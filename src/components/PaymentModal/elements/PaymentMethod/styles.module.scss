@@ -12,7 +12,6 @@
   text-align: center;
 }
 
-
 ._rightMain {
   display: flex;
   flex-direction: column;
@@ -20,6 +19,7 @@
   align-content: center;
   width: 100%;
   margin: 0 auto;
+  height: calc(85vh - 176px);
 }
 
 ._inputParent {
@@ -48,13 +48,12 @@
     font-family: $montserratRegular;
     font-size: 0.8rem;
     text-decoration: underline;
-    :active{
+    :active {
       text-decoration: none;
       a.nostyle:link {
         text-decoration: inherit;
         color: inherit;
-
-    }
+      }
     }
   }
 }
@@ -83,7 +82,7 @@
 ._quarterWidth {
   width: 30%;
 }
-._threeQuarterWidth{
+._threeQuarterWidth {
   width: 68%;
 }
 
@@ -96,7 +95,6 @@
 }
 
 @mixin input($borderColor) {
-
   border: solid 1px $borderColor;
   border-radius: 1.25rem;
   width: 100%;
@@ -108,38 +106,35 @@
 }
 
 ._input {
-  @include input($alto)
+  @include input($alto);
 }
 
 ._inputError {
   @include input($red);
-
 }
 
-._inputDate{
+._inputDate {
   @include input($alto);
-
 }
 
-._buttonContainer{
+._buttonContainer {
   position: absolute;
   bottom: 2.5rem;
   right: 2.5rem;
 }
 
-._btnParent{
+._btnParent {
   width: 120px;
-
 }
 
-._deliveryTitle{
-font-family: $montserratBold;
-font-size: $montserratBold18;
-color: $mineShaft;
-margin-left: 1.5rem;
+._deliveryTitle {
+  font-family: $montserratBold;
+  font-size: $montserratBold18;
+  color: $mineShaft;
+  margin-left: 1.5rem;
 }
 
-._paymentTitle{
+._paymentTitle {
   font-family: $montserratBold;
   font-size: $montserratBold18;
   color: $mineShaft;
@@ -158,14 +153,14 @@ margin-left: 1.5rem;
   display: inline-block;
   width: 1rem;
   height: 1rem;
-  min-width:  1rem;
-  min-height:  1rem;
+  min-width: 1rem;
+  min-height: 1rem;
   padding: 0.1rem;
   background-clip: content-box;
   border: 2px solid $black;
   background-color: trasparent;
   border-radius: 50%;
-  margin:0;
+  margin: 0;
   margin-right: 0.7rem;
 
   &:checked {
@@ -173,36 +168,36 @@ margin-left: 1.5rem;
   }
 }
 
-._radioTitle{
+._radioTitle {
   font-size: $montserratMedium16;
   font-family: $montserratMedium;
   color: $black;
 }
 
-._deliveryType{
+._deliveryType {
   display: flex;
   flex-direction: column;
   width: 50%;
   margin-right: 1rem;
+  overflow: auto;
 }
-._tdcContainer{
+._tdcContainer {
   display: flex;
   flex-direction: column;
   width: 80%;
   margin-right: 1rem;
 }
-._messageContainer{
+._messageContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-content: center;
   width: 50%;
   margin-left: 1rem;
+  overflow: auto;
 }
 
-
-
-._radioContainer{
+._radioContainer {
   display: flex;
   justify-content: space-between;
   align-content: center;
@@ -210,23 +205,23 @@ margin-left: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
-._firstRow{
+._firstRow {
   display: flex;
   justify-content: space-between;
   align-content: center;
+  height: 100%;
 }
 
-._addressCheckbox{
+._addressCheckbox {
   margin-left: 1rem;
 }
 
-._addressTitle{
+._addressTitle {
   font-size: $montserratMedium14;
   font-family: $montserratMedium;
   color: $black;
-
 }
-._addressSubtitle{
+._addressSubtitle {
   font-size: $montserratMedium10;
   font-family: $montserratMedium;
   color: $mineShaft;
@@ -234,22 +229,21 @@ margin-left: 1.5rem;
   margin-top: 0.5rem;
 }
 
-._addressDescription{
+._addressDescription {
   display: flex;
   flex-direction: column;
 }
-._list{
-padding: 0;
+._list {
+  padding: 0;
 }
-._listItem{
+._listItem {
   font-size: $montserratRegular16;
   font-family: $montserratRegular;
   color: $mineShaft;
   list-style: none;
 }
 
-
-._advicesItem{
+._advicesItem {
   font-size: $montserratRegular14;
   font-family: $montserratRegular;
   color: $mineShaft;
@@ -257,7 +251,7 @@ padding: 0;
   margin: 0.5rem 0px;
 }
 
-._advicesItemBold{
+._advicesItemBold {
   font-size: $montserratBold16;
   font-family: $montserratBold;
   color: $mineShaft;
@@ -265,22 +259,22 @@ padding: 0;
   margin-top: 0.5rem 0;
 }
 
-._advices{
+._advices {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-content: flex-start;
 }
 
-._link{
-  p{
+._link {
+  p {
     margin: 0.5rem 0;
     font-weight: 100;
   }
 }
 
 @include responsive(md) {
-  ._titleParent{
+  ._titleParent {
     margin-bottom: 1rem;
   }
   ._inputRow {
@@ -291,9 +285,8 @@ padding: 0;
   ._rightMain {
     width: 100%;
     margin-bottom: 4rem;
-
   }
-  ._buttonContainer{
+  ._buttonContainer {
     bottom: 0;
     margin: 2rem auto;
     display: flex;
@@ -306,25 +299,25 @@ padding: 0;
   ._firstRow {
     flex-direction: column;
   }
-  ._deliveryType{
+  ._deliveryType {
     width: 100%;
+    overflow: auto;
   }
 
-  ._messageContainer{
+  ._messageContainer {
     width: 100%;
+    overflow: auto;
   }
 
-  ._btnParent{
-   margin-bottom: 1rem;
+  ._btnParent {
+    margin-bottom: 1rem;
   }
 
-  ._radioContainer{
+  ._radioContainer {
     margin-top: 0.8rem;
     margin-bottom: 0.8rem;
   }
-  ._deliveryType{
+  ._deliveryType {
     margin-bottom: 0.6rem;
   }
-
 }
-
