@@ -231,7 +231,7 @@ const DeliveryForm = () => {
 
             <div className={styles._quarterWidth} >
               <div className={`${styles._inputParent}`}>
-                <label>Municipio</label>
+                <label>Ubicación</label>
                 <select name="municipality"
                   placeholder='Seleccione el país'
                   onChange={(event) => setShippingMethod(event.currentTarget.value)}
